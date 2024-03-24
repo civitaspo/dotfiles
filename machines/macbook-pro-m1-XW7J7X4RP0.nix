@@ -1,4 +1,5 @@
 { config, pkgs, ... }: {
+  # Use nix-installer (https://install.determinate.systems/nix) to install Nix.
   nix = {
     useDaemon = true;
     gc = {
