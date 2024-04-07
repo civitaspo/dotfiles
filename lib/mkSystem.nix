@@ -10,6 +10,8 @@ name:
 # See all nix supported systems here: https://github.com/NixOS/nix/blob/f8916734601b9492c8e9d3f3765ef94487b9ade9/flake.nix#L25-L42
 assert (system == "aarch64-linux" || system == "x86_64-linux" || system == "aarch64-darwin");
 let
+  elemAt = nixpkgs.lib.elemAt;
+  splitString = nixpkgs.lib.splitString;
   os = elemAt (splitString "-" system) 1;
   cpuArch = elemAt (splitString "-" system) 0;
   isWSL = wsl;

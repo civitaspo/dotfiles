@@ -31,5 +31,5 @@
     rebase.autoStash = true;
     delta.navigate = true;
     ghq.root = "~/src";
-  }
+  };
 }

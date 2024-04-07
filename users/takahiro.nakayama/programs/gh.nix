@@ -4,5 +4,5 @@
   gh.gitCredentialHelper.enable = true;
   gh.settings = {
     git_protocol = "ssh";
-  }
+  };
 }
