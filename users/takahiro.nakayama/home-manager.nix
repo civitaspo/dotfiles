@@ -14,7 +14,7 @@ in {
     alacritty
     bat
     delta
-    exa
+    eza
     findutils
     fd
     github-copilot-cli
@@ -38,7 +38,6 @@ in {
     jq
     tig
     starship
-    twingate
     ripgrep
     zellij
     # font
@@ -80,7 +79,7 @@ in {
   xdg = {
     enable = true;
     configFile.nvim = {
-      source = ./nvim;
+      source = ./files/.config/nvim;
       recursive = true;
     };
   };

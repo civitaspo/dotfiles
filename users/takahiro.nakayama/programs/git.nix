@@ -11,11 +11,11 @@
     #   path = "~/.secret"
     # }
   ];
-  git.signing.signByDefault = true;
+  # git.signing.signByDefault = true;
   git.userEmail = "civitaspo@gmail.com";
   git.userName = "Takahiro Nakayama";
   git.extraConfig = {
-    core.pager = "delta";
+    core.pager = "${pkgs.delta}/bin/delta";
     core.autocrlf = "input";
     core.filemode = false;
     push.default = "simple";
@@ -25,7 +25,7 @@
     pull.rebase = "merges";
     # init.templatedir = "~/.git-template";
     init.defaultBranch = "main";
-    interactive.diffFilter = "delta --color-only";
+    interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
     diff.compactionHeuristic = true;
     fetch.recurseSubmodules = "yes";
     rebase.autoStash = true;

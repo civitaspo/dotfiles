@@ -21,13 +21,14 @@ in {
       "hammerspoon"
       "notion-calendar"
       "setapp"
-      "rancher"
+      # "rancher"
     ];
     masApps = {
       "Display Menu" =  549083868;
       "LINE" = 539883307;
       "Numbers" = 409203825;
       "Pages" = 409201541;
+      "Twingate" = 1501592214;
     };
   };
   users.users.${user} = {

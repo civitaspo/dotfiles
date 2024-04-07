@@ -33,7 +33,7 @@
         inherit overlays nixpkgs inputs;
       };
     in {
-      darwinConfigurations.macbook-pro-m1-XW7J7X4RP0 = mkSystem "macbook-pro-m1-XW7J7X4RP0" {
+      darwinConfigurations.macbook-XW7J7X4RP0 = mkSystem "macbook-XW7J7X4RP0" {
         system = "aarch64-darwin";
         user   = "takahiro.nakayama";
       };

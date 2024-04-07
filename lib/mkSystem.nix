@@ -29,6 +29,7 @@ in systemFunc rec {
 
   modules = [
     { nixpkgs.overlays = overlays; }
+    { nixpkgs.config.allowUnfree = true; }
     (if isWSL then inputs.nixos-wsl.nixosModules.wsl else {})
 
     machineConfig
