@@ -12,39 +12,41 @@ in {
     _1password
     _1password-gui
     alacritty
+    awscli2
     bat
+    curl
     delta
     eza
-    findutils
     fd
-    github-copilot-cli
-    git
-    gawk
-    gnused
-    gnugrep
-    gnutar
-    curl
-    neovim
-    wget
-    zip
-    awscli2
-    google-cloud-sdk
-    ssm-session-manager-plugin
-    terraform
-    terraform-ls
+    findutils
     fzf
+    gawk
     gh
+    ghq
+    git
+    github-copilot-cli
+    gnugrep
+    gnused
+    gnutar
+    google-cloud-sdk
     htop
     jq
-    tig
-    starship
-    raycast
+    neovim
     ripgrep
+    raycast
+    ssm-session-manager-plugin
+    starship
+    terraform
+    terraform-ls
+    tig
+    wget
+    zip
     zellij
-    superwhisper
     # font
     jetbrains-mono
     monaspace
+    # overlays
+    superwhisper
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
   ]) ++ (lib.optionals (isLinux && !isWSL) [
