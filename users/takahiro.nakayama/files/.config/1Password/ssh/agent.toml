@@ -1,0 +1,4 @@
+[[ssh-keys]]
+item = "Git Commit Signing Key"
+vault = "Private"
+account = "gonyumin"

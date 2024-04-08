@@ -83,6 +83,10 @@ in {
       source = ./files/.config/nvim;
       recursive = true;
     };
+    configFile."1Password" = {
+      source = ./files/.config/1Password;
+      recursive = true;
+    }
   };
   programs = import ./lib/programs.nix {
     inherit inputs config lib pkgs;
