@@ -25,7 +25,7 @@
     branch.autosetuprebase = "always";
     gpg.format = "ssh";
     # TODO: Set another tool when isDarwin != true.
-    gpg.ssh.program = "${pkgs._1password}/Contents/MacOS/op-ssh-sign";
+    gpg.ssh.program = "${pkgs._1password-gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
     merge.ff = false;
     pull.rebase = "merges";
     # init.templatedir = "~/.git-template";
