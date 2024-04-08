@@ -40,6 +40,7 @@ in {
     starship
     ripgrep
     zellij
+    superwhisper
     # font
     jetbrains-mono
     monaspace
