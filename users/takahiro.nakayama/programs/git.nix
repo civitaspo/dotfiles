@@ -11,7 +11,9 @@
     #   path = "~/.secret"
     # }
   ];
-  # git.signing.signByDefault = true;
+
+  git.signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlmYWLNT2IyKC0InCp3Upis6d3pH25NcQaPuDntjSWJ";
+  git.signing.signByDefault = true;
   git.userEmail = "civitaspo@gmail.com";
   git.userName = "Takahiro Nakayama";
   git.extraConfig = {
@@ -21,6 +23,9 @@
     push.default = "simple";
     coler.ui = true;
     branch.autosetuprebase = "always";
+    gpg.format = "ssh";
+    # TODO: Set another tool when isDarwin != true.
+    gpg.ssh.program = "${pkgs._1password}/Contents/MacOS/op-ssh-sign";
     merge.ff = false;
     pull.rebase = "merges";
     # init.templatedir = "~/.git-template";
