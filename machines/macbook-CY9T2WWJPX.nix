@@ -27,4 +27,5 @@
   };
   environment.shells = with pkgs; [ bashInteractive zsh ];
   environment.systemPackages = with pkgs; [ ];
+  security.pam.enableSudoTouchIdAuth = true;
 }
