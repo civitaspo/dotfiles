@@ -3,12 +3,12 @@
 {
   ssh.enable = true;
   ssh.compression = true;
-  ssh.extraOptionOverrides = {
-    IdentityAgent = "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
-  };
   ssh.includes = [
     "${config.home.homeDirectory}/.ssh/config.d/*.conf"
   ];
+  ssh.extraConfig = ''
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+  '';
   ssh.matchBlocks = {
     "github.com" = {
       hostname = "ssh.github.com";
