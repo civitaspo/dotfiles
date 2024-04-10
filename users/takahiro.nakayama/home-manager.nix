@@ -23,6 +23,7 @@ in {
     gawk
     gh
     ghq
+    gh-dash
     git
     github-copilot-cli
     gnugrep
@@ -31,6 +32,7 @@ in {
     google-cloud-sdk
     htop
     jq
+    lazygit
     neovim
     ripgrep
     raycast
@@ -38,10 +40,15 @@ in {
     starship
     terraform
     terraform-ls
-    tig
     wget
     zip
     zellij
+    zoxide
+    zsh
+    # java
+    jdk # LTS
+    # corretto11
+    # corretto17
     # font
     jetbrains-mono
     monaspace
@@ -89,7 +96,7 @@ in {
     configFile."1Password" = {
       source = ./files/.config/1Password;
       recursive = true;
-    }
+    };
   };
   programs = import ./lib/programs.nix {
     inherit inputs config lib pkgs;

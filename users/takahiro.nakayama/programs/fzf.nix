@@ -1,4 +1,6 @@
-{ inputs, config, lib, pkgs, ... }: {
+{ inputs, config, lib, pkgs, ... }:
+
+{
   fzf.enable = true;
   fzf.enableZshIntegration = true;
   # TODO: fd

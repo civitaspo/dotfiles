@@ -1,16 +1,45 @@
-{ inputs, config, lib, pkgs, ... }: {
+{ inputs, config, lib, pkgs, ... }:
+
+{
   git.enable = true;
   git.attributes = [];
   git.delta.enable = true;
   git.extraConfig = {};
   git.hooks = {};
-  git.ignores =[];
+  git.ignores =[
+    ".DS_Store"
+    ".bundle"
+    "db/*.sqlite3"
+    "log/*.log"
+    "tmp/"
+    "*~"
+    ".vagrant"
+    ".bundle"
+    "dump.rdb"
+    ".idea"
+    "*.iml"
+    ".ruby-version"
+    "Gemfile*.lock"
+    "Gemfile.lock"
+    ".java-version"
+    "vendor/"
+    "workspace"
+    "/.gtm/"
+    ".go-version"
+    ".bash_history"
+    ".metals"
+    ".bloop"
+    ".vscode"
+    ".dccache"
+    ".tool-versions"
+  ];
   git.includes = [
     # secret
     # {
     #   path = "~/.secret"
     # }
   ];
+  git.lfs.enable = true;
 
   git.signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlmYWLNT2IyKC0InCp3Upis6d3pH25NcQaPuDntjSWJ";
   git.signing.signByDefault = true;
@@ -36,5 +65,6 @@
     rebase.autoStash = true;
     delta.navigate = true;
     ghq.root = "~/src";
+    http.postBuffer = "1M";
   };
 }
