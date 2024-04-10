@@ -37,5 +37,9 @@
         system = "aarch64-darwin";
         user   = "takahiro.nakayama";
       };
+      darwinConfigurations.macbook-CY9T2WWJPX = mkSystem "macbook-CY9T2WWJPX" {
+        system = "aarch64-darwin";
+        user   = "takahiro.nakayama";
+      };
     };
 }
