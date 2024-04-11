@@ -87,17 +87,7 @@ in {
     };
   };
 
-  xdg = {
-    enable = true;
-    configFile.nvim = {
-      source = ./files/.config/nvim;
-      recursive = true;
-    };
-    configFile."1Password" = {
-      source = ./files/.config/1Password;
-      recursive = true;
-    };
-  };
+  xdg = import ./lib/xdg.nix {};
   programs = import ./lib/programs.nix {
     inherit inputs config lib pkgs;
   };

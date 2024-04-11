@@ -7,5 +7,5 @@ in
   foldl' (acc: path: acc // (import path { inherit inputs config lib pkgs; } ))
     {}
     (map (n: (programsDir + ("/" + n)))
-      (filter (n: match ".*\\.nix" n != null)
+      (filter (n: (match ".*\\.nix" n) != null)
         (attrNames (readDir programsDir))))
