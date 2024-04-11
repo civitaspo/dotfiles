@@ -32,6 +32,7 @@ in {
     google-cloud-sdk
     htop
     jq
+    karabiner-elements
     lazygit
     neovim
     ripgrep
