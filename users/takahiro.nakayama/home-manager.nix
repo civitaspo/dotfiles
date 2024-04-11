@@ -87,6 +87,7 @@ in {
     };
   };
 
+  home.file = import ./lib/homeFiles.nix {};
   xdg = import ./lib/xdg.nix {};
   programs = import ./lib/programs.nix {
     inherit inputs config lib pkgs;
