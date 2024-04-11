@@ -61,9 +61,9 @@ in {
   ]);
   # home.sessionPath = [];
   home.sessionVariables = {
-    LANG = "ja_JP.UTF-8";
-    LC_CTYPE = "ja_JP.UTF-8";
-    LC_ALL = "ja_JP.UTF-8";
+    LANG = "en_US.UTF-8";
+    LC_CTYPE = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
     EDITOR = "nvim";
     PAGER = "less";
   };
@@ -72,6 +72,9 @@ in {
     cp = "cp -iv";
     mv = "mv -iv";
     mkdir = "mkdir -p";
+    gst = "git status -s";
+    ga = "git add";
+    gc = "git commit";
   };
   home.username = user;
   # launchd.enable
