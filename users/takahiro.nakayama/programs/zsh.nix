@@ -27,4 +27,9 @@
       src = pkgs.zsh-completions;
     }
   ];
+  zsh.shellAliases = {
+    gst = "${pkgs.git}/bin/git status -s";
+    ga = "${pkgs.git}/bin/git add";
+    gc = "${pkgs.git}/bin/git commit";
+  };
 }

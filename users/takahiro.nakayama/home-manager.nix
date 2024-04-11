@@ -72,9 +72,6 @@ in {
     cp = "cp -iv";
     mv = "mv -iv";
     mkdir = "mkdir -p";
-    gst = "git status -s";
-    ga = "git add";
-    gc = "git commit";
   };
   home.username = user;
   # launchd.enable
