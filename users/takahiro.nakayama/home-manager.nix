@@ -52,8 +52,7 @@ in {
     # corretto11
     # corretto17
     # font
-    jetbrains-mono
-    monaspace
+    nerdfonts
     # overlays
     superwhisper
   ] ++ (lib.optionals isDarwin [
