@@ -118,4 +118,7 @@ do
   hs.hotkey.bind({"cmd"}, "4", function()
     activateApp("Slack")
   end)
+  hs.hotkey.bind({"cmd"}, "6", function()
+    activateApp("Gather")
+  end)
 end
