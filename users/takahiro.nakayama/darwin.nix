@@ -19,6 +19,7 @@ in {
       "gather"
       "google-japanese-ime"
       "hammerspoon"
+      "karabiner-elements"
       "notion-calendar"
       "setapp"
       # "rancher"
