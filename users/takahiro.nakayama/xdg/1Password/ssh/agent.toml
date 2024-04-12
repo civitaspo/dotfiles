@@ -2,3 +2,8 @@
 item = "Git Commit Signing Key"
 vault = "Private"
 account = "gonyumin"
+
+[[ssh-keys]]
+item = "1Password SSH Authn Key"
+vault = "Private"
+account = "gonyumin"

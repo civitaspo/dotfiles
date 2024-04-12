@@ -7,13 +7,16 @@
     "${config.home.homeDirectory}/.ssh/config.d/*.conf"
   ];
   ssh.extraConfig = ''
-  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   '';
   ssh.matchBlocks = {
     "github.com" = {
       hostname = "ssh.github.com";
       user = "git";
       port = 443;
+      extraOptions = {
+        IdentityAgent = "~/Library/Group\\ Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+      };
     };
   };
   ssh.serverAliveInterval = 60;
