@@ -32,5 +32,6 @@
     ga = "${pkgs.git}/bin/git add";
     gc = "${pkgs.git}/bin/git commit";
     grs = "${pkgs.git}/bin/git restore";
+    vim = "${pkgs.neovim}/bin/nvim";
   };
 }
