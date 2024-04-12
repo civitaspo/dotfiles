@@ -3,9 +3,7 @@
 let
   user = "takahiro.nakayama";
 in {
-  nixpkgs.overlays = import ../../lib/overlays.nix ++ [
-    # (import ./vim.nix { inherit inputs; })
-  ];
+  nixpkgs.overlays = import ../../lib/overlays.nix;
   homebrew = {
     enable = true;
     taps = [
