@@ -12,6 +12,7 @@ in {
     _1password
     _1password-gui
     alacritty
+    alt-tab-macos
     awscli2
     bat
     curl
@@ -36,6 +37,7 @@ in {
     neovim
     ripgrep
     raycast
+    slack
     ssm-session-manager-plugin
     starship
     terraform
