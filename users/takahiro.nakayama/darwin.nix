@@ -22,7 +22,7 @@ in {
       "karabiner-elements"
       "notion-calendar"
       "setapp"
-      # "rancher"
+      "rancher"
     ];
     masApps = {
       "Display Menu" =  549083868;
