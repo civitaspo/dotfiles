@@ -2,4 +2,4 @@
 
 set -e
 
-git push "$(git remote | fzf-tmux +m)" "$(git branch | fzf +m | sed "s/.* //")" $*
+git push "$(git remote | fzf-zellij)" "$(git branch | fzf-zellij | sed "s/.* //")" $*
