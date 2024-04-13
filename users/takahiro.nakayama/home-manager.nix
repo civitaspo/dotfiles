@@ -17,6 +17,7 @@ in {
     bat
     curl
     delta
+    deno
     eza
     fd
     findutils
@@ -35,13 +36,17 @@ in {
     jq
     lazygit
     neovim
-    ripgrep
+    nodejs_21
+    python3
     raycast
+    ripgrep
+    ruby
     slack
     ssm-session-manager-plugin
     starship
     terraform
     terraform-ls
+    typescript
     wget
     zip
     zellij
