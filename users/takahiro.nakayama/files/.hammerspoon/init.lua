@@ -1,10 +1,10 @@
 do
   local function reloadConfig(files)
     doReload = false
-    for _,file in pairs(files) do
+    for _, file in pairs(files) do
       if file:sub(-4) == ".lua" then
         doReload = true
-        print("-- Loading config: "..file)
+        print("-- Loading config: " .. file)
       end
     end
     if doReload then
@@ -106,19 +106,22 @@ do
     end
   end
 
-  hs.hotkey.bind({"cmd"}, "1", function()
+  hs.hotkey.bind({ "cmd" }, "1", function()
     activateApp("1Password")
   end)
-  hs.hotkey.bind({"cmd"}, "2", function()
+  hs.hotkey.bind({ "cmd" }, "2", function()
     activateApp("Alacritty")
   end)
-  hs.hotkey.bind({"cmd"}, "3", function()
+  hs.hotkey.bind({ "cmd" }, "3", function()
     activateApp("Arc")
   end)
-  hs.hotkey.bind({"cmd"}, "4", function()
+  hs.hotkey.bind({ "cmd" }, "4", function()
     activateApp("Slack")
   end)
-  hs.hotkey.bind({"cmd"}, "6", function()
+  hs.hotkey.bind({ "cmd" }, "5", function()
+    activateApp("Logseq")
+  end)
+  hs.hotkey.bind({ "cmd" }, "6", function()
     activateApp("Gather")
   end)
 end
