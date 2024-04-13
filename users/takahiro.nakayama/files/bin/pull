@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -e
+
+git pull "$(git remote | fzf-tmux +m)" "$(git branch | fzf +m | sed "s/.* //")" $*
