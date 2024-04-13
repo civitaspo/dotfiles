@@ -37,6 +37,7 @@ in {
     lazygit
     neovim
     nodejs_21
+    ollama
     python3
     raycast
     ripgrep
