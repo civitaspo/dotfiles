@@ -18,6 +18,7 @@ in {
       "google-japanese-ime"
       "hammerspoon"
       "karabiner-elements"
+      "logseq"
       "notion-calendar"
       "setapp"
       "rancher"
