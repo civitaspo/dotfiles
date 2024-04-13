@@ -8,6 +8,7 @@ in
       "${path}" = {
         source = filesDir + ("/" + path);
         recursive = true;
+        executable = (match "^(sbin|bin|scripts)$" path) != null;
       };
     } ))
     { }
