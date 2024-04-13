@@ -9,6 +9,10 @@
   git.ignores =[
     ".DS_Store"
     ".bundle"
+    ".factorypath"
+    ".classpath"
+    ".project"
+    ".settings"
     "db/*.sqlite3"
     "log/*.log"
     "tmp/"
