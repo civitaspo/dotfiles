@@ -35,6 +35,7 @@
     gb = "${pkgs.git}/bin/git branch";
     grs = "${pkgs.git}/bin/git restore";
     gsw = "${pkgs.git}/bin/git switch";
+    gl = "${pkgs.lazygit}/bin/lazygit";
     vim = "${pkgs.neovim}/bin/nvim";
     ls = "${pkgs.eza}/bin/eza";
     diff = "${pkgs.delta}/bin/delta";
@@ -84,7 +85,7 @@
 
   frepo() {
     local dir
-    dir=$(${pkgs.ghq}/bin/ghq list > /dev/null | ${pkgs.fzf}/bin/fzf +m) &&
+    dir=$(${pkgs.ghq}/bin/ghq list > /dev/null | fzf-zellij) &&
       \cd $(${pkgs.ghq}/bin/ghq root)/$dir
     zle accept-line
   }
