@@ -39,6 +39,7 @@
     vim = "${pkgs.neovim}/bin/nvim";
     ls = "${pkgs.eza}/bin/eza";
     diff = "${pkgs.delta}/bin/delta";
+    cd = "z";
   };
   zsh.initExtra = ''
   setopt correct
