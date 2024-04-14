@@ -27,6 +27,7 @@ in {
       "Display Menu" =  549083868;
       "Goodnotes 6" = 1444383602;
       "LINE" = 539883307;
+      "Microsoft Excel" = 462058435;
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Twingate" = 1501592214;
