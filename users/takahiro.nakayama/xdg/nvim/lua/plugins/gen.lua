@@ -3,10 +3,15 @@ return {
     "David-Kunz/gen.nvim",
     cmd = "Gen",
     keys = {
-      -- todo
+      { "<leader>ai", "<cmd>Gen<cr>", desc = "Select Gen Actions & Run" },
+      { "<leader>ag", "<cmd>Gen Generate<cr>", desc = "Gen: Generate" },
+      { "<leader>af", "<cmd>Gen Change_Code<cr>", desc = "Gen: Change Code" },
+      { "<leader>ap", "<cmd>Gen Chat<cr>", desc = "Gen: Chat" },
+      { "<leader>as", "<cmd>Gen Summarize<cr>", desc = "Summarize" },
+      { "<leader>aq", "<cmd>Gen Ask<cr>", desc = "Ask" },
     },
     opts = {
-        model = "codegemma:7b-code", -- The default model to use.
+        model = "mistral", -- The default model to use.
         host = "localhost", -- The host running the Ollama service.
         port = "11434", -- The port on which the Ollama service is listening.
         quit_map = "q", -- set keymap for close the response window
