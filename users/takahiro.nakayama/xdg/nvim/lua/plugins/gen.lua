@@ -4,9 +4,9 @@ return {
     cmd = "Gen",
     keys = {
       { "<leader>ai", "<cmd>Gen<cr>", desc = "Select Gen Actions & Run" },
-      { "<leader>ag", "<cmd>Gen Generate<cr>", desc = "Gen: Generate" },
-      { "<leader>af", "<cmd>Gen Change_Code<cr>", desc = "Gen: Change Code" },
-      { "<leader>ap", "<cmd>Gen Chat<cr>", desc = "Gen: Chat" },
+      { "<leader>ag", "<cmd>Gen Generate<cr>", desc = "Generate" },
+      { "<leader>af", "<cmd>Gen Change_Code<cr>", desc = "Change Code" },
+      { "<leader>ap", "<cmd>Gen Chat<cr>", desc = "Chat" },
       { "<leader>as", "<cmd>Gen Summarize<cr>", desc = "Summarize" },
       { "<leader>aq", "<cmd>Gen Ask<cr>", desc = "Ask" },
     },
