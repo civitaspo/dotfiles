@@ -15,8 +15,11 @@
         "unbind \"Ctrl n\"" = [];
         "unbind \"Ctrl h\"" = [];
         "bind \"Ctrl z\"" = { SwitchToMode = "locked"; };
-        "bind \"Ctrl r\"" = { SwitchToMode = "resize"; };
+        "bind \"Ctrl l\"" = { SwitchToMode = "resize"; };
         "bind \"Ctrl m\"" = { SwitchToMode = "move"; };
+        "bind \"Ctrl s\"" = { SwitchToMode = "search"; };
+        "bind \"Ctrl o\"" = { SwitchToMode = "session"; };
+        "bind \"Ctrl r\"" = { SwitchToMode = "scroll"; };
         "bind \"p\"" = { NewPane = "Right"; };
         "bind \"w\"" = { FocusNextPane = []; };
         "bind \"t\"" = { NewTab = []; };
