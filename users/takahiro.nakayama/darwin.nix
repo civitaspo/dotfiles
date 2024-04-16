@@ -19,6 +19,7 @@ in {
       "hammerspoon"
       "karabiner-elements"
       "logseq"
+      "mimestream"
       "notion-calendar"
       "setapp"
       "rancher"
