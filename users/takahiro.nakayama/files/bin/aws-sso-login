@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+__AWS_PROFILE="$(cat $HOME/.aws/config | grep '[profile' | cut -d ' ' -f2 | tr -d ']' | fzf-zellij)"
+aws sso login --profile "$__AWS_PROFILE"
