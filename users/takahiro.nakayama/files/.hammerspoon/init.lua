@@ -124,4 +124,7 @@ do
   hs.hotkey.bind({ "cmd" }, "6", function()
     activateApp("Gather")
   end)
+  hs.hotkey.bind({ "cmd" }, "9", function()
+    activateApp("Notion Calendar")
+  end)
 end
