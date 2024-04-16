@@ -22,6 +22,10 @@
       # not very long... can safely switch back for 23.11.
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    dotfiles-private = {
+      url = "git+ssh://git@github.com/civitaspo/dotfiles-private";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs:

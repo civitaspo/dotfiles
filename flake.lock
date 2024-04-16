@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "dotfiles-private": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1713302222,
+        "narHash": "sha256-0FDO3OV78WNmkLHBdhG5TjWlH15MnHGEJvRA+RZXE/k=",
+        "ref": "refs/heads/main",
+        "rev": "cfc9b3cb6ea1d2aeffcdba96ec865d68c3357c25",
+        "revCount": 2,
+        "type": "git",
+        "url": "ssh://git@github.com/civitaspo/dotfiles-private"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/civitaspo/dotfiles-private"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -278,6 +294,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "dotfiles-private": "dotfiles-private",
         "home-manager": "home-manager",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixos-wsl": "nixos-wsl",

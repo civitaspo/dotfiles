@@ -1,17 +1,6 @@
 { inputs, config, lib, pkgs, ... }:
 
 {
-  # TODO
-  # awscli.enable = true;
-  # awscli.credentials = {
-  #   "default" = {
-  #     "credential_process" = "${pkgs.pass}/bin/pass show aws";
-  #   };
-  # };
-  # awscli.settings = {
-  #   "default" = {
-  #     region = "ap-northeast-1";
-  #     output = "json";
-  #   };
-  # };
+  awscli.enable = true;
+  awscli.settings = import "${inputs.dotfiles-private.outPath}/aws-config.nix";
 }
