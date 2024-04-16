@@ -14,6 +14,7 @@ in {
     alacritty
     alt-tab-macos
     awscli2
+    azure-cli
     bat
     curl
     delta
