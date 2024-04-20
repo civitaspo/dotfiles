@@ -12,7 +12,7 @@ return {
       api_key_cmd = 'op read op://Private/openai-api-key-civitaspo-neovim/password --no-newline',
       openai_params = {
         model = "gpt-4-turbo",
-        max_tokens = 128000,
+        -- max_tokens = 128000,
       },
       openai_edit_params = {
         model = "gpt-4-turbo",
