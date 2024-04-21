@@ -62,6 +62,9 @@ in {
     nerdfonts
     # overlays
     superwhisper
+  ] ++ [
+    # unstable packages
+    inputs.nixpkgs-unstable.legacyPackages.${system}.devenv
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
   ]) ++ (lib.optionals (isLinux && !isWSL) [
