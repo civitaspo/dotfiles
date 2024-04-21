@@ -60,8 +60,6 @@ in {
     # corretto17
     # font
     nerdfonts
-    # overlays
-    superwhisper
   ] ++ [
     # unstable packages
     inputs.nixpkgs-unstable.legacyPackages.${system}.devenv
