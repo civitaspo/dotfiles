@@ -19,7 +19,6 @@ in {
     curl
     delta
     deno
-    devbox
     eza
     fd
     findutils
@@ -61,6 +60,9 @@ in {
     # corretto17
     # font
     nerdfonts
+  ] ++ [
+    # unstable packages
+    inputs.nixpkgs-unstable.legacyPackages.${system}.devenv
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
   ]) ++ (lib.optionals (isLinux && !isWSL) [
