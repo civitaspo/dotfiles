@@ -62,7 +62,6 @@ in {
     nerdfonts
     # overlays
     superwhisper
-    devenv
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
   ]) ++ (lib.optionals (isLinux && !isWSL) [
