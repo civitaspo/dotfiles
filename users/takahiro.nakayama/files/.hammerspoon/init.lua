@@ -127,4 +127,7 @@ do
   hs.hotkey.bind({ "cmd" }, "9", function()
     activateApp("Notion Calendar")
   end)
+  hs.hotkey.bind({ "cmd" }, "0", function()
+    activateApp("Mimestream")
+  end)
 end
