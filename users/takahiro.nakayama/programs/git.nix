@@ -36,6 +36,10 @@
     ".vscode"
     ".dccache"
     ".tool-versions"
+    ".devenv*"
+    "devenv.nix"
+    "devenv.local.nix"
+    ".direnv"
   ];
   git.includes = [
     # secret
