@@ -65,6 +65,8 @@ in {
     inputs.nixpkgs-unstable.legacyPackages.${system}.devenv
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
+    # custom derivation
+    superkey
   ]) ++ (lib.optionals (isLinux && !isWSL) [
     # NOTE: add linux only packages
   ]);
