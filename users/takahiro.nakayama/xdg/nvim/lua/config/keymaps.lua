@@ -9,7 +9,7 @@ vim.keymap.set({'i', 'v', 'n'}, '<C-p>', '<Up>')
 vim.keymap.set({'i', 'v', 'n'}, '<C-e>', '<End>')
 vim.keymap.set({'i', 'v', 'n'}, '<C-a>', '<Home>')
 vim.keymap.set({'i', 'v', 'n'}, '<C-h>', '<BS>')
-vim.keymap.set({'i', 'v', 'n'}, '<C-d>', '<Del>')
+vim.keymap.set({'i', 'v'}, '<C-d>', '<Del>') -- <C-d> in normal mode is for scrolling down
 vim.keymap.set('i', '<C-k>', '<C-o>D')
 vim.keymap.set('i', '<C-u>', '<C-o>d^')
 vim.keymap.set('i', '<C-w>', '<C-o>db')
