@@ -22,6 +22,7 @@ in {
       "mimestream"
       "notion-calendar"
       "setapp"
+      superkey
       "rancher"
     ];
     masApps = {
