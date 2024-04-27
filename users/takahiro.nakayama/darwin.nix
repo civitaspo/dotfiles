@@ -10,20 +10,20 @@ in {
       "aquaproj/aqua"
     ];
     brews = [
-      "aqua"
+      aqua
     ];
     casks  = [
-      "arc"
-      "gather"
-      "google-japanese-ime"
-      "hammerspoon"
-      "karabiner-elements"
-      "logseq"
-      "mimestream"
-      "notion-calendar"
-      "setapp"
+      arc
+      gather
+      google-japanese-ime
+      hammerspoon
+      karabiner-elements
+      logseq
+      mimestream
+      notion-calendar
+      setapp
       superkey
-      "rancher"
+      rancher
     ];
     masApps = {
       "Display Menu" =  549083868;
