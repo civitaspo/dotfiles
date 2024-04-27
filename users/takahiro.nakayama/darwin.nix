@@ -19,7 +19,6 @@ in {
       "hammerspoon"
       "heptabase"
       "karabiner-elements"
-      "logseq"
       "mimestream"
       "notion-calendar"
       "raycast"
