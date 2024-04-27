@@ -75,12 +75,6 @@ in {
     EDITOR = "nvim";
     PAGER = "less";
   };
-  home.shellAliases = {
-    rm = "rm -iv";
-    cp = "cp -iv";
-    mv = "mv -iv";
-    mkdir = "mkdir -p";
-  };
   home.username = user;
   # launchd.enable
   editorconfig.enable = true;

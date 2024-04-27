@@ -6,8 +6,6 @@
   zsh.autocd = true;
   zsh.completionInit = "autoload -Uz compinit && compinit -u";
   zsh.defaultKeymap = "emacs";
-  zsh.envExtra = ''
-  '';
   zsh.history.path = "${config.home.homeDirectory}/.zsh_history";
   zsh.history.save = 10000000;
   zsh.history.share = true;
@@ -40,7 +38,14 @@
     ls = "${pkgs.eza}/bin/eza";
     diff = "${pkgs.delta}/bin/delta";
     cd = "z";
+    rm = "rm -iv";
+    cp = "cp -iv";
+    mv = "mv -iv";
+    mkdir = "mkdir -p";
   };
+  zsh.envExtra = ''
+  OPENAI_API_KEY=op://Private/openai-api-key-civitaspo-neovim/password
+  '';
   zsh.initExtra = ''
   setopt correct
   setopt correct_all
