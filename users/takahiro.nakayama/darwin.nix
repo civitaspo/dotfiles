@@ -35,6 +35,9 @@ in {
       "Pages" = 409201541;
       "Twingate" = 1501592214;
     };
+    onActivation = {
+      cleanup = "zap";
+    };
   };
   users.users.${user} = {
     home = "/Users/${user}";
