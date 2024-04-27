@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+ENV_KV="$(env | grep '=op:' | fzf-zellij)"
+ENV_KEY="$(echo ${ENV_KV} | cut -d'=' -f1)"
+ENV_VALUE="$(echo ${ENV_KV} | cut -d'=' -f2)"
+echo "export ${ENV_KEY}=\"\$(op read ${ENV_VALUE})\""

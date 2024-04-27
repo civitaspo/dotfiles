@@ -23,8 +23,12 @@
       file = "share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh";
     }
   ];
+  # NOTE: zsh.sessionValiables is exported only when the first login shell is started.
+  #       This means that the variables are not exported even when the shell is restarted (e.g. 'exit $SHELL and re-run zellij').
   zsh.sessionVariables = {
     WORDCHARS = "*?_-.[]~!#$%^(){}<>";
+    # 1Password secrets
+    OPENAI_API_KEY = "op://Private/openai-api-key-civitaspo-neovim/password";
   };
   zsh.shellAliases = {
     gst = "${pkgs.git}/bin/git status";
@@ -43,8 +47,8 @@
     mv = "mv -iv";
     mkdir = "mkdir -p";
   };
+  # NOTE: zsh.envExtra is not exported, just the variables are defined in '.zshenv'.
   zsh.envExtra = ''
-  OPENAI_API_KEY=op://Private/openai-api-key-civitaspo-neovim/password
   '';
   zsh.initExtra = ''
   setopt correct
