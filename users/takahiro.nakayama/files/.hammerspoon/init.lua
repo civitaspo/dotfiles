@@ -119,7 +119,7 @@ do
     activateApp("Slack")
   end)
   hs.hotkey.bind({ "cmd" }, "5", function()
-    activateApp("Logseq")
+    activateApp("Heptabase")
   end)
   hs.hotkey.bind({ "cmd" }, "6", function()
     activateApp("Gather")
