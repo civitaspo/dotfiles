@@ -9,10 +9,11 @@ return {
       "nvim-telescope/telescope.nvim"
     },
     opts = {
-      api_key_cmd = 'op read op://Private/openai-api-key-civitaspo-neovim/password --no-newline',
+      -- NOTE: Set OPENAI_API_KEY environment variable.
+      --       export OPENAI_API_KEY="$(op read op://Private/openai-api-key-civitaspo-neovim/password --no-newline)"
+      -- api_key_cmd = 'op read op://Private/openai-api-key-civitaspo-neovim/password --no-newline',
       openai_params = {
         model = "gpt-4-turbo",
-        -- max_tokens = 128000,
       },
       openai_edit_params = {
         model = "gpt-4-turbo",
