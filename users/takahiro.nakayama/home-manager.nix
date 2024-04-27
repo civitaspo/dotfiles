@@ -40,7 +40,6 @@ in {
     nodejs_21
     ollama
     python3
-    raycast
     ripgrep
     ruby
     slack

@@ -21,6 +21,7 @@ in {
       "logseq"
       "mimestream"
       "notion-calendar"
+      "raycast"
       "setapp"
       "superkey"
       "rancher"
