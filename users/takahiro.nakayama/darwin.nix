@@ -17,6 +17,7 @@ in {
       "gather"
       "google-japanese-ime"
       "hammerspoon"
+      "heptabase"
       "karabiner-elements"
       "logseq"
       "mimestream"
