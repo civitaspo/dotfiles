@@ -34,6 +34,9 @@
                                     "modifiers": {
                                         "mandatory": [
                                             "left_control"
+                                        ],
+                                        "optional": [
+                                            "any"
                                         ]
                                     }
                                 },
@@ -496,14 +499,9 @@
                                 "to": [
                                     {
                                         "key_code": "tab",
-                                        "modifiers": {
-                                            "mandatory": [
-                                                "left_control"
-                                            ],
-                                            "optional": [
-                                                "any"
-                                            ]
-                                        }
+                                        "modifiers": [
+                                          "left_control"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -537,15 +535,10 @@
                                 "to": [
                                     {
                                         "key_code": "tab",
-                                        "modifiers": {
-                                            "mandatory": [
+                                        "modifiers": [
                                                 "left_control",
                                                 "left_shift"
-                                            ],
-                                            "optional": [
-                                                "any"
                                             ]
-                                        }
                                     }
                                 ],
                                 "type": "basic"
