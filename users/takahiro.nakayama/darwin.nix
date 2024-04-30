@@ -21,6 +21,7 @@ in {
       "heptabase"
       "karabiner-elements"
       "mimestream"
+      "miro"
       "notion-calendar"
       "rancher"
       "raycast"
