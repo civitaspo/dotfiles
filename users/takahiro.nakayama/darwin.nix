@@ -13,6 +13,7 @@ in {
       "aqua"
     ];
     casks  = [
+      "anki"
       "arc"
       "gather"
       "google-japanese-ime"
@@ -21,10 +22,11 @@ in {
       "karabiner-elements"
       "mimestream"
       "notion-calendar"
+      "rancher"
       "raycast"
       "setapp"
       "superkey"
-      "rancher"
+      "thingsmacsandboxhelper"
     ];
     masApps = {
       "Display Menu" =  549083868;
@@ -33,6 +35,7 @@ in {
       # "Microsoft Excel" = 462058435;
       "Numbers" = 409203825;
       "Pages" = 409201541;
+      "Things" = 904280696;
       "Twingate" = 1501592214;
     };
     onActivation = {
