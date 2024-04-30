@@ -38,8 +38,11 @@
     ".tool-versions"
     ".devenv*"
     "devenv.nix"
+    "devenv.yaml"
     "devenv.local.nix"
+    "devenv.lock"
     ".direnv"
+    ".envrc"
   ];
   git.includes = [
     # secret
