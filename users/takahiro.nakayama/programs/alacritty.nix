@@ -10,19 +10,19 @@
     };
     font = {
       normal = {
-        family = "JetBrainsMonoNL Nerd Font Propo";
-        style = "Thin";
+        family = "MonaspiceKr Nerd Font Mono";
+        style = "Light";
       };
       bold = {
-        family = "JetBrainsMonoNL Nerd Font Propo";
+        family = "MonaspiceKr Nerd Font Mono";
         style = "Medium";
       };
       italic = {
-        family = "JetBrainsMonoNL Nerd Font Propo";
-        style = "Thin Italic";
+        family = "MonaspiceKr Nerd Font Mono";
+        style = "Light Italic";
       };
       bold_italic = {
-        family = "JetBrainsMonoNL Nerd Font Propo";
+        family = "MonaspiceKr Nerd Font Mono";
         style = "Medium Italic";
       };
     };

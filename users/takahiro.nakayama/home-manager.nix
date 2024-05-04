@@ -58,7 +58,7 @@ in {
     # corretto11
     # corretto17
     # font
-    nerdfonts
+    inputs.nixpkgs-unstable.legacyPackages.${system}.nerdfonts
   ] ++ [
     # unstable packages
     inputs.nixpkgs-unstable.legacyPackages.${system}.devenv
