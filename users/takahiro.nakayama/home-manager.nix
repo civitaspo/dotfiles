@@ -12,7 +12,6 @@ in {
     _1password
     _1password-gui
     alacritty
-    alt-tab-macos
     awscli2
     azure-cli
     bat
@@ -64,6 +63,8 @@ in {
     inputs.nixpkgs-unstable.legacyPackages.${system}.devenv
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
+    alt-tab-macos
+    pronotes
   ]) ++ (lib.optionals (isLinux && !isWSL) [
     # NOTE: add linux only packages
   ]);
