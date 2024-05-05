@@ -1,3 +1,8 @@
+require("which-key").register({
+  mode = { "n", "v" },
+  ["<leader>a"] = { name = "+chatgpt" },
+})
+
 return {
   {
     "jackMort/ChatGPT.nvim",
@@ -8,63 +13,57 @@ return {
       "folke/trouble.nvim",
       "nvim-telescope/telescope.nvim"
     },
-    opts = function ()
-      require("which-key").register({
-        mode = { "n", "v" },
-        ["<leader>a"] = { name = "+chatgpt" },
-      })
-      return {
-        -- NOTE: Set OPENAI_API_KEY environment variable.
-        --       export OPENAI_API_KEY="$(op read op://Private/openai-api-key-civitaspo-neovim/password --no-newline)"
-        -- api_key_cmd = 'op read op://Private/openai-api-key-civitaspo-neovim/password --no-newline',
-        openai_params = {
-          model = "gpt-4-turbo",
+    opts = {
+      -- NOTE: Set OPENAI_API_KEY environment variable.
+      --       export OPENAI_API_KEY="$(op read op://Private/openai-api-key-civitaspo-neovim/password --no-newline)"
+      -- api_key_cmd = 'op read op://Private/openai-api-key-civitaspo-neovim/password --no-newline',
+      openai_params = {
+        model = "gpt-4-turbo",
+      },
+      openai_edit_params = {
+        model = "gpt-4-turbo",
+      },
+      edit_with_instructions = {
+        diff = true,
+        keymaps = {
+          close = "<C-c>",
+          accept = "<C-Enter>",
+          toggle_help = "<C-q>",
+          cycle_windows = "<Tab>",
+          use_output_as_input = "<C-i>",
+          -- disabled
+          toggle_diff = "<C-\\>d",
+          toggle_settings = "<C-\\>s",
         },
-        openai_edit_params = {
-          model = "gpt-4-turbo",
+      },
+      chat = {
+        keymaps = {
+          close = "<C-c>",
+          yank_last = "<C-y>",
+          yank_last_code = "<C-k>",
+          scroll_up = "<C-u>",
+          scroll_down = "<C-d>",
+          new_session = "<C-o>",
+          cycle_windows = "<Tab>",
+          next_message = "<C-n>",
+          prev_message = "<C-p>",
+          select_session = "<Space>",
+          rename_session = "r",
+          delete_session = "d",
+          draft_message = "<C-r>",
+          edit_message = "e",
+          delete_message = "d",
+          toggle_sessions = "<C-\\> <C-\\>",
+          toggle_help = "<C-q>",
+          stop_generating = "<C-x>",
+          -- disabled
+          cycle_modes = "<C-\\>c",
+          toggle_settings = "<C-\\>s",
+          toggle_message_role = "<C-\\>mr",
+          toggle_system_role_open = "<C-\\>sr",
         },
-        edit_with_instructions = {
-          diff = true,
-          keymaps = {
-            close = "<C-c>",
-            accept = "<C-Enter>",
-            toggle_help = "<C-q>",
-            cycle_windows = "<Tab>",
-            use_output_as_input = "<C-i>",
-            -- disabled
-            toggle_diff = "<C-\\>d",
-            toggle_settings = "<C-\\>s",
-          },
-        },
-        chat = {
-          keymaps = {
-            close = "<C-c>",
-            yank_last = "<C-y>",
-            yank_last_code = "<C-k>",
-            scroll_up = "<C-u>",
-            scroll_down = "<C-d>",
-            new_session = "<C-o>",
-            cycle_windows = "<Tab>",
-            next_message = "<C-n>",
-            prev_message = "<C-p>",
-            select_session = "<Space>",
-            rename_session = "r",
-            delete_session = "d",
-            draft_message = "<C-r>",
-            edit_message = "e",
-            delete_message = "d",
-            toggle_sessions = "<C-\\> <C-\\>",
-            toggle_help = "<C-q>",
-            stop_generating = "<C-x>",
-            -- disabled
-            cycle_modes = "<C-\\>c",
-            toggle_settings = "<C-\\>s",
-            toggle_message_role = "<C-\\>mr",
-            toggle_system_role_open = "<C-\\>sr",
-          },
-        },
-      }
-    end,
+      },
+    },
     keys = {
       {"<leader>ac", mode = {"n"},  "<cmd>ChatGPT<CR>", desc = "ChatGPT"},
       {"<leader>ae", mode = {"n", "v"}, "<cmd>ChatGPTEditWithInstruction<CR>", desc = "Edit with instruction"},

@@ -1,3 +1,8 @@
+require("which-key").register({
+  mode = { "n", "x" },
+  ["<leader>r"] = { name = "+refactoring" },
+})
+
 return {
   {
     "ThePrimeagen/refactoring.nvim",
@@ -5,27 +10,20 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    opts = function ()
-      -- TODO: Why doesn't this work?
-      require("which-key").register({
-        mode = { "n", "x" },
-        ["<leader>r"] = { name = "+refactoring" },
-      })
-      return {
-        -- https://github.com/ThePrimeagen/refactoring.nvim/blob/d2786877c91aa409c824f27b4ce8a9f560dda60a/lua/refactoring/config/init.lua
-        prompt_func_return_type = {
-          go = true,
-          java = true,
-        },
-        prompt_func_param_type = {
-          go = true,
-          java = true,
-        },
-        printf_statements = {},
-        print_var_statements = {},
-        show_success_message = false,
-      }
-    end,
+    opts = {
+      -- https://github.com/ThePrimeagen/refactoring.nvim/blob/d2786877c91aa409c824f27b4ce8a9f560dda60a/lua/refactoring/config/init.lua
+      prompt_func_return_type = {
+        go = true,
+        java = true,
+      },
+      prompt_func_param_type = {
+        go = true,
+        java = true,
+      },
+      printf_statements = {},
+      print_var_statements = {},
+      show_success_message = false,
+    },
     keys = {
       -- https://github.com/ThePrimeagen/refactoring.nvim/tree/master?tab=readme-ov-file#lua-api-
       {
