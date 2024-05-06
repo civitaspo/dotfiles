@@ -1,13 +1,11 @@
 return {
+  -- NOTE: Disable UI plugins to avoid conflicts with hlchunk.nvim.
+  { "lukas-reineke/indent-blankline.nvim", enabled = false },
+  { "echasnovski/mini.indentscope", enabled = false },
   {
     "shellRaining/hlchunk.nvim",
     event = { "UIEnter" },
     opts = {
-      chunk = { enabled = true },
-      -- NOTE: Disable other components to avoid conflict with other plugins (indent-blankline, mini.indentscope, ...).
-      indent = { enabled = false },
-      line_num = { enabled = false },
-      blank = { enabled = false },
     },
   },
 }
