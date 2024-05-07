@@ -8,7 +8,7 @@ if [[ "$(uname -o)" = "Darwin" ]]; then
   readonly SERIAL_NUMBER=$(ioreg -l | grep IOPlatformSerialNumber | cut -d= -f2 | cut -d\" -f2)
   cd ${ROOT}
   echo "[INFO] Execute 'nix build \".#darwinConfigurations.macbook-${SERIAL_NUMBER}.system\"''"
-  nix build ".#darwinConfigurations.macbook-${SERIAL_NUMBER}.system"
+  nix build --show-trace ".#darwinConfigurations.macbook-${SERIAL_NUMBER}.system"
   echo "[INFO] Execute './result/sw/bin/darwin-rebuild switch --flake \"$(pwd)#macbook-${SERIAL_NUMBER}\"'"
   ./result/sw/bin/darwin-rebuild switch --flake "$(pwd)#macbook-${SERIAL_NUMBER}"
 else
