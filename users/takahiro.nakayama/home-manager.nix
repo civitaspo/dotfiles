@@ -15,6 +15,7 @@ in {
     awscli2
     azure-cli
     bat
+    cargo
     curl
     delta
     deno
@@ -41,6 +42,8 @@ in {
     python3
     ripgrep
     ruby
+    rustc
+    rustfmt
     slack
     ssm-session-manager-plugin
     starship
