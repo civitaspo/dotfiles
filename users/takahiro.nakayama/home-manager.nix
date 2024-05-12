@@ -30,7 +30,8 @@ in {
     git
     github-copilot-cli
     gnugrep
-    gnused
+    # gnused
+    gnused-gsed
     gnutar
     google-cloud-sdk
     htop
