@@ -40,7 +40,6 @@ in {
     neovim
     nodejs_21
     ollama
-    openssl
     python3
     ripgrep
     ruby
@@ -66,6 +65,7 @@ in {
   ] ++ [
     # unstable packages
     inputs.nixpkgs-unstable.legacyPackages.${system}.devenv
+    inputs.nixpkgs-unstable.legacyPackages.${system}.openssl_3_3
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
     alt-tab-macos
