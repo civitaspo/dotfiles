@@ -18,10 +18,10 @@ return {
       --       export OPENAI_API_KEY="$(op read op://Private/openai-api-key-civitaspo-neovim/password --no-newline)"
       -- api_key_cmd = 'op read op://Private/openai-api-key-civitaspo-neovim/password --no-newline',
       openai_params = {
-        model = "gpt-4-turbo",
+        model = "gpt-4o",
       },
       openai_edit_params = {
-        model = "gpt-4-turbo",
+        model = "gpt-4o",
       },
       edit_with_instructions = {
         diff = true,
