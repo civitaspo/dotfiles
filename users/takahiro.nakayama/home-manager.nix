@@ -40,6 +40,7 @@ in {
     neovim
     nodejs_21
     ollama
+    openssl
     python3
     ripgrep
     ruby
