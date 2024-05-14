@@ -27,6 +27,10 @@
         createPatchOptionsMenu = "<c-x>";
         diffingMenu-alt = "";
       };
+      commits = {
+        moveDownCommit = "D";
+        moveUpCommit = "U";
+      };
       files = {
         findBaseCommitForFixup = "";
         openStatusFilter = "";
