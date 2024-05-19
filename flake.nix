@@ -16,12 +16,6 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      # Only need unstable until the lpeg fix hits mainline, probably
-      # not very long... can safely switch back for 23.11.
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     dotfiles-private = {
       url = "git+ssh://git@github.com/civitaspo/dotfiles-private";
       flake = false;
@@ -31,7 +25,6 @@
   outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs:
     let
       overlays = [
-        inputs.neovim-nightly-overlay.overlay
       ];
       mkSystem = import ./lib/mkSystem.nix {
         inherit overlays nixpkgs inputs;

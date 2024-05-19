@@ -37,7 +37,7 @@ in {
     htop
     jq
     lazygit
-    neovim
+    inputs.nixpkgs-unstable.legacyPackages.${system}.neovim
     nodejs_21
     ollama
     python3
