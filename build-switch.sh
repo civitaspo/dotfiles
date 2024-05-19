@@ -5,7 +5,7 @@ ROOT=$(cd $(dirname $0); pwd)
 
 # install
 if [[ "$(uname -o)" = "Darwin" ]]; then
-  readonly SERIAL_NUMBER=$(ioreg -l | grep IOPlatformSerialNumber | cut -d= -f2 | cut -d\" -f2)
+  readonly SERIAL_NUMBER=$(/usr/sbin/ioreg -l | grep IOPlatformSerialNumber | cut -d= -f2 | cut -d\" -f2)
   cd ${ROOT}
   echo "[INFO] Execute 'nix build \".#darwinConfigurations.macbook-${SERIAL_NUMBER}.system\"''"
   nix build --show-trace ".#darwinConfigurations.macbook-${SERIAL_NUMBER}.system"
