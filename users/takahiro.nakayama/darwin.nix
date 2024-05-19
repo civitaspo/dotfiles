@@ -15,6 +15,7 @@ in {
     casks  = [
       "anki"
       "arc"
+      "chatgpt"
       "gather"
       "google-japanese-ime"
       "hammerspoon"
