@@ -27,7 +27,6 @@ in {
       "rancher"
       "raycast"
       "setapp"
-      "superkey"
       "thingsmacsandboxhelper"
     ];
     masApps = {
