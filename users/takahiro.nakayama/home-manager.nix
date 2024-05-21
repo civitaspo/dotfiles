@@ -33,7 +33,7 @@ in {
     # gnused
     gnused-gsed
     gnutar
-    google-cloud-sdk
+    inputs.nixpkgs-unstable.legacyPackages.${system}.google-cloud-sdk
     htop
     jq
     lazygit
