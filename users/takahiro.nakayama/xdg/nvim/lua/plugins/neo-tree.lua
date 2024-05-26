@@ -2,6 +2,17 @@ return {
   {
     'nvim-neo-tree/neo-tree.nvim',
     opts = {
+      window = {
+        mappings = {
+          -- The same as "a"
+          ["n"] = {
+            "add",
+            config = {
+              show_path = "none" -- "none", "relative", "absolute"
+            }
+          },
+        },
+      },
       filesystem = {
         filtered_items = {
           visible = true,
