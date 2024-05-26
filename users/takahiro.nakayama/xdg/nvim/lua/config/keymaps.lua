@@ -14,15 +14,15 @@
 -- c = command-line
 -- t = terminal
 
-vim.keymap.set({ "i", "v", "n", "l" }, "<C-f>", "<Right>", { noremap = true, silent = true })
-vim.keymap.set({ "i", "v", "n", "l" }, "<C-b>", "<Left>",  { noremap = true, silent = true })
-vim.keymap.set({ "i", "v", "n", "l" }, "<C-n>", "<Down>",  { noremap = true, silent = true })
-vim.keymap.set({ "i", "v", "n", "l" }, "<C-p>", "<Up>",    { noremap = true, silent = true })
-vim.keymap.set({ "i", "v", "n", "l" }, "<C-e>", "<End>",   { noremap = true, silent = true })
-vim.keymap.set({ "i", "v", "n", "l" }, "<C-a>", "<Home>",  { noremap = true, silent = true })
-vim.keymap.set({ "i", "v", "l" },      "<C-h>", "<BS>",    { noremap = true, silent = true })
-vim.keymap.set({ "i", "v", "l" },      "<C-d>", "<Del>",   { noremap = true, silent = true }) -- <C-d> in normal mode is for scrolling down
-vim.keymap.set({ "i", "l" },           "<C-k>", "<C-o>D",  { noremap = true, silent = true })
-vim.keymap.set({ "i", "l" },           "<C-u>", "<C-o>d^", { noremap = true, silent = true })
-vim.keymap.set({ "n" },                     "<C-c>", ":q<CR>",  { noremap = true, silent = true })
-vim.keymap.set({ "n" },                     "<C-x>", ":wq<CR>", { noremap = true, silent = true })
+vim.keymap.set({ "i", "v", "n", "l" }, "<C-f>", "<Right>", { noremap = true,  silent = true })
+vim.keymap.set({ "i", "v", "n", "l" }, "<C-b>", "<Left>",  { noremap = true,  silent = true })
+vim.keymap.set({ "i", "v", "n", "l" }, "<C-n>", "<Down>",  { noremap = true,  silent = true })
+vim.keymap.set({ "i", "v", "n", "l" }, "<C-p>", "<Up>",    { noremap = true,  silent = true })
+vim.keymap.set({ "i", "v", "n", "l" }, "<C-e>", "<End>",   { noremap = true,  silent = true })
+vim.keymap.set({ "i", "v", "n", "l" }, "<C-a>", "<Home>",  { noremap = true,  silent = true })
+vim.keymap.set({ "i", "v", "l", "t" }, "<C-h>", "<BS>",    { noremap = false, silent = true })
+vim.keymap.set({ "i", "v", "l", "t" }, "<C-d>", "<Del>",   { noremap = false, silent = true }) -- <C-d> in normal mode is for scrolling down
+vim.keymap.set({ "i", "l" },           "<C-k>", "<C-o>D",  { noremap = true,  silent = true })
+vim.keymap.set({ "i", "l" },           "<C-u>", "<C-o>d^", { noremap = true,  silent = true })
+vim.keymap.set({ "n" },                "<C-c>", ":q<CR>",  { noremap = true,  silent = true })
+vim.keymap.set({ "n" },                "<C-x>", ":wq<CR>", { noremap = true,  silent = true })
