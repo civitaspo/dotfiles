@@ -2,12 +2,6 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- Deletes LazyVim default keymaps
-vim.keymap.del({ "i", "l" }, "<C-k>") -- Go to Upper Window
-vim.keymap.del({ "i", "v", "n", "l" }, "<C-f>") -- Scroll Forward
-vim.keymap.del({ "i", "v", "n", "l" }, "<C-b>") -- Scroll Backward
-vim.keymap.del({ "i", "v", "n", "l" }, "<C-a>") -- Increment
-
 -- modes: https://neovim.io/doc/user/map.html#map-table
 --
 -- n = normal
