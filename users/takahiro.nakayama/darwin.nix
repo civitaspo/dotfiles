@@ -27,6 +27,7 @@ in {
       "rancher"
       "raycast"
       "setapp"
+      "snowflake-snowsql"
       "thingsmacsandboxhelper"
     ];
     masApps = {
