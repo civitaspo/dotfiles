@@ -38,6 +38,9 @@ return {
             '.git/refs/**',
           },
         },
+        -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/832
+        group_empty_dirs = true,
+        scan_mode = "deep",
       },
     },
   },
