@@ -46,6 +46,7 @@
     cp = "cp -iv";
     mv = "mv -iv";
     mkdir = "mkdir -p";
+    snowsql = "/Applications/SnowSQL.app/Contents/MacOS/snowsql";
   };
   # NOTE: zsh.envExtra is not exported, just the variables are defined in '.zshenv'.
   zsh.envExtra = ''
