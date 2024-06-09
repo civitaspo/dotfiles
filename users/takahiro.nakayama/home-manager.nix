@@ -7,7 +7,7 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
 in {
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
   home.packages = with pkgs; [
     _1password
     _1password-gui
