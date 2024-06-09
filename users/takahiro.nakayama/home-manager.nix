@@ -11,7 +11,7 @@ in {
   home.packages = with pkgs; [
     _1password
     _1password-gui
-    alacritty
+    # alacritty
     awscli2
     azure-cli
     bat

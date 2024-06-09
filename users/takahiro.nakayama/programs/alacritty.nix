@@ -1,7 +1,7 @@
 { inputs, config, lib, pkgs, ... }:
 
 {
-  alacritty.enable = true;
+  alacritty.enable = false;
   alacritty.settings = {
     # https://github.com/alacritty/alacritty/tree/master#configuration
     window.startup_mode = "Maximized";
