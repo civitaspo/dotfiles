@@ -38,7 +38,7 @@ in {
     jq
     lazygit
     inputs.nixpkgs-unstable.legacyPackages.${system}.neovim
-    nodejs_21
+    nodejs_22
     ollama
     python3
     ripgrep
