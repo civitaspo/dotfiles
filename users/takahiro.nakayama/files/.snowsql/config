@@ -1,0 +1,34 @@
+[connections]
+
+[connections.layerx-bakuraku-dev]
+accountname = layerx-bakuraku-dev
+username = TAKAHIRO.NAKAYAMA@LAYERX.CO.JP
+authenticator = externalbrowser
+
+[variables]
+# SnowSQL defines the variables in this section on startup.
+# You can use these variables in SQL statements. For details, see
+# https://docs.snowflake.com/en/user-guide/snowsql-use.html#using-variables
+
+[options]
+auto_completion = True
+variable_substitution = True
+exit_on_error = True
+log_file = ~/.snowsql/log
+log_level = INFO
+timing = True
+
+# Table format. Possible values: psql, plain, simple, grid, fancy_grid, pipe,
+# orgtbl, rst, mediawiki, html, latex, latex_booktabs, tsv.
+# Recommended: psql, fancy_grid and grid.
+output_format = psql
+
+# Keybindings: Possible values: emacs, vi.
+# Emacs mode: Ctrl-A is home, Ctrl-E is end. All emacs keybindings are available in the REPL.
+# When Vi mode is enabled you can use modal editing features offered by Vi in the REPL.
+key_bindings = emacs
+
+# Repository Base URL
+# The endpoint to download the SnowSQL main module.
+repository_base_url = https://sfc-repo.snowflakecomputing.com/snowsql
+
