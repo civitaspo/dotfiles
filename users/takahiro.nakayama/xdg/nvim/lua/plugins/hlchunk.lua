@@ -10,7 +10,7 @@ return {
         notify = false,
       },
       indent = {
-        enable = true,
+        enable = false,
         notify = false,
       },
       line_num = {
