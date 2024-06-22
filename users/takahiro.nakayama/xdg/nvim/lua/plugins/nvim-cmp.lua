@@ -11,17 +11,6 @@ return {
         -- https://github.com/hrsh7th/nvim-cmp/blob/a110e12d0b58eefcf5b771f533fc2cf3050680ac/lua/cmp/config/mapping.lua#L44
         ['<C-P>'] = cmp.config.disable,
         ['<C-N>'] = cmp.config.disable,
-
-        -- Use <S-CR> instead of <C-N>
-        -- https://github.com/LazyVim/LazyVim/blob/b47c65f4087c4d82720ab7439f395aba5d6b5f40/lua/lazyvim/plugins/coding.lua#L39
-        ["<S-CR>"] = cmp.mapping(function()
-          if cmp.visible() then
-            -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
-            cmp.select_next_item()
-          else
-            cmp.complete()
-          end
-        end, { "i", "s" }),
       })
     end,
   },
