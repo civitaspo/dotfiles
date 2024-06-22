@@ -15,12 +15,7 @@ return {
         -- Use <S-CR> instead of <C-N>
         -- https://github.com/LazyVim/LazyVim/blob/b47c65f4087c4d82720ab7439f395aba5d6b5f40/lua/lazyvim/plugins/coding.lua#L39
         ["<S-CR>"] = cmp.mapping(function()
-          if cmp.visible() then
-            -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
-            cmp.select_next_item()
-          else
-            cmp.complete()
-          end
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
         end, { "i", "s" }),
       })
     end,
