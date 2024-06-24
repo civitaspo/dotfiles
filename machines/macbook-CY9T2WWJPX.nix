@@ -28,4 +28,27 @@
   environment.shells = with pkgs; [ bashInteractive zsh ];
   environment.systemPackages = with pkgs; [ ];
   security.pam.enableSudoTouchIdAuth = true;
+  launchd.daemons = {
+    sysctl = {
+      serviceConfig.Label = "sysctl";
+      serviceConfig.ProgramArguments = [
+        "sysctl"
+        "-w"
+        "kern.maxfiles=524288"        # 2^19
+        "kern.maxfilesperproc=524288" # 2^19
+      ];
+      serviceConfig.RunAtLoad = true;
+    };
+    "launchctl.maxfiles" = {
+      serviceConfig.Label = "launchctl.maxfiles";
+      serviceConfig.ProgramArguments = [
+        "launchctl"
+        "limit"
+        "maxfiles"
+        "524288" # 2^19
+        "524288" # 2^19
+      ];
+      serviceConfig.RunAtLoad = true;
+    };
+  };
 }
