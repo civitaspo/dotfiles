@@ -69,7 +69,6 @@ in {
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
     alt-tab-macos
-    pronotes
   ]) ++ (lib.optionals (isLinux && !isWSL) [
     # NOTE: add linux only packages
   ]);
