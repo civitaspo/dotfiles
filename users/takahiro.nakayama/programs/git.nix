@@ -75,5 +75,6 @@
     delta.navigate = true;
     ghq.root = "~/src";
     http.postBuffer = "1M";
+    "url \"ssh://git@github.com/\"".insteadOf = "https://github.com/";
   };
 }
