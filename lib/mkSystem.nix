@@ -19,8 +19,8 @@ let
   _ = nixpkgs.lib.throwIf (isWSL && isDarwin) "WSL and Darwin are mutually exclusive";
 
   machineConfig = ../machines/${name}.nix;
-  userOSConfig = ../users/${user}/${os}.nix;
-  userHMConfig = ../users/${user}/home-manager.nix;
+  userOSConfig = ../home/${os}.nix;
+  userHMConfig = ../home/home-manager.nix;
 
   systemFunc = if isDarwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
   home-manager = if isDarwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;

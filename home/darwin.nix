@@ -3,7 +3,7 @@
 let
   user = "takahiro.nakayama";
 in {
-  nixpkgs.overlays = import ../../lib/overlays.nix;
+  nixpkgs.overlays = import ../lib/overlays.nix;
   homebrew = {
     enable = true;
     taps = [
