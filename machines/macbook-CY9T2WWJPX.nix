@@ -13,6 +13,7 @@
       keep-derivations = true
       max-jobs = auto
       extra-nix-path = nixpkgs=flake:nixpkgs
+      upgrade-nix-store-path-url = https://install.determinate.systems/nix-upgrade/stable/universal
     '';
   };
   programs.zsh= {
