@@ -38,5 +38,9 @@
         system = "aarch64-darwin";
         user   = "takahiro.nakayama";
       };
+      darwinConfigurations.macbook-H7QRCQLYPP = mkSystem "macbook-H7QRCQLYPP" {
+        system = "aarch64-darwin";
+        user   = "takahiro.nakayama";
+      };
     };
 }
