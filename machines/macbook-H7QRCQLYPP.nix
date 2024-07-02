@@ -13,8 +13,11 @@
       keep-derivations = true
       max-jobs = auto
       extra-nix-path = nixpkgs=flake:nixpkgs
-      upgrade-nix-store-path-url = https://install.determinate.systems/nix-upgrade/stable/universal
     '';
+    # NOTE: https://github.com/LnL7/nix-darwin/issues/864
+    # > Validating generated nix.conf
+    # > error: unknown setting 'upgrade-nix-store-path-url'
+    # upgrade-nix-store-path-url = https://install.determinate.systems/nix-upgrade/stable/universal
   };
   programs.zsh= {
     enable = true;
