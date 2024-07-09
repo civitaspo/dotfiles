@@ -26,99 +26,44 @@
         style = "Medium Italic";
       };
     };
-    colors = { # https://github.com/catppuccin/alacritty/blob/main/catppuccin-mocha.toml
+    colors = {
+    # Default colors
       primary = {
-        background = "#1e1e2e";
-        foreground = "#cdd6f4";
-        dim_foreground = "#7f849c";
-        bright_foreground = "#cdd6f4";
+        background = "0x22272e";
+        foreground = "0xadbac7";
       };
 
+      # Cursor colors
+      #
+      # These will only be used when the `custom_cursor_colors` field is set to `true`.
       cursor = {
-        text = "#1e1e2e";
-        cursor = "#f5e0dc";
+        text = "0x22272e";
+        cursor = "0xadbac7";
       };
 
-      vi_mode_cursor = {
-        text = "#1e1e2e";
-        cursor = "#b4befe";
-      };
-
-      search = {
-        matches = {
-          foreground = "#1e1e2e";
-          background = "#a6adc8";
-        };
-        focused_match = {
-          foreground = "#1e1e2e";
-          background = "#a6e3a1";
-        };
-      };
-
-      footer_bar = {
-        foreground = "#1e1e2e";
-        background = "#a6adc8";
-      };
-
-      hints = {
-        start = {
-          foreground = "#1e1e2e";
-          background = "#f9e2af";
-        };
-        end = {
-          foreground = "#1e1e2e";
-          background = "#a6adc8";
-        };
-      };
-
-      selection = {
-        text = "#1e1e2e";
-        background = "#f5e0dc";
-      };
-
+      # Normal colors
       normal = {
-        black = "#45475a";
-        red = "#f38ba8";
-        green = "#a6e3a1";
-        yellow = "#f9e2af";
-        blue = "#89b4fa";
-        magenta = "#f5c2e7";
-        cyan = "#94e2d5";
-        white = "#bac2de";
+        black = "0x545d68";
+        red = "0xf47067";
+        green = "0x57ab5a";
+        yellow = "0xc69026";
+        blue = "0x539bf5";
+        magenta = "0xb083f0";
+        cyan = "0x39c5cf";
+        white = "0x909dab";
       };
 
+      # Bright colors
       bright = {
-        black = "#585b70";
-        red = "#f38ba8";
-        green = "#a6e3a1";
-        yellow = "#f9e2af";
-        blue = "#89b4fa";
-        magenta = "#f5c2e7";
-        cyan = "#94e2d5";
-        white = "#a6adc8";
+        black = "0x636e7b";
+        red = "0xff938a";
+        green = "0x6bc46d";
+        yellow = "0xdaaa3f";
+        blue = "0x6cb6ff";
+        magenta = "0xb083f0";
+        cyan = "0x39c5cf";
+        white = "0x909dab";
       };
-
-      dim = {
-        black = "#45475a";
-        red = "#f38ba8";
-        green = "#a6e3a1";
-        yellow = "#f9e2af";
-        blue = "#89b4fa";
-        magenta = "#f5c2e7";
-        cyan = "#94e2d5";
-        white = "#bac2de";
-      };
-
-      indexed_colors = [
-        {
-          index = 16;
-          color = "#fab387";
-        }
-        {
-          index = 17;
-          color = "#f5e0dc";
-        }
-      ];
     };
   };
 }
