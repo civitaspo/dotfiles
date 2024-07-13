@@ -9,7 +9,7 @@ do
     activateApp("1Password")
   end)
   hs.hotkey.bind({ "cmd" }, "2", function()
-    activateApp("Alacritty")
+    activateApp("Cursor")
   end)
   hs.hotkey.bind({ "cmd" }, "3", function()
     activateApp("Arc")
