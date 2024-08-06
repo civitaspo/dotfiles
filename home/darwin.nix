@@ -13,6 +13,7 @@ in {
       "aqua"
     ];
     casks  = [
+      "alt-tab"
       "anki"
       "arc"
       "cursor"

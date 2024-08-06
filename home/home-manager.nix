@@ -68,7 +68,6 @@ in {
     inputs.nixpkgs-unstable.legacyPackages.${system}.openssl_3_3
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
-    alt-tab-macos
   ]) ++ (lib.optionals (isLinux && !isWSL) [
     # NOTE: add linux only packages
   ]);
