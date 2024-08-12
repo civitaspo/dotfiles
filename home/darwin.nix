@@ -32,7 +32,6 @@ in {
       "thingsmacsandboxhelper"
     ];
     masApps = {
-      "Bear" = 1091189122;
       "Display Menu" =  549083868;
       "Goodnotes 6" = 1444383602;
       "LINE" = 539883307;

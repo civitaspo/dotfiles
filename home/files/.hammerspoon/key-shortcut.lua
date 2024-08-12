@@ -18,7 +18,7 @@ do
     activateApp("Slack")
   end)
   hs.hotkey.bind({ "cmd" }, "5", function()
-    activateApp("Notes")
+    activateApp("Heptabase")
   end)
   hs.hotkey.bind({ "cmd" }, "6", function()
     activateApp("Gather")
@@ -36,4 +36,3 @@ do
     activateApp("Mimestream")
   end)
 end
-
