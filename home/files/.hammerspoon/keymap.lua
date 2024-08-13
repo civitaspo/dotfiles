@@ -40,6 +40,10 @@ do
   end
   local function keyBindings()
     emacsKeyBindings("Mimestream")
+    emacsKeyBindings("Arc")
+    emacsKeyBindings("Heptabase")
+    emacsKeyBindings("Slack")
+    emacsKeyBindings("Things3")
   end
   local appWatcher = hs.application.watcher.new(function(name, event, app)
     if event == hs.application.watcher.activated then
