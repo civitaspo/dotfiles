@@ -35,7 +35,8 @@ do
       hs.eventtap.keyStroke({}, "delete")
     end)
     appKeyBinding(appName, { "ctrl" }, "k", function()
-      hs.eventtap.keyStroke({}, "shift-end", "delete")
+      hs.eventtap.keyStroke({ "shift" }, "end")
+      hs.eventtap.keyStroke({}, "delete")
     end)
   end
   local function keyBindings()
