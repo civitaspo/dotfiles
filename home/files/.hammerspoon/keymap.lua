@@ -4,7 +4,8 @@ do
   end
   local function appKeyBinding(appName, modifiers, key, fn)
     if isActiveApp(appName) then
-      hs.hotkey.bind(modifiers, key, fn)
+      -- Keyrepeat is sooooooooooooooooooooooooo slowwww!!!!!!!!!!
+      hs.hotkey.bind(modifiers, key, fn, nil, fn)
     else
       hs.hotkey.disableAll(modifiers, key)
     end
@@ -40,11 +41,17 @@ do
     end)
   end
   local function keyBindings()
-    emacsKeyBindings("Mimestream")
-    emacsKeyBindings("Arc")
-    emacsKeyBindings("Heptabase")
-    emacsKeyBindings("Slack")
-    emacsKeyBindings("Things3")
+    local activeApp = hs.application.frontmostApplication():name()
+    -- local apps = { "Arc", "Heptabase", "Slack", "Things3", "Mimestream" }
+    local apps = { }
+    for _, app in ipairs(apps) do
+      if app ~= activeApp then
+        emacsKeyBindings(app)
+      end
+    end
+    if hs.fnutils.contains(apps, activeApp) then
+      emacsKeyBindings(activeApp)
+    end
   end
   local appWatcher = hs.application.watcher.new(function(name, event, app)
     if event == hs.application.watcher.activated then
