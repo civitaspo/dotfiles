@@ -27,6 +27,9 @@
         createPatchOptionsMenu = "<c-x>";
         diffingMenu-alt = "";
       };
+      branches = {
+        setUpstream = "U";
+      };
       commits = {
         moveDownCommit = "D";
         moveUpCommit = "U";
@@ -36,5 +39,25 @@
         openStatusFilter = "";
       };
     };
+    customCommands = [
+      {
+        key = "u";
+        context = "global";
+        command = "git pull origin main --rebase";
+        description = "Pull main branch & rebase current branch";
+        loadingText = "Pulling main branch & rebasing current branch...";
+        stream = true;
+        prompts = [
+          {
+            type = "confirm";
+            title = "Pull main branch & rebase current branch";
+            body = "Are you sure you want to pull main branch & rebase current branch?";
+          }
+        ];
+        after = {
+          checkForConflicts = true;
+        };
+      }
+    ];
   };
 }
