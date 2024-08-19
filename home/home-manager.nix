@@ -15,6 +15,7 @@ in {
     awscli2
     azure-cli
     bat
+    btop
     cargo
     curl
     delta
@@ -35,7 +36,6 @@ in {
     gnused-gsed
     gnutar
     inputs.nixpkgs-unstable.legacyPackages.${system}.google-cloud-sdk
-    htop
     jq
     lazygit
     inputs.nixpkgs-unstable.legacyPackages.${system}.neovim
