@@ -58,6 +58,7 @@
     core.pager = "${pkgs.delta}/bin/delta";
     core.autocrlf = "input";
     core.filemode = false;
+    core.ignorecase = false;
     push.default = "simple";
     coler.ui = true;
     branch.autosetuprebase = "always";
