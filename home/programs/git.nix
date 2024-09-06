@@ -75,6 +75,7 @@
     rebase.autoStash = true;
     delta.navigate = true;
     ghq.root = "~/src";
+    fetch.prune = true;
     http.postBuffer = "1M";
     "url \"ssh://git@github.com/\"".insteadOf = "https://github.com/";
   };
