@@ -41,7 +41,6 @@ in {
       "Pages" = 409201541;
       "Things" = 904280696;
       "Twingate" = 1501592214;
-      "one sec" = 1532875441;
     };
     onActivation = {
       cleanup = "zap";
