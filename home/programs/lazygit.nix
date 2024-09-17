@@ -58,6 +58,25 @@
           checkForConflicts = true;
         };
       }
+      {
+        key = "<c-d>";
+        context = "localBranches";
+        command = "git fetch --prune && git for-each-ref --format '%(refname:short) %(upstream:track)' | grep '\\[gone\\]$' | cut -d' ' -f1 | xargs -I%% git branch -D %%";
+        description = "Delete local branches that are gone";
+        loadingText = "Deleting local branches that are gone...";
+        stream = true;
+        prompts = [
+          {
+            type = "confirm";
+            title = "Delete local branches that are gone";
+            body = "Are you sure you want to delete local branches that are gone?";
+          }
+        ];
+        after = {
+          checkForConflicts = true;
+        };
+      }
+
     ];
   };
 }
