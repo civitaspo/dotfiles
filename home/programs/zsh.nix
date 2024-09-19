@@ -78,11 +78,15 @@
   setopt magic_equal_subst
   setopt prompt_subst
 
+  # CUSTOM ZELLIJ INTEGRATION
+  if [[ "$IS_VSCODE_TERMINAL" != "true" ]]; then
+    eval "$(${pkgs.zellij}/bin/zellij setup --generate-auto-start zsh)"
+  fi
+
   umask 022
 
   autoload -Uz url-quote-magic
   zle -N self-insert url-quote-magic
-
 
   typeset -gx -U path
   path=( \

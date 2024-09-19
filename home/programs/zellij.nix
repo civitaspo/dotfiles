@@ -2,7 +2,10 @@
 
 {
   zellij.enable = true;
-  zellij.enableZshIntegration = true;
+  # NOTE: I don't want to start zellij automatically when I start zsh in vscode.
+  #       So, I write customized zsh integration.
+  #       See. zsh.nix
+  zellij.enableZshIntegration = false;
   zellij.settings = {
     scroll_buffer_size = 50000;
     copy_command = "pbcopy";

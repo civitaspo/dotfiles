@@ -2,13 +2,19 @@
 
 set -eo pipefail
 
-INPUT_FILE="$(mktemp -u)"
-cat >"${INPUT_FILE}"
+if [[ -z "$ZELLIJ" ]]; then
+  # non-zellij
+  cat | fzf +m
+else
+  # zellij
+  INPUT_FILE="$(mktemp -u)"
+  cat >"${INPUT_FILE}"
 
-FIFO_PIPE="$(mktemp -u)"
-mkfifo "$FIFO_PIPE"
-zellij run --close-on-exit -f -- bash -ec "cat ${INPUT_FILE} | fzf +m > $FIFO_PIPE"
-cat "$FIFO_PIPE"
+  FIFO_PIPE="$(mktemp -u)"
+  mkfifo "$FIFO_PIPE"
+  zellij run --close-on-exit -f -- bash -ec "cat ${INPUT_FILE} | fzf +m > $FIFO_PIPE"
+  cat "$FIFO_PIPE"
 
-rm -f "$FIFO_PIPE"
-rm -f "$INPUT_FILE"
+  rm -f "$FIFO_PIPE"
+  rm -f "$INPUT_FILE"
+fi
