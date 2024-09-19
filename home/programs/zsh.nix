@@ -51,6 +51,12 @@
   # NOTE: zsh.envExtra is not exported, just the variables are defined in '.zshenv'.
   zsh.envExtra = ''
   '';
+  zsh.loginExtra = ''
+  # CUSTOM ZELLIJ INTEGRATION
+  if [[ "$IS_VSCODE_TERMINAL" != "true" ]]; then
+    eval "$(${pkgs.zellij}/bin/zellij setup --generate-auto-start zsh)"
+  fi
+  '';
   zsh.initExtra = ''
   setopt correct
   setopt correct_all
@@ -77,11 +83,6 @@
   setopt list_types
   setopt magic_equal_subst
   setopt prompt_subst
-
-  # CUSTOM ZELLIJ INTEGRATION
-  if [[ "$IS_VSCODE_TERMINAL" != "true" ]]; then
-    eval "$(${pkgs.zellij}/bin/zellij setup --generate-auto-start zsh)"
-  fi
 
   umask 022
 
