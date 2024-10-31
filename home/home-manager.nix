@@ -21,6 +21,7 @@ in {
     delta
     deno
     devbox
+    docker
     eza
     fd
     findutils
@@ -68,6 +69,7 @@ in {
     inputs.nixpkgs-unstable.legacyPackages.${system}.openssl_3_3
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
+    colima
   ]) ++ (lib.optionals (isLinux && !isWSL) [
     # NOTE: add linux only packages
   ]);

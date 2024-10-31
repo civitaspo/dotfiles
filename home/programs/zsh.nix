@@ -95,7 +95,6 @@
       ${config.home.homeDirectory}/sbin(N-/) \
       ${config.home.homeDirectory}/scripts(N-/) \
       ${config.home.homeDirectory}/.local/share/aquaproj-aqua/bin(N-/) \
-      ${config.home.homeDirectory}/.rd/bin(N-/) \
       "$path[@]" \
     )
 

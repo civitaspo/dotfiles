@@ -25,7 +25,6 @@ in {
       "mimestream"
       "miro"
       "notion-calendar"
-      "rancher"
       "raycast"
       "setapp"
       "snowflake-snowsql"
