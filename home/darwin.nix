@@ -13,7 +13,7 @@ in {
       "aqua"
     ];
     casks  = [
-      "alt-tab"
+      "tabtab"
       "anki"
       "arc"
       "cursor"
@@ -29,6 +29,7 @@ in {
       "setapp"
       "snowflake-snowsql"
       "thingsmacsandboxhelper"
+      "nikitabobko/tap/aerospace"
     ];
     masApps = {
       "Display Menu" =  549083868;
