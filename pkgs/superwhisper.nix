@@ -1,7 +1,7 @@
 { lib, stdenv, fetchurl, _7zz }:
 
 # NOTE: superwhisper only supports MacOS.
-assert (!stdenv.isLinux);
+assert (stdenv.isDarwin);
 
 stdenv.mkDerivation rec {
   pname = "superwhisper";

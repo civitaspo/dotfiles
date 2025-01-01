@@ -70,6 +70,8 @@ in {
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
     colima
+    # overlays
+    aqua
   ]) ++ (lib.optionals (isLinux && !isWSL) [
     # NOTE: add linux only packages
   ]);

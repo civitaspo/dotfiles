@@ -7,10 +7,8 @@ in {
   homebrew = {
     enable = true;
     taps = [
-      "aquaproj/aqua"
     ];
     brews = [
-      "aqua"
     ];
     casks  = [
       "tabtab"
