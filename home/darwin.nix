@@ -12,13 +12,11 @@ in {
     ];
     casks  = [
       "tabtab"
-      "anki"
       "arc"
       "cursor"
       "chatgpt"
       "google-japanese-ime"
       "hammerspoon"
-      "heptabase"
       "karabiner-elements"
       "mimestream"
       "miro"
