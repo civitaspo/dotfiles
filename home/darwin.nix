@@ -7,6 +7,7 @@ in {
   homebrew = {
     enable = true;
     taps = [
+      "nikitabobko/tap"
     ];
     brews = [
     ];
@@ -25,7 +26,7 @@ in {
       "setapp"
       "snowflake-snowsql"
       "thingsmacsandboxhelper"
-      "nikitabobko/tap/aerospace"
+      "aerospace"
     ];
     masApps = {
       "Display Menu" =  549083868;
