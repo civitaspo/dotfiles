@@ -111,6 +111,7 @@
   typeset -gx -U fpath
   fpath=( \
       ${pkgs.zsh-completions}/share/zsh/site-functions(N-/) \
+      ${config.home.homeDirectory}/.config/zsh/site-functions(N-/) \
       $fpath \
       )
   '';
