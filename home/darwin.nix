@@ -13,14 +13,13 @@ in {
     ];
     casks  = [
       "tabtab"
+      "anybox"
       "arc"
       "cursor"
-      "chatgpt"
       "google-japanese-ime"
       "hammerspoon"
       "karabiner-elements"
       "mimestream"
-      "miro"
       "notion-calendar"
       "raycast"
       "setapp"
