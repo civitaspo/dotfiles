@@ -13,7 +13,6 @@ in {
     ];
     casks  = [
       "tabtab"
-      "anybox"
       "arc"
       "cursor"
       "google-japanese-ime"
@@ -28,6 +27,8 @@ in {
       "aerospace"
     ];
     masApps = {
+      "Anybox" = 1593408455;
+      "Bear" = 1091189122;
       "Display Menu" =  549083868;
       "Goodnotes 6" = 1444383602;
       "Klack" = 6446206067;
