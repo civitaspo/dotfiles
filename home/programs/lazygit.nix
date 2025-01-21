@@ -76,7 +76,82 @@
           checkForConflicts = true;
         };
       }
-
+      # {
+      #   key = "<c-y>";
+      #   context = "localBranches";
+      #   description = "Create a New Pull Request";
+      #   command = "gh pr create --base {{.SelectedLocalBranch.Name}}";
+      #   prompts = [
+      #     {
+      #       type = "menu";
+      #       title = "Semantic PR Type";
+      #       key = "SemPRType";
+      #       options = [
+      #         {
+      #           name = "feat";
+      #           description = "A new feature";
+      #           value = "feat";
+      #         }
+      #         {
+      #           name = "fix";
+      #           description = "A bug fix";
+      #           value = "fix";
+      #         }
+      #         {
+      #           name = "chore";
+      #           description = "Other changes that don't modify src or test files";
+      #           value = "chore";
+      #         }
+      #         {
+      #           name = "ci";
+      #           description = "Changes to CI configuration files and scripts";
+      #           value = "ci";
+      #         }
+      #         {
+      #           name = "docs";
+      #           description = "Documentation only changes";
+      #           value = "docs";
+      #         }
+      #         {
+      #           name = "deps";
+      #           description = "Update dependencies";
+      #           value = "deps";
+      #         }
+      #         {
+      #           name = "perf";
+      #           description = "A code change that improves performance";
+      #           value = "perf";
+      #         }
+      #         {
+      #           name = "refactor";
+      #           description = "A code change that neither fixes a bug nor adds a feature";
+      #           value = "refactor";
+      #         }
+      #         {
+      #           name = "revert";
+      #           description = "Reverts a previous commit";
+      #           value = "revert";
+      #         }
+      #         {
+      #           name = "style";
+      #           description = "Changes that do not affect the meaning of the code";
+      #           value = "style";
+      #         }
+      #         {
+      #           name = "test";
+      #           description = "Adding missing tests or correcting existing tests";
+      #           value = "test";
+      #         }
+      #       ];
+      #     }
+      #     {
+      #       type = "input";
+      #       title = "PR Title";
+      #       key = "title";
+      #       placeholder = "Enter PR title";
+      #     }
+      #   ];
+      # }
     ];
   };
 }
