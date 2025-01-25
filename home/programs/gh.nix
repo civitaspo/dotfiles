@@ -3,7 +3,8 @@
 {
   gh.enable = true;
   gh.extensions = [
-    inputs.nixpkgs-unstable.legacyPackages.${system}.gh-dash
+    # NOTE: I don't use gh-dash as a gh subcommand.
+    # pkgs.gh-dash
   ];
   gh.gitCredentialHelper.enable = true;
   gh.settings = {
