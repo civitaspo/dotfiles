@@ -29,7 +29,7 @@ in {
     gawk
     gh
     ghq
-    inputs.nixpkgs-unstable.legacyPackages.${system}.gh-dash
+    gh-dash
     git
     github-copilot-cli
     gnugrep
