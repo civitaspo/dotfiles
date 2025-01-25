@@ -6,7 +6,7 @@ if ! env | grep '=op:' 2>&1 >/dev/null; then
 fi
 
 
-ENV_KV="$(env | grep '=op:' | fzf-zellij)"
+ENV_KV="$(env | grep '=op:' | fzf)"
 ENV_KEY="$(echo ${ENV_KV} | cut -d'=' -f1)"
 ENV_VALUE="$(echo ${ENV_KV} | cut -d'=' -f2)"
 echo "export ${ENV_KEY}=\"\$(op read ${ENV_VALUE})\""

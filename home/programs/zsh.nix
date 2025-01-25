@@ -24,7 +24,7 @@
     }
   ];
   # NOTE: zsh.sessionValiables is exported only when the first login shell is started.
-  #       This means that the variables are not exported even when the shell is restarted (e.g. 'exit $SHELL and re-run zellij').
+  #       This means that the variables are not exported even when the shell is restarted.
   zsh.sessionVariables = {
     WORDCHARS = "*?_-.[]~!#$%^(){}<>";
     # 1Password secrets
@@ -52,10 +52,6 @@
   zsh.envExtra = ''
   '';
   zsh.loginExtra = ''
-  # CUSTOM ZELLIJ INTEGRATION
-  if [[ "$IS_VSCODE_TERMINAL" != "true" ]]; then
-    eval "$(${pkgs.zellij}/bin/zellij setup --generate-auto-start zsh)"
-  fi
   '';
   zsh.initExtra = ''
   setopt correct
@@ -100,7 +96,7 @@
 
   frepo() {
     local dir
-    dir=$(${pkgs.ghq}/bin/ghq list > /dev/null | fzf-zellij) &&
+    dir=$(${pkgs.ghq}/bin/ghq list > /dev/null | fzf) &&
       \cd $(${pkgs.ghq}/bin/ghq root)/$dir
     zle accept-line
   }

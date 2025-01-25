@@ -55,7 +55,6 @@ in {
     typescript
     wget
     zip
-    zellij
     zoxide
     zsh
     # java

@@ -2,4 +2,4 @@
 
 set -e
 
-git pull "$(git remote | fzf-zellij)" "$(git branch | fzf-zellij | sed "s/.* //")" $*
+git pull "$(git remote | fzf)" "$(git branch | fzf | sed "s/.* //")" $*
