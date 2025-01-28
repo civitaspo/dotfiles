@@ -5,10 +5,10 @@ assert (stdenv.isDarwin);
 
 stdenv.mkDerivation rec {
   pname = "superwhisper";
-  version = "2.41.0";
+  version = "2.43.0";
   src = fetchurl {
     url = "https://github.com/aquaproj/aqua/releases/download/v${version}/aqua_darwin_arm64.tar.gz";
-    sha256 = "3c6750cfc8e28d65c008c819ac8fc0b2f23c6aba7e9eaacbe5e7eed0b68903cd";
+    sha256 = "ec1b13cd972cd9f2d58acf6c544c082de0e448c0aa343310c303b6f0b0daff8d";
   };
   sourceRoot = ".";
   installPhase = ''
