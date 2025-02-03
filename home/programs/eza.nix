@@ -3,5 +3,5 @@
 {
   eza.enable = true;
   eza.git = true;
-  eza.icons = true;
+  eza.icons = "auto";
 }
