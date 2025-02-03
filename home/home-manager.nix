@@ -62,7 +62,7 @@ in {
     # corretto11
     # corretto17
     # font
-    inputs.nixpkgs-unstable.legacyPackages.${system}.nerdfonts
+    nerdfonts
   ] ++ [
     # unstable packages
     inputs.nixpkgs-unstable.legacyPackages.${system}.openssl_3_3
