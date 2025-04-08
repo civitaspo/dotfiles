@@ -7,10 +7,8 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
 in {
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
   home.packages = with pkgs; [
-    _1password
-    _1password-gui
     alacritty
     awscli2
     azure-cli
@@ -20,7 +18,6 @@ in {
     curl
     delta
     deno
-    devbox
     docker
     eza
     fd
@@ -42,6 +39,7 @@ in {
     inputs.nixpkgs-unstable.legacyPackages.${system}.neovim
     nodejs_22
     ollama
+    openssl
     python3
     ripgrep
     ruby
@@ -50,7 +48,6 @@ in {
     slack
     ssm-session-manager-plugin
     starship
-    terraform
     terraform-ls
     typescript
     wget
@@ -65,7 +62,6 @@ in {
     nerdfonts
   ] ++ [
     # unstable packages
-    inputs.nixpkgs-unstable.legacyPackages.${system}.openssl_3_3
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
     colima

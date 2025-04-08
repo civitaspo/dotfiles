@@ -12,9 +12,12 @@ in {
     brews = [
     ];
     casks  = [
+      "1password"
       "tabtab"
       "arc"
       "cursor"
+      "chatwise"
+      "ghostty"
       "google-japanese-ime"
       "hammerspoon"
       "karabiner-elements"
