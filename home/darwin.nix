@@ -17,6 +17,7 @@ in {
       "arc"
       "cursor"
       "chatwise"
+      "flashspace"
       "ghostty"
       "google-japanese-ime"
       "hammerspoon"
