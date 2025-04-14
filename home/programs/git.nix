@@ -41,9 +41,6 @@
     ".devbox"
     ".direnv"
     ".envrc"
-    "aqua.yaml"
-    "aqua-checksums.json"
-    "aqua-policy.yaml"
   ];
   git.includes = [
     # secret

@@ -1,0 +1,49 @@
+{
+  "checksums": [
+    {
+      "id": "github_release/github.com/marp-team/marp-cli/v4.1.2/marp-cli-v4.1.2-linux.tar.gz",
+      "checksum": "60BD4967E87A2AEA337B20C83B31FD35D0A21D631AE59B5C49C984A204885E52",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/marp-team/marp-cli/v4.1.2/marp-cli-v4.1.2-mac.tar.gz",
+      "checksum": "76A06D37F78A27C398553770A15E80D30EF1316B4FA6B0CD0BA43DED711E9482",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/marp-team/marp-cli/v4.1.2/marp-cli-v4.1.2-win.zip",
+      "checksum": "80EEF99420F24E1EC178E27931D121BFA5DBD44493FC22344E7D044DE014DC0D",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/cache.agilebits.com/dist/1P/op2/pkg/v2.30.3/op_darwin_amd64_v2.30.3.zip",
+      "checksum": "79FA39079B038BFEFA8DAFBC9E6CD1540AD869532DDBB6CF0A0B829EDC7F4D48",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/cache.agilebits.com/dist/1P/op2/pkg/v2.30.3/op_darwin_arm64_v2.30.3.zip",
+      "checksum": "0472133A09A0596119543C0EE7DEF0B3C08646354432516A18DBFE831D536C88",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/cache.agilebits.com/dist/1P/op2/pkg/v2.30.3/op_linux_amd64_v2.30.3.zip",
+      "checksum": "A16307EBCECB40FD091D7A6FF4F0C380C3C0897C4F4616DE2C5D285E57D5EE28",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/cache.agilebits.com/dist/1P/op2/pkg/v2.30.3/op_linux_arm64_v2.30.3.zip",
+      "checksum": "39BD361B2CD4819EA757583624EEDA33F6062BA5CCFC2B90AD0764AED94CD1C4",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/cache.agilebits.com/dist/1P/op2/pkg/v2.30.3/op_windows_amd64_v2.30.3.zip",
+      "checksum": "3191456F345AAB7435252284A5196FC94ECAF7F7CA3715338F01B17E50AF1386",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "registries/github_content/github.com/aquaproj/aqua-registry/v4.340.1/registry.yaml",
+      "checksum": "F997367406740607F93A454CC4E5A58CA06E1B75502DAE27F47882A7105C84FE",
+      "algorithm": "sha256"
+    }
+  ]
+}
