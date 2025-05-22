@@ -37,10 +37,10 @@
     gb = "${pkgs.git}/bin/git branch";
     grs = "${pkgs.git}/bin/git restore";
     gsw = "${pkgs.git}/bin/git switch";
-    gg = "${pkgs.lazygit}/bin/lazygit";
-    vim = "${pkgs.neovim}/bin/nvim";
-    ls = "${pkgs.eza}/bin/eza";
-    diff = "${pkgs.delta}/bin/delta";
+    gg = "lazygit";
+    vim = "nvim";
+    ls = "eza";
+    diff = "delta";
     cd = "z";
     rm = "rm -iv";
     cp = "cp -iv";
