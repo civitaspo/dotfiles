@@ -9,51 +9,22 @@ let
 in {
   home.stateVersion = "24.11";
   home.packages = with pkgs; [
-    # awscli2
-    # azure-cli
-    # bat
-    # btop
     cargo
     curl
-    # delta
-    # deno
-    # docker
-    # eza
-    # fd
     findutils
-    # fzf
     gawk
-    # gh
-    # ghq
-    # gh-dash
     git
-    # github-copilot-cli
     gnugrep
-    # gnused
     gnused-gsed
     gnutar
-    # inputs.nixpkgs-unstable.legacyPackages.${system}.google-cloud-sdk
-    # jq
-    # lazygit
-    neovim
-    # nodejs_22
-    # ollama
     openssl
-    # python3
-    # ripgrep
     ruby
     rustc
     rustfmt
-    # slack
     ssm-session-manager-plugin
-    # starship
-    # terraform-ls
-    # typescript
     wget
     zip
-    # zoxide
     zsh
-    # java
     jdk # LTS
     # corretto11
     # corretto17
@@ -63,9 +34,6 @@ in {
     # unstable packages
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
-    # colima
-    # overlays
-    # aqua
   ]) ++ (lib.optionals (isLinux && !isWSL) [
     # NOTE: add linux only packages
   ]);
