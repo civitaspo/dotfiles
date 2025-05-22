@@ -16,17 +16,24 @@ in {
       "tabtab"
       "arc"
       "cursor"
+      "chatgpt"
       "chatwise"
       "flashspace"
+      "gather"
       "ghostty"
       "google-japanese-ime"
       "hammerspoon"
+      "homerow"
       "karabiner-elements"
+      "keyboard-maestro"
       "mimestream"
+      "notion"
       "notion-calendar"
+      "qmk-toolbox"
       "raycast"
       "setapp"
       "snowflake-snowsql"
+      "spotify"
       "thingsmacsandboxhelper"
       "aerospace"
     ];
@@ -41,7 +48,6 @@ in {
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Things" = 904280696;
-      "Twingate" = 1501592214;
     };
     onActivation = {
       cleanup = "zap";

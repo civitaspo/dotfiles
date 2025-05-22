@@ -9,50 +9,49 @@ let
 in {
   home.stateVersion = "24.11";
   home.packages = with pkgs; [
-    alacritty
-    awscli2
-    azure-cli
-    bat
-    btop
+    # awscli2
+    # azure-cli
+    # bat
+    # btop
     cargo
     curl
-    delta
-    deno
-    docker
-    eza
-    fd
+    # delta
+    # deno
+    # docker
+    # eza
+    # fd
     findutils
-    fzf
+    # fzf
     gawk
-    gh
-    ghq
-    gh-dash
+    # gh
+    # ghq
+    # gh-dash
     git
-    github-copilot-cli
+    # github-copilot-cli
     gnugrep
     # gnused
     gnused-gsed
     gnutar
-    inputs.nixpkgs-unstable.legacyPackages.${system}.google-cloud-sdk
-    jq
-    lazygit
-    inputs.nixpkgs-unstable.legacyPackages.${system}.neovim
-    nodejs_22
-    ollama
+    # inputs.nixpkgs-unstable.legacyPackages.${system}.google-cloud-sdk
+    # jq
+    # lazygit
+    neovim
+    # nodejs_22
+    # ollama
     openssl
-    python3
-    ripgrep
+    # python3
+    # ripgrep
     ruby
     rustc
     rustfmt
-    slack
+    # slack
     ssm-session-manager-plugin
-    starship
-    terraform-ls
-    typescript
+    # starship
+    # terraform-ls
+    # typescript
     wget
     zip
-    zoxide
+    # zoxide
     zsh
     # java
     jdk # LTS
@@ -64,9 +63,9 @@ in {
     # unstable packages
   ] ++ (lib.optionals isDarwin [
     # NOTE: add darwin only packages
-    colima
+    # colima
     # overlays
-    aqua
+    # aqua
   ]) ++ (lib.optionals (isLinux && !isWSL) [
     # NOTE: add linux only packages
   ]);
@@ -77,6 +76,7 @@ in {
     LC_ALL = "en_US.UTF-8";
     EDITOR = "cursor --wait";
     PAGER = "less";
+    AQUA_GLOBAL_CONFIG = "\${AQUA_GLOBAL_CONFIG:-}:\${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml";
   };
   home.username = user;
   # launchd.enable
