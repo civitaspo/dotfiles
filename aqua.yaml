@@ -35,3 +35,5 @@ packages:
 - name: BurntSushi/ripgrep@14.1.1
 - name: starship/starship@v1.23.0
 - name: ajeetdsouza/zoxide@v0.9.7
+- name: abiosoft/colima@v0.8.1
+- name: lima-vm/lima@v1.1.1

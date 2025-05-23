@@ -26,6 +26,26 @@
       "algorithm": "sha256"
     },
     {
+      "id": "github_release/github.com/abiosoft/colima/v0.8.1/colima-Darwin-arm64",
+      "checksum": "C266FCB272B39221EF6152D2093BB02A1EBADC26042233AD359E1AE52D5D5922",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/abiosoft/colima/v0.8.1/colima-Darwin-x86_64",
+      "checksum": "791330C62C60389F70E5E1C33A56C35502A9E36E544A418DAEA0273E539ACBF4",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/abiosoft/colima/v0.8.1/colima-Linux-aarch64",
+      "checksum": "B045195BC89920811A85B9B2EAC8B53A5687E3128BC1174542EA195A02CCC0BB",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/abiosoft/colima/v0.8.1/colima-Linux-x86_64",
+      "checksum": "F2D6664A79FF3AA35F0718AAC2BA9F6B531772E1464F3B096C1AC2AAB404943E",
+      "algorithm": "sha256"
+    },
+    {
       "id": "github_release/github.com/ajeetdsouza/zoxide/v0.9.7/zoxide-0.9.7-aarch64-apple-darwin.tar.gz",
       "checksum": "4CE19AD9EA0FDF92265EF73B1CB38C605FBCCFDA815157C1E99C0AF99115C4E4",
       "algorithm": "sha256"
@@ -298,6 +318,26 @@
     {
       "id": "github_release/github.com/junegunn/fzf/v0.62.0/fzf-0.62.0-windows_arm64.zip",
       "checksum": "84F5208A4F5ED45DA23137A854A9B0119E1A3E2F4D60DF8B05835EEC2F2BBFF1",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/lima-vm/lima/v1.1.1/lima-1.1.1-Darwin-arm64.tar.gz",
+      "checksum": "3C3C2BB59076716EAEEFDB36E2AB5F876C15C06A7620DC8AF23A7DDD904796DE",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/lima-vm/lima/v1.1.1/lima-1.1.1-Darwin-x86_64.tar.gz",
+      "checksum": "5BB258E2C52D474C32B5A140383CBB9506F45E7BF69596249723AB41A99BE64A",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/lima-vm/lima/v1.1.1/lima-1.1.1-Linux-aarch64.tar.gz",
+      "checksum": "D73C335F078191176EAB96B51676E298FCE29BD167130B403EC2563BE5467035",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/lima-vm/lima/v1.1.1/lima-1.1.1-Linux-x86_64.tar.gz",
+      "checksum": "8EC55D2CAC9A283ADAE5628A2F2B0955EF753964AC6657FC90B322E57ACB8891",
       "algorithm": "sha256"
     },
     {
