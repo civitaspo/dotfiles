@@ -11,6 +11,13 @@ in {
   home.packages = with pkgs; [
     cargo
     curl
+    # todo: Use aqua after fixing the following error
+    # FATA[0000] failed to find "lima-guestagent.Linux-aarch64" binary for "/Users/takahiro.nakayama/.local/share/aquaproj-aqua/bin/limactl", attempted [/Users/takahiro.nakayama/.local/share/aquaproj-aqua/bin/lima-guestagent.Linux-aarch64 /Users/takahiro.nakayama/.local/share/aquaproj-aqua/share/lima/lima-guestagent.Linux-aarch64]
+    # Maybe need the following setting.
+    # > - name: lima-guestagent.Linux-aarch64
+    # > - src: share/lima/lima-guestagent.Linux-aarch64.gz
+    # https://github.com/aquaproj/aqua-registry/blob/4ce1eaa891d23280118af17143d64f31a980a4bb/pkgs/lima-vm/lima/registry.yaml#L11
+    colima
     findutils
     gawk
     git
