@@ -176,6 +176,16 @@
       "algorithm": "sha256"
     },
     {
+      "id": "github_release/github.com/docker/docker-credential-helpers/v0.9.3/docker-credential-osxkeychain-v0.9.3.darwin-amd64",
+      "checksum": "F5F6C40B252A1DBC1CE12900A85475AE52C1AA05E184290C8A2D55A9B5690F4C",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/docker-credential-helpers/v0.9.3/docker-credential-osxkeychain-v0.9.3.darwin-arm64",
+      "checksum": "FB1CAF7DE348E0C1FBEDBB3813C0C96DD5D72229B5E5EE7366760F4C73FE6810",
+      "algorithm": "sha256"
+    },
+    {
       "id": "github_release/github.com/eza-community/eza/v0.21.3/eza.exe_x86_64-pc-windows-gnu.tar.gz",
       "checksum": "B8C802CC47F6B4303FEE9F0DA9282C801FE4C8CFF65A1A587CB63A2C81ABB4AF",
       "algorithm": "sha256"
