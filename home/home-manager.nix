@@ -24,6 +24,7 @@ in {
     gnugrep
     gnused-gsed
     gnutar
+    google-cloud-sdk # TODO: Use aqua
     openssl
     ruby
     rustc
