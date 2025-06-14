@@ -110,5 +110,11 @@
       ${config.home.homeDirectory}/.config/zsh-site-functions(N-/) \
       $fpath \
       )
+  # pnpm
+  export PNPM_HOME="${config.home.homeDirectory}/.local/share/pnpm"
+  case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+  esac
   '';
 }
