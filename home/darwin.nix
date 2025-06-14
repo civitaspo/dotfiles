@@ -27,8 +27,6 @@ in {
       "karabiner-elements"
       "keyboard-maestro"
       "mimestream"
-      "notion"
-      "notion-calendar"
       "qmk-toolbox"
       "raycast"
       "setapp"
