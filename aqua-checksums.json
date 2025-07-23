@@ -156,6 +156,26 @@
       "algorithm": "sha256"
     },
     {
+      "id": "github_release/github.com/atuinsh/atuin/v18.7.1/atuin-aarch64-apple-darwin.tar.gz",
+      "checksum": "807427AD685FED6AC27FF96A494046F203F011F72A14ADD73BA4214723CC9190",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/atuinsh/atuin/v18.7.1/atuin-aarch64-unknown-linux-musl.tar.gz",
+      "checksum": "7F1657CDFBC6BFC059B12AE3CBAB56122754E27B89503B159FF92B5C7207D2D9",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/atuinsh/atuin/v18.7.1/atuin-x86_64-apple-darwin.tar.gz",
+      "checksum": "407C3383D43499A2373650B93FAE8AEC87BBE237B8D3C0FD18465586BEB36397",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/atuinsh/atuin/v18.7.1/atuin-x86_64-unknown-linux-musl.tar.gz",
+      "checksum": "6FAC2F65501C1E4C4499C9F314658EEAF8B9C83E32C4EB19273D89B046537316",
+      "algorithm": "sha256"
+    },
+    {
       "id": "github_release/github.com/cli/cli/v2.73.0/gh_2.73.0_linux_amd64.tar.gz",
       "checksum": "9EBC6B751EE182FDB291CEB2213CC17ABB1624B30F6D7A3913097AF41F48B1B4",
       "algorithm": "sha256"
@@ -808,6 +828,36 @@
     {
       "id": "github_release/github.com/starship/starship/v1.23.0/starship-x86_64-unknown-linux-musl.tar.gz",
       "checksum": "8D06D2CC67AEDD6316FF58AB679FB80CDED0D85DE1DCD5727DF0633D35356D57",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/twpayne/chezmoi/v2.63.1/chezmoi_2.63.1_darwin_amd64.tar.gz",
+      "checksum": "05DA33AA069CE72065220BEFCEB4AA99BF2E00FB559DB613F4F7530C27221B61",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/twpayne/chezmoi/v2.63.1/chezmoi_2.63.1_darwin_arm64.tar.gz",
+      "checksum": "F01EDE51BBC37CACE2D947D33AEE44507FB3622B5E460DDBDFF9D105F8E3628F",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/twpayne/chezmoi/v2.63.1/chezmoi_2.63.1_linux-glibc_amd64.tar.gz",
+      "checksum": "611A450E44C95CB124AF586C7D6690E6DCFC035737BCF78B5533166A57C1C414",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/twpayne/chezmoi/v2.63.1/chezmoi_2.63.1_linux_arm64.pkg.tar.zst",
+      "checksum": "510C2DC2D091532F54A1B9ECB97AFDA7B7A07B4C8420E7B6293BEAE0845733F0",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/twpayne/chezmoi/v2.63.1/chezmoi_2.63.1_windows_amd64.zip",
+      "checksum": "EAE552B4ACAFE5DE72199B8A15FF2813CE39EBD30ECDB4ABDDF6890D49BD8EE6",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/twpayne/chezmoi/v2.63.1/chezmoi_2.63.1_windows_arm64.zip",
+      "checksum": "BB230B70583505FC9D6FA8AF0F4BA6E12628CFCBA3113BDDC19DF8EF5D80B757",
       "algorithm": "sha256"
     },
     {

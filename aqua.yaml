@@ -41,3 +41,5 @@ packages:
 - name: docker/docker-credential-helpers/docker-credential-osxkeychain@v0.9.3
   registry: local
 - name: neovim/neovim@v0.11.3
+- name: twpayne/chezmoi@v2.63.1
+- name: atuinsh/atuin@v18.7.1
