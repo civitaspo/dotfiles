@@ -46,7 +46,7 @@
         command = "git pull origin main --rebase";
         description = "Pull main branch & rebase current branch";
         loadingText = "Pulling main branch & rebasing current branch...";
-        stream = true;
+        output = "log";
         prompts = [
           {
             type = "confirm";
@@ -64,7 +64,7 @@
         command = "git fetch --prune && git for-each-ref --format '%(refname:short) %(upstream:track)' | grep '\\[gone\\]$' | cut -d' ' -f1 | xargs -I%% git branch -D %%";
         description = "Delete local branches that are gone";
         loadingText = "Deleting local branches that are gone...";
-        stream = true;
+        output = "log";
         prompts = [
           {
             type = "confirm";
