@@ -51,8 +51,7 @@ in {
       "aerospace"
     ];
     masApps = {
-      "Anybox" = 1593408455;
-      "Bear" = 1091189122;
+      "Bear" = 1091189122; # https://apps.apple.com/jp/app/bear-markdown-notes/id1091189122?l=en-US&mt=12
       "Display Menu" =  549083868;
       "Goodnotes 6" = 1444383602;
       "Klack" = 6446206067;
