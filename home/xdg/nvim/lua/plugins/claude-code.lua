@@ -1,32 +1,46 @@
 return {
   {
     -- NOTE: <esc> is overridden by neovim global keymap, so we use <C-[> to send esc to Claude Code.
-    "greggh/claude-code.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
     opts = {
-      window = {
-        position = "botright vsplit",
-        split_ratio = 0.4,
-      },
-      refresh = { enable = false }, -- My neovim reloads files automatically, so I don't need this.
-      git = { use_git_root = false },
-      keymaps = {
-        toggle = {
-          normal = "<leader>ac",
-          variants = {
-            continue = "<leader>aC",
-            resume = "<leader>ar",
-          },
+      terminal = {
+        split_side = "right", -- "left" or "right"
+        split_width_percentage = 0.30,
+        provider = "auto", -- "auto", "snacks", "native", "external", or custom provider table
+        auto_close = true,
+        snacks_win_opts = {}, -- Opts to pass to `Snacks.terminal.open()` - see Floating Window section below
+        provider_opts = {
+          external_terminal_cmd = nil, -- Command template for external terminal provider (e.g., "alacritty -e %s")
         },
-        window_navigation = false,
-        scrolling = false,
+      },
+      diff_opts = {
+        auto_close_on_accept = true,
+        vertical_split = true,
+        open_in_current_tab = true,
+        keep_terminal_focus = false, -- If true, moves focus back to terminal after diff opens
       },
     },
     keys = {
-      { "<C-,>", mode = { "n" }, "<cmd>ClaudeCode<CR>", desc = "Claude Code" },
-      { "<leader>ac", mode = { "n" }, "<cmd>ClaudeCode<CR>", desc = "Claude Code" },
-      { "<leader>aC", mode = { "n", "v" }, "<cmd>ClaudeCodeContinue<CR>", desc = "Claude Code(Continue)" },
-      { "<leader>ar", mode = { "n", "v" }, "<cmd>ClaudeCodeResume<CR>", desc = "Claude Code(Resume)" },
+      { "<C-,>", mode = { "n", "t" }, "<cmd>ClaudeCode<cr>", desc = "Claude Code" },
+      { "<leader>ac", mode = { "n", "t" }, "<cmd>ClaudeCode<cr>", desc = "Claude Code" },
+      { "<leader>aC", mode = { "n", "t" }, "<cmd>ClaudeCodeContinue<CR>", desc = "Claude Code(Continue)" },
+      { "<leader>ar", mode = { "n", "t" }, "<cmd>ClaudeCodeResume<CR>", desc = "Claude Code(Resume)" },
+      { "<leader>af", mode = { "n", "t" }, "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+      { "<leader>ar", mode = { "n", "t" }, "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+      { "<leader>aC", mode = { "n", "t" }, "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+      { "<leader>am", mode = { "n", "t" }, "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+      { "<leader>ab", mode = { "n", "v" }, "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+      { "<leader>as", mode = { "n", "v" }, "<cmd>ClaudeCodeSend<cr>", desc = "Send to Claude" },
+      {
+        "<leader>as",
+        "<cmd>ClaudeCodeTreeAdd<cr>",
+        desc = "Add file",
+        ft = { "snacks_picker_list", "NvimTree", "neo-tree", "oil", "minifiles",},
+      },
+      -- Diff management
+      { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+      { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
     },
   },
   {
