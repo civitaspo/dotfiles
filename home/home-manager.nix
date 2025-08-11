@@ -50,7 +50,7 @@ in {
     LANG = "en_US.UTF-8";
     LC_CTYPE = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
-    EDITOR = "cursor --wait";
+    EDITOR = "nvim";
     PAGER = "less";
     AQUA_GLOBAL_CONFIG = "\${AQUA_GLOBAL_CONFIG:-}:\${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml";
   };
