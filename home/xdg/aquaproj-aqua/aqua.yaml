@@ -9,34 +9,37 @@ checksum:
   - all
 registries:
 - type: standard
-  ref: v4.340.1 # renovate: depName=aquaproj/aqua-registry
+  ref: v4.400.0 # renovate: depName=aquaproj/aqua-registry
 - name: local
   type: local
   path: aqua-registry.yaml
 packages:
 - name: 1password/cli@v2.30.3
-- name: marp-team/marp-cli@v4.1.2
-- name: pnpm/pnpm@v10.1.0
-- name: nodejs/node@v23.11.0
-- name: aws/aws-cli@2.27.4
-- name: astral-sh/ruff@0.11.8
-- name: go-task/task@v3.43.3
-- name: junegunn/fzf@v0.62.0
+- name: marp-team/marp-cli@v4.2.3
+- name: pnpm/pnpm@v10.14.0
+- name: nodejs/node@v24.4.1
+- name: aws/aws-cli@2.28.7
+- name: astral-sh/ruff@0.12.8
+- name: go-task/task@v3.44.1
+- name: junegunn/fzf@v0.65.1
 - name: sharkdp/bat@v0.25.0
 - name: aristocratos/btop@v1.4.3
-- name: aws/aws-cli@2.27.20
 - name: dandavison/delta@0.18.2
-- name: denoland/deno@v2.3.3
-- name: docker/cli@v28.1.1
-- name: eza-community/eza@v0.21.3
+- name: denoland/deno@v2.4.3
+- name: docker/cli@v28.3.3
+- name: eza-community/eza@0.21.3
 - name: sharkdp/fd@v10.2.0
-- name: cli/cli@v2.73.0
+- name: cli/cli@v2.76.2
 - name: x-motemen/ghq@v1.8.0
-- name: jqlang/jq@jq-1.7.1
-- name: jesseduffield/lazygit@v0.50.0
-- name: neovim/neovim@v0.11.1
+- name: jqlang/jq@jq-1.8.1
+- name: jesseduffield/lazygit@v0.54.2
+- name: neovim/neovim@v0.11.3
 - name: BurntSushi/ripgrep@14.1.1
 - name: starship/starship@v1.23.0
-- name: ajeetdsouza/zoxide@v0.9.7
+- name: ajeetdsouza/zoxide@v0.9.8
 - name: docker/docker-credential-helpers/docker-credential-osxkeychain@v0.9.3
   registry: local
+- name: twpayne/chezmoi@v2.64.0
+- name: atuinsh/atuin@v18.8.0
+- name: direnv/direnv@v2.37.1
+- name: fujiwara/awslim@v0.4.0
