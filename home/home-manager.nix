@@ -56,18 +56,7 @@ in {
   };
   home.username = user;
   # launchd.enable
-  editorconfig.enable = true;
-  editorconfig.settings = {
-    "*" = {
-      charset = "utf-8";
-      end_of_line = "lf";
-      trim_trailing_whitespace = true;
-      insert_final_newline = true;
-      indent_style = "space";
-      indent_size = 2;
-    };
-  };
-
+  editorconfig = import ./editorconfig.nix {};
   home.file = import ./lib/homeFiles.nix {};
   xdg = import ./lib/xdg.nix {};
   programs = import ./lib/programs.nix {
