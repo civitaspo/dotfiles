@@ -24,7 +24,7 @@ vim.keymap.set({ "i", "v", "x", "l", "c" }, "<C-h>", "<BS>", { noremap = false, 
 vim.keymap.set({ "i", "v", "x", "l", "c" }, "<C-d>", "<Del>", { noremap = false, silent = true }) -- <C-d> in normal mode is for scrolling down
 vim.keymap.set({ "n" }, "<C-c>", ":q<CR>", { noremap = true, silent = true })
 vim.keymap.set({ "n" }, "<C-x>", ":wq<CR>", { noremap = true, silent = true })
-vim.keymap.set({ "t" }, "<esc>", "<C-\\><C-n>", { noremap = true, silent = true })
+vim.keymap.set({ "t" }, "<C-x>", "<C-\\><C-n>", { noremap = true, silent = true })
 
 -- https://github.com/bsuth/emacs-bindings.nvim
 vim.keymap.set({ "i", "l", "n", "c" }, "<C-k>", function()
