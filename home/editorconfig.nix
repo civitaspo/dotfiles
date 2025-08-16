@@ -14,5 +14,8 @@
     "*.py" = {
       indent_size = 4;
     };
+    "*.sql" = {
+      indent_size = 4;
+    };
   };
 }
