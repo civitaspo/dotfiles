@@ -43,3 +43,5 @@ packages:
 - name: atuinsh/atuin@v18.8.0
 - name: direnv/direnv@v2.37.1
 - name: fujiwara/awslim@v0.4.0
+- name: sotarok/gw@v0.4.0
+  registry: local

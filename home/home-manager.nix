@@ -53,6 +53,7 @@ in {
     EDITOR = "nvim";
     PAGER = "less";
     AQUA_GLOBAL_CONFIG = "\${AQUA_GLOBAL_CONFIG:-}:\${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml";
+    AQUA_POLICY_CONFIG = "\${AQUA_POLICY_CONFIG:-}:\${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua-policy.yaml";
   };
   home.username = user;
   # launchd.enable

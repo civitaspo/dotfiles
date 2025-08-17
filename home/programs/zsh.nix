@@ -116,5 +116,9 @@
     *":$PNPM_HOME:"*) ;;
     *) export PATH="$PNPM_HOME:$PATH" ;;
   esac
+  # gw
+  if command -v gw &> /dev/null; then
+    eval "$(gw shell-integration --show-script --shell=zsh)"
+  fi
   '';
 }

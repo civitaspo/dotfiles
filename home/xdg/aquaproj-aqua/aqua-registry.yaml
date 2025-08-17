@@ -26,3 +26,12 @@ packages:
     repo_owner: upamune
     repo_name: airule
     asset: airule_{{.OS}}_{{.Arch}}.tar.gz
+  - type: github_release
+    repo_owner: sotarok
+    repo_name: gw
+    asset: gw_{{title .OS}}_{{.Arch}}.tar.gz
+    supported_envs:
+      - darwin/amd64
+      - darwin/arm64
+    replacements:
+      amd64: x86_64
