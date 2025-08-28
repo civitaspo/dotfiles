@@ -1,13 +1,1 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/aquaproj/aqua/main/json-schema/policy.json
-# aqua Policy
-# https://aquaproj.github.io/
-registries:
-  - type: local
-    name: local
-    path: aqua-registry.yaml
-  - type: standard
-    ref: semver(">= 4.0.0")
-packages:
-  - registry: standard
-  - registry: local
+home/xdg/aquaproj-aqua/aqua-policy.yaml

@@ -45,3 +45,4 @@ packages:
 - name: fujiwara/awslim@v0.4.0
 - name: sotarok/gw@v0.4.0
   registry: local
+- name: astral-sh/uv@0.8.13
