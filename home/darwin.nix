@@ -28,6 +28,7 @@ in {
     ];
     casks  = [
       "1password"
+      "aqua-voice"
       "tabtab"
       "arc"
       "cursor"
