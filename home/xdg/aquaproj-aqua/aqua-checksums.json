@@ -871,6 +871,31 @@
       "algorithm": "sha256"
     },
     {
+      "id": "github_release/github.com/k1LoW/deck/v1.19.0/deck_v1.19.0_darwin_amd64.zip",
+      "checksum": "506FE9A5F186E5AA6722FD35D005FF2B76ED50A528E266DCBBBD4090E04032BA",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/k1LoW/deck/v1.19.0/deck_v1.19.0_darwin_arm64.zip",
+      "checksum": "F2ED3E93641FC270029B1597B88F0A8BAA5D2F6F984A729A2EAE6198542AF514",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/k1LoW/deck/v1.19.0/deck_v1.19.0_linux_amd64.tar.gz",
+      "checksum": "B50785DDA02FDBB33A10CFC479760D5B46ACD50D345C741CD75A1277C3EB6D49",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/k1LoW/deck/v1.19.0/deck_v1.19.0_linux_arm64.tar.gz",
+      "checksum": "C82405E77C777A20FC89388C8E9A53D9CB8F75F55715F8BD32343FD6D50709DE",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/k1LoW/deck/v1.19.0/deck_v1.19.0_windows_amd64.tar.gz",
+      "checksum": "000E107D69DF2046A2FD790F7315CF19AF160486C8D571CA82C3645C78BEEA2E",
+      "algorithm": "sha256"
+    },
+    {
       "id": "github_release/github.com/marp-team/marp-cli/v4.1.2/marp-cli-v4.1.2-linux.tar.gz",
       "checksum": "60BD4967E87A2AEA337B20C83B31FD35D0A21D631AE59B5C49C984A204885E52",
       "algorithm": "sha256"
