@@ -1,0 +1,15 @@
+# https://github.com/openai/codex/blob/main/docs/config.md
+config.tomlmodel_reasoning_effort = "high"
+hide_agent_reasoning = true
+network_access = true
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+file_opener = "none" # I use neovim.
+preferred_auth_method = "chatgpt"
+
+[tools]
+web_search = true
+
+[mcp_servers.context7]
+# Execute `pnpm install -g @upstash/context7-mcp` to install.
+command = "context7-mcp"
