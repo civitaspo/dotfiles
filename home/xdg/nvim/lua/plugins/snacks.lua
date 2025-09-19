@@ -2,6 +2,15 @@ return {
   {
     "snacks.nvim",
     opts = {
+      indent = {
+        enabled = true,
+        animate = {
+          enabled = true,
+          duration = { total = 300 },
+        },
+        scope = { enabeld = true },
+        chunk = { enabled = true },
+      },
       gitbrowse = {
         what = "permalink"
       },
