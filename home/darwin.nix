@@ -61,6 +61,7 @@ in {
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Things" = 904280696;
+      "Toggl Track" = 1291898086;
     };
     onActivation = {
       cleanup = "zap";
