@@ -29,6 +29,7 @@ in {
     casks  = [
       "1password"
       "aqua-voice"
+      "aerospace"
       "tabtab"
       "arc"
       "cursor"
