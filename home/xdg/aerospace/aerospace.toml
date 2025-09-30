@@ -40,7 +40,7 @@ automatically-unhide-macos-hidden-apps = false
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
-    preset = 'qwerty'
+    preset = 'dvorak'
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
@@ -96,16 +96,16 @@ automatically-unhide-macos-hidden-apps = false
     cmd-alt-comma = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-    cmd-ctrl-alt-b = 'focus left'
-    cmd-ctrl-alt-n = 'focus down'
-    cmd-ctrl-alt-p = 'focus up'
-    cmd-ctrl-alt-f = 'focus right'
+    cmd-alt-h = 'focus left'
+    cmd-alt-t = 'focus down'
+    cmd-alt-c = 'focus up'
+    cmd-alt-n = 'focus right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
-    cmd-ctrl-alt-shift-b = 'move left'
-    cmd-ctrl-alt-shift-n = 'move down'
-    cmd-ctrl-alt-shift-p = 'move up'
-    cmd-ctrl-alt-shift-f = 'move right'
+    cmd-alt-shift-h = 'move left'
+    cmd-alt-shift-t = 'move down'
+    cmd-alt-shift-c = 'move up'
+    cmd-alt-shift-n = 'move right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resizk
     cmd-alt-minus = 'resize smart -50'
@@ -143,10 +143,10 @@ automatically-unhide-macos-hidden-apps = false
     # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
     #s = ['layout sticky tiling', 'mode main']
 
-    cmd-alt-b = ['join-with left', 'mode main']
-    cmd-alt-n = ['join-with down', 'mode main']
-    cmd-alt-p = ['join-with up', 'mode main']
-    cmd-alt-f = ['join-with right', 'mode main']
+    cmd-alt-h = ['join-with left', 'mode main']
+    cmd-alt-t = ['join-with down', 'mode main']
+    cmd-alt-c = ['join-with up', 'mode main']
+    cmd-alt-n = ['join-with right', 'mode main']
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
