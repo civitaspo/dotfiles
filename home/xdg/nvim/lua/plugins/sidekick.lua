@@ -4,6 +4,10 @@ return {
     opts = {
       cli = {
         win = {
+          layout = "right",
+          split = {
+            width = 105, -- 90~110 is good for me.
+          },
           keys = {
             prompt = { "<c-.>", "prompt" },
           },
