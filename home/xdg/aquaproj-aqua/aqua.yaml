@@ -47,3 +47,5 @@ packages:
   registry: local
 - name: astral-sh/uv@0.8.13
 - name: k1LoW/deck@v1.19.0
+- name: docker/compose@v2.40.0
+- name: docker/buildx@v0.29.1

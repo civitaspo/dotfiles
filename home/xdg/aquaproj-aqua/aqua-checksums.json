@@ -471,6 +471,66 @@
       "algorithm": "sha256"
     },
     {
+      "id": "github_release/github.com/docker/buildx/v0.29.1/buildx-v0.29.1.darwin-amd64",
+      "checksum": "6CE35646A4F345313B5EADE3E12FA102481A4F0CD8737DA847E4177E91610257",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/buildx/v0.29.1/buildx-v0.29.1.darwin-arm64",
+      "checksum": "7E65F23FB86C4CF4EBDCEEC89C741F8A0363100B255CAD353A64E24701DD00BA",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/buildx/v0.29.1/buildx-v0.29.1.linux-amd64",
+      "checksum": "7D2D7D6D4680AA349614965AAA33CCEC43F1A9A21E908A5CE4CB6ADFA5AD5141",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/buildx/v0.29.1/buildx-v0.29.1.linux-arm64",
+      "checksum": "50E85C4E290B698908421161C1AEE069BCC5D4A65B7B7201BFAC3A176B223A7E",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/buildx/v0.29.1/buildx-v0.29.1.windows-amd64.exe",
+      "checksum": "3522D12875B71093A210FDC717C9B4BE915D1617D41DD347E6DC3E7F2B99D784",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/buildx/v0.29.1/buildx-v0.29.1.windows-arm64.exe",
+      "checksum": "2E1E5A3603EF9C92CEF386EA8A6FFC300854247737686C6E9AF47C308DEC19C8",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/compose/v2.40.0/docker-compose-darwin-aarch64",
+      "checksum": "FDF30E455F3DFA4BE10B447F14EC37A355C4200F950DD389C0708A7AB0CE6F98",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/compose/v2.40.0/docker-compose-darwin-x86_64",
+      "checksum": "CA2EE9184773F8E0D21A3387320DABDE4D853CD39DD3BEFD2BA2E05D9C81B72D",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/compose/v2.40.0/docker-compose-linux-aarch64",
+      "checksum": "FA99CA94C96C8CAE4024493581A20049764CE723558991D0D1526C1C7B791A79",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/compose/v2.40.0/docker-compose-linux-x86_64",
+      "checksum": "BD5835CCBBF06A42DCB5294C65E34A4634B34447AFB9ED6FC7ADF18A000E0F99",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/compose/v2.40.0/docker-compose-windows-aarch64.exe",
+      "checksum": "EDD7D5B17800835E29261BBD64EEE1FFB2D7793230A6C68616750F1254BC9F14",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/docker/compose/v2.40.0/docker-compose-windows-x86_64.exe",
+      "checksum": "835B6A7150D12E128FA9FD902ABFF6212FF3E55398683D57E213956558EAD5DF",
+      "algorithm": "sha256"
+    },
+    {
       "id": "github_release/github.com/docker/docker-credential-helpers/v0.9.3/docker-credential-osxkeychain-v0.9.3.darwin-amd64",
       "checksum": "F5F6C40B252A1DBC1CE12900A85475AE52C1AA05E184290C8A2D55A9B5690F4C",
       "algorithm": "sha256"
