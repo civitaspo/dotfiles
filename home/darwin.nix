@@ -50,7 +50,6 @@ in {
       "snowflake-snowsql"
       "spotify"
       "thingsmacsandboxhelper"
-      "aerospace"
     ];
     masApps = {
       "Bear" = 1091189122; # https://apps.apple.com/jp/app/bear-markdown-notes/id1091189122?l=en-US&mt=12
