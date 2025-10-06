@@ -47,7 +47,6 @@ in {
       "mimestream"
       "qmk-toolbox"
       "raycast"
-      "rize"
       "snowflake-snowsql"
       "spotify"
       "thingsmacsandboxhelper"
