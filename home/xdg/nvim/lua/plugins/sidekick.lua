@@ -10,6 +10,10 @@ return {
           },
           keys = {
             prompt = { "<c-.>", "prompt" },
+            nav_left      = { "<c-,>", "nav_left"  , expr = true, desc = "navigate to the left window" },
+            nav_down      = nil,
+            nav_up        = { "<c-,>", "nav_up"    , expr = true, desc = "navigate to the above window" },
+            nav_right     = nil,
           },
         },
       },
