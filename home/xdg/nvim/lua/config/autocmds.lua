@@ -12,3 +12,17 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FocusGained", "BufEnter" }, {
   pattern = "*",
   command = "checktime",
 })
+
+-- Avoid 'E828: Cannot open undo file for writing'
+vim.api.nvim_create_autocmd("BufReadPost", {
+  callback = function()
+    local path = vim.fn.expand("%:p")
+    if #path > 200 then
+      vim.opt_local.undofile = false
+      vim.notify(
+        "undofile disabled for long path (" .. tostring(#path) .. " chars)",
+        vim.log.levels.INFO
+      )
+    end
+  end,
+})
