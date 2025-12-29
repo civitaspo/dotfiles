@@ -44,11 +44,13 @@ in {
       "homerow"
       "karabiner-elements"
       "keyboard-maestro"
+      "kiro"
       "mimestream"
       "qmk-toolbox"
       "raycast"
       "snowflake-snowsql"
       "spotify"
+      "tabtab"
       "thingsmacsandboxhelper"
     ];
     masApps = {
