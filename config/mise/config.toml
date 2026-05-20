@@ -1,0 +1,59 @@
+# Tool versions managed by mise.
+# Symlinked to ~/.config/mise/config.toml by `task reconcile`.
+#
+# mise owns every binary it reasonably can: language runtimes and CLI tools.
+# Tools that used to live in aqua are pinned through mise's `aqua` backend,
+# so aqua is still used - just driven by mise instead of its own directory.
+
+[tools]
+# --- Language runtimes (previously installed via Nix) -----------------------
+node = "latest"
+ruby = "latest"
+python = "latest"
+go = "latest"
+rust = "latest"
+deno = "latest"
+java = "temurin-21"
+
+# --- CLI tools (previously installed via aqua) ------------------------------
+"aqua:1password/cli" = "latest"
+"aqua:marp-team/marp-cli" = "latest"
+"aqua:pnpm/pnpm" = "latest"
+"aqua:aws/aws-cli" = "latest"
+"aqua:astral-sh/ruff" = "latest"
+"aqua:astral-sh/uv" = "latest"
+"aqua:go-task/task" = "latest"
+"aqua:junegunn/fzf" = "latest"
+"aqua:sharkdp/bat" = "latest"
+"aqua:sharkdp/fd" = "latest"
+"aqua:aristocratos/btop" = "latest"
+"aqua:dandavison/delta" = "latest"
+"aqua:eza-community/eza" = "latest"
+"aqua:cli/cli" = "latest"
+"aqua:x-motemen/ghq" = "latest"
+"aqua:jqlang/jq" = "latest"
+"aqua:jesseduffield/lazygit" = "latest"
+"aqua:neovim/neovim" = "latest"
+"aqua:BurntSushi/ripgrep" = "latest"
+"aqua:starship/starship" = "latest"
+"aqua:ajeetdsouza/zoxide" = "latest"
+"aqua:twpayne/chezmoi" = "latest"
+"aqua:atuinsh/atuin" = "latest"
+"aqua:direnv/direnv" = "latest"
+"aqua:fujiwara/awslim" = "latest"
+"aqua:k1LoW/deck" = "latest"
+"aqua:aws/session-manager-plugin" = "latest"
+
+# --- Docker client tooling --------------------------------------------------
+"aqua:docker/cli" = "latest"
+"aqua:docker/compose" = "latest"
+"aqua:docker/buildx" = "latest"
+"ubi:docker/docker-credential-helpers[exe=docker-credential-osxkeychain]" = "latest"
+
+# --- Tools that used to live in the aqua local registry ---------------------
+"ubi:sotarok/gw" = "latest"
+"ubi:upamune/airule" = "latest"
+"ubi:upamune/airulesync" = "latest"
+
+# --- AI agent CLIs ----------------------------------------------------------
+claude-code = "latest"

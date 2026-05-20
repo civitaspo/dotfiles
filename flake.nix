@@ -1,46 +1,30 @@
 {
-  description = "NixOS systems and tools by civitaspo";
+  description = "civitaspo's macOS configuration (nix-darwin, nixpkgs-unstable)";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
+      url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    dotfiles-private = {
-      url = "git+ssh://git@github.com/civitaspo/dotfiles-private";
-      flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, ... }:
     let
-      overlays = [
+      # Machines are identified by their device serial number.
+      hostnames = [
+        "macbook-XW7J7X4RP0"
+        "macbook-CY9T2WWJPX"
+        "macbook-H7QRCQLYPP"
       ];
-      mkSystem = import ./lib/mkSystem.nix {
-        inherit overlays nixpkgs inputs;
-      };
-    in {
-      darwinConfigurations.macbook-XW7J7X4RP0 = mkSystem "macbook-XW7J7X4RP0" {
-        system = "aarch64-darwin";
-        user   = "takahiro.nakayama";
-      };
-      darwinConfigurations.macbook-CY9T2WWJPX = mkSystem "macbook-CY9T2WWJPX" {
-        system = "aarch64-darwin";
-        user   = "takahiro.nakayama";
-      };
-      darwinConfigurations.macbook-H7QRCQLYPP = mkSystem "macbook-H7QRCQLYPP" {
-        system = "aarch64-darwin";
-        user   = "takahiro.nakayama";
-      };
+      mkDarwin = hostname:
+        darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit hostname; };
+          modules = [ ./nix/darwin.nix ];
+        };
+    in
+    {
+      darwinConfigurations = nixpkgs.lib.genAttrs hostnames mkDarwin;
     };
 }

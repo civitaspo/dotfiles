@@ -1,0 +1,106 @@
+# Task runner for civitaspo/dotfiles.
+# https://taskfile.dev
+#
+# `init.sh` handles first-time bootstrap; every other workflow lives here.
+version: '3'
+
+vars:
+  # Hostname matches a darwinConfigurations entry in flake.nix.
+  HOST:
+    sh: |
+      echo "macbook-$(/usr/sbin/ioreg -l | awk -F'"' '/IOPlatformSerialNumber/{print $4}')"
+  # Private dotfiles repository, cloned by init.sh.
+  PRIVATE_DIR:
+    sh: |
+      echo "${PRIVATE_DIR:-$HOME/src/github.com/civitaspo/dotfiles-private}"
+
+tasks:
+  default:
+    desc: List available tasks.
+    cmds:
+      - task --list
+    silent: true
+
+  reconcile:
+    desc: Apply the whole configuration to this machine.
+    cmds:
+      - task: link
+      - task: switch
+      - task: brew
+      - task: mise
+
+  link:
+    desc: Symlink dotfiles into $HOME and ~/.config.
+    cmds:
+      - |
+        set -eu
+        link_tree() {
+          src="$1"; dst="$2"
+          [ -d "$src" ] || return 0
+          find "$src" -type f -not -name .DS_Store | while IFS= read -r file; do
+            rel="${file#"$src"/}"
+            target="$dst/$rel"
+            mkdir -p "$(dirname "$target")"
+            if [ -e "$target" ] && [ ! -L "$target" ]; then
+              mv "$target" "$target.bak"
+              echo "backed up: $target -> $target.bak"
+            fi
+            ln -sfn "$file" "$target"
+          done
+        }
+        link_tree "{{.ROOT_DIR}}/config" "$HOME/.config"
+        link_tree "{{.ROOT_DIR}}/home" "$HOME"
+        link_tree "{{.PRIVATE_DIR}}/home" "$HOME"
+        echo "dotfiles linked."
+
+  switch:
+    desc: Build and activate the nix-darwin configuration.
+    cmds:
+      - darwin-rebuild switch --flake ".#{{.HOST}}"
+
+  brew:
+    desc: Install Homebrew packages from the Brewfile.
+    cmds:
+      - brew bundle --file ./Brewfile
+
+  mise:
+    desc: Install tool versions with mise.
+    cmds:
+      - mise install
+
+  update:
+    desc: Update all dependencies (nix, mise, Homebrew).
+    cmds:
+      - task: update:nix
+      - task: update:mise
+      - task: update:brew
+
+  update:nix:
+    desc: Update flake inputs and re-activate nix-darwin.
+    cmds:
+      - nix flake update
+      - darwin-rebuild switch --flake ".#{{.HOST}}"
+
+  update:mise:
+    desc: Upgrade mise-managed tools and drop unused versions.
+    cmds:
+      - mise upgrade
+      - mise prune
+
+  update:brew:
+    desc: Upgrade Homebrew packages.
+    cmds:
+      - brew update
+      - brew upgrade
+      - brew bundle --file ./Brewfile
+      - brew cleanup
+
+  import:brew:
+    desc: Capture the live Homebrew state back into the Brewfile.
+    cmds:
+      - brew bundle dump --force --file ./Brewfile
+
+  check:
+    desc: Validate the nix-darwin configuration.
+    cmds:
+      - nix flake check

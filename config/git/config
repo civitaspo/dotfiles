@@ -1,0 +1,69 @@
+[user]
+	name = Takahiro Nakayama
+	email = civitaspo@gmail.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlmYWLNT2IyKC0InCp3Upis6d3pH25NcQaPuDntjSWJ
+
+[core]
+	pager = delta
+	autocrlf = input
+	filemode = false
+	ignorecase = false
+	excludesfile = ~/.config/git/ignore
+
+[commit]
+	gpgsign = true
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+[push]
+	default = simple
+
+[color]
+	ui = true
+
+[branch]
+	autosetuprebase = always
+
+[merge]
+	ff = false
+
+[pull]
+	rebase = merges
+
+[init]
+	defaultBranch = main
+
+[interactive]
+	diffFilter = delta --color-only
+
+[diff]
+	compactionHeuristic = true
+
+[fetch]
+	recurseSubmodules = yes
+	prune = true
+
+[rebase]
+	autoStash = true
+
+[delta]
+	navigate = true
+
+[ghq]
+	root = ~/src
+
+[http]
+	postBuffer = 1M
+
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

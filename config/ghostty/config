@@ -1,0 +1,52 @@
+# Ghostty Configuration
+# Optimized for AI development with Japanese font support
+
+# Font settings with Japanese support
+font-family = "SF Mono", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP"
+font-size = 13
+font-feature = "liga", "clig", "calt"
+font-feature = -dlig
+
+# Window settings
+window-width = 120
+window-height = 40
+window-padding-x = 10
+window-padding-y = 10
+
+# Appearance settings
+theme = "Kanagawa Dragon"
+background-opacity = 0.95
+unfocused-split-opacity = 0.7
+
+# Cursor settings
+cursor-style = "block"
+cursor-opacity = 0.8
+
+# Copy & paste optimization
+copy-on-select = true
+
+# Support for long logs and agent output
+scrollback-limit = 100000
+
+# Color settings (AI development friendly dark theme)
+foreground = "#E5E5E5"
+background = "#1E1E1E"
+
+# 16-color palette (VS Code inspired)
+palette = "0=#000000"
+palette = "1=#CD3131"
+palette = "2=#0DBC79"
+palette = "3=#E5E510"
+palette = "4=#2472C8"
+palette = "5=#BC3FBC"
+palette = "6=#11A8CD"
+palette = "7=#E5E5E5"
+palette = "8=#666666"
+palette = "9=#F14C4C"
+palette = "10=#23D18B"
+palette = "11=#F5F543"
+palette = "12=#3B8EEA"
+palette = "13=#D670D6"
+palette = "14=#29B8DB"
+palette = "15=#E5E5E5"
+keybind = shift+enter=text:\n
