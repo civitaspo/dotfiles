@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # First-time bootstrap for civitaspo/dotfiles.
 #
-# Installs Nix, Homebrew and mise, clones the private dotfiles, then applies
-# the whole configuration. Safe to re-run; every step is idempotent. For day
-# to day work use `task` instead (see Taskfile.yml).
+# Installs Nix, Homebrew and mise, then applies the configuration. The
+# nix-darwin activation also runs home-manager, which links every dotfile.
+# Safe to re-run; every step is idempotent. For day-to-day work use `task`
+# (see Taskfile.yml).
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -38,22 +39,18 @@ if [ ! -x "$HOME/.local/bin/mise" ]; then
 fi
 export PATH="$HOME/.local/bin:$PATH"
 
-# --- Private dotfiles -------------------------------------------------------
+# --- Private dotfiles checkout (for editing; the flake fetches its own copy)
 if [ ! -d "$PRIVATE_DIR/.git" ]; then
   log "Cloning dotfiles-private into $PRIVATE_DIR..."
   mkdir -p "$(dirname "$PRIVATE_DIR")"
   git clone "$PRIVATE_REPO" "$PRIVATE_DIR"
 fi
 
-# --- mise-managed tools (this is what provides `task`) ----------------------
-log "Installing mise-managed tools..."
-mkdir -p "$HOME/.config/mise"
-ln -sfn "$REPO_ROOT/config/mise/config.toml" "$HOME/.config/mise/config.toml"
-mise install
-
-# --- First nix-darwin activation --------------------------------------------
+# --- nix-darwin + home-manager (also links every dotfile) -------------------
 HOST="macbook-$(/usr/sbin/ioreg -l | awk -F'"' '/IOPlatformSerialNumber/{print $4}')"
-if [ ! -e /run/current-system/sw/bin/darwin-rebuild ]; then
+if [ -e /run/current-system/sw/bin/darwin-rebuild ]; then
+  darwin-rebuild switch --flake ".#${HOST}"
+else
   log "Activating nix-darwin for the first time ($HOST)..."
   nix build ".#darwinConfigurations.${HOST}.system"
   ./result/sw/bin/darwin-rebuild switch --flake ".#${HOST}"
@@ -61,8 +58,10 @@ if [ ! -e /run/current-system/sw/bin/darwin-rebuild ]; then
 fi
 export PATH="/run/current-system/sw/bin:$PATH"
 
-# --- Apply the rest with Task -----------------------------------------------
-log "Applying configuration..."
-mise exec -- task reconcile
+# --- mise tools and Homebrew packages ---------------------------------------
+log "Installing mise-managed tools..."
+mise install
+log "Installing Homebrew packages..."
+brew bundle --file ./Brewfile
 
 log "Done. Open a new terminal to load the new shell environment."

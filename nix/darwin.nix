@@ -2,9 +2,11 @@
 #
 # Scope: macOS system-level settings only. Binaries are managed by mise,
 # applications by Homebrew (Brewfile), and dotfiles by `task reconcile`.
-{ pkgs, hostname, ... }:
+{ pkgs, hostname, inputs, ... }:
 
 {
+  imports = [ inputs.home-manager.darwinModules.home-manager ];
+
   nixpkgs.config.allowUnfree = true;
 
   # Nix itself is installed and managed by the Determinate Systems installer
@@ -19,6 +21,16 @@
   users.users."takahiro.nakayama" = {
     home = "/Users/takahiro.nakayama";
     shell = pkgs.zsh;
+  };
+
+  # home-manager places this user's dotfiles (see nix/home.nix). Pre-existing
+  # files are moved aside with a .backup suffix on first activation.
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "backup";
+    extraSpecialArgs = { inherit inputs; };
+    users."takahiro.nakayama" = import ./home.nix;
   };
 
   programs.zsh.enable = true;

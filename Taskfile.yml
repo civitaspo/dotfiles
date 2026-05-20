@@ -1,7 +1,9 @@
 # Task runner for civitaspo/dotfiles.
 # https://taskfile.dev
 #
-# `init.sh` handles first-time bootstrap; every other workflow lives here.
+# init.sh handles first-time bootstrap; every other workflow lives here.
+# Dotfile placement is owned by home-manager (nix/home.nix), so `switch`
+# applies it - there is no symlink logic in this file.
 version: '3'
 
 vars:
@@ -9,10 +11,6 @@ vars:
   HOST:
     sh: |
       echo "macbook-$(/usr/sbin/ioreg -l | awk -F'"' '/IOPlatformSerialNumber/{print $4}')"
-  # Private dotfiles repository, cloned by init.sh.
-  PRIVATE_DIR:
-    sh: |
-      echo "${PRIVATE_DIR:-$HOME/src/github.com/civitaspo/dotfiles-private}"
 
 tasks:
   default:
@@ -24,37 +22,12 @@ tasks:
   reconcile:
     desc: Apply the whole configuration to this machine.
     cmds:
-      - task: link
       - task: switch
       - task: brew
       - task: mise
 
-  link:
-    desc: Symlink dotfiles into $HOME and ~/.config.
-    cmds:
-      - |
-        set -eu
-        link_tree() {
-          src="$1"; dst="$2"
-          [ -d "$src" ] || return 0
-          find "$src" -type f -not -name .DS_Store | while IFS= read -r file; do
-            rel="${file#"$src"/}"
-            target="$dst/$rel"
-            mkdir -p "$(dirname "$target")"
-            if [ -e "$target" ] && [ ! -L "$target" ]; then
-              mv "$target" "$target.bak"
-              echo "backed up: $target -> $target.bak"
-            fi
-            ln -sfn "$file" "$target"
-          done
-        }
-        link_tree "{{.ROOT_DIR}}/config" "$HOME/.config"
-        link_tree "{{.ROOT_DIR}}/home" "$HOME"
-        link_tree "{{.PRIVATE_DIR}}/home" "$HOME"
-        echo "dotfiles linked."
-
   switch:
-    desc: Build and activate the nix-darwin configuration.
+    desc: Activate nix-darwin and home-manager (this also links dotfiles).
     cmds:
       - darwin-rebuild switch --flake ".#{{.HOST}}"
 

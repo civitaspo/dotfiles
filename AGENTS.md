@@ -4,15 +4,16 @@ Guidance for AI coding agents working in this repository.
 
 ## What this repository is
 
-civitaspo's macOS configuration. Responsibilities are split across four tools:
+civitaspo's macOS configuration. Responsibilities are split across five tools:
 
-- **nix-darwin** (`nix/darwin.nix`) -- macOS system settings only.
+- **nix-darwin** (`nix/darwin.nix`) -- macOS system settings.
+- **home-manager** (`nix/home.nix`) -- symlinks dotfiles into `$HOME`.
 - **Homebrew** (`Brewfile`) -- GUI apps, App Store apps, base packages.
 - **mise** (`config/mise/config.toml`) -- CLI binaries and language runtimes.
 - **Task** (`Taskfile.yml`) -- setup, update and reconcile workflows.
 
-`config/` is symlinked into `~/.config` and `home/` into `$HOME` by
-`task reconcile`. `init.sh` bootstraps a fresh machine.
+Dotfiles are plain files under `config/` (-> `~/.config`) and `home/`
+(-> `$HOME`); home-manager symlinks them. `init.sh` bootstraps a fresh machine.
 
 ## Conventions
 
@@ -21,6 +22,7 @@ civitaspo's macOS configuration. Responsibilities are split across four tools:
 - Use semantic commit messages (`feat(scope): ...`, `fix(scope): ...`).
 - After editing any `*.nix` file, run `task check` (`nix flake check`).
 - Prefer mise for binaries; do not add packages to Nix or commit binaries.
+- `Taskfile.yml` only orchestrates -- it must not contain shell logic.
 
 ## Boundaries
 
