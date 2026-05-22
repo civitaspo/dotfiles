@@ -6,9 +6,9 @@ Guidance for AI coding agents working in this repository.
 
 civitaspo's macOS configuration. Responsibilities are split across five tools:
 
-- **nix-darwin** (`nix/darwin.nix`) -- macOS system settings.
+- **nix-darwin** (`nix/darwin.nix`) -- macOS system settings and base CLI packages.
 - **home-manager** (`nix/home.nix`) -- symlinks dotfiles into `$HOME`.
-- **Homebrew** (`Brewfile`) -- GUI apps, App Store apps, base packages.
+- **Homebrew** (`Brewfile`) -- GUI apps and App Store apps (plus colima).
 - **mise** (`config/mise/config.toml`) -- CLI binaries and language runtimes.
 - **Task** (`Taskfile.yml`) -- setup, update and reconcile workflows.
 

@@ -48,8 +48,7 @@ path=(
 # --- Completion --------------------------------------------------------------
 typeset -gx -U fpath
 fpath=(
-  /opt/homebrew/share/zsh-completions(N-/)
-  /opt/homebrew/share/zsh/site-functions(N-/)
+  /run/current-system/sw/share/zsh/site-functions(N-/)
   ~/.config/zsh-site-functions(N-/)
   $fpath
 )
@@ -125,11 +124,11 @@ if command -v gw &> /dev/null; then
   eval "$(gw shell-integration --show-script --shell=zsh)"
 fi
 
-# --- Plugins (Homebrew) ------------------------------------------------------
-if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# --- Plugins (Nix) -----------------------------------------------------------
+if [ -f /run/current-system/sw/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /run/current-system/sw/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 # Syntax highlighting must be sourced last.
-if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f /run/current-system/sw/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /run/current-system/sw/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi

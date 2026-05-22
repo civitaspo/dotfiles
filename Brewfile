@@ -1,31 +1,18 @@
-# Homebrew bundle: GUI applications, App Store apps, and base packages.
+# Homebrew bundle: GUI applications and App Store apps.
 #
 # This file is the source of truth. Apply it with `task brew` and capture
-# drift from the live machine with `task import:brew` (`brew bundle dump`).
-# Binaries and language runtimes are managed by mise, not here.
+# drift with `task import:brew`. CLI binaries and language runtimes come from
+# mise; base packages (GNU userland, git, shell plugins) come from Nix.
 
 # --- Taps -------------------------------------------------------------------
 tap "civitaspo/tap"
 tap "nikitabobko/tap"
 
-# --- Base packages (GNU userland and shell plugins) -------------------------
-brew "coreutils"
-brew "findutils"
-brew "gnu-sed"
-brew "gnu-tar"
-brew "gawk"
-brew "grep"
-brew "curl"
-brew "wget"
-brew "openssl@3"
-brew "gnupg"
-brew "git"
-brew "git-lfs"
-brew "mas"
+# --- Formula (exception) ----------------------------------------------------
+# colima would normally be a Nix package, but nixpkgs currently flags its
+# lima dependency (lima-full) as insecure. It is kept on Homebrew to avoid
+# whitelisting a known-insecure package in Nix.
 brew "colima"
-brew "zsh-autosuggestions"
-brew "zsh-syntax-highlighting"
-brew "zsh-completions"
 
 # --- Casks: applications ----------------------------------------------------
 cask "1password"

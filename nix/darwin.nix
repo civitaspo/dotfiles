@@ -35,7 +35,27 @@
 
   programs.zsh.enable = true;
   environment.shells = with pkgs; [ bashInteractive zsh ];
-  environment.systemPackages = [ ];
+
+  # Base CLI packages. Homebrew is GUI-apps only and dev tools come from mise;
+  # everything else (GNU userland, git, shell plugins) is installed here.
+  environment.systemPackages = with pkgs; [
+    coreutils
+    findutils
+    gnused
+    gnutar
+    gawk
+    gnugrep
+    curl
+    wget
+    openssl
+    gnupg
+    git
+    git-lfs
+    mas
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-completions
+  ];
 
   # Touch ID for sudo.
   security.pam.services.sudo_local.touchIdAuth = true;
