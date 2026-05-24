@@ -1,9 +1,27 @@
 # nix-darwin system configuration.
 #
-# Scope: macOS system-level settings only. Binaries are managed by mise,
-# applications by Homebrew (Brewfile), and dotfiles by `task reconcile`.
+# Scope: macOS system-level settings plus base CLI packages and pinned
+# language runtimes / tools (see flake.nix for the per-tool nixpkgs inputs).
+# Most binaries come from mise; applications from Homebrew (Brewfile);
+# dotfiles from home-manager (nix/home.nix).
 { pkgs, hostname, inputs, ... }:
 
+let
+  system = "aarch64-darwin";
+  # Each per-tool nixpkgs input is imported with `allowUnfree` so packages
+  # like Terraform (BSL) evaluate cleanly. We use `import` rather than
+  # `legacyPackages` so we can pass `config`.
+  mkPkgs = src: import src {
+    inherit system;
+    config = { allowUnfree = true; };
+  };
+  pkgsPython         = mkPkgs inputs.nixpkgs-python;
+  pkgsNode           = mkPkgs inputs.nixpkgs-node;
+  pkgsGo             = mkPkgs inputs.nixpkgs-go;
+  pkgsTerraform      = mkPkgs inputs.nixpkgs-terraform;
+  pkgsProcessCompose = mkPkgs inputs.nixpkgs-process-compose;
+  pkgsK6             = mkPkgs inputs.nixpkgs-k6;
+in
 {
   imports = [ inputs.home-manager.darwinModules.home-manager ];
 
@@ -12,6 +30,14 @@
   # Nix itself is installed and managed by the Determinate Systems installer
   # (see init.sh), so nix-darwin must not manage the Nix daemon or nix.conf.
   nix.enable = false;
+
+  # nix-darwin's release-25.11 branch is paired with nixpkgs-unstable on
+  # purpose (see flake.nix). The branch-matching check is bypassed via
+  # `enableNixpkgsReleaseCheck = false` in the darwinSystem call, but two
+  # internal modules import eval-config.nix directly with the default
+  # (`true`) and would re-fire the assertion. We disable them.
+  system.tools.darwin-uninstaller.enable = false;
+  documentation.enable = false;
 
   networking.hostName = hostname;
   networking.computerName = hostname;
@@ -36,8 +62,8 @@
   programs.zsh.enable = true;
   environment.shells = with pkgs; [ bashInteractive zsh ];
 
-  # Base CLI packages. Homebrew is GUI-apps only and dev tools come from mise;
-  # everything else (GNU userland, git, shell plugins) is installed here.
+  # Base CLI packages from nixpkgs-unstable plus language runtimes / tools
+  # pinned through their own nixpkgs inputs.
   environment.systemPackages = with pkgs; [
     coreutils
     findutils
@@ -55,6 +81,15 @@
     zsh-autosuggestions
     zsh-syntax-highlighting
     zsh-completions
+  ] ++ [
+    # Pinned per-tool packages -- bump with:
+    #   nix flake lock --update-input nixpkgs-<tool>
+    pkgsPython.python313
+    pkgsNode.nodejs_22
+    pkgsGo.go
+    pkgsTerraform.terraform
+    pkgsProcessCompose.process-compose
+    pkgsK6.k6
   ];
 
   # Touch ID for sudo.

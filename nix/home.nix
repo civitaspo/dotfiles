@@ -23,6 +23,11 @@ in
 {
   home.stateVersion = "24.11";
 
+  # Match the nix-darwin override (see flake.nix): home-manager release-25.11
+  # is paired with nixpkgs-unstable on purpose, so suppress the corresponding
+  # version-mismatch warning.
+  home.enableNixpkgsReleaseCheck = false;
+
   xdg.enable = true;
   xdg.configFile = linkDir ../config;
 
