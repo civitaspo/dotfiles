@@ -1,21 +1,18 @@
 # Tool versions managed by mise.
-# Symlinked to ~/.config/mise/config.toml by `task reconcile`.
+# Symlinked to ~/.config/mise/config.toml by home-manager.
 #
-# mise owns every binary it reasonably can: language runtimes and CLI tools.
-# Tools that used to live in aqua are pinned through mise's `aqua` backend,
-# so aqua is still used - just driven by mise instead of its own directory.
+# mise owns most CLI binaries. Some language runtimes (Python, Node.js, Go)
+# and tools (Terraform, process-compose, k6) are pinned through dedicated
+# nixpkgs inputs instead -- see flake.nix.
 
 [tools]
-# --- Language runtimes (previously installed via Nix) -----------------------
-node = "latest"
+# --- Language runtimes (others come from Nix; see flake.nix) ----------------
 ruby = "latest"
-python = "latest"
-go = "latest"
 rust = "latest"
 deno = "latest"
 java = "temurin-21"
 
-# --- CLI tools (previously installed via aqua) ------------------------------
+# --- CLI tools (formerly aqua) ----------------------------------------------
 "aqua:1password/cli" = "latest"
 "aqua:marp-team/marp-cli" = "latest"
 "aqua:pnpm/pnpm" = "latest"
@@ -49,6 +46,10 @@ java = "temurin-21"
 "aqua:docker/compose" = "latest"
 "aqua:docker/buildx" = "latest"
 "ubi:docker/docker-credential-helpers[exe=docker-credential-osxkeychain]" = "latest"
+
+# --- Container runtime (replaces the Homebrew colima formula) ---------------
+"aqua:abiosoft/colima" = "latest"
+"aqua:lima-vm/lima" = "latest"
 
 # --- Tools that used to live in the aqua local registry ---------------------
 "ubi:sotarok/gw" = "latest"

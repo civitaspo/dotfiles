@@ -3,7 +3,8 @@
 #
 # init.sh handles first-time bootstrap; every other workflow lives here.
 # Dotfile placement is owned by home-manager (nix/home.nix), so `switch`
-# applies it - there is no symlink logic in this file.
+# applies it. Homebrew is intentionally NOT on $PATH -- brew tasks scope
+# /opt/homebrew/bin onto PATH inline, leaving the user's shell clean.
 version: '3'
 
 vars:
@@ -34,7 +35,7 @@ tasks:
   brew:
     desc: Install Homebrew packages from the Brewfile.
     cmds:
-      - brew bundle --file ./Brewfile
+      - PATH="/opt/homebrew/bin:$PATH" brew bundle --file ./Brewfile
 
   mise:
     desc: Install tool versions with mise.
@@ -63,15 +64,15 @@ tasks:
   update:brew:
     desc: Upgrade Homebrew packages.
     cmds:
-      - brew update
-      - brew upgrade
-      - brew bundle --file ./Brewfile
-      - brew cleanup
+      - PATH="/opt/homebrew/bin:$PATH" brew update
+      - PATH="/opt/homebrew/bin:$PATH" brew upgrade
+      - PATH="/opt/homebrew/bin:$PATH" brew bundle --file ./Brewfile
+      - PATH="/opt/homebrew/bin:$PATH" brew cleanup
 
   import:brew:
     desc: Capture the live Homebrew state back into the Brewfile.
     cmds:
-      - brew bundle dump --force --file ./Brewfile
+      - PATH="/opt/homebrew/bin:$PATH" brew bundle dump --force --file ./Brewfile
 
   check:
     desc: Validate the nix-darwin configuration.

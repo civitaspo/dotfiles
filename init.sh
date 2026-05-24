@@ -30,7 +30,8 @@ if [ ! -x /opt/homebrew/bin/brew ]; then
   NONINTERACTIVE=1 /bin/bash -c \
     "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Homebrew is intentionally not added to $PATH; both this script and
+# `task brew` invoke it via the absolute path.
 
 # --- mise -------------------------------------------------------------------
 if [ ! -x "$HOME/.local/bin/mise" ]; then
@@ -62,6 +63,6 @@ export PATH="/run/current-system/sw/bin:$PATH"
 log "Installing mise-managed tools..."
 mise install
 log "Installing Homebrew packages..."
-brew bundle --file ./Brewfile
+PATH="/opt/homebrew/bin:$PATH" brew bundle --file ./Brewfile
 
 log "Done. Open a new terminal to load the new shell environment."

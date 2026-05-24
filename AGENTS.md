@@ -8,7 +8,7 @@ civitaspo's macOS configuration. Responsibilities are split across five tools:
 
 - **nix-darwin** (`nix/darwin.nix`) -- macOS system settings and base CLI packages.
 - **home-manager** (`nix/home.nix`) -- symlinks dotfiles into `$HOME`.
-- **Homebrew** (`Brewfile`) -- GUI apps and App Store apps (plus colima).
+- **Homebrew** (`Brewfile`) -- GUI apps and App Store apps. Not on `$PATH`; only `task brew` and friends invoke it (each scopes `/opt/homebrew/bin` onto PATH locally).
 - **mise** (`config/mise/config.toml`) -- CLI binaries and language runtimes.
 - **Task** (`Taskfile.yml`) -- setup, update and reconcile workflows.
 
