@@ -48,13 +48,12 @@ if [ ! -d "$PRIVATE_DIR/.git" ]; then
 fi
 
 # --- nix-darwin + home-manager (also links every dotfile) -------------------
-HOST="macbook-$(/usr/sbin/ioreg -l | awk -F'"' '/IOPlatformSerialNumber/{print $4}')"
 if [ -e /run/current-system/sw/bin/darwin-rebuild ]; then
-  darwin-rebuild switch --flake ".#${HOST}"
+  darwin-rebuild switch --flake ".#default"
 else
-  log "Activating nix-darwin for the first time ($HOST)..."
-  nix build ".#darwinConfigurations.${HOST}.system"
-  ./result/sw/bin/darwin-rebuild switch --flake ".#${HOST}"
+  log "Activating nix-darwin for the first time..."
+  nix build ".#darwinConfigurations.default.system"
+  ./result/sw/bin/darwin-rebuild switch --flake ".#default"
   rm -f ./result
 fi
 export PATH="/run/current-system/sw/bin:$PATH"

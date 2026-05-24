@@ -45,8 +45,3 @@ task check         # validate the nix-darwin configuration
 
 To change a configuration file, edit it under `config/` or `home/` and run
 `task switch`; home-manager re-links it into place.
-
-## Adding a machine
-
-Machines are identified by their device serial number. Add an entry
-`macbook-<serial>` to the `hostnames` list in `flake.nix`.

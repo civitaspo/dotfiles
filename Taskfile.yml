@@ -7,12 +7,6 @@
 # /opt/homebrew/bin onto PATH inline, leaving the user's shell clean.
 version: '3'
 
-vars:
-  # Hostname matches a darwinConfigurations entry in flake.nix.
-  HOST:
-    sh: |
-      echo "macbook-$(/usr/sbin/ioreg -l | awk -F'"' '/IOPlatformSerialNumber/{print $4}')"
-
 tasks:
   default:
     desc: List available tasks.
@@ -30,7 +24,7 @@ tasks:
   switch:
     desc: Activate nix-darwin and home-manager (this also links dotfiles).
     cmds:
-      - darwin-rebuild switch --flake ".#{{.HOST}}"
+      - darwin-rebuild switch --flake ".#default"
 
   brew:
     desc: Install Homebrew packages from the Brewfile.
@@ -53,7 +47,7 @@ tasks:
     desc: Update flake inputs and re-activate nix-darwin.
     cmds:
       - nix flake update
-      - darwin-rebuild switch --flake ".#{{.HOST}}"
+      - darwin-rebuild switch --flake ".#default"
 
   update:mise:
     desc: Upgrade mise-managed tools and drop unused versions.

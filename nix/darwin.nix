@@ -4,7 +4,7 @@
 # language runtimes / tools (see flake.nix for the per-tool nixpkgs inputs).
 # Most binaries come from mise; applications from Homebrew (Brewfile);
 # dotfiles from home-manager (nix/home.nix).
-{ pkgs, hostname, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   system = "aarch64-darwin";
@@ -38,9 +38,6 @@ in
   # (`true`) and would re-fire the assertion. We disable them.
   system.tools.darwin-uninstaller.enable = false;
   documentation.enable = false;
-
-  networking.hostName = hostname;
-  networking.computerName = hostname;
 
   # Owner of the macOS defaults and activation hooks below.
   system.primaryUser = "takahiro.nakayama";

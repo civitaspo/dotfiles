@@ -40,25 +40,17 @@
   };
 
   outputs = { self, nixpkgs, darwin, ... }@inputs:
-    let
-      # Machines are identified by their device serial number.
-      hostnames = [
-        "macbook-XW7J7X4RP0"
-        "macbook-CY9T2WWJPX"
-        "macbook-H7QRCQLYPP"
-      ];
-      mkDarwin = hostname:
-        darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          specialArgs = { inherit inputs hostname; };
-          # Pairing nix-darwin's release-25.11 branch with nixpkgs-unstable
-          # is intentional (see the nixpkgs comment above); bypass the
-          # branch-matching check that would otherwise refuse it.
-          enableNixpkgsReleaseCheck = false;
-          modules = [ ./nix/darwin.nix ];
-        };
-    in
     {
-      darwinConfigurations = nixpkgs.lib.genAttrs hostnames mkDarwin;
+      # Single hostname-agnostic configuration; every machine activates it
+      # as `.#default`. The machine's own macOS hostname is left alone.
+      darwinConfigurations.default = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit inputs; };
+        # Pairing nix-darwin's release-25.11 branch with nixpkgs-unstable
+        # is intentional (see the nixpkgs comment above); bypass the
+        # branch-matching check that would otherwise refuse it.
+        enableNixpkgsReleaseCheck = false;
+        modules = [ ./nix/darwin.nix ];
+      };
     };
 }
