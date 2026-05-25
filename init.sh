@@ -49,11 +49,11 @@ fi
 
 # --- nix-darwin + home-manager (also links every dotfile) -------------------
 if [ -e /run/current-system/sw/bin/darwin-rebuild ]; then
-  darwin-rebuild switch --flake ".#default"
+  darwin-rebuild switch --flake ".#aarch64-darwin"
 else
   log "Activating nix-darwin for the first time..."
-  nix build ".#darwinConfigurations.default.system"
-  ./result/sw/bin/darwin-rebuild switch --flake ".#default"
+  nix build ".#darwinConfigurations.aarch64-darwin.system"
+  ./result/sw/bin/darwin-rebuild switch --flake ".#aarch64-darwin"
   rm -f ./result
 fi
 export PATH="/run/current-system/sw/bin:$PATH"

@@ -41,9 +41,10 @@
 
   outputs = { self, nixpkgs, darwin, ... }@inputs:
     {
-      # Single hostname-agnostic configuration; every machine activates it
-      # as `.#default`. The machine's own macOS hostname is left alone.
-      darwinConfigurations.default = darwin.lib.darwinSystem {
+      # Single hostname-agnostic configuration, keyed by system. Every
+      # machine activates it as `.#aarch64-darwin`. The macOS hostname is
+      # left alone.
+      darwinConfigurations.aarch64-darwin = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = { inherit inputs; };
         # Pairing nix-darwin's release-25.11 branch with nixpkgs-unstable
