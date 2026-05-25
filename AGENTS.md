@@ -24,6 +24,19 @@ Dotfiles are plain files under `config/` (-> `~/.config`) and `home/`
 - Prefer mise for binaries; do not add packages to Nix or commit binaries.
 - `Taskfile.yml` only orchestrates -- it must not contain shell logic.
 
+## Git workflow
+
+- Before creating a feature branch or worktree, run `git fetch origin main`.
+- Base new feature branches and worktrees on `origin/main`, not a stale local
+  `main`.
+- After creating or entering a feature worktree, confirm it is based on the
+  latest `origin/main`; if the worktree is clean and `origin/main` moved,
+  rebase onto it before editing.
+- Before opening a pull request, fetch `origin main` again and rebase the
+  feature branch onto the latest `origin/main` when the worktree is clean.
+- Never discard or overwrite user changes while updating from `main`; if the
+  worktree is dirty, stop and ask how to proceed.
+
 ## Boundaries
 
 This is a **public** repository. Never commit anything tied to an employer or
