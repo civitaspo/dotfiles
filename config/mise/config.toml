@@ -13,7 +13,7 @@ deno = "latest"
 java = "temurin-21"
 
 # --- CLI tools (formerly aqua) ----------------------------------------------
-"aqua:1password/cli" = "latest"
+1password-cli = "latest"
 "aqua:marp-team/marp-cli" = "latest"
 # pnpm via npm (aqua-registry's pnpm asset name does not match upstream on macOS).
 "npm:pnpm" = "latest"
@@ -24,9 +24,10 @@ java = "temurin-21"
 "aqua:junegunn/fzf" = "latest"
 "aqua:sharkdp/bat" = "latest"
 "aqua:sharkdp/fd" = "latest"
-"aqua:aristocratos/btop" = "latest"
+# btop does not publish macOS release assets; bottom provides a portable TUI monitor.
+"aqua:ClementTsang/bottom" = "0.12.3"
 "aqua:dandavison/delta" = "latest"
-"aqua:eza-community/eza" = "latest"
+eza = "latest"
 "aqua:cli/cli" = "latest"
 "aqua:x-motemen/ghq" = "latest"
 "aqua:jqlang/jq" = "latest"
@@ -41,6 +42,10 @@ java = "temurin-21"
 "aqua:fujiwara/awslim" = "latest"
 "aqua:k1LoW/deck" = "latest"
 "aqua:aws/session-manager-plugin" = "latest"
+"aqua:crate-ci/typos" = "latest"
+"aqua:koalaman/shellcheck" = "latest"
+"aqua:mvdan/sh" = "latest"
+"cargo:deadnix" = "latest"
 
 # --- Docker client tooling --------------------------------------------------
 "aqua:docker/cli" = "latest"

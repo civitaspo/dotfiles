@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-if ! env | grep '=op:' 2>&1 >/dev/null; then
+if ! env | grep -q '=op:'; then
   echo "[INFO] There is no environment variables by 1Password." 1>&2
   exit 1
 fi
 
-
 ENV_KV="$(env | grep '=op:' | fzf)"
-ENV_KEY="$(echo ${ENV_KV} | cut -d'=' -f1)"
-ENV_VALUE="$(echo ${ENV_KV} | cut -d'=' -f2)"
+ENV_KEY="${ENV_KV%%=*}"
+ENV_VALUE="${ENV_KV#*=}"
 echo "export ${ENV_KEY}=\"\$(op read ${ENV_VALUE})\""

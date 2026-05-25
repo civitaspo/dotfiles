@@ -39,7 +39,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, darwin, ... }@inputs:
+  outputs = { darwin, ... }@inputs:
     {
       # Single hostname-agnostic configuration, keyed by system. Every
       # machine activates it as `.#aarch64-darwin`. The macOS hostname is

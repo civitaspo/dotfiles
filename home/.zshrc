@@ -69,8 +69,6 @@ alias gsw='git switch'
 alias gg='lazygit'
 alias vim='nvim'
 alias ls='eza --git --icons=auto'
-alias diff='delta'
-alias cd='z'
 alias rm='rm -iv'
 alias cp='cp -iv'
 alias mv='mv -iv'
@@ -97,11 +95,15 @@ esac
 if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
 fi
+if command -v delta &> /dev/null; then
+  alias diff='delta'
+fi
 if command -v starship &> /dev/null; then
   eval "$(starship init zsh)"
 fi
 if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
+  alias cd='z'
 fi
 if command -v direnv &> /dev/null; then
   eval "$(direnv hook zsh)"
