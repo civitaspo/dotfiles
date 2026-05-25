@@ -144,7 +144,7 @@ in
     zsh-completions
   ] ++ [
     # Pinned per-tool packages -- bump with:
-    #   nix flake lock --update-input nixpkgs-<tool>
+    #   nix flake update nixpkgs-<tool>
     pkgsPython.python313
     pkgsNode.nodejs_22
     pkgsGo.go
