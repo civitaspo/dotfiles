@@ -15,7 +15,8 @@ java = "temurin-21"
 # --- CLI tools (formerly aqua) ----------------------------------------------
 "aqua:1password/cli" = "latest"
 "aqua:marp-team/marp-cli" = "latest"
-"aqua:pnpm/pnpm" = "latest"
+# pnpm via npm (aqua-registry's pnpm asset name does not match upstream on macOS).
+"npm:pnpm" = "latest"
 "aqua:aws/aws-cli" = "latest"
 "aqua:astral-sh/ruff" = "latest"
 "aqua:astral-sh/uv" = "latest"
@@ -55,6 +56,9 @@ java = "temurin-21"
 "ubi:sotarok/gw" = "latest"
 "ubi:upamune/airule" = "latest"
 "ubi:upamune/airulesync" = "latest"
+
+# --- Cloud SDKs -------------------------------------------------------------
+gcloud = "latest"
 
 # --- AI agent CLIs ----------------------------------------------------------
 claude-code = "latest"

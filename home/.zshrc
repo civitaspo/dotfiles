@@ -75,7 +75,6 @@ alias rm='rm -iv'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -p'
-alias snowsql='/Applications/SnowSQL.app/Contents/MacOS/snowsql'
 
 # --- Functions ---------------------------------------------------------------
 # Fuzzy-pick a ghq-managed repository and cd into it.

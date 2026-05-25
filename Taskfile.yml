@@ -66,7 +66,8 @@ tasks:
   import:brew:
     desc: Capture the live Homebrew state back into the Brewfile.
     cmds:
-      - PATH="/opt/homebrew/bin:$PATH" brew bundle dump --force --file ./Brewfile
+      # --no-vscode keeps VS Code / Cursor extension entries out of the file.
+      - PATH="/opt/homebrew/bin:$PATH" brew bundle dump --force --no-vscode --file ./Brewfile
 
   check:
     desc: Validate the nix-darwin configuration.
