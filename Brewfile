@@ -36,7 +36,7 @@ cask "spotify"
 cask "tabtab"
 
 # --- Casks: fonts -----------------------------------------------------------
-cask "font-monaspace-nerd-font"
+cask "font-monaspice-nerd-font"
 
 # --- Mac App Store ----------------------------------------------------------
 mas "1Password for Safari", id: 1569813296
