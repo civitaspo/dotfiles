@@ -138,6 +138,7 @@ in
     gnupg
     git
     git-lfs
+    htop
     mas
     zsh-autosuggestions
     zsh-syntax-highlighting
