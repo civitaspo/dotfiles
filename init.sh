@@ -21,6 +21,7 @@ if [ ! -e /nix/var/nix/profiles/default/bin/nix ]; then
   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 fi
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+  # shellcheck disable=SC1091
   . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
 

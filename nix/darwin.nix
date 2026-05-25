@@ -33,14 +33,78 @@ in
 
   # nix-darwin's release-25.11 branch is paired with nixpkgs-unstable on
   # purpose (see flake.nix). The branch-matching check is bypassed via
-  # `enableNixpkgsReleaseCheck = false` in the darwinSystem call, but two
-  # internal modules import eval-config.nix directly with the default
-  # (`true`) and would re-fire the assertion. We disable them.
-  system.tools.darwin-uninstaller.enable = false;
+  # `enableNixpkgsReleaseCheck = false` in the darwinSystem call, but an
+  # internal module imports eval-config.nix directly with the default
+  # (`true`) and would re-fire the assertion. We disable it.
   documentation.enable = false;
 
-  # Owner of the macOS defaults and activation hooks below.
-  system.primaryUser = "takahiro.nakayama";
+  system = {
+    # Disable the release check in the darwin-uninstaller module too; it
+    # imports eval-config.nix directly and would otherwise re-fire it.
+    tools.darwin-uninstaller.enable = false;
+
+    # Owner of the macOS defaults and activation hooks below.
+    primaryUser = "takahiro.nakayama";
+
+    stateVersion = 4;
+
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToControl = true;
+    };
+
+    defaults = {
+      LaunchServices.LSQuarantine = false;
+      NSGlobalDomain = {
+        AppleICUForce24HourTime = true;
+        AppleInterfaceStyle = "Dark";
+        AppleInterfaceStyleSwitchesAutomatically = false;
+        AppleMeasurementUnits = "Centimeters";
+        ApplePressAndHoldEnabled = false;
+        AppleShowAllExtensions = true;
+        AppleShowScrollBars = "WhenScrolling";
+        AppleTemperatureUnit = "Celsius";
+        InitialKeyRepeat = 15;
+        KeyRepeat = 1;
+        NSAutomaticCapitalizationEnabled = false;
+        NSAutomaticDashSubstitutionEnabled = false;
+        NSAutomaticPeriodSubstitutionEnabled = false;
+        NSAutomaticQuoteSubstitutionEnabled = false;
+        NSAutomaticSpellingCorrectionEnabled = false;
+        NSAutomaticWindowAnimationsEnabled = false;
+        NSDisableAutomaticTermination = true;
+        NSWindowResizeTime = 0.001;
+        "com.apple.mouse.tapBehavior" = 1;
+        "com.apple.sound.beep.volume" = 0.0;
+        "com.apple.sound.beep.feedback" = 0;
+        "com.apple.trackpad.enableSecondaryClick" = true;
+      };
+      dock = {
+        autohide = false;
+        show-recents = false;
+        launchanim = true;
+        mouse-over-hilite-stack = true;
+        orientation = "bottom";
+        tilesize = 48;
+      };
+      finder = {
+        _FXShowPosixPathInTitle = false;
+      };
+      trackpad = {
+        Clicking = true;
+        TrackpadThreeFingerDrag = true;
+      };
+    };
+
+    # Disable Spotlight indexing.
+    activationScripts.postActivation.text = ''
+      printf "disabling spotlight indexing... "
+      mdutil -i off -d / &> /dev/null
+      mdutil -E / &> /dev/null
+      echo "ok"
+    '';
+  };
+
   users.users."takahiro.nakayama" = {
     home = "/Users/takahiro.nakayama";
     shell = pkgs.zsh;
@@ -97,83 +161,29 @@ in
   # Raise file descriptor limits (2^19).
   launchd.daemons = {
     sysctl = {
-      serviceConfig.Label = "sysctl";
-      serviceConfig.ProgramArguments = [
-        "sysctl"
-        "-w"
-        "kern.maxfiles=524288"
-        "kern.maxfilesperproc=524288"
-      ];
-      serviceConfig.RunAtLoad = true;
+      serviceConfig = {
+        Label = "sysctl";
+        ProgramArguments = [
+          "sysctl"
+          "-w"
+          "kern.maxfiles=524288"
+          "kern.maxfilesperproc=524288"
+        ];
+        RunAtLoad = true;
+      };
     };
     "launchctl.maxfiles" = {
-      serviceConfig.Label = "launchctl.maxfiles";
-      serviceConfig.ProgramArguments = [
-        "launchctl"
-        "limit"
-        "maxfiles"
-        "524288"
-        "524288"
-      ];
-      serviceConfig.RunAtLoad = true;
+      serviceConfig = {
+        Label = "launchctl.maxfiles";
+        ProgramArguments = [
+          "launchctl"
+          "limit"
+          "maxfiles"
+          "524288"
+          "524288"
+        ];
+        RunAtLoad = true;
+      };
     };
   };
-
-  system.stateVersion = 4;
-
-  system.keyboard = {
-    enableKeyMapping = true;
-    remapCapsLockToControl = true;
-  };
-
-  system.defaults = {
-    LaunchServices.LSQuarantine = false;
-    NSGlobalDomain = {
-      AppleICUForce24HourTime = true;
-      AppleInterfaceStyle = "Dark";
-      AppleInterfaceStyleSwitchesAutomatically = false;
-      AppleMeasurementUnits = "Centimeters";
-      ApplePressAndHoldEnabled = false;
-      AppleShowAllExtensions = true;
-      AppleShowScrollBars = "WhenScrolling";
-      AppleTemperatureUnit = "Celsius";
-      InitialKeyRepeat = 15;
-      KeyRepeat = 1;
-      NSAutomaticCapitalizationEnabled = false;
-      NSAutomaticDashSubstitutionEnabled = false;
-      NSAutomaticPeriodSubstitutionEnabled = false;
-      NSAutomaticQuoteSubstitutionEnabled = false;
-      NSAutomaticSpellingCorrectionEnabled = false;
-      NSAutomaticWindowAnimationsEnabled = false;
-      NSDisableAutomaticTermination = true;
-      NSWindowResizeTime = 0.001;
-      "com.apple.mouse.tapBehavior" = 1;
-      "com.apple.sound.beep.volume" = 0.0;
-      "com.apple.sound.beep.feedback" = 0;
-      "com.apple.trackpad.enableSecondaryClick" = true;
-    };
-    dock = {
-      autohide = false;
-      show-recents = false;
-      launchanim = true;
-      mouse-over-hilite-stack = true;
-      orientation = "bottom";
-      tilesize = 48;
-    };
-    finder = {
-      _FXShowPosixPathInTitle = false;
-    };
-    trackpad = {
-      Clicking = true;
-      TrackpadThreeFingerDrag = true;
-    };
-  };
-
-  # Disable Spotlight indexing.
-  system.activationScripts.postActivation.text = ''
-    printf "disabling spotlight indexing... "
-    mdutil -i off -d / &> /dev/null
-    mdutil -E / &> /dev/null
-    echo "ok"
-  '';
 }

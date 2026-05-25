@@ -21,27 +21,31 @@ let
   private = "${inputs.dotfiles-private}/home";
 in
 {
-  home.stateVersion = "24.11";
+  home = {
+    stateVersion = "24.11";
 
-  # Match the nix-darwin override (see flake.nix): home-manager release-25.11
-  # is paired with nixpkgs-unstable on purpose, so suppress the corresponding
-  # version-mismatch warning.
-  home.enableNixpkgsReleaseCheck = false;
+    # Match the nix-darwin override (see flake.nix): home-manager release-25.11
+    # is paired with nixpkgs-unstable on purpose, so suppress the corresponding
+    # version-mismatch warning.
+    enableNixpkgsReleaseCheck = false;
 
-  xdg.enable = true;
-  xdg.configFile = linkDir ../config;
+    file =
+      # Public dotfiles. ~/.ssh is handled separately below because it is
+      # split between this repository and the private one.
+      builtins.removeAttrs (linkDir ../home) [ ".ssh" ]
+      // {
+        ".ssh/config".source = ../home/.ssh/config;
+        # Private dotfiles.
+        ".aws" = { source = "${private}/.aws"; recursive = true; };
+        ".snowsql" = { source = "${private}/.snowsql"; recursive = true; };
+        ".claude" = { source = "${private}/.claude"; recursive = true; };
+        ".codex" = { source = "${private}/.codex"; recursive = true; };
+        ".ssh/config.d" = { source = "${private}/.ssh/config.d"; recursive = true; };
+      };
+  };
 
-  home.file =
-    # Public dotfiles. ~/.ssh is handled separately below because it is
-    # split between this repository and the private one.
-    builtins.removeAttrs (linkDir ../home) [ ".ssh" ]
-    // {
-      ".ssh/config".source = ../home/.ssh/config;
-      # Private dotfiles.
-      ".aws" = { source = "${private}/.aws"; recursive = true; };
-      ".snowsql" = { source = "${private}/.snowsql"; recursive = true; };
-      ".claude" = { source = "${private}/.claude"; recursive = true; };
-      ".codex" = { source = "${private}/.codex"; recursive = true; };
-      ".ssh/config.d" = { source = "${private}/.ssh/config.d"; recursive = true; };
-    };
+  xdg = {
+    enable = true;
+    configFile = linkDir ../config;
+  };
 }

@@ -70,6 +70,31 @@ tasks:
       - /opt/homebrew/bin/brew bundle dump --force --no-vscode --file ./Brewfile
 
   check:
+    desc: Validate the configuration.
+    cmds:
+      - task: check:nix
+      - task: check:nix-lint
+      - task: check:shell
+      - task: check:typos
+
+  check:nix:
     desc: Validate the nix-darwin configuration.
     cmds:
       - nix flake check
+
+  check:nix-lint:
+    desc: Lint Nix files.
+    cmds:
+      - deadnix --fail .
+      - nix run --inputs-from . nixpkgs#statix -- check .
+
+  check:shell:
+    desc: Lint and format-check shell scripts.
+    cmds:
+      - shellcheck init.sh home/bin/op-export home/bin/aws-sso-login home/bin/paws home/bin/pull home/bin/push home/.docker/cli-plugins/docker-compose home/.docker/cli-plugins/docker-buildx
+      - shfmt -d -i 2 -ci init.sh home/bin/op-export home/bin/aws-sso-login home/bin/paws home/bin/pull home/bin/push home/.docker/cli-plugins/docker-compose home/.docker/cli-plugins/docker-buildx
+
+  check:typos:
+    desc: Check spelling in source files.
+    cmds:
+      - typos

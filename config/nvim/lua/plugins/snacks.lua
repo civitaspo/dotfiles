@@ -8,7 +8,7 @@ return {
           enabled = true,
           duration = { total = 300 },
         },
-        scope = { enabeld = true },
+        scope = { enabled = true },
         chunk = { enabled = true },
       },
       gitbrowse = {
