@@ -7,9 +7,6 @@
 # tasks call /opt/homebrew/bin/brew directly.
 version: '3'
 
-vars:
-  BREW: /opt/homebrew/bin/brew
-
 tasks:
   default:
     desc: List available tasks.
@@ -32,7 +29,7 @@ tasks:
   brew:
     desc: Install Homebrew packages from the Brewfile.
     cmds:
-      - "{{.BREW}} bundle --file ./Brewfile"
+      - /opt/homebrew/bin/brew bundle --file ./Brewfile
 
   mise:
     desc: Install tool versions with mise.
@@ -61,16 +58,16 @@ tasks:
   update:brew:
     desc: Upgrade Homebrew packages.
     cmds:
-      - "{{.BREW}} update"
-      - "{{.BREW}} upgrade"
-      - "{{.BREW}} bundle --file ./Brewfile"
-      - "{{.BREW}} cleanup"
+      - /opt/homebrew/bin/brew update
+      - /opt/homebrew/bin/brew upgrade
+      - /opt/homebrew/bin/brew bundle --file ./Brewfile
+      - /opt/homebrew/bin/brew cleanup
 
   import:brew:
     desc: Capture the live Homebrew state back into the Brewfile.
     cmds:
       # --no-vscode keeps VS Code / Cursor extension entries out of the file.
-      - "{{.BREW}} bundle dump --force --no-vscode --file ./Brewfile"
+      - /opt/homebrew/bin/brew bundle dump --force --no-vscode --file ./Brewfile
 
   check:
     desc: Validate the nix-darwin configuration.
