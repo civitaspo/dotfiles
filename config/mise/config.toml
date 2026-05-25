@@ -1,0 +1,64 @@
+# Tool versions managed by mise.
+# Symlinked to ~/.config/mise/config.toml by home-manager.
+#
+# mise owns most CLI binaries. Some language runtimes (Python, Node.js, Go)
+# and tools (Terraform, process-compose, k6) are pinned through dedicated
+# nixpkgs inputs instead -- see flake.nix.
+
+[tools]
+# --- Language runtimes (others come from Nix; see flake.nix) ----------------
+ruby = "latest"
+rust = "latest"
+deno = "latest"
+java = "temurin-21"
+
+# --- CLI tools (formerly aqua) ----------------------------------------------
+"aqua:1password/cli" = "latest"
+"aqua:marp-team/marp-cli" = "latest"
+# pnpm via npm (aqua-registry's pnpm asset name does not match upstream on macOS).
+"npm:pnpm" = "latest"
+"aqua:aws/aws-cli" = "latest"
+"aqua:astral-sh/ruff" = "latest"
+"aqua:astral-sh/uv" = "latest"
+"aqua:go-task/task" = "latest"
+"aqua:junegunn/fzf" = "latest"
+"aqua:sharkdp/bat" = "latest"
+"aqua:sharkdp/fd" = "latest"
+"aqua:aristocratos/btop" = "latest"
+"aqua:dandavison/delta" = "latest"
+"aqua:eza-community/eza" = "latest"
+"aqua:cli/cli" = "latest"
+"aqua:x-motemen/ghq" = "latest"
+"aqua:jqlang/jq" = "latest"
+"aqua:jesseduffield/lazygit" = "latest"
+"aqua:neovim/neovim" = "latest"
+"aqua:BurntSushi/ripgrep" = "latest"
+"aqua:starship/starship" = "latest"
+"aqua:ajeetdsouza/zoxide" = "latest"
+"aqua:twpayne/chezmoi" = "latest"
+"aqua:atuinsh/atuin" = "latest"
+"aqua:direnv/direnv" = "latest"
+"aqua:fujiwara/awslim" = "latest"
+"aqua:k1LoW/deck" = "latest"
+"aqua:aws/session-manager-plugin" = "latest"
+
+# --- Docker client tooling --------------------------------------------------
+"aqua:docker/cli" = "latest"
+"aqua:docker/compose" = "latest"
+"aqua:docker/buildx" = "latest"
+"ubi:docker/docker-credential-helpers[exe=docker-credential-osxkeychain]" = "latest"
+
+# --- Container runtime (replaces the Homebrew colima formula) ---------------
+"aqua:abiosoft/colima" = "latest"
+"aqua:lima-vm/lima" = "latest"
+
+# --- Tools that used to live in the aqua local registry ---------------------
+"ubi:sotarok/gw" = "latest"
+"ubi:upamune/airule" = "latest"
+"ubi:upamune/airulesync" = "latest"
+
+# --- Cloud SDKs -------------------------------------------------------------
+gcloud = "latest"
+
+# --- AI agent CLIs ----------------------------------------------------------
+claude-code = "latest"

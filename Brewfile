@@ -1,0 +1,59 @@
+# Homebrew bundle: GUI applications and App Store apps.
+#
+# This file is the source of truth. Apply it with `task brew` and capture
+# drift with `task import:brew` (VS Code extensions are intentionally
+# excluded via --no-vscode). Homebrew is intentionally NOT on $PATH --
+# `task` is the only entry point. CLI binaries come from mise, and base
+# packages plus pinned runtimes come from Nix.
+
+# --- Taps -------------------------------------------------------------------
+tap "civitaspo/tap"
+tap "nikitabobko/tap"
+
+# --- Casks: applications ----------------------------------------------------
+cask "1password"
+cask "nikitabobko/tap/aerospace"
+cask "aqua-voice"
+cask "arc"
+cask "azookey"
+cask "chatgpt"
+cask "chatwise"
+cask "claude"
+cask "cleanshot"
+cask "codex-app"
+cask "cursor"
+cask "ghostty"
+cask "google-japanese-ime"
+cask "hammerspoon"
+cask "homerow"
+cask "karabiner-elements"
+cask "keyboard-maestro"
+cask "linear"
+cask "mimestream"
+cask "civitaspo/tap/openin4"
+cask "qmk-toolbox"
+cask "raycast"
+cask "spotify"
+cask "tabtab"
+
+# --- Casks: fonts -----------------------------------------------------------
+cask "font-monaspace-nerd-font"
+
+# --- Mac App Store ----------------------------------------------------------
+mas "1Password for Safari", id: 1569813296
+mas "Amphetamine", id: 937984704
+mas "Anybox", id: 1593408455
+mas "Bear", id: 1091189122
+mas "Display Menu", id: 549083868
+mas "GarageBand", id: 682658836
+mas "Goodnotes", id: 1444383602
+mas "Keynote", id: 409183694
+mas "Kindle", id: 302584613
+mas "Klack", id: 6446206067
+mas "LINE", id: 539883307
+mas "Magnet", id: 441258766
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Things", id: 904280696
+mas "Toggl Track", id: 1291898086
+mas "Twingate", id: 1501592214

@@ -1,0 +1,84 @@
+# Task runner for civitaspo/dotfiles.
+# https://taskfile.dev
+#
+# init.sh handles first-time bootstrap; every other workflow lives here.
+# Dotfile placement is owned by home-manager (nix/home.nix), so `switch`
+# applies it. Homebrew is intentionally NOT on the user's $PATH; the brew
+# tasks add /opt/homebrew/bin via an `env:` block scoped to that task.
+version: '3'
+
+tasks:
+  default:
+    desc: List available tasks.
+    cmds:
+      - task --list
+    silent: true
+
+  reconcile:
+    desc: Apply the whole configuration to this machine.
+    cmds:
+      - task: switch
+      - task: brew
+      - task: mise
+
+  switch:
+    desc: Activate nix-darwin and home-manager (this also links dotfiles).
+    cmds:
+      - darwin-rebuild switch --flake ".#aarch64-darwin"
+
+  brew:
+    desc: Install Homebrew packages from the Brewfile.
+    env:
+      PATH:
+        sh: echo "/opt/homebrew/bin:$PATH"
+    cmds:
+      - brew bundle --file ./Brewfile
+
+  mise:
+    desc: Install tool versions with mise.
+    cmds:
+      - mise install
+
+  update:
+    desc: Update all dependencies (nix, mise, Homebrew).
+    cmds:
+      - task: update:nix
+      - task: update:mise
+      - task: update:brew
+
+  update:nix:
+    desc: Update flake inputs and re-activate nix-darwin.
+    cmds:
+      - nix flake update
+      - darwin-rebuild switch --flake ".#aarch64-darwin"
+
+  update:mise:
+    desc: Upgrade mise-managed tools and drop unused versions.
+    cmds:
+      - mise upgrade
+      - mise prune
+
+  update:brew:
+    desc: Upgrade Homebrew packages.
+    env:
+      PATH:
+        sh: echo "/opt/homebrew/bin:$PATH"
+    cmds:
+      - brew update
+      - brew upgrade
+      - brew bundle --file ./Brewfile
+      - brew cleanup
+
+  import:brew:
+    desc: Capture the live Homebrew state back into the Brewfile.
+    env:
+      PATH:
+        sh: echo "/opt/homebrew/bin:$PATH"
+    cmds:
+      # --no-vscode keeps VS Code / Cursor extension entries out of the file.
+      - brew bundle dump --force --no-vscode --file ./Brewfile
+
+  check:
+    desc: Validate the nix-darwin configuration.
+    cmds:
+      - nix flake check
