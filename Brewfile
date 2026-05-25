@@ -17,7 +17,6 @@ cask "aqua-voice"
 cask "arc"
 cask "azookey"
 cask "chatgpt"
-cask "chatwise"
 cask "claude"
 cask "cleanshot"
 cask "codex-app"
@@ -42,18 +41,12 @@ cask "font-monaspace-nerd-font"
 # --- Mac App Store ----------------------------------------------------------
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
-mas "Anybox", id: 1593408455
 mas "Bear", id: 1091189122
 mas "Display Menu", id: 549083868
-mas "GarageBand", id: 682658836
-mas "Goodnotes", id: 1444383602
 mas "Keynote", id: 409183694
 mas "Kindle", id: 302584613
 mas "Klack", id: 6446206067
 mas "LINE", id: 539883307
-mas "Magnet", id: 441258766
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Things", id: 904280696
-mas "Toggl Track", id: 1291898086
 mas "Twingate", id: 1501592214
