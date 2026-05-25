@@ -4,8 +4,11 @@
 # init.sh handles first-time bootstrap; every other workflow lives here.
 # Dotfile placement is owned by home-manager (nix/home.nix), so `switch`
 # applies it. Homebrew is intentionally NOT on the user's $PATH; the brew
-# tasks add /opt/homebrew/bin via an `env:` block scoped to that task.
+# tasks call /opt/homebrew/bin/brew directly.
 version: '3'
+
+vars:
+  BREW: /opt/homebrew/bin/brew
 
 tasks:
   default:
@@ -28,11 +31,8 @@ tasks:
 
   brew:
     desc: Install Homebrew packages from the Brewfile.
-    env:
-      PATH:
-        sh: echo "/opt/homebrew/bin:$PATH"
     cmds:
-      - brew bundle --file ./Brewfile
+      - "{{.BREW}} bundle --file ./Brewfile"
 
   mise:
     desc: Install tool versions with mise.
@@ -60,23 +60,17 @@ tasks:
 
   update:brew:
     desc: Upgrade Homebrew packages.
-    env:
-      PATH:
-        sh: echo "/opt/homebrew/bin:$PATH"
     cmds:
-      - brew update
-      - brew upgrade
-      - brew bundle --file ./Brewfile
-      - brew cleanup
+      - "{{.BREW}} update"
+      - "{{.BREW}} upgrade"
+      - "{{.BREW}} bundle --file ./Brewfile"
+      - "{{.BREW}} cleanup"
 
   import:brew:
     desc: Capture the live Homebrew state back into the Brewfile.
-    env:
-      PATH:
-        sh: echo "/opt/homebrew/bin:$PATH"
     cmds:
       # --no-vscode keeps VS Code / Cursor extension entries out of the file.
-      - brew bundle dump --force --no-vscode --file ./Brewfile
+      - "{{.BREW}} bundle dump --force --no-vscode --file ./Brewfile"
 
   check:
     desc: Validate the nix-darwin configuration.
