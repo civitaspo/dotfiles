@@ -45,3 +45,11 @@ task check         # validate the nix-darwin configuration
 
 To change a configuration file, edit it under `config/` or `home/` and run
 `task switch`; home-manager re-links it into place.
+
+## Dependency updates
+
+The Renovate GitHub App runs daily on weekdays to open dependency update pull
+requests for GitHub Actions, Nix flake inputs and mise-managed tools.
+
+No repository token or Actions secret is required. Repository access is scoped
+by the Renovate GitHub App installation.
