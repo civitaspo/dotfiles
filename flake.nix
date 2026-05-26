@@ -12,7 +12,7 @@
 
     # Pinned per-tool nixpkgs commits, so language runtimes and tools don't
     # drift on every nixpkgs-unstable update. Bump one with:
-    #   nix flake lock --update-input nixpkgs-<tool>
+    #   nix flake update nixpkgs-<tool>
     nixpkgs-python.url          = "github:NixOS/nixpkgs/9d29d5f667d7467f98efc31881e824fa586c927e"; # Python 3.13.12
     nixpkgs-node.url            = "github:NixOS/nixpkgs/9d29d5f667d7467f98efc31881e824fa586c927e"; # Node.js 22.22.2
     nixpkgs-go.url              = "github:NixOS/nixpkgs/01fbdeef22b76df85ea168fbfe1bfd9e63681b30"; # Go 1.26.2
