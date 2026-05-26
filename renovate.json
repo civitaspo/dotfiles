@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "timezone": "Asia/Tokyo",
+  "schedule": ["before 6am every weekday"],
+  "dependencyDashboard": true,
+  "semanticCommits": "enabled",
+  "labels": ["dependencies"],
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "labels": ["dependencies", "security"],
+    "vulnerabilityFixStrategy": "highest"
+  },
+  "branchPrefix": "renovate/",
+  "nix": {
+    "enabled": true
+  },
+  "mise": {
+    "enabled": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am every weekday"]
+  },
+  "packageRules": [
+    {
+      "description": "Group GitHub Actions updates together.",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
+    },
+    {
+      "description": "Group Nix flake input updates together.",
+      "matchManagers": ["nix"],
+      "groupName": "Nix flake inputs"
+    },
+    {
+      "description": "Group mise tool updates together.",
+      "matchManagers": ["mise"],
+      "groupName": "mise tools"
+    }
+  ]
+}
