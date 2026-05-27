@@ -51,9 +51,24 @@ tasks:
 
   update:mise:
     desc: Upgrade mise-managed tools and drop unused versions.
+    dir: ./config/mise
+    env:
+      MISE_GLOBAL_CONFIG_FILE: '{{.TASKFILE_DIR}}/config/mise/config.toml'
+      MISE_GLOBAL_CONFIG_ROOT: '{{.TASKFILE_DIR}}/config/mise'
+      MISE_LOCKED: 'false'
     cmds:
       - mise upgrade
       - mise prune
+
+  lock:mise:
+    desc: Refresh the committed mise lockfile.
+    dir: ./config/mise
+    env:
+      MISE_GLOBAL_CONFIG_FILE: '{{.TASKFILE_DIR}}/config/mise/config.toml'
+      MISE_GLOBAL_CONFIG_ROOT: '{{.TASKFILE_DIR}}/config/mise'
+      MISE_LOCKED: 'false'
+    cmds:
+      - mise lock --global --platform macos-arm64
 
   update:brew:
     desc: Upgrade Homebrew packages.

@@ -5,6 +5,12 @@
 # and tools (Terraform, process-compose, k6) are pinned through dedicated
 # nixpkgs inputs instead -- see flake.nix.
 
+[settings]
+# Consume the committed lockfile during normal installs. This keeps "latest"
+# declarations reproducible and avoids writing the home-manager-managed
+# lockfile under /nix/store.
+locked = true
+
 [tools]
 # --- Language runtimes (others come from Nix; see flake.nix) ----------------
 # Ruby versions are managed by rv instead of mise's core Ruby backend.
