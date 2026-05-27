@@ -24,7 +24,7 @@ tasks:
   switch:
     desc: Activate nix-darwin and home-manager (this also links dotfiles).
     cmds:
-      - darwin-rebuild switch --flake ".#aarch64-darwin"
+      - sudo darwin-rebuild switch --flake ".#aarch64-darwin"
 
   brew:
     desc: Install Homebrew packages from the Brewfile.
@@ -47,7 +47,7 @@ tasks:
     desc: Update flake inputs and re-activate nix-darwin.
     cmds:
       - nix flake update
-      - darwin-rebuild switch --flake ".#aarch64-darwin"
+      - sudo darwin-rebuild switch --flake ".#aarch64-darwin"
 
   update:mise:
     desc: Upgrade mise-managed tools and drop unused versions.
