@@ -7,7 +7,8 @@
 
 [tools]
 # --- Language runtimes (others come from Nix; see flake.nix) ----------------
-ruby = "latest"
+# Ruby versions are managed by rv instead of mise's core Ruby backend.
+"aqua:spinel-coop/rv" = "latest"
 rust = "latest"
 deno = "latest"
 java = "temurin-21"
@@ -36,11 +37,10 @@ eza = "latest"
 "aqua:BurntSushi/ripgrep" = "latest"
 "aqua:starship/starship" = "latest"
 "aqua:ajeetdsouza/zoxide" = "latest"
-"aqua:twpayne/chezmoi" = "latest"
 "aqua:atuinsh/atuin" = "latest"
 "aqua:direnv/direnv" = "latest"
-"aqua:fujiwara/awslim" = "latest"
 "aqua:k1LoW/deck" = "latest"
+"github:k1LoW/mo" = "latest"
 "aqua:aws/session-manager-plugin" = "latest"
 "aqua:crate-ci/typos" = "latest"
 "aqua:koalaman/shellcheck" = "latest"
@@ -56,11 +56,6 @@ eza = "latest"
 # --- Container runtime (replaces the Homebrew colima formula) ---------------
 "aqua:abiosoft/colima" = "latest"
 "aqua:lima-vm/lima" = "latest"
-
-# --- Tools that used to live in the aqua local registry ---------------------
-"ubi:sotarok/gw" = "latest"
-"ubi:upamune/airule" = "latest"
-"ubi:upamune/airulesync" = "latest"
 
 # --- Cloud SDKs -------------------------------------------------------------
 gcloud = "latest"
