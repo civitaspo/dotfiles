@@ -7,6 +7,16 @@ backend = "vfox:1password-cli"
 [tools.1password-cli."platforms.macos-arm64"]
 url = "https://cache.agilebits.com/dist/1P/op2/pkg/v2.34.0/op_darwin_arm64_v2.34.0.zip"
 
+[[tools.aqua]]
+version = "2.59.1"
+backend = "github:aquaproj/aqua"
+
+[tools.aqua."platforms.macos-arm64"]
+checksum = "sha256:8c658418ba81cf2629813d374358f3dfe13c6715d27ccb476baf85c873acc501"
+url = "https://github.com/aquaproj/aqua/releases/download/v2.59.1/aqua_darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/aquaproj/aqua/releases/assets/430610107"
+provenance = "github-attestations"
+
 [[tools."aqua:BurntSushi/ripgrep"]]
 version = "15.1.0"
 backend = "aqua:BurntSushi/ripgrep"
