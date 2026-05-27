@@ -83,11 +83,6 @@ version = "5.1.4"
 backend = "aqua:docker/compose"
 "platforms.macos-arm64" = { checksum = "sha256:4cad7fc67dd089a598a15598ad38d04e6f23bf299846d26b2c572f1f96a7c49f", url = "https://github.com/docker/compose/releases/download/v5.1.4/docker-compose-darwin-aarch64"}
 
-[[tools."aqua:fujiwara/awslim"]]
-version = "0.6.13"
-backend = "aqua:fujiwara/awslim"
-"platforms.macos-arm64" = { checksum = "sha256:1cc61717f883037f00c1312f6747acb3a0fcb381a60aa9ab3a4bc0eef5ccb838", url = "https://github.com/fujiwara/awslim/releases/download/v0.6.13/awslim_0.6.13_darwin_arm64.tar.gz"}
-
 [[tools."aqua:go-task/task"]]
 version = "3.51.1"
 backend = "aqua:go-task/task"
@@ -148,15 +143,15 @@ version = "10.4.2"
 backend = "aqua:sharkdp/fd"
 "platforms.macos-arm64" = { checksum = "sha256:623dc0afc81b92e4d4606b380d7bc91916ba7b97814263e554d50923a39e480a", url = "https://github.com/sharkdp/fd/releases/download/v10.4.2/fd-v10.4.2-aarch64-apple-darwin.tar.gz"}
 
+[[tools."aqua:spinel-coop/rv"]]
+version = "0.5.3"
+backend = "aqua:spinel-coop/rv"
+"platforms.macos-arm64" = { checksum = "sha256:6c790115817d79d67da8e79810ececb6b0ae700d14060dd7f23c49809e27fbe5", url = "https://github.com/spinel-coop/rv/releases/download/v0.5.3/rv-aarch64-apple-darwin.tar.xz"}
+
 [[tools."aqua:starship/starship"]]
 version = "1.25.1"
 backend = "aqua:starship/starship"
 "platforms.macos-arm64" = { checksum = "sha256:1062a2363489b9335529b83204472f02633c08fc3609f1b325be5eba36feb631", url = "https://github.com/starship/starship/releases/download/v1.25.1/starship-aarch64-apple-darwin.tar.gz"}
-
-[[tools."aqua:twpayne/chezmoi"]]
-version = "2.70.4"
-backend = "aqua:twpayne/chezmoi"
-"platforms.macos-arm64" = { checksum = "sha256:0093fa436e9ccccf423323315c0146f6dc77985294bd845cee1f3cf3f63eeb0f", url = "https://github.com/twpayne/chezmoi/releases/download/v2.70.4/chezmoi_2.70.4_darwin_arm64.tar.gz"}
 
 [[tools."aqua:x-motemen/ghq"]]
 version = "1.10.1"
@@ -186,6 +181,11 @@ version = "569.0.0"
 backend = "vfox:mise-plugins/vfox-gcloud"
 "platforms.macos-arm64" = { url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-569.0.0-darwin-arm.tar.gz"}
 
+[[tools."github:k1LoW/mo"]]
+version = "1.5.5"
+backend = "github:k1LoW/mo"
+"platforms.macos-arm64" = { checksum = "sha256:0773d77f52633fcecfc3ce05d04a6fb9a6b7f57b73c7d40929c9209fbb7869f4", url = "https://github.com/k1LoW/mo/releases/download/v1.5.5/mo_v1.5.5_darwin_arm64.zip", url_api = "https://api.github.com/repos/k1LoW/mo/releases/assets/418525567"}
+
 [[tools.java]]
 version = "temurin-21.0.11+10.0.LTS"
 backend = "core:java"
@@ -193,11 +193,6 @@ backend = "core:java"
 [[tools."npm:pnpm"]]
 version = "11.3.0"
 backend = "npm:pnpm"
-
-[[tools.ruby]]
-version = "4.0.5"
-backend = "core:ruby"
-"platforms.macos-arm64" = { checksum = "sha256:7d6149079a63f8ae1d326c9fa65c6019ba2dc3155eae7b39159817911c88958e", url = "https://cache.ruby-lang.org/pub/ruby/4.0/ruby-4.0.5.tar.gz"}
 
 [[tools.rust]]
 version = "1.95.0"
@@ -209,15 +204,3 @@ backend = "ubi:docker/docker-credential-helpers[exe=docker-credential-osxkeychai
 
 [tools."ubi:docker/docker-credential-helpers".options]
 exe = "docker-credential-osxkeychain"
-
-[[tools."ubi:sotarok/gw"]]
-version = "0.8.2"
-backend = "ubi:sotarok/gw"
-
-[[tools."ubi:upamune/airule"]]
-version = "0.0.6"
-backend = "ubi:upamune/airule"
-
-[[tools."ubi:upamune/airulesync"]]
-version = "0.0.6"
-backend = "ubi:upamune/airulesync"
