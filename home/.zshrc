@@ -37,14 +37,6 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=10000000
 
-# --- PATH --------------------------------------------------------------------
-typeset -gx -U path
-path=(
-  $HOME/bin(N-/)
-  $HOME/.local/bin(N-/)
-  $path
-)
-
 # --- Completion --------------------------------------------------------------
 typeset -gx -U fpath
 fpath=(
@@ -95,35 +87,45 @@ esac
 if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
 fi
-if command -v delta &> /dev/null; then
+
+_command_ready() {
+  local bin_path
+  bin_path="$(command -v "$1" 2> /dev/null)" || return 1
+  if [[ "$bin_path" == "$HOME/.local/share/mise/shims/"* ]] && command -v mise &> /dev/null; then
+    mise which "$1" &> /dev/null
+  fi
+}
+
+if _command_ready delta; then
   alias diff='delta'
 fi
-if command -v starship &> /dev/null; then
+if _command_ready starship; then
   eval "$(starship init zsh)"
 fi
-if command -v zoxide &> /dev/null; then
+if _command_ready zoxide; then
   eval "$(zoxide init zsh)"
   alias cd='z'
 fi
-if command -v direnv &> /dev/null; then
+if _command_ready direnv; then
   eval "$(direnv hook zsh)"
 fi
-if command -v atuin &> /dev/null; then
+if _command_ready atuin; then
   eval "$(atuin init zsh)"
 fi
-if command -v fzf &> /dev/null; then
+if _command_ready fzf; then
   eval "$(fzf --zsh)"
   export FZF_DEFAULT_OPTS='--bind ctrl-n:down,ctrl-p:up'
-  if command -v fd &> /dev/null; then
+  if _command_ready fd; then
     export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
   fi
 fi
 # gw - git worktree helper
-if command -v gw &> /dev/null; then
+if _command_ready gw; then
   eval "$(gw shell-integration --show-script --shell=zsh)"
 fi
+unfunction _command_ready
 
 # --- Plugins (Nix) -----------------------------------------------------------
 if [ -f /run/current-system/sw/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
