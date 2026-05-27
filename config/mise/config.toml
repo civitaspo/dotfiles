@@ -21,6 +21,7 @@ java = "temurin-21"
 
 # --- CLI tools (formerly aqua) ----------------------------------------------
 1password-cli = "latest"
+aqua = "latest"
 "aqua:marp-team/marp-cli" = "latest"
 # pnpm via npm (aqua-registry's pnpm asset name does not match upstream on macOS).
 "npm:pnpm" = "latest"
