@@ -109,6 +109,12 @@ fi
 if _command_ready direnv; then
   eval "$(direnv hook zsh)"
 fi
+if _command_ready dust; then
+  alias du='dust'
+fi
+if _command_ready procs; then
+  alias ps='procs'
+fi
 if _command_ready atuin; then
   eval "$(atuin init zsh)"
 fi
