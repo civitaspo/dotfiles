@@ -52,6 +52,7 @@ eza = "latest"
 "aqua:crate-ci/typos" = "latest"
 "aqua:koalaman/shellcheck" = "latest"
 "aqua:mvdan/sh" = "latest"
+"aqua:evilmartians/lefthook" = "latest"
 "cargo:deadnix" = "latest"
 
 # --- Docker client tooling --------------------------------------------------
