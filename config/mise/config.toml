@@ -64,6 +64,14 @@ eza = "latest"
 "aqua:abiosoft/colima" = "latest"
 "aqua:lima-vm/lima" = "latest"
 
+# --- Data tools -------------------------------------------------------------
+# Embedded analytics DB: query CSV/Parquet/JSON and remote S3 directly via SQL.
+"aqua:duckdb/duckdb" = "latest"
+
+# --- Modern coreutils replacements ------------------------------------------
+"aqua:dalance/procs" = "latest"
+"aqua:bootandy/dust" = "latest"
+
 # --- Cloud SDKs -------------------------------------------------------------
 gcloud = "latest"
 
