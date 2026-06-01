@@ -7,6 +7,7 @@
 # packages plus pinned runtimes come from Nix.
 
 # --- Taps -------------------------------------------------------------------
+tap "civitaspo/dotfiles", __dir__
 tap "civitaspo/tap"
 tap "nikitabobko/tap"
 
@@ -18,6 +19,7 @@ cask "arc"
 cask "azookey"
 cask "chatgpt"
 cask "claude"
+cask "civitaspo/dotfiles/circleback"
 cask "cleanshot"
 cask "codex-app"
 cask "cursor"
@@ -30,6 +32,7 @@ cask "keyboard-maestro"
 cask "linear"
 cask "mimestream"
 cask "civitaspo/tap/openin4"
+cask "civitaspo/dotfiles/otter"
 cask "qmk-toolbox"
 cask "raycast"
 cask "spotify"
