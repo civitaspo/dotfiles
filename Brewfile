@@ -35,6 +35,7 @@ cask "qmk-toolbox"
 cask "raycast"
 cask "spotify"
 cask "tabtab"
+cask "zed"
 
 # --- Casks: fonts -----------------------------------------------------------
 cask "font-monaspice-nerd-font"

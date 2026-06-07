@@ -4,7 +4,8 @@ export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-export EDITOR="nvim"
+export EDITOR="zed --wait"
+export VISUAL="$EDITOR"
 export PAGER="less"
 
 # Keep non-interactive zsh commands, including Codex tool calls, on the same
