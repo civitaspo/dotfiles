@@ -1,4 +1,4 @@
-# Homebrew bundle: GUI applications and App Store apps.
+# Homebrew bundle: GUI applications, local casks, and App Store apps.
 #
 # This file is the source of truth. Apply it with `task brew` and capture
 # drift with `task import:brew` (VS Code extensions are intentionally
@@ -8,7 +8,6 @@
 
 # --- Taps -------------------------------------------------------------------
 tap "civitaspo/dotfiles", __dir__
-tap "civitaspo/tap"
 tap "nikitabobko/tap"
 
 # --- Casks: applications ----------------------------------------------------
@@ -31,7 +30,7 @@ cask "karabiner-elements"
 cask "keyboard-maestro"
 cask "linear"
 cask "mimestream"
-cask "civitaspo/tap/openin4"
+cask "civitaspo/dotfiles/openin4"
 cask "qmk-toolbox"
 cask "raycast"
 cask "spotify"
