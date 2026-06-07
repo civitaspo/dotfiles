@@ -91,6 +91,13 @@ backend = "aqua:aws/session-manager-plugin"
 [tools."aqua:aws/session-manager-plugin"."platforms.macos-arm64"]
 url = "https://s3.amazonaws.com/session-manager-downloads/plugin/1.2.814.0/mac_arm64/sessionmanager-bundle.zip"
 
+[[tools."aqua:bootandy/dust"]]
+version = "1.2.4"
+backend = "aqua:bootandy/dust"
+
+[tools."aqua:bootandy/dust"."platforms.macos-arm64"]
+url = "https://github.com/bootandy/dust/releases/download/v1.2.4/dust-v1.2.4-x86_64-apple-darwin.tar.gz"
+
 [[tools."aqua:cli/cli"]]
 version = "2.92.0"
 backend = "aqua:cli/cli"
@@ -107,6 +114,13 @@ backend = "aqua:crate-ci/typos"
 [tools."aqua:crate-ci/typos"."platforms.macos-arm64"]
 checksum = "sha256:503d4b0b2035d96fb286b5dc8594bda6a587cc76c1ad1022aa36a2634d42ae4b"
 url = "https://github.com/crate-ci/typos/releases/download/v1.46.3/typos-v1.46.3-aarch64-apple-darwin.tar.gz"
+
+[[tools."aqua:dalance/procs"]]
+version = "0.14.11"
+backend = "aqua:dalance/procs"
+
+[tools."aqua:dalance/procs"."platforms.macos-arm64"]
+url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-x86_64-mac.zip"
 
 [[tools."aqua:dandavison/delta"]]
 version = "0.19.2"
@@ -146,6 +160,23 @@ backend = "aqua:docker/compose"
 [tools."aqua:docker/compose"."platforms.macos-arm64"]
 checksum = "sha256:4cad7fc67dd089a598a15598ad38d04e6f23bf299846d26b2c572f1f96a7c49f"
 url = "https://github.com/docker/compose/releases/download/v5.1.4/docker-compose-darwin-aarch64"
+
+[[tools."aqua:duckdb/duckdb"]]
+version = "1.5.3"
+backend = "aqua:duckdb/duckdb"
+
+[tools."aqua:duckdb/duckdb"."platforms.macos-arm64"]
+checksum = "sha256:ae799f106aca1bb740b0406448f13ba91558d59197475cb6a0f349db6e17721a"
+url = "https://github.com/duckdb/duckdb/releases/download/v1.5.3/duckdb_cli-osx-universal.zip"
+
+[[tools."aqua:evilmartians/lefthook"]]
+version = "2.1.9"
+backend = "aqua:evilmartians/lefthook"
+
+[tools."aqua:evilmartians/lefthook"."platforms.macos-arm64"]
+checksum = "sha256:808f8ef81a61e01eb41c1a2951e5639804f2372dc6a484bbeff726406745c77f"
+url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.9/lefthook_2.1.9_MacOS_arm64.gz"
+provenance = "github-attestations"
 
 [[tools."aqua:go-task/task"]]
 version = "3.51.1"
