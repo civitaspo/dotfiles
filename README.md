@@ -10,7 +10,7 @@ Each tool owns one clear responsibility:
 |------|----------------|-------|
 | [nix-darwin](https://github.com/nix-darwin/nix-darwin) | macOS system settings, base CLI packages | `flake.nix`, `nix/darwin.nix` |
 | [home-manager](https://github.com/nix-community/home-manager) | Dotfile placement (symlinks into `$HOME`) | `nix/home.nix` |
-| [Homebrew](https://brew.sh) | GUI apps and App Store apps | `Brewfile` |
+| [Homebrew](https://brew.sh) | GUI apps, local casks and App Store apps | `Brewfile`, `Casks/` |
 | [mise](https://mise.jdx.dev) | CLI binaries and language runtimes | `config/mise/config.toml` |
 | [Task](https://taskfile.dev) | Setup, update and reconcile workflows | `Taskfile.yml` |
 
