@@ -106,8 +106,8 @@ tasks:
   check:shell:
     desc: Lint and format-check shell scripts.
     cmds:
-      - shellcheck init.sh home/bin/op-export home/bin/aws-sso-login home/bin/paws home/bin/pull home/bin/push home/.docker/cli-plugins/docker-compose home/.docker/cli-plugins/docker-buildx
-      - shfmt -d -i 2 -ci init.sh home/bin/op-export home/bin/aws-sso-login home/bin/paws home/bin/pull home/bin/push home/.docker/cli-plugins/docker-compose home/.docker/cli-plugins/docker-buildx
+      - shellcheck init.sh home/bin/* home/.docker/cli-plugins/*
+      - shfmt -d -i 2 -ci init.sh home/bin/* home/.docker/cli-plugins/*
 
   check:typos:
     desc: Check spelling in source files.
