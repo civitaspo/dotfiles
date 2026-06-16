@@ -96,6 +96,7 @@ version = "1.2.4"
 backend = "aqua:bootandy/dust"
 
 [tools."aqua:bootandy/dust"."platforms.macos-arm64"]
+checksum = "sha256:bf84d3ff7f58e325d3eb5bb7696df6b22ef1e01fec80c2d8f7c9d3e611be66f4"
 url = "https://github.com/bootandy/dust/releases/download/v1.2.4/dust-v1.2.4-x86_64-apple-darwin.tar.gz"
 
 [[tools."aqua:cli/cli"]]
@@ -120,6 +121,7 @@ version = "0.14.11"
 backend = "aqua:dalance/procs"
 
 [tools."aqua:dalance/procs"."platforms.macos-arm64"]
+checksum = "sha256:72e45a61660e1c586afff64b3a8a393fed06f3a133df8e716ade68b00190ea87"
 url = "https://github.com/dalance/procs/releases/download/v0.14.11/procs-v0.14.11-x86_64-mac.zip"
 
 [[tools."aqua:dandavison/delta"]]
@@ -339,6 +341,7 @@ backend = "github:k1LoW/mo"
 checksum = "sha256:0773d77f52633fcecfc3ce05d04a6fb9a6b7f57b73c7d40929c9209fbb7869f4"
 url = "https://github.com/k1LoW/mo/releases/download/v1.5.5/mo_v1.5.5_darwin_arm64.zip"
 url_api = "https://api.github.com/repos/k1LoW/mo/releases/assets/418525567"
+provenance = "github-attestations"
 
 [[tools."http:antigravity-cli"]]
 version = "1.0.3"
