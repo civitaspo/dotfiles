@@ -312,6 +312,14 @@ backend = "aqua:anthropics/claude-code"
 [tools.claude-code."platforms.macos-arm64"]
 url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.150/darwin-arm64/claude"
 
+[[tools.codex]]
+version = "0.140.0"
+backend = "aqua:openai/codex"
+
+[tools.codex."platforms.macos-arm64"]
+checksum = "sha256:5e38113f213d0ba1982a04ba2d4f19fa2f1971e3493639b2c61905d764b7548e"
+url = "https://github.com/openai/codex/releases/download/rust-v0.140.0/codex-aarch64-apple-darwin.zst"
+
 [[tools.deno]]
 version = "2.8.0"
 backend = "core:deno"
