@@ -78,6 +78,7 @@ gcloud = "latest"
 
 # --- AI agent CLIs ----------------------------------------------------------
 claude-code = "latest"
+codex = "latest"
 
 [tools."http:antigravity-cli"]
 version = "1.0.3"
