@@ -26,12 +26,12 @@ checksum = "sha256:378e973289176ca0c6054054ee7f631a065874a352bf43f0fa60ef079b6ba
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.1.0/ripgrep-15.1.0-aarch64-apple-darwin.tar.gz"
 
 [[tools."aqua:ClementTsang/bottom"]]
-version = "0.12.3"
+version = "0.14.2"
 backend = "aqua:ClementTsang/bottom"
 
 [tools."aqua:ClementTsang/bottom"."platforms.macos-arm64"]
-checksum = "sha256:106e9493d20192d18dbe46d4c99f680d817c796724103ee258567070fcd16429"
-url = "https://github.com/ClementTsang/bottom/releases/download/0.12.3/bottom_aarch64-apple-darwin.tar.gz"
+checksum = "sha256:69cdfe0fbf3f3a3efba9f54b9a89f740b24344b4cfa3efb6857a4e76ace8cf6a"
+url = "https://github.com/ClementTsang/bottom/releases/download/0.14.2/bottom_aarch64-apple-darwin.tar.gz"
 provenance = "github-attestations"
 
 [[tools."aqua:abiosoft/colima"]]
