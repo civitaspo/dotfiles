@@ -1,8 +1,9 @@
 # Homebrew bundle: GUI applications, local casks, and App Store apps.
 #
-# This file is the source of truth. Apply it with `task brew` and capture
-# drift with `task import:brew` (VS Code extensions are intentionally
-# excluded via --no-vscode). Homebrew is intentionally NOT on $PATH --
+# This file is the source of truth. Apply it with `task brew` (installs,
+# upgrades, and uninstalls packages not listed here) and capture drift with
+# `task import:brew` (VS Code extensions are intentionally excluded via
+# --no-vscode). Homebrew is intentionally NOT on $PATH --
 # `task` is the only entry point. CLI binaries come from mise, and base
 # packages plus pinned runtimes come from Nix.
 
@@ -27,6 +28,7 @@ cask "karabiner-elements"
 cask "keyboard-maestro"
 cask "linear"
 cask "mimestream"
+cask "obsidian"
 cask "civitaspo/dotfiles/openin4"
 cask "qmk-toolbox"
 cask "raycast"
