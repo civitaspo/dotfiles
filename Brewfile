@@ -8,8 +8,8 @@
 # packages plus pinned runtimes come from Nix.
 
 # --- Taps -------------------------------------------------------------------
-tap "civitaspo/dotfiles", __dir__
-tap "nikitabobko/tap"
+tap "civitaspo/dotfiles", trusted: true
+tap "nikitabobko/tap", trusted: { casks: ["aerospace"] }
 
 # --- Casks: applications ----------------------------------------------------
 cask "1password"
