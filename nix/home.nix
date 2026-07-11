@@ -6,7 +6,8 @@
 # Private dotfiles come from the dotfiles-private flake input. Directory
 # sources are linked recursively so a tool can still write runtime state
 # next to its managed files (e.g. ~/.config/nvim, ~/.claude).
-# ~/.cursor/skills is linked from private; the rest of ~/.cursor is local.
+# ~/.cursor/skills is a single directory symlink from private; the rest of
+# ~/.cursor stays local.
 { lib, inputs, ... }:
 
 let
@@ -41,8 +42,9 @@ in
         ".snowsql" = { source = "${private}/.snowsql"; recursive = true; };
         ".claude" = { source = "${private}/.claude"; recursive = true; };
         ".codex" = { source = "${private}/.codex"; recursive = true; };
-        # Only skills — ~/.cursor holds runtime state (extensions, logs, etc.).
-        ".cursor/skills" = { source = "${private}/.cursor/skills"; recursive = true; };
+        # Single directory symlink — recursive per-file links race on mkdir
+        # for this large CoCo skills tree (~2500 files).
+        ".cursor/skills".source = "${private}/.cursor/skills";
         ".ssh/config.d" = { source = "${private}/.ssh/config.d"; recursive = true; };
       };
   };
