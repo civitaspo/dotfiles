@@ -40,6 +40,9 @@ in
         ".snowsql" = { source = "${private}/.snowsql"; recursive = true; };
         ".claude" = { source = "${private}/.claude"; recursive = true; };
         ".codex" = { source = "${private}/.codex"; recursive = true; };
+        # Personal Cursor agent skills (SKILL.md trees). Only the skills
+        # directory is linked so the rest of ~/.cursor stays local state.
+        ".cursor/skills" = { source = "${private}/.cursor/skills"; recursive = true; };
         ".ssh/config.d" = { source = "${private}/.ssh/config.d"; recursive = true; };
       };
   };

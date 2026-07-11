@@ -16,7 +16,8 @@ Each tool owns one clear responsibility:
 
 Dotfiles are plain files: `config/` is placed into `~/.config` and `home/`
 into `$HOME` by home-manager. Private configuration (work accounts, internal
-hosts, agent settings) lives in the separate private repository
+hosts, agent settings, personal Cursor skills under `~/.cursor/skills/`)
+lives in the separate private repository
 [civitaspo/dotfiles-private](https://github.com/civitaspo/dotfiles-private),
 consumed as a flake input.
 
