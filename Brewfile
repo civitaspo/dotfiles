@@ -8,7 +8,10 @@
 # packages plus pinned runtimes come from Nix.
 
 # --- Taps -------------------------------------------------------------------
-tap "civitaspo/dotfiles", trusted: true
+# Clone from this checkout so Brewfile and Casks/ stay in sync. Without
+# __dir__, Homebrew defaults to github.com/civitaspo/homebrew-dotfiles
+# (which does not exist) and the installed tap clone goes stale.
+tap "civitaspo/dotfiles", __dir__, trusted: true
 tap "nikitabobko/tap", trusted: { casks: ["aerospace"] }
 
 # --- Casks: applications ----------------------------------------------------
