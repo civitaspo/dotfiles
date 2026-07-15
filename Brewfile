@@ -8,12 +8,9 @@
 # packages plus pinned runtimes come from Nix.
 
 # --- Taps -------------------------------------------------------------------
-# Clone from this checkout so Brewfile and Casks/ stay in sync. Without
-# __dir__, Homebrew defaults to github.com/civitaspo/homebrew-dotfiles
-# (which does not exist) and the installed tap clone goes stale.
-# `scripts/brew-bundle` retargets/syncs that tap before brew bundle runs.
-# `task import:brew` rewrites dump's absolute path back to __dir__.
-tap "civitaspo/dotfiles", __dir__, trusted: true
+# Explicit URL is required: without it Homebrew looks for
+# github.com/civitaspo/homebrew-dotfiles, which does not exist.
+tap "civitaspo/dotfiles", "https://github.com/civitaspo/dotfiles", trusted: true
 tap "nikitabobko/tap", trusted: { casks: ["aerospace"] }
 
 # --- Casks: applications ----------------------------------------------------

@@ -63,6 +63,6 @@ export PATH="/run/current-system/sw/bin:$PATH"
 log "Installing mise-managed tools..."
 mise install
 log "Installing Homebrew packages..."
-"$REPO_ROOT/scripts/brew-bundle"
+PATH="/opt/homebrew/bin:$PATH" brew bundle --file ./Brewfile --force-cleanup
 
 log "Done. Open a new terminal to load the new shell environment."
