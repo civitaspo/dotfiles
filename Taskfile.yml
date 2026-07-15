@@ -29,7 +29,7 @@ tasks:
   brew:
     desc: Apply the Brewfile (install, upgrade, and remove unlisted packages).
     cmds:
-      - ./scripts/brew-bundle
+      - /opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup
 
   mise:
     desc: Install tool versions with mise.
@@ -75,13 +75,14 @@ tasks:
     cmds:
       - /opt/homebrew/bin/brew update
       - /opt/homebrew/bin/brew upgrade
-      - ./scripts/brew-bundle
+      - /opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup
       - /opt/homebrew/bin/brew cleanup
 
   import:brew:
     desc: Capture the live Homebrew state back into the Brewfile.
     cmds:
-      - ./scripts/import-brew
+      # --no-vscode keeps VS Code / Cursor extension entries out of the file.
+      - /opt/homebrew/bin/brew bundle dump --force --no-vscode --file ./Brewfile
 
   check:
     desc: Validate the configuration.
@@ -105,8 +106,8 @@ tasks:
   check:shell:
     desc: Lint and format-check shell scripts.
     cmds:
-      - shellcheck init.sh scripts/* home/bin/* home/.docker/cli-plugins/*
-      - shfmt -d -i 2 -ci init.sh scripts/* home/bin/* home/.docker/cli-plugins/*
+      - shellcheck init.sh home/bin/* home/.docker/cli-plugins/*
+      - shfmt -d -i 2 -ci init.sh home/bin/* home/.docker/cli-plugins/*
 
   check:typos:
     desc: Check spelling in source files.
