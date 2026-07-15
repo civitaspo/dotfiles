@@ -8,9 +8,8 @@
 # packages plus pinned runtimes come from Nix.
 
 # --- Taps -------------------------------------------------------------------
-# Explicit URL is required: without it Homebrew looks for
-# github.com/civitaspo/homebrew-dotfiles, which does not exist.
-tap "civitaspo/dotfiles", "https://github.com/civitaspo/dotfiles", trusted: true
+# Clone from this checkout so Brewfile and Casks/ stay in sync.
+tap "civitaspo/dotfiles", __dir__, trusted: true
 tap "nikitabobko/tap", trusted: { casks: ["aerospace"] }
 
 # --- Casks: applications ----------------------------------------------------
