@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Capture the live Homebrew state into Brewfile, preserving the local tap.
+#
+# `brew bundle dump` rewrites custom tap remotes as absolute paths. This
+# checkout is the civitaspo/dotfiles tap source, so keep `__dir__` instead.
+set -euo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+BREWFILE="$REPO_ROOT/Brewfile"
+TMP="$(mktemp)"
+trap 'rm -f "$TMP"' EXIT
+
+PATH="/opt/homebrew/bin:$PATH" brew bundle dump --force --no-vscode --file "$BREWFILE"
+
+while IFS= read -r line || [ -n "$line" ]; do
+  if [[ "$line" == 'tap "civitaspo/dotfiles"'* ]]; then
+    printf '%s\n' 'tap "civitaspo/dotfiles", __dir__, trusted: true'
+  else
+    printf '%s\n' "$line"
+  fi
+done <"$BREWFILE" >"$TMP"
+mv "$TMP" "$BREWFILE"
+trap - EXIT
