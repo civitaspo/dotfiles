@@ -9,6 +9,7 @@
 
 # --- Taps -------------------------------------------------------------------
 # Clone from this checkout so Brewfile and Casks/ stay in sync.
+# After adding or changing Casks/, run `task brew:tap` then `task brew`.
 tap "civitaspo/dotfiles", __dir__, trusted: true
 tap "nikitabobko/tap", trusted: { casks: ["aerospace"] }
 
