@@ -31,6 +31,11 @@ tasks:
     cmds:
       - /opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup
 
+  brew:tap:
+    desc: Retarget civitaspo/dotfiles at this checkout and sync Casks/.
+    cmds:
+      - ./scripts/reset-dotfiles-tap
+
   mise:
     desc: Install tool versions with mise.
     cmds:
@@ -106,8 +111,8 @@ tasks:
   check:shell:
     desc: Lint and format-check shell scripts.
     cmds:
-      - shellcheck init.sh home/bin/* home/.docker/cli-plugins/*
-      - shfmt -d -i 2 -ci init.sh home/bin/* home/.docker/cli-plugins/*
+      - shellcheck init.sh scripts/* home/bin/* home/.docker/cli-plugins/*
+      - shfmt -d -i 2 -ci init.sh scripts/* home/bin/* home/.docker/cli-plugins/*
 
   check:typos:
     desc: Check spelling in source files.
