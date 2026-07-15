@@ -29,7 +29,7 @@ tasks:
   brew:
     desc: Apply the Brewfile (install, upgrade, and remove unlisted packages).
     cmds:
-      - /opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup
+      - ./scripts/brew-bundle
 
   mise:
     desc: Install tool versions with mise.
@@ -75,7 +75,7 @@ tasks:
     cmds:
       - /opt/homebrew/bin/brew update
       - /opt/homebrew/bin/brew upgrade
-      - /opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup
+      - ./scripts/brew-bundle
       - /opt/homebrew/bin/brew cleanup
 
   import:brew:
