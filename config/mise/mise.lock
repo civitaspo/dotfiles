@@ -351,6 +351,15 @@ url = "https://github.com/k1LoW/mo/releases/download/v1.5.5/mo_v1.5.5_darwin_arm
 url_api = "https://api.github.com/repos/k1LoW/mo/releases/assets/418525567"
 provenance = "github-attestations"
 
+[[tools."github:tomasz-tomczyk/crit"]]
+version = "0.18.0"
+backend = "github:tomasz-tomczyk/crit"
+
+[tools."github:tomasz-tomczyk/crit"."platforms.macos-arm64"]
+checksum = "sha256:b21bfb5a4ea840d2119bd1e2ccf32d83839816df164ee215cfeebf9557db7814"
+url = "https://github.com/tomasz-tomczyk/crit/releases/download/v0.18.0/crit-darwin-arm64"
+url_api = "https://api.github.com/repos/tomasz-tomczyk/crit/releases/assets/472507595"
+
 [[tools."http:antigravity-cli"]]
 version = "1.0.3"
 backend = "http:antigravity-cli"
