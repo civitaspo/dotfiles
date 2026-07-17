@@ -2,7 +2,8 @@
 # Retarget the civitaspo/dotfiles Homebrew tap at this checkout and sync it.
 #
 # brew bundle skips already-installed taps, so a stale clone can miss new
-# files under Casks/. Run via `task brew:tap` when that happens.
+# files under Casks/. Homebrew 6 also keys tap trust to the custom remote
+# path from Brewfile `__dir__`, so keep origin equal to this checkout.
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -10,26 +11,15 @@ TAP="civitaspo/dotfiles"
 BREW="/opt/homebrew/bin/brew"
 export PATH="/opt/homebrew/bin:$PATH"
 
+# Match Brewfile `__dir__` (logical path, not realpath) so trusted: true applies.
 repo_root="$REPO_ROOT"
-if command -v realpath >/dev/null 2>&1; then
-  repo_root="$(realpath "$REPO_ROOT")"
-fi
-
-normalize_path() {
-  local path="$1"
-  if [ -d "$path" ] && command -v realpath >/dev/null 2>&1; then
-    realpath "$path"
-  else
-    printf '%s\n' "${path%/}"
-  fi
-}
 
 if ! "$BREW" tap | grep -qx "$TAP"; then
   "$BREW" tap --custom-remote "$TAP" "$repo_root"
 else
   tap_path="$("$BREW" --repo "$TAP")"
   remote="$(git -C "$tap_path" remote get-url origin 2>/dev/null || true)"
-  if [ "$(normalize_path "$remote")" != "$(normalize_path "$repo_root")" ]; then
+  if [ "${remote%/}" != "${repo_root%/}" ]; then
     "$BREW" tap --custom-remote "$TAP" "$repo_root"
   fi
 fi
@@ -38,3 +28,6 @@ tap_path="$("$BREW" --repo "$TAP")"
 head_sha="$(git -C "$repo_root" rev-parse HEAD)"
 git -C "$tap_path" fetch --quiet origin
 git -C "$tap_path" reset --hard --quiet "$head_sha"
+
+# Name-based trust does not match a custom-remote tap; trust the path remote.
+"$BREW" trust "$(git -C "$tap_path" remote get-url origin)"
