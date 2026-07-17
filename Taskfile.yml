@@ -29,6 +29,7 @@ tasks:
   brew:
     desc: Apply the Brewfile (install, upgrade, and remove unlisted packages).
     cmds:
+      - task: brew:tap
       - /opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup
 
   brew:tap:
@@ -80,6 +81,7 @@ tasks:
     cmds:
       - /opt/homebrew/bin/brew update
       - /opt/homebrew/bin/brew upgrade
+      - task: brew:tap
       - /opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup
       - /opt/homebrew/bin/brew cleanup
 

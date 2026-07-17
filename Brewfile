@@ -9,7 +9,8 @@
 
 # --- Taps -------------------------------------------------------------------
 # Clone from this checkout so Brewfile and Casks/ stay in sync.
-# After adding or changing Casks/, run `task brew:tap` then `task brew`.
+# `task brew` / `task update:brew` run `task brew:tap` first so the installed
+# tap remote matches `__dir__` (required for Homebrew 6 trust).
 tap "civitaspo/dotfiles", __dir__, trusted: true
 tap "nikitabobko/tap", trusted: { casks: ["aerospace"] }
 
