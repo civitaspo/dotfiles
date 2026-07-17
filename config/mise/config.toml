@@ -79,6 +79,8 @@ gcloud = "latest"
 # --- AI agent CLIs ----------------------------------------------------------
 claude-code = "latest"
 codex = "latest"
+# Inline review UI for agent plans/diffs (https://crit.md/).
+"github:tomasz-tomczyk/crit" = "latest"
 
 [tools."http:antigravity-cli"]
 version = "1.0.3"
