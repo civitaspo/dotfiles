@@ -49,14 +49,18 @@ if [ ! -d "$PRIVATE_DIR/.git" ]; then
 fi
 
 # --- nix-darwin + home-manager (also links every dotfile) -------------------
+# Build as the current user so git+ssh flake inputs (dotfiles-private) can use
+# the user SSH agent; activation alone needs root.
+# See: https://github.com/nix-darwin/nix-darwin/issues/1471
 if [ -e /run/current-system/sw/bin/darwin-rebuild ]; then
-  darwin-rebuild switch --flake ".#aarch64-darwin"
+  darwin-rebuild build --flake ".#aarch64-darwin"
 else
   log "Activating nix-darwin for the first time..."
   nix build ".#darwinConfigurations.aarch64-darwin.system"
-  ./result/sw/bin/darwin-rebuild switch --flake ".#aarch64-darwin"
-  rm -f ./result
 fi
+sudo nix-env -p /nix/var/nix/profiles/system --set ./result
+sudo ./result/activate
+rm -f ./result
 export PATH="/run/current-system/sw/bin:$PATH"
 
 # --- mise tools and Homebrew packages ---------------------------------------

@@ -23,8 +23,14 @@ tasks:
 
   switch:
     desc: Activate nix-darwin and home-manager (this also links dotfiles).
+    # Build as the invoking user so git+ssh flake inputs (dotfiles-private)
+    # can use the user SSH agent; sudo alone has no access to it. Then set
+    # the system profile and activate as root.
+    # See: https://github.com/nix-darwin/nix-darwin/issues/1471
     cmds:
-      - sudo darwin-rebuild switch --flake ".#aarch64-darwin"
+      - darwin-rebuild build --flake ".#aarch64-darwin"
+      - sudo nix-env -p /nix/var/nix/profiles/system --set ./result
+      - sudo ./result/activate
 
   brew:
     desc: Apply the Brewfile (install, upgrade, and remove unlisted packages).
@@ -53,7 +59,7 @@ tasks:
     desc: Update flake inputs and re-activate nix-darwin.
     cmds:
       - nix flake update
-      - sudo darwin-rebuild switch --flake ".#aarch64-darwin"
+      - task: switch
 
   update:mise:
     desc: Upgrade mise-managed tools and drop unused versions.
