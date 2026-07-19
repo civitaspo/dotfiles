@@ -42,23 +42,20 @@ tasks:
     desc: Retarget civitaspo/dotfiles at this checkout and sync Casks/.
     # Always recreate: brew bundle skips already-installed taps, so a stale or
     # corrupt clone can miss Casks/ and break Homebrew 6 path-based trust.
+    env:
+      PATH:
+        sh: echo "/opt/homebrew/bin:$PATH"
+    vars:
+      TAP: civitaspo/dotfiles
+      TAP_PATH:
+        sh: /opt/homebrew/bin/brew --repo {{.TAP}}
     cmds:
-      - |
-        set -euo pipefail
-        export PATH="/opt/homebrew/bin:$PATH"
-        brew=/opt/homebrew/bin/brew
-        tap=civitaspo/dotfiles
-        repo='{{.TASKFILE_DIR}}'
-        if "$brew" tap | grep -qx "$tap"; then
-          "$brew" untap --force "$tap" || true
-        fi
-        # untap can leave a broken checkout behind when .git itself is invalid.
-        tap_path="$("$brew" --repo "$tap" 2>/dev/null || true)"
-        if [ -n "$tap_path" ] && [ -e "$tap_path" ]; then
-          rm -rf "$tap_path"
-        fi
-        "$brew" tap --custom-remote "$tap" "$repo"
-        "$brew" trust "$repo"
+      - cmd: brew untap --force {{.TAP}}
+        ignore_error: true
+      - cmd: rm -rf '{{.TAP_PATH}}'
+        if: test -e '{{.TAP_PATH}}'
+      - brew tap --custom-remote {{.TAP}} {{.TASKFILE_DIR}}
+      - brew trust {{.TASKFILE_DIR}}
 
   mise:
     desc: Install tool versions with mise.
