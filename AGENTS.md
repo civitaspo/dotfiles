@@ -22,7 +22,8 @@ Dotfiles are plain files under `config/` (-> `~/.config`) and `home/`
 - Use semantic commit messages (`feat(scope): ...`, `fix(scope): ...`).
 - After editing any `*.nix` file, run `task check` (`nix flake check`).
 - Prefer mise for binaries; do not add packages to Nix or commit binaries.
-- `Taskfile.yml` only orchestrates -- it must not contain shell logic.
+- Prefer keeping `Taskfile.yml` as orchestration; small inline shell is fine
+  when a dedicated script would be overkill (e.g. `brew:tap`).
 
 ## Git workflow
 
