@@ -33,7 +33,7 @@ aqua = "latest"
 "aqua:sharkdp/bat" = "latest"
 "aqua:sharkdp/fd" = "latest"
 # btop does not publish macOS release assets; bottom provides a portable TUI monitor.
-"aqua:ClementTsang/bottom" = "0.12.3"
+"aqua:ClementTsang/bottom" = "0.14.6"
 "aqua:dandavison/delta" = "latest"
 eza = "latest"
 "aqua:cli/cli" = "latest"
