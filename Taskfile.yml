@@ -42,9 +42,6 @@ tasks:
     desc: Retarget civitaspo/dotfiles at this checkout and sync Casks/.
     # Always recreate: brew bundle skips already-installed taps, so a stale or
     # corrupt clone can miss Casks/ and break Homebrew 6 path-based trust.
-    env:
-      PATH:
-        sh: echo "/opt/homebrew/bin:$PATH"
     vars:
       TAP: civitaspo/dotfiles
       TAP_PATH:
@@ -54,8 +51,8 @@ tasks:
         ignore_error: true
       - cmd: rm -rf '{{.TAP_PATH}}'
         if: test -e '{{.TAP_PATH}}'
-      - brew tap --custom-remote {{.TAP}} {{.TASKFILE_DIR}}
-      - brew trust {{.TASKFILE_DIR}}
+      - /opt/homebrew/bin/brew tap --custom-remote {{.TAP}} {{.TASKFILE_DIR}}
+      - /opt/homebrew/bin/brew trust {{.TASKFILE_DIR}}
 
   mise:
     desc: Install tool versions with mise.
