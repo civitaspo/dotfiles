@@ -20,7 +20,10 @@ deno = "latest"
 java = "temurin-21"
 
 # --- CLI tools (formerly aqua) ----------------------------------------------
-1password-cli = "latest"
+# Pin aqua:1password/cli: the aqua HTTP package cannot resolve "latest", and the
+# vfox short name fails under Renovate's MISE_SAFE=1 lock --bump. Version bumps
+# come from renovate.json's custom manager + Homebrew cask API.
+"aqua:1password/cli" = "2.38.1"
 aqua = "latest"
 "aqua:marp-team/marp-cli" = "latest"
 # pnpm via npm (aqua-registry's pnpm asset name does not match upstream on macOS).
@@ -35,7 +38,9 @@ aqua = "latest"
 # btop does not publish macOS release assets; bottom provides a portable TUI monitor.
 "aqua:ClementTsang/bottom" = "0.14.7"
 "aqua:dandavison/delta" = "latest"
-eza = "latest"
+# cargo backend: eza has no macOS GitHub release assets, and the asdf/vfox short
+# name cannot list versions under Renovate's MISE_SAFE=1 lock --bump.
+"cargo:eza" = "latest"
 "aqua:cli/cli" = "latest"
 "aqua:x-motemen/ghq" = "latest"
 "aqua:jqlang/jq" = "latest"

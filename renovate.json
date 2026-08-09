@@ -12,6 +12,8 @@
     "vulnerabilityFixStrategy": "highest"
   },
   "branchPrefix": "renovate/",
+  "platformAutomerge": false,
+  "automergeStrategy": "squash",
   "nix": {
     "enabled": true
   },
@@ -23,7 +25,46 @@
     "automerge": true,
     "schedule": ["before 6am every weekday"]
   },
+  "customDatasources": {
+    "1password-cli": {
+      "defaultRegistryUrlTemplate": "https://formulae.brew.sh/api/cask/1password-cli.json",
+      "transformTemplates": [
+        "{\"releases\":[{\"version\": version}]}"
+      ]
+    }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Bump pinned aqua:1password/cli in mise config and lock (aqua HTTP packages have no version list).",
+      "managerFilePatterns": [
+        "/(^|/)config/mise/config\\.toml$/",
+        "/(^|/)config/mise/mise\\.lock$/"
+      ],
+      "matchStrings": [
+        "\"aqua:1password/cli\"\\s*=\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\"",
+        "\\[\\[tools\\.\"aqua:1password/cli\"\\]\\]\\nversion = \"(?<currentValue>\\d+\\.\\d+\\.\\d+)\"",
+        "pkg/v(?<currentValue>\\d+\\.\\d+\\.\\d+)/op_darwin_arm64_v\\d+\\.\\d+\\.\\d+\\.zip",
+        "op_darwin_arm64_v(?<currentValue>\\d+\\.\\d+\\.\\d+)\\.zip"
+      ],
+      "depNameTemplate": "1password-cli",
+      "datasourceTemplate": "custom.1password-cli",
+      "versioningTemplate": "semver"
+    }
+  ],
   "packageRules": [
+    {
+      "description": "Private flake input; Renovate cannot look up SSH git refs.",
+      "matchManagers": ["nix"],
+      "matchDepNames": ["dotfiles-private"],
+      "enabled": false
+    },
+    {
+      "description": "1password-cli is updated by the custom manager; mise cannot resolve aqua HTTP versions.",
+      "matchManagers": ["mise"],
+      "matchDepNames": ["aqua:1password/cli"],
+      "enabled": false
+    },
     {
       "description": "Group GitHub Actions updates together.",
       "matchManagers": ["github-actions"],
@@ -32,7 +73,7 @@
     {
       "description": "Automerge securefix-server reusable workflow pin bumps",
       "matchManagers": ["github-actions"],
-      "matchPackagePatterns": ["^civitaspo/securefix-server"],
+      "matchPackageNames": ["civitaspo/securefix-server/**"],
       "automerge": true
     },
     {
@@ -53,7 +94,7 @@
     },
     {
       "description": "Group mise tool updates together.",
-      "matchManagers": ["mise"],
+      "matchManagers": ["mise", "custom.regex"],
       "groupName": "mise tools"
     }
   ]

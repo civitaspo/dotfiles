@@ -53,9 +53,16 @@ requests for GitHub Actions, Nix flake inputs and mise-managed tools.
 
 Trusted PRs (Renovate, Dependabot, and `civitaspo`) request approval through
 [`civitaspo/securefix-server`](https://github.com/civitaspo/securefix-server)
-via `.github/workflows/approve-request.yml`. Non-major Renovate updates enable
-GitHub auto-merge after that approval.
+via `.github/workflows/approve-request.yml`. Non-major Renovate updates
+automerge with squash via Renovate itself (`platformAutomerge: false`), so they
+do not depend on GitHub's native auto-merge API.
 
-Repository access for Renovate is scoped by the Renovate GitHub App
-installation. Approve requests need the repository secret
-`SECUREFIX_CLIENT_PRIVATE_KEY` only.
+To gate merges on the Securefix bot approval, activate the repository `main`
+ruleset with `required_approving_review_count: 1`. After that, you can optionally
+set `platformAutomerge: true` in `renovate.json` so GitHub merges as soon as the
+bot approves.
+
+The private flake input `dotfiles-private` is ignored by Renovate (SSH lookup
+is impossible from the Mend app). Repository access for Renovate is scoped by
+the Renovate GitHub App installation. Approve requests need the repository
+secret `SECUREFIX_CLIENT_PRIVATE_KEY` only.
