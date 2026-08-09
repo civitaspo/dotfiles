@@ -51,5 +51,11 @@ To change a configuration file, edit it under `config/` or `home/` and run
 The Renovate GitHub App runs daily on weekdays to open dependency update pull
 requests for GitHub Actions, Nix flake inputs and mise-managed tools.
 
-No repository token or Actions secret is required. Repository access is scoped
-by the Renovate GitHub App installation.
+Trusted PRs (Renovate, Dependabot, and `civitaspo`) request approval through
+[`civitaspo/securefix-server`](https://github.com/civitaspo/securefix-server)
+via `.github/workflows/approve-request.yml`. Non-major Renovate updates enable
+GitHub auto-merge after that approval.
+
+Repository access for Renovate is scoped by the Renovate GitHub App
+installation. Approve requests need the repository secret
+`SECUREFIX_CLIENT_PRIVATE_KEY` only.
