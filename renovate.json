@@ -20,6 +20,7 @@
   },
   "lockFileMaintenance": {
     "enabled": true,
+    "automerge": true,
     "schedule": ["before 6am every weekday"]
   },
   "packageRules": [
@@ -27,6 +28,23 @@
       "description": "Group GitHub Actions updates together.",
       "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions"
+    },
+    {
+      "description": "Automerge securefix-server reusable workflow pin bumps",
+      "matchManagers": ["github-actions"],
+      "matchPackagePatterns": ["^civitaspo/securefix-server"],
+      "automerge": true
+    },
+    {
+      "description": "Automerge non-major updates (minor, patch, pin, digest)",
+      "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest"],
+      "automerge": true
+    },
+    {
+      "description": "Do not automerge major updates",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["dependencies", "major"]
     },
     {
       "description": "Group Nix flake input updates together.",
