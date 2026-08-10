@@ -12,7 +12,7 @@
     "vulnerabilityFixStrategy": "highest"
   },
   "branchPrefix": "renovate/",
-  "platformAutomerge": false,
+  "platformAutomerge": true,
   "automergeStrategy": "squash",
   "nix": {
     "enabled": true
