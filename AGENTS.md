@@ -43,5 +43,4 @@ Dotfiles are plain files under `config/` (-> `~/.config`) and `home/`
 This is a **public** repository. Never commit anything tied to an employer or
 other private context. Such configuration belongs in the private repository
 `civitaspo/dotfiles-private`, which supplies `~/.aws/config`,
-`~/.ssh/config.d/`, `~/.snowsql/config`, `~/.claude/`, `~/.codex/`, and
-`~/.agents/skills/`.
+`~/.ssh/config.d/`, `~/.snowsql/config`, and `~/.agents/skills/`.
