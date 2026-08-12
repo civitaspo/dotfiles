@@ -1,0 +1,40 @@
+# Minimal CI gate for the default-branch ruleset required context `status-check`.
+# Matches the SecureFix client pattern: status-check fails only when a needed job
+# fails/cancels; on green it is skipped and the ruleset still allows merge.
+
+name: CI
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions: {}
+
+defaults:
+  run:
+    shell: bash -euo pipefail {0}
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ok:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - run: exit 0
+
+  status-check:
+    runs-on: ubuntu-latest
+    if: always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled'))
+    timeout-minutes: 5
+    permissions: {}
+    needs:
+      - ok
+    steps:
+      - run: exit 1
