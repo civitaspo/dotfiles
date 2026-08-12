@@ -5,7 +5,7 @@
 #   home/    -> $HOME
 # Private dotfiles come from the dotfiles-private flake input. Directory
 # sources are linked recursively so a tool can still write runtime state
-# next to its managed files (e.g. ~/.config/nvim, ~/.claude).
+# next to its managed files (e.g. ~/.config/nvim).
 # ~/.agents/skills is a single directory symlink from private so Cursor and
 # Codex share the same Agent Skills tree.
 { lib, inputs, ... }:
@@ -40,8 +40,6 @@ in
         # Private dotfiles.
         ".aws" = { source = "${private}/.aws"; recursive = true; };
         ".snowsql" = { source = "${private}/.snowsql"; recursive = true; };
-        ".claude" = { source = "${private}/.claude"; recursive = true; };
-        ".codex" = { source = "${private}/.codex"; recursive = true; };
         # Single directory symlink — recursive per-file links race on mkdir
         # for this large CoCo skills tree (~2500 files).
         ".agents/skills".source = "${private}/.agents/skills";
