@@ -83,6 +83,9 @@ gcloud = "latest"
 
 # --- AI agent CLIs ----------------------------------------------------------
 claude-code = "latest"
+# Resolves to aqua:openai/codex (package tar.gz since rust-v0.133.0). Requires a
+# recent mise so the baked aqua registry matches mise.lock; `task mise` runs
+# `mise self-update` first for that reason.
 codex = "latest"
 # Inline review UI for agent plans/diffs (https://crit.md/).
 "github:tomasz-tomczyk/crit" = "latest"
