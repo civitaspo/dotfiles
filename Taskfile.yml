@@ -57,6 +57,11 @@ tasks:
   mise:
     desc: Install tool versions with mise.
     cmds:
+      # Keep mise itself current before locked installs. Renovate refreshes
+      # mise.lock with the latest aqua-registry asset layouts (e.g. openai/codex
+      # package tar.gz); an older mise still extracts those as the previous
+      # format (zst) and fails with "failed to un-zst … Unknown frame descriptor".
+      - mise self-update -y
       - mise install
 
   update:
@@ -80,6 +85,7 @@ tasks:
       MISE_GLOBAL_CONFIG_ROOT: '{{.TASKFILE_DIR}}/config/mise'
       MISE_LOCKED: 'false'
     cmds:
+      - mise self-update -y
       - mise upgrade
       - mise prune
 
