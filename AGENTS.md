@@ -44,4 +44,4 @@ This is a **public** repository. Never commit anything tied to an employer or
 other private context. Such configuration belongs in the private repository
 `civitaspo/dotfiles-private`, which supplies `~/.aws/config`,
 `~/.ssh/config.d/`, `~/.snowsql/config`, `~/.claude/`, `~/.codex/`, and
-`~/.cursor/skills/`.
+`~/.agents/skills/`.
