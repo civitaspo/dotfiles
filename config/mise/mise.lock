@@ -27,13 +27,13 @@ url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15
 url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478118851"
 
 [[tools."aqua:ClementTsang/bottom"]]
-version = "0.14.7"
+version = "0.14.8"
 backend = "aqua:ClementTsang/bottom"
 
 [tools."aqua:ClementTsang/bottom"."platforms.macos-arm64"]
-checksum = "sha256:aaf5c61c0c29b35a205fe1cff590d900716ea61e7d7c5efc8a3ebfbf624a81a2"
-url = "https://github.com/ClementTsang/bottom/releases/download/0.14.7/bottom_aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/ClementTsang/bottom/releases/assets/491705631"
+checksum = "sha256:60138a19944eeb8cb177fea4f4d6d042d3971828de0418b034618d6837d62c1a"
+url = "https://github.com/ClementTsang/bottom/releases/download/0.14.8/bottom_aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/ClementTsang/bottom/releases/assets/513310009"
 provenance = "github-attestations"
 
 [[tools."aqua:abiosoft/colima"]]
