@@ -39,7 +39,6 @@ cask "raycast"
 cask "civitaspo/dotfiles/reflect-open"
 cask "spotify"
 cask "tabtab"
-cask "zed"
 
 # --- Casks: fonts -----------------------------------------------------------
 cask "font-monaspice-nerd-font"
