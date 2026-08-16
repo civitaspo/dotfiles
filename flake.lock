@@ -24,10 +24,10 @@
     "dotfiles-private": {
       "flake": false,
       "locked": {
-        "lastModified": 1786855073,
+        "lastModified": 1786855160,
         "narHash": "sha256-/8aTHzZ4Btmo2uD5q9L5nceL9Qr+WLQr2ORAssX/mbQ=",
         "ref": "refs/heads/main",
-        "rev": "784fd632a2d5d39904247e7dae538936fc2b90e0",
+        "rev": "a3a01b89081fe7944dc9f07a29f9c8427c7afd52",
         "revCount": 20,
         "type": "git",
         "url": "ssh://git@github.com/civitaspo/dotfiles-private"
