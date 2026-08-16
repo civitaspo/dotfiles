@@ -23,7 +23,7 @@ java = "temurin-21"
 # Pin aqua:1password/cli: the aqua HTTP package cannot resolve "latest", and the
 # vfox short name fails under Renovate's MISE_SAFE=1 lock --bump. Version bumps
 # come from renovate.json's custom manager + Homebrew cask API.
-"aqua:1password/cli" = "2.38.1"
+"aqua:1password/cli" = "2.39.0"
 aqua = "latest"
 "aqua:marp-team/marp-cli" = "latest"
 # pnpm via npm (aqua-registry's pnpm asset name does not match upstream on macOS).
