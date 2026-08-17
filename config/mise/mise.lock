@@ -15,7 +15,7 @@ version = "2.39.0"
 backend = "aqua:1password/cli"
 
 [tools."aqua:1password/cli"."platforms.macos-arm64"]
-url = "https://cache.agilebits.com/dist/1P/op2/pkg/v2.38.1/op_darwin_arm64_v2.39.0.zip"
+url = "https://cache.agilebits.com/dist/1P/op2/pkg/v2.39.0/op_darwin_arm64_v2.39.0.zip"
 
 [[tools."aqua:BurntSushi/ripgrep"]]
 version = "15.2.0"
@@ -55,23 +55,23 @@ url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.10.0/zoxide-0.
 url_api = "https://api.github.com/repos/ajeetdsouza/zoxide/releases/assets/466316174"
 
 [[tools."aqua:astral-sh/ruff"]]
-version = "0.16.2"
+version = "0.16.3"
 backend = "aqua:astral-sh/ruff"
 
 [tools."aqua:astral-sh/ruff"."platforms.macos-arm64"]
-checksum = "sha256:fbf6cbc23d254b0bc03a6fb2b1b04efb917fe5ce068d027e735ce7ed65b9bed6"
-url = "https://github.com/astral-sh/ruff/releases/download/0.16.2/ruff-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/ruff/releases/assets/505191610"
+checksum = "sha256:136a4db6512d9b16dda56ac8604696ed65c3b1a914a142de029e7f8d5006f1d9"
+url = "https://github.com/astral-sh/ruff/releases/download/0.16.3/ruff-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/ruff/releases/assets/513140218"
 provenance = "github-attestations"
 
 [[tools."aqua:astral-sh/uv"]]
-version = "0.12.3"
+version = "0.12.5"
 backend = "aqua:astral-sh/uv"
 
 [tools."aqua:astral-sh/uv"."platforms.macos-arm64"]
-checksum = "sha256:546f7f8a6c70ff13a3a9d2bc958db3427298cebf3e0cb756f9177133b7068843"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.3/uv-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/505387707"
+checksum = "sha256:5bb0e5fe008a773c3dbcb97ff79cd89e1241464fe9d2f986d52ad8f1b037bd62"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.5/uv-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/514850968"
 provenance = "github-attestations"
 
 [[tools."aqua:atuinsh/atuin"]]
@@ -85,11 +85,11 @@ url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/500652047"
 provenance = "github-attestations"
 
 [[tools."aqua:aws/aws-cli"]]
-version = "2.36.19"
+version = "2.36.24"
 backend = "aqua:aws/aws-cli"
 
 [tools."aqua:aws/aws-cli"."platforms.macos-arm64"]
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.36.19.pkg"
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.36.24.pkg"
 
 [[tools."aqua:aws/session-manager-plugin"]]
 version = "1.2.835.0"
@@ -208,13 +208,13 @@ url = "https://github.com/go-task/task/releases/download/v3.52.0/task_darwin_arm
 url_api = "https://api.github.com/repos/go-task/task/releases/assets/464613319"
 
 [[tools."aqua:jesseduffield/lazygit"]]
-version = "0.64.0"
+version = "0.64.1"
 backend = "aqua:jesseduffield/lazygit"
 
 [tools."aqua:jesseduffield/lazygit"."platforms.macos-arm64"]
-checksum = "sha256:df8d2dd27cdc1075785f1abb85b74fe393fcdc1f3fdf6cb2b587feb3ce72ba33"
-url = "https://github.com/jesseduffield/lazygit/releases/download/v0.64.0/lazygit_0.64.0_darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/jesseduffield/lazygit/releases/assets/501040495"
+checksum = "sha256:a106b4c1bf8ab7539c4afb40a01cbde263a96513cdcb8bf7630278f07e88cd99"
+url = "https://github.com/jesseduffield/lazygit/releases/download/v0.64.1/lazygit_0.64.1_darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/jesseduffield/lazygit/releases/assets/511894212"
 
 [[tools."aqua:jqlang/jq"]]
 version = "1.8.2"
@@ -345,11 +345,13 @@ version = "0.23.5"
 backend = "cargo:eza"
 
 [[tools.claude-code]]
-version = "2.1.226"
+version = "2.1.233"
 backend = "aqua:anthropics/claude-code"
 
 [tools.claude-code."platforms.macos-arm64"]
-url = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/2.1.226/darwin-arm64/claude"
+checksum = "sha256:5dce92ccd93173fead018f2a8262189da88c7d6fffbaa666b7a81a6b05f72afe"
+url = "https://github.com/anthropics/claude-code/releases/download/v2.1.233/claude-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/514776720"
 
 [[tools.codex]]
 version = "0.147.0"
@@ -369,11 +371,11 @@ checksum = "sha256:b796aadd131f6930560c1ee040cf0d6f53933fbb987464e9ff46bd7ea4830
 url = "https://dl.deno.land/release/v2.9.5/deno-aarch64-apple-darwin.zip"
 
 [[tools.gcloud]]
-version = "579.0.0"
+version = "580.0.0"
 backend = "vfox:mise-plugins/vfox-gcloud"
 
 [tools.gcloud."platforms.macos-arm64"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-579.0.0-darwin-arm.tar.gz"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-580.0.0-darwin-arm.tar.gz"
 
 [[tools."github:k1LoW/mo"]]
 version = "1.6.7"
@@ -422,7 +424,7 @@ checksum = "sha256:021d629349ebc12a409faa517b837ec80ceee8f58a5ac85c788ecad07ca68
 url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12%2B8/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.12_8.tar.gz"
 
 [[tools."npm:pnpm"]]
-version = "11.21.0"
+version = "11.22.0"
 backend = "npm:pnpm"
 
 [[tools.rust]]
