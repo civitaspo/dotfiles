@@ -15,7 +15,7 @@ version = "2.39.0"
 backend = "aqua:1password/cli"
 
 [tools."aqua:1password/cli"."platforms.macos-arm64"]
-url = "https://cache.agilebits.com/dist/1P/op2/pkg/v2.38.1/op_darwin_arm64_v2.39.0.zip"
+url = "https://cache.agilebits.com/dist/1P/op2/pkg/v2.39.0/op_darwin_arm64_v2.39.0.zip"
 
 [[tools."aqua:BurntSushi/ripgrep"]]
 version = "15.2.0"
