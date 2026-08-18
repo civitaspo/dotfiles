@@ -1,16 +1,16 @@
 # Homebrew bundle: GUI applications, local casks, and App Store apps.
 #
-# This file is the source of truth. Apply it with `task brew` (installs,
+# This file is the source of truth. Apply it with `mise run brew` (installs,
 # upgrades, and uninstalls packages not listed here) and capture drift with
-# `task import:brew` (VS Code extensions are intentionally excluded via
+# `mise run import:brew` (VS Code extensions are intentionally excluded via
 # --no-vscode). Homebrew is intentionally NOT on $PATH --
-# `task` is the only entry point. CLI binaries come from mise, and base
-# packages plus pinned runtimes come from Nix.
+# `mise run brew` is the only entry point. CLI binaries come from mise, and
+# base packages plus pinned runtimes come from Nix.
 
 # --- Taps -------------------------------------------------------------------
 # Clone from this checkout so Brewfile and Casks/ stay in sync.
-# `task brew` / `task update:brew` run `task brew:tap` first so the installed
-# tap remote matches `__dir__` (required for Homebrew 6 trust).
+# `mise run brew` / `mise run update:brew` run `mise run brew:tap` first so
+# the installed tap remote matches `__dir__` (required for Homebrew 6 trust).
 tap "civitaspo/dotfiles", __dir__, trusted: true
 tap "nikitabobko/tap", trusted: { casks: ["aerospace"] }
 

@@ -4,26 +4,26 @@ Guidance for AI coding agents working in this repository.
 
 ## What this repository is
 
-civitaspo's macOS configuration. Responsibilities are split across five tools:
+civitaspo's macOS configuration. Responsibilities are split across four tools:
 
 - **nix-darwin** (`nix/darwin.nix`) -- macOS system settings and base CLI packages.
 - **home-manager** (`nix/home.nix`) -- symlinks dotfiles into `$HOME`.
-- **Homebrew** (`Brewfile`) -- GUI apps and App Store apps. Not on `$PATH`; only `task brew` and friends invoke it (each scopes `/opt/homebrew/bin` onto PATH locally).
-- **mise** (`config/mise/config.toml`) -- CLI binaries and language runtimes.
-- **Task** (`Taskfile.yml`) -- setup, update and reconcile workflows.
+- **Homebrew** (`Brewfile`) -- GUI apps and App Store apps. Not on `$PATH`; only `mise run brew` and friends invoke it (via `/opt/homebrew/bin/brew`).
+- **mise** (`config/mise/config.toml`, `mise.toml`, `mise-tasks/`) -- CLI binaries, language runtimes, and repository task orchestration.
 
 Dotfiles are plain files under `config/` (-> `~/.config`) and `home/`
-(-> `$HOME`); home-manager symlinks them. `init.sh` bootstraps a fresh machine.
+(-> `$HOME`); home-manager symlinks them. `bootstrap.sh` installs a pinned
+mise; `mise run bootstrap` installs Nix and Homebrew.
 
 ## Conventions
 
 - Always end files with a trailing newline.
 - Code, comments, commit messages and pull requests are written in English.
 - Use semantic commit messages (`feat(scope): ...`, `fix(scope): ...`).
-- After editing any `*.nix` file, run `task check` (`nix flake check`).
+- After editing any `*.nix` file, run `mise run check` (`nix flake check`).
 - Prefer mise for binaries; do not add packages to Nix or commit binaries.
-- Prefer keeping `Taskfile.yml` as orchestration; small inline shell is fine
-  when a dedicated script would be overkill (e.g. `brew:tap`).
+- Keep `mise.toml` declarative; use a file task for defensive shell logic
+  (e.g. `brew:tap`).
 
 ## Git workflow
 

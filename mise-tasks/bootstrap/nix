@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+#MISE description="Install the pinned Determinate Nix package."
+set -euo pipefail
+
+NIX_VERSION="3.21.9"
+NIX_SHA256="8c74e21dafdcaa0376c4274d3a7c6738964e511fa98fbdd65134475d382c5268"
+NIX_TEAM_ID="X3JQ4VPJZ6"
+NIX_URL="https://install.determinate.systems/determinate-pkg/tag/v${NIX_VERSION}/Universal"
+NIX_BIN="/nix/var/nix/profiles/default/bin/nix"
+
+fail() {
+  printf '[bootstrap:nix] error: %s\n' "$*" >&2
+  exit 1
+}
+
+[[ "$(uname -s)" == "Darwin" ]] || fail "macOS is required"
+[[ "$(uname -m)" == "arm64" ]] || fail "Apple Silicon is required"
+
+if [[ -x "$NIX_BIN" ]]; then
+  printf '[bootstrap:nix] Nix already installed at %s; skipping.\n' "$NIX_BIN"
+  exit 0
+fi
+
+if [[ -e /nix ]]; then
+  fail "partial Nix installation found at /nix; inspect or remove it manually"
+fi
+
+tmp_dir="$(mktemp -d)"
+trap 'rm -rf "$tmp_dir"' EXIT
+pkg="$tmp_dir/Determinate.pkg"
+
+/usr/bin/curl --proto '=https' --tlsv1.2 \
+  --fail --show-error --silent --location \
+  "$NIX_URL" --output "$pkg"
+
+printf '%s  %s\n' "$NIX_SHA256" "$pkg" |
+  /usr/bin/shasum -a 256 -c -
+
+signature="$(/usr/sbin/pkgutil --check-signature "$pkg")" ||
+  fail "Determinate.pkg signature check failed"
+printf '%s\n' "$signature"
+[[ "$signature" == *"(${NIX_TEAM_ID})"* ]] ||
+  fail "Determinate.pkg is not signed by Team ID ${NIX_TEAM_ID}"
+
+/usr/sbin/spctl --assess --verbose=2 --type install "$pkg" ||
+  fail "Determinate.pkg failed Gatekeeper assessment"
+
+sudo /usr/sbin/installer -verboseR -pkg "$pkg" -target /
+
+[[ -x "$NIX_BIN" ]] || fail "Nix was not installed at ${NIX_BIN}"
+printf '[bootstrap:nix] installed Determinate Nix %s\n' "$NIX_VERSION"

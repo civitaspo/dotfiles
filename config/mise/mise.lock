@@ -198,15 +198,6 @@ url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.10/leftho
 url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/470227499"
 provenance = "github-attestations"
 
-[[tools."aqua:go-task/task"]]
-version = "3.52.0"
-backend = "aqua:go-task/task"
-
-[tools."aqua:go-task/task"."platforms.macos-arm64"]
-checksum = "sha256:debfa9a3bc06fcb5d5550b44725ecd22bb305499ce057bd6d7a774db5cdaa7b8"
-url = "https://github.com/go-task/task/releases/download/v3.52.0/task_darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/go-task/task/releases/assets/464613319"
-
 [[tools."aqua:jesseduffield/lazygit"]]
 version = "0.64.0"
 backend = "aqua:jesseduffield/lazygit"

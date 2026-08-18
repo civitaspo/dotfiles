@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+#MISE description="Install the pinned Homebrew package."
+set -euo pipefail
+
+BREW_VERSION="6.0.18"
+BREW_SHA256="dc892c034bf7c5567489bd02c34301e9cc63faf246c69372639c943cf5006d12"
+BREW_URL="https://github.com/Homebrew/brew/releases/download/${BREW_VERSION}/Homebrew.pkg"
+BREW_BIN="/opt/homebrew/bin/brew"
+
+fail() {
+  printf '[bootstrap:homebrew] error: %s\n' "$*" >&2
+  exit 1
+}
+
+[[ "$(uname -s)" == "Darwin" ]] || fail "macOS is required"
+[[ "$(uname -m)" == "arm64" ]] || fail "Apple Silicon is required"
+
+if [[ -x "$BREW_BIN" ]]; then
+  printf '[bootstrap:homebrew] Homebrew already installed at %s; skipping.\n' "$BREW_BIN"
+  exit 0
+fi
+
+if [[ -e /opt/homebrew ]]; then
+  fail "partial Homebrew installation found at /opt/homebrew; inspect it manually"
+fi
+
+tmp_dir="$(mktemp -d)"
+trap 'rm -rf "$tmp_dir"' EXIT
+pkg="$tmp_dir/Homebrew.pkg"
+
+/usr/bin/curl --proto '=https' --tlsv1.2 \
+  --fail --show-error --silent --location \
+  "$BREW_URL" --output "$pkg"
+
+printf '%s  %s\n' "$BREW_SHA256" "$pkg" |
+  /usr/bin/shasum -a 256 -c -
+
+signature="$(/usr/sbin/pkgutil --check-signature "$pkg")" ||
+  fail "Homebrew.pkg signature check failed"
+printf '%s\n' "$signature"
+[[ "$signature" == *"Developer ID Installer:"* ]] ||
+  fail "Homebrew.pkg is not signed by a Developer ID Installer certificate"
+
+/usr/sbin/spctl --assess --verbose=2 --type install "$pkg" ||
+  fail "Homebrew.pkg failed Gatekeeper assessment"
+
+sudo /usr/sbin/installer -verboseR -pkg "$pkg" -target /
+
+[[ -x "$BREW_BIN" ]] || fail "Homebrew was not installed at ${BREW_BIN}"
+printf '[bootstrap:homebrew] installed Homebrew %s\n' "$BREW_VERSION"

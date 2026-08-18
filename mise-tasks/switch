@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#MISE description="Activate nix-darwin and home-manager."
+set -euo pipefail
+
+cd "${MISE_PROJECT_ROOT:?}"
+
+onepassword_socket="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+if [[ -S "$onepassword_socket" ]]; then
+  export SSH_AUTH_SOCK="$onepassword_socket"
+fi
+
+if command -v darwin-rebuild >/dev/null 2>&1; then
+  darwin-rebuild build --flake ".#aarch64-darwin"
+else
+  nix build ".#darwinConfigurations.aarch64-darwin.system"
+fi
+
+sudo nix-env -p /nix/var/nix/profiles/system --set ./result
+sudo ./result/activate
+rm -f ./result

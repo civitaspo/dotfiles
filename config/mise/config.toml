@@ -31,7 +31,6 @@ aqua = "latest"
 "aqua:aws/aws-cli" = "latest"
 "aqua:astral-sh/ruff" = "latest"
 "aqua:astral-sh/uv" = "latest"
-"aqua:go-task/task" = "latest"
 "aqua:junegunn/fzf" = "latest"
 "aqua:sharkdp/bat" = "latest"
 "aqua:sharkdp/fd" = "latest"
@@ -84,8 +83,8 @@ gcloud = "latest"
 # --- AI agent CLIs ----------------------------------------------------------
 claude-code = "latest"
 # Resolves to aqua:openai/codex (package tar.gz since rust-v0.133.0). Requires a
-# recent mise so the baked aqua registry matches mise.lock; `task mise` runs
-# `mise self-update` first for that reason.
+# recent mise so the baked aqua registry matches mise.lock; bootstrap.sh pins
+# that mise version.
 codex = "latest"
 # Inline review UI for agent plans/diffs (https://crit.md/).
 "github:tomasz-tomczyk/crit" = "latest"

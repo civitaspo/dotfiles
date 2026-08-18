@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#MISE description="Retarget civitaspo/dotfiles at this checkout and sync Casks/."
+set -euo pipefail
+
+tap="civitaspo/dotfiles"
+expected_path="/opt/homebrew/Library/Taps/civitaspo/homebrew-dotfiles"
+tap_path="$(/opt/homebrew/bin/brew --repo "$tap" 2>/dev/null || true)"
+
+/opt/homebrew/bin/brew untap --force "$tap" || true
+
+if [[ -n "$tap_path" && -e "$tap_path" ]]; then
+  [[ "$tap_path" == "$expected_path" ]] || {
+    printf 'Refusing to remove unexpected tap path: %s\n' "$tap_path" >&2
+    exit 1
+  }
+  rm -rf -- "$tap_path"
+fi
+
+/opt/homebrew/bin/brew tap \
+  --custom-remote "$tap" "${MISE_PROJECT_ROOT:?}"
+/opt/homebrew/bin/brew trust "${MISE_PROJECT_ROOT:?}"

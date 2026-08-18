@@ -28,7 +28,8 @@ in
   nixpkgs.config.allowUnfree = true;
 
   # Nix itself is installed and managed by the Determinate Systems installer
-  # (see init.sh), so nix-darwin must not manage the Nix daemon or nix.conf.
+  # (see mise run bootstrap), so nix-darwin must not manage the Nix daemon
+  # or nix.conf.
   nix.enable = false;
 
   # nix-darwin's release-25.11 branch is paired with nixpkgs-unstable on
