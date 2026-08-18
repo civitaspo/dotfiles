@@ -15,7 +15,7 @@
     #   nix flake update nixpkgs-<tool>
     nixpkgs-python.url          = "github:NixOS/nixpkgs/9d29d5f667d7467f98efc31881e824fa586c927e"; # Python 3.13.12
     nixpkgs-node.url            = "github:NixOS/nixpkgs/9d29d5f667d7467f98efc31881e824fa586c927e"; # Node.js 22.22.2
-    nixpkgs-go.url              = "github:NixOS/nixpkgs/fae36b82dd34d78bc79e18832a3982c077d88918"; # Go 1.26.2
+    nixpkgs-go.url              = "github:NixOS/nixpkgs/29ea483f5e38805c38201e50ac10edaa12784e7e"; # Go 1.26.2
     nixpkgs-terraform.url       = "github:NixOS/nixpkgs/a1bab9e494f5f4939442a57a58d0449a109593fe"; # Terraform 1.14.3
     nixpkgs-process-compose.url = "github:NixOS/nixpkgs/8a1b0127302ea51e05bf4ea5a291743fac442406"; # process-compose 1.110.0
     nixpkgs-k6.url              = "github:NixOS/nixpkgs/9d29d5f667d7467f98efc31881e824fa586c927e"; # k6 1.7.1
