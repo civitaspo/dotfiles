@@ -1,0 +1,114 @@
+# Repository workflows for civitaspo/dotfiles.
+# Global tool versions remain in config/mise/config.toml.
+
+[settings]
+task.run_auto_install = false
+
+[task_config]
+includes = ["mise-tasks"]
+
+[tasks.default]
+description = "List available repository tasks."
+run = "mise tasks ls --local"
+quiet = true
+
+[tasks.bootstrap]
+description = "Install Nix and Homebrew on a new Mac."
+run = [
+  { task = "bootstrap:nix" },
+  { task = "bootstrap:homebrew" },
+]
+
+[tasks.reconcile]
+description = "Apply the whole configuration to this machine."
+run = [
+  { task = "switch" },
+  { task = "brew" },
+  { task = "tools" },
+]
+
+[tasks.brew]
+description = "Apply the Brewfile and remove unlisted packages."
+run = [
+  { task = "brew:tap" },
+  "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup",
+]
+
+[tasks.tools]
+description = "Install locked tool versions with mise."
+run = "mise install"
+
+[tasks.update]
+description = "Update Nix inputs, mise tools, and Homebrew packages."
+run = [
+  { task = "update:nix" },
+  { task = "update:mise" },
+  { task = "update:brew" },
+]
+
+[tasks."update:nix"]
+description = "Update flake inputs and re-activate nix-darwin."
+run = [
+  "nix flake update",
+  { task = "switch" },
+]
+
+[tasks."update:mise"]
+description = "Upgrade mise-managed tools and drop unused versions."
+dir = "{{config_root}}/config/mise"
+env = { MISE_GLOBAL_CONFIG_FILE = "{{config_root}}/config/mise/config.toml", MISE_GLOBAL_CONFIG_ROOT = "{{config_root}}/config/mise", MISE_LOCKED = "false" }
+run = [
+  "mise upgrade",
+  "mise prune",
+]
+
+[tasks."lock:mise"]
+description = "Refresh the committed mise lockfile."
+dir = "{{config_root}}/config/mise"
+env = { MISE_GLOBAL_CONFIG_FILE = "{{config_root}}/config/mise/config.toml", MISE_GLOBAL_CONFIG_ROOT = "{{config_root}}/config/mise", MISE_LOCKED = "false" }
+run = "mise lock --global --platform macos-arm64"
+
+[tasks."update:brew"]
+description = "Upgrade Homebrew packages."
+run = [
+  "/opt/homebrew/bin/brew update",
+  "/opt/homebrew/bin/brew upgrade",
+  { task = "brew:tap" },
+  "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup",
+  "/opt/homebrew/bin/brew cleanup",
+]
+
+[tasks."import:brew"]
+description = "Capture the live Homebrew state back into the Brewfile."
+run = "/opt/homebrew/bin/brew bundle dump --force --no-vscode --file ./Brewfile"
+
+[tasks.check]
+description = "Validate the configuration."
+run = [
+  { task = "check:nix" },
+  { task = "check:nix-lint" },
+  { task = "check:shell" },
+  { task = "check:typos" },
+]
+
+[tasks."check:nix"]
+description = "Validate the nix-darwin configuration."
+run = "nix flake check"
+
+[tasks."check:nix-lint"]
+description = "Lint Nix files."
+run = [
+  "deadnix --fail .",
+  "nix run --inputs-from . nixpkgs#statix -- check .",
+]
+
+[tasks."check:shell"]
+description = "Lint and format-check shell scripts."
+run = [
+  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
+]
+
+[tasks."check:typos"]
+description = "Check spelling in source files."
+run = "typos"
