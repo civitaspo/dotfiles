@@ -36,6 +36,7 @@ cask "civitaspo/dotfiles/openin4"
 cask "qmk-toolbox"
 cask "raycast"
 cask "civitaspo/dotfiles/reflect-open"
+cask "space-rabbit"
 cask "spotify"
 cask "tabtab"
 

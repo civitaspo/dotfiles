@@ -96,7 +96,8 @@ After the first successful reconcile, home-manager puts mise on `PATH`, so
 These are manual and are not part of `mise run reconcile`:
 
 - grant Accessibility / Input Monitoring / Screen Recording to Karabiner,
-  Hammerspoon, AeroSpace, Homerow, Keyboard Maestro, and CleanShot
+  Hammerspoon, AeroSpace, Space Rabbit, Homerow, Keyboard Maestro, and
+  CleanShot
 - sign into paid apps (CleanShot, Keyboard Maestro, Mimestream, and others)
 - Git commit signing via 1Password (`op-ssh-sign`)
 - `op signin`, `gh auth`, `gcloud auth`, AWS SSO, SnowSQL, and Atuin
