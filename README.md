@@ -82,6 +82,7 @@ mise run reconcile     # apply everything: nix-darwin + home-manager + Homebrew 
 mise run switch        # apply only the Nix configuration (nix-darwin + home-manager)
 mise run update        # update Nix inputs, mise tools and Homebrew packages
 mise run import:brew   # capture the live Homebrew state back into the Brewfile
+mise run livecheck:casks # show newer upstream versions for local tap casks
 mise run check         # validate the configuration
 ```
 
@@ -105,8 +106,10 @@ These are manual and are not part of `mise run reconcile`:
 
 home-manager moves conflicting files aside with a `.backup` suffix.
 Activation disables Spotlight indexing. `mise run brew` uses
-`brew bundle --force-cleanup`, so packages not listed in the Brewfile are
-removed.
+`brew bundle --force-cleanup --no-upgrade`, so packages not listed in the
+Brewfile are removed and already-installed apps are left in place. Local
+tap casks (Kanary, Nospace, OpenIn, Reflect Open) self-update in-app;
+`mise run update:brew` skips them when the installed app is already current.
 
 ## Dependency updates
 

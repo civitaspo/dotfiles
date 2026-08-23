@@ -7,6 +7,16 @@ cask "openin4" do
   desc "Advanced link handler and browser picker"
   homepage "https://loshadki.app/openin4/"
 
+  livecheck do
+    url "https://loshadki.app/openin4/releases/appcast.xml"
+    regex(/OpenIn[._-]v?(\d+(?:[.-]\d+)+)\.app\.zip/i)
+    strategy :sparkle do |item, regex|
+      item.url[regex, 1]
+    end
+  end
+
+  auto_updates true
+
   app "OpenIn.app"
 
   zap trash: [
