@@ -18,6 +18,15 @@ backend = "aqua:1password/cli"
 checksum = "blake3:5b933123d7e1de7abfd93c279fe5953af82735386f6cf9a43d6165a7fd79b54b"
 url = "https://cache.agilebits.com/dist/1P/op2/pkg/v2.39.0/op_darwin_arm64_v2.39.0.zip"
 
+[[tools."aqua:Aloxaf/silicon"]]
+version = "0.5.2"
+backend = "aqua:Aloxaf/silicon"
+
+[tools."aqua:Aloxaf/silicon"."platforms.macos-arm64"]
+checksum = "sha256:a679e02f9e0aa662edc50848ad50e5adbcee78980ac074c1cdf3f02679892b5d"
+url = "https://github.com/Aloxaf/silicon/releases/download/v0.5.2/silicon-v0.5.2-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/Aloxaf/silicon/releases/assets/136850052"
+
 [[tools."aqua:BurntSushi/ripgrep"]]
 version = "15.2.0"
 backend = "aqua:BurntSushi/ripgrep"
@@ -340,10 +349,6 @@ backend = "cargo:deadnix"
 version = "0.23.5"
 backend = "cargo:eza"
 
-[[tools."cargo:silicon"]]
-version = "0.5.2"
-backend = "cargo:silicon"
-
 [[tools.claude-code]]
 version = "2.1.238"
 backend = "aqua:anthropics/claude-code"
@@ -424,6 +429,9 @@ url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0
 [[tools."npm:@mermaid-js/mermaid-cli"]]
 version = "11.16.0"
 backend = "npm:@mermaid-js/mermaid-cli"
+
+[tools."npm:@mermaid-js/mermaid-cli".options]
+trust_policy_excludes = '["cytoscape@3.34.1"]'
 
 [[tools."npm:pnpm"]]
 version = "11.22.0"
