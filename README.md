@@ -106,10 +106,9 @@ These are manual and are not part of `mise run reconcile`:
 
 home-manager moves conflicting files aside with a `.backup` suffix.
 Activation disables Spotlight indexing. `mise run brew` uses
-`brew bundle --force-cleanup --no-upgrade`, so packages not listed in the
-Brewfile are removed and already-installed apps are left in place. Local
-tap casks (Kanary, Nospace, OpenIn, Reflect Open) self-update in-app;
-`mise run update:brew` skips them when the installed app is already current.
+`brew bundle --force-cleanup`, so packages not listed in the Brewfile are
+removed. Local tap casks (Kanary, Nospace, OpenIn, Reflect Open) are
+pinned and self-update in-app; `brew upgrade` skips them.
 
 ## Dependency updates
 

@@ -1,12 +1,11 @@
 # Homebrew bundle: GUI applications, local casks, and App Store apps.
 #
-# This file is the source of truth. Apply it with `mise run brew` (installs
-# missing packages and uninstalls packages not listed here; does not upgrade)
-# and capture drift with `mise run import:brew` (VS Code extensions are
-# intentionally excluded via --no-vscode). Upgrade official Homebrew packages
-# with `mise run update:brew`. Local tap casks self-update in-app; Homebrew
-# skips them when the installed app is already current. Check stale pins with
-# `mise run livecheck:casks`. Homebrew is intentionally NOT on $PATH --
+# This file is the source of truth. Apply it with `mise run brew` (installs,
+# upgrades, and uninstalls packages not listed here) and capture drift with
+# `mise run import:brew` (VS Code extensions are intentionally excluded via
+# --no-vscode). Local tap casks are pinned after install so brew leaves them
+# to in-app updates; check stale Casks/ pins with `mise run livecheck:casks`.
+# Homebrew is intentionally NOT on $PATH --
 # `mise run brew` is the only entry point. CLI binaries come from mise, and
 # base packages plus pinned runtimes come from Nix.
 

@@ -8,6 +8,9 @@
 # Recreate the tap only when it is missing, pointed at the wrong remote, or
 # corrupt (e.g. a deleted git worktree). Always untapping makes brew bundle
 # re-fetch already-installed local casks on every `mise run brew`.
+#
+# Installed local casks are pinned so `brew bundle` / `brew upgrade` skip
+# them. They self-update in-app; Casks/*.rb pins are for fresh installs.
 set -euo pipefail
 
 tap="civitaspo/dotfiles"
@@ -63,3 +66,11 @@ git -C "$tap_path" reset --hard --quiet "$head_sha"
 
 # Name-based trust does not match a custom-remote tap; trust the path remote.
 "$brew" trust "$(git -C "$tap_path" remote get-url origin)"
+
+shopt -s nullglob
+for cask_file in "$repo_root"/Casks/*.rb; do
+  name="$(basename "$cask_file" .rb)"
+  if "$brew" list --cask "$name" >/dev/null 2>&1; then
+    "$brew" pin --cask "$name"
+  fi
+done

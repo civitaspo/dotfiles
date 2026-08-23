@@ -28,10 +28,10 @@ run = [
 ]
 
 [tasks.brew]
-description = "Apply the Brewfile and remove unlisted packages without upgrading."
+description = "Apply the Brewfile and remove unlisted packages."
 run = [
   { task = "brew:tap" },
-  "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup --no-upgrade",
+  "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup",
 ]
 
 [tasks.tools]
@@ -74,7 +74,7 @@ run = [
   { task = "brew:tap" },
   "/opt/homebrew/bin/brew update",
   "/opt/homebrew/bin/brew upgrade",
-  "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup --no-upgrade",
+  "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup",
   "/opt/homebrew/bin/brew cleanup",
 ]
 
