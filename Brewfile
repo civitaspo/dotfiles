@@ -41,6 +41,7 @@ cask "spotify"
 cask "tabtab"
 
 # --- Casks: fonts -----------------------------------------------------------
+cask "font-hackgen"
 cask "font-monaspice-nerd-font"
 
 # --- Mac App Store ----------------------------------------------------------

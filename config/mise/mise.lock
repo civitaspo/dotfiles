@@ -37,6 +37,15 @@ url = "https://github.com/ClementTsang/bottom/releases/download/0.14.8/bottom_aa
 url_api = "https://api.github.com/repos/ClementTsang/bottom/releases/assets/513310009"
 provenance = "github-attestations"
 
+[[tools."aqua:Songmu/laminate"]]
+version = "0.0.4"
+backend = "aqua:Songmu/laminate"
+
+[tools."aqua:Songmu/laminate"."platforms.macos-arm64"]
+checksum = "sha256:fff6b2d2357a4fabc479283edce9304c864165d4e5da38782dbc26fd9b580abc"
+url = "https://github.com/Songmu/laminate/releases/download/v0.0.4/laminate_v0.0.4_darwin_arm64.zip"
+url_api = "https://api.github.com/repos/Songmu/laminate/releases/assets/289872070"
+
 [[tools."aqua:abiosoft/colima"]]
 version = "0.10.3"
 backend = "aqua:abiosoft/colima"
@@ -331,6 +340,10 @@ backend = "cargo:deadnix"
 version = "0.23.5"
 backend = "cargo:eza"
 
+[[tools."cargo:silicon"]]
+version = "0.5.2"
+backend = "cargo:silicon"
+
 [[tools.claude-code]]
 version = "2.1.238"
 backend = "aqua:anthropics/claude-code"
@@ -371,6 +384,15 @@ url = "https://github.com/k1LoW/mo/releases/download/v1.6.7/mo_v1.6.7_darwin_arm
 url_api = "https://api.github.com/repos/k1LoW/mo/releases/assets/499857651"
 provenance = "github-attestations"
 
+[[tools."github:sorairolake/qrtool"]]
+version = "0.13.2"
+backend = "github:sorairolake/qrtool"
+
+[tools."github:sorairolake/qrtool"."platforms.macos-arm64"]
+checksum = "sha256:ff88c8cb01572dee99c48a17c5f5649dbea64056d1f6f8c53c43b8eea1be9d52"
+url = "https://github.com/sorairolake/qrtool/releases/download/v0.13.2/qrtool-v0.13.2-aarch64-apple-darwin.tar.zst"
+url_api = "https://api.github.com/repos/sorairolake/qrtool/releases/assets/331043334"
+
 [[tools."github:tomasz-tomczyk/crit"]]
 version = "0.18.4"
 backend = "github:tomasz-tomczyk/crit"
@@ -398,6 +420,10 @@ backend = "core:java"
 [tools.java."platforms.macos-arm64"]
 checksum = "sha256:021d629349ebc12a409faa517b837ec80ceee8f58a5ac85c788ecad07ca6881c"
 url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12%2B8/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.12_8.tar.gz"
+
+[[tools."npm:@mermaid-js/mermaid-cli"]]
+version = "11.16.0"
+backend = "npm:@mermaid-js/mermaid-cli"
 
 [[tools."npm:pnpm"]]
 version = "11.22.0"

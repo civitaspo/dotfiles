@@ -1,0 +1,13 @@
+# Image backends for `deck apply -c laminate` and `laminate --lang …`.
+# laminate only routes; the tools below must be on PATH (see config/mise).
+cache: 1h
+commands:
+  - lang: qr
+    run: ['qrtool', 'encode', '-t', 'png', '-o', '{{output}}', '{{input}}']
+    ext: png
+  - lang: mermaid
+    run: 'mmdc --scale 8 -i - -o "{{output}}" --quiet'
+    ext: png
+  - lang: '*'
+    run: 'silicon -l "{{lang}}" -o "{{output}}"'
+    ext: png
