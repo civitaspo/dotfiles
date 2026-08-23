@@ -53,9 +53,9 @@ aqua = "latest"
 "aqua:k1LoW/deck" = "latest"
 "github:k1LoW/mo" = "latest"
 "aqua:Songmu/laminate" = "latest"
-"cargo:silicon" = "latest"
+# silicon v0.5.3 is source-only; cargo needs cmake/fontconfig. 0.5.2 is a Rosetta binary.
+"aqua:Aloxaf/silicon" = "0.5.2"
 "github:sorairolake/qrtool" = "latest"
-"npm:@mermaid-js/mermaid-cli" = "latest"
 "aqua:aws/session-manager-plugin" = "latest"
 "aqua:crate-ci/typos" = "latest"
 "aqua:koalaman/shellcheck" = "latest"
@@ -92,6 +92,11 @@ claude-code = "latest"
 codex = "latest"
 # Inline review UI for agent plans/diffs (https://crit.md/).
 "github:tomasz-tomczyk/crit" = "latest"
+
+[tools."npm:@mermaid-js/mermaid-cli"]
+version = "latest"
+# cytoscape 3.34.1 dropped trusted-publisher metadata that 3.33.4 had.
+trust_policy_excludes = ["cytoscape@3.34.1"]
 
 [tools."http:antigravity-cli"]
 version = "1.0.3"
