@@ -52,14 +52,9 @@ aqua = "latest"
 "aqua:direnv/direnv" = "latest"
 "aqua:k1LoW/deck" = "latest"
 "github:k1LoW/mo" = "latest"
-# laminate routes deck code blocks to image backends
-# (https://songmu.jp/riji/entry/2025-08-12-laminate.html).
 "aqua:Songmu/laminate" = "latest"
-# silicon has no current macOS GitHub release assets (v0.5.3 is source-only).
 "cargo:silicon" = "latest"
-# qrencode is a C library with no portable GitHub release; qrtool writes PNG.
 "github:sorairolake/qrtool" = "latest"
-# mermaid-cli (mmdc). Needs a Chromium-based browser at render time.
 "npm:@mermaid-js/mermaid-cli" = "latest"
 "aqua:aws/session-manager-plugin" = "latest"
 "aqua:crate-ci/typos" = "latest"
