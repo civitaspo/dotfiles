@@ -53,7 +53,6 @@ aqua = "latest"
 "aqua:k1LoW/deck" = "latest"
 "github:k1LoW/mo" = "latest"
 "aqua:Songmu/laminate" = "latest"
-# silicon v0.5.3 is source-only; cargo needs cmake/fontconfig. 0.5.2 is a Rosetta binary.
 "aqua:Aloxaf/silicon" = "0.5.2"
 "github:sorairolake/qrtool" = "latest"
 "aqua:aws/session-manager-plugin" = "latest"

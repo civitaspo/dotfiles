@@ -22,6 +22,10 @@ mise; `mise run bootstrap` installs Nix and Homebrew.
 - Use semantic commit messages (`feat(scope): ...`, `fix(scope): ...`).
 - After editing any `*.nix` file, run `mise run check` (`nix flake check`).
 - Prefer mise for binaries; do not add packages to Nix or commit binaries.
+- Install CLI binaries through mise's aqua backend (`aqua:owner/repo`). Use
+  `github:`, `ubi:`, `npm:`, `cargo:`, or `http:` only when aqua-registry has
+  no usable package. Do not compile from source or add build dependencies
+  when a prebuilt exists.
 - Keep `mise.toml` declarative; use a file task for defensive shell logic
   (e.g. `brew:tap`).
 

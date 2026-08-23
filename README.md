@@ -71,8 +71,8 @@ If App Store apps fail until they have been acquired on this Apple ID, Get
 them once in the App Store and rerun `mise run brew`. Other failed steps are
 idempotent; rerun the task that stopped.
 
-Rosetta is required because the committed `mise.lock` entries for dust and
-procs use x86_64 assets on macOS arm64.
+Rosetta is required because the committed `mise.lock` entries for dust,
+procs, and silicon use x86_64 assets on macOS arm64.
 
 ## Daily workflow
 
