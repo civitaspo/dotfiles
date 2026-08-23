@@ -71,11 +71,18 @@ run = "mise lock --global --platform macos-arm64"
 [tasks."update:brew"]
 description = "Upgrade Homebrew packages."
 run = [
+  { task = "brew:tap" },
   "/opt/homebrew/bin/brew update",
   "/opt/homebrew/bin/brew upgrade",
-  { task = "brew:tap" },
   "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup",
   "/opt/homebrew/bin/brew cleanup",
+]
+
+[tasks."livecheck:casks"]
+description = "Show newer upstream versions for local tap casks."
+run = [
+  { task = "brew:tap" },
+  "/opt/homebrew/bin/brew livecheck --tap civitaspo/dotfiles --cask --newer-only",
 ]
 
 [tasks."import:brew"]

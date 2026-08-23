@@ -3,7 +3,9 @@
 # This file is the source of truth. Apply it with `mise run brew` (installs,
 # upgrades, and uninstalls packages not listed here) and capture drift with
 # `mise run import:brew` (VS Code extensions are intentionally excluded via
-# --no-vscode). Homebrew is intentionally NOT on $PATH --
+# --no-vscode). Local tap casks are pinned after install so brew leaves them
+# to in-app updates; check stale Casks/ pins with `mise run livecheck:casks`.
+# Homebrew is intentionally NOT on $PATH --
 # `mise run brew` is the only entry point. CLI binaries come from mise, and
 # base packages plus pinned runtimes come from Nix.
 

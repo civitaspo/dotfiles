@@ -1,21 +1,76 @@
 #!/usr/bin/env bash
 #MISE description="Retarget civitaspo/dotfiles at this checkout and sync Casks/."
+#
+# brew bundle skips already-installed taps, so a stale clone can miss new
+# files under Casks/. Homebrew 6 keys tap trust to the Brewfile `__dir__`
+# path remote, so keep origin equal to this checkout.
+#
+# Recreate the tap only when it is missing, pointed at the wrong remote, or
+# corrupt (e.g. a deleted git worktree). Always untapping makes brew bundle
+# re-fetch already-installed local casks on every `mise run brew`.
+#
+# Installed local casks are pinned so `brew bundle` / `brew upgrade` skip
+# them. They self-update in-app; Casks/*.rb pins are for fresh installs.
 set -euo pipefail
 
 tap="civitaspo/dotfiles"
 expected_path="/opt/homebrew/Library/Taps/civitaspo/homebrew-dotfiles"
-tap_path="$(/opt/homebrew/bin/brew --repo "$tap" 2>/dev/null || true)"
+brew="/opt/homebrew/bin/brew"
+# Match Brewfile `__dir__` (logical path, not realpath) so trusted: true applies.
+repo_root="${MISE_PROJECT_ROOT:?}"
 
-/opt/homebrew/bin/brew untap --force "$tap" || true
+tap_git_ok() {
+  local tap_path="$1"
+  [[ -e "$tap_path" ]] && git -C "$tap_path" rev-parse --git-dir >/dev/null 2>&1
+}
 
-if [[ -n "$tap_path" && -e "$tap_path" ]]; then
-  [[ "$tap_path" == "$expected_path" ]] || {
-    printf 'Refusing to remove unexpected tap path: %s\n' "$tap_path" >&2
-    exit 1
-  }
-  rm -rf -- "$tap_path"
+force_retap() {
+  "$brew" untap --force "$tap" || true
+  local tap_path
+  tap_path="$("$brew" --repo "$tap" 2>/dev/null || true)"
+  if [[ -n "$tap_path" && -e "$tap_path" ]]; then
+    [[ "$tap_path" == "$expected_path" ]] || {
+      printf 'Refusing to remove unexpected tap path: %s\n' "$tap_path" >&2
+      exit 1
+    }
+    rm -rf -- "$tap_path"
+  fi
+  "$brew" tap --custom-remote "$tap" "$repo_root"
+}
+
+if ! "$brew" tap | grep -qx "$tap"; then
+  "$brew" tap --custom-remote "$tap" "$repo_root"
+else
+  tap_path="$("$brew" --repo "$tap")"
+  if ! tap_git_ok "$tap_path"; then
+    force_retap
+  else
+    remote="$(git -C "$tap_path" remote get-url origin 2>/dev/null || true)"
+    if [[ "${remote%/}" != "${repo_root%/}" ]]; then
+      if ! "$brew" tap --custom-remote "$tap" "$repo_root"; then
+        force_retap
+      fi
+    fi
+  fi
 fi
 
-/opt/homebrew/bin/brew tap \
-  --custom-remote "$tap" "${MISE_PROJECT_ROOT:?}"
-/opt/homebrew/bin/brew trust "${MISE_PROJECT_ROOT:?}"
+tap_path="$("$brew" --repo "$tap")"
+if ! tap_git_ok "$tap_path"; then
+  force_retap
+  tap_path="$("$brew" --repo "$tap")"
+fi
+
+head_sha="$(git -C "$repo_root" rev-parse HEAD)"
+git -C "$tap_path" fetch --quiet origin
+git -C "$tap_path" reset --hard --quiet "$head_sha"
+
+# Name-based trust does not match a custom-remote tap; trust the path remote.
+"$brew" trust "$(git -C "$tap_path" remote get-url origin)"
+
+shopt -s nullglob
+for cask_file in "$repo_root"/Casks/*.rb; do
+  name="$(basename "$cask_file" .rb)"
+  if "$brew" list --cask "$name" >/dev/null 2>&1; then
+    "$brew" pin --cask "$name"
+  fi
+done
