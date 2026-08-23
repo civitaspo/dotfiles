@@ -49,6 +49,16 @@ in
 
   xdg = {
     enable = true;
-    configFile = linkDir ../config;
+    configFile =
+      let
+        privateDeck = "${inputs.dotfiles-private}/config/deck";
+      in
+      linkDir ../config
+      // lib.optionalAttrs (builtins.pathExists privateDeck) {
+        deck = {
+          source = privateDeck;
+          recursive = true;
+        };
+      };
   };
 }
