@@ -18,15 +18,6 @@ backend = "aqua:1password/cli"
 checksum = "blake3:5b933123d7e1de7abfd93c279fe5953af82735386f6cf9a43d6165a7fd79b54b"
 url = "https://cache.agilebits.com/dist/1P/op2/pkg/v2.39.0/op_darwin_arm64_v2.39.0.zip"
 
-[[tools."aqua:Aloxaf/silicon"]]
-version = "0.5.2"
-backend = "aqua:Aloxaf/silicon"
-
-[tools."aqua:Aloxaf/silicon"."platforms.macos-arm64"]
-checksum = "sha256:a679e02f9e0aa662edc50848ad50e5adbcee78980ac074c1cdf3f02679892b5d"
-url = "https://github.com/Aloxaf/silicon/releases/download/v0.5.2/silicon-v0.5.2-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/Aloxaf/silicon/releases/assets/136850052"
-
 [[tools."aqua:BurntSushi/ripgrep"]]
 version = "15.2.0"
 backend = "aqua:BurntSushi/ripgrep"
@@ -120,6 +111,15 @@ backend = "aqua:bootandy/dust"
 checksum = "sha256:bf84d3ff7f58e325d3eb5bb7696df6b22ef1e01fec80c2d8f7c9d3e611be66f4"
 url = "https://github.com/bootandy/dust/releases/download/v1.2.4/dust-v1.2.4-x86_64-apple-darwin.tar.gz"
 url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/338099240"
+
+[[tools."aqua:charmbracelet/freeze"]]
+version = "0.2.2"
+backend = "aqua:charmbracelet/freeze"
+
+[tools."aqua:charmbracelet/freeze"."platforms.macos-arm64"]
+checksum = "sha256:6936ebad96dda73a6c952d7e945106916c4d4345334828109b4db6ddbb9aabee"
+url = "https://github.com/charmbracelet/freeze/releases/download/v0.2.2/freeze_0.2.2_Darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/charmbracelet/freeze/releases/assets/242747208"
 
 [[tools."aqua:cli/cli"]]
 version = "2.98.0"
