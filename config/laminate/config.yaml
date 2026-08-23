@@ -9,5 +9,5 @@ commands:
     run: 'mmdc --scale 8 -i - -o "{{output}}" --quiet'
     ext: png
   - lang: '*'
-    run: 'silicon -l "{{lang}}" -o "{{output}}"'
+    run: 'freeze -c user -l "{{lang}}" -o "{{output}}"'
     ext: png
