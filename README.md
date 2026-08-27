@@ -69,7 +69,9 @@ tools.
 
 If App Store apps fail until they have been acquired on this Apple ID, Get
 them once in the App Store and rerun `mise run brew`. Other failed steps are
-idempotent; rerun the task that stopped.
+idempotent; rerun the task that stopped. Keynote, Numbers, and Pages use
+the universal App Store IDs; the classic Mac IDs were delisted in April
+2026 and cannot be installed by mas.
 
 Rosetta is required because the committed `mise.lock` entries for dust and
 procs use x86_64 assets on macOS arm64.

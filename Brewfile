@@ -46,14 +46,19 @@ cask "tabtab"
 cask "font-monaspice-nerd-font"
 
 # --- Mac App Store ----------------------------------------------------------
+# Keynote/Numbers/Pages use the universal App Store IDs. Apple delisted the
+# classic Mac ADAM IDs (409183694, 409203825, 409201541) in April 2026, so
+# mas fails those with "No apps found in the App Store". The current
+# listings install as Creator Studio builds (com.apple.Keynote and friends)
+# alongside any remaining classic iWork apps (com.apple.iWork.*).
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
 mas "Bear", id: 1091189122
 mas "Display Menu", id: 549083868
-mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
 mas "Kindle", id: 302584613
 mas "Klack", id: 6446206067
 mas "LINE", id: 539883307
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
 mas "Twingate", id: 1501592214
