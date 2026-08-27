@@ -81,7 +81,8 @@ in
         "com.apple.trackpad.enableSecondaryClick" = true;
       };
       dock = {
-        autohide = false;
+        autohide = true;
+        autohide-delay = 9999999.0;
         show-recents = false;
         launchanim = true;
         mouse-over-hilite-stack = true;
