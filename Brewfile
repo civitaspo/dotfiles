@@ -14,11 +14,9 @@
 # `mise run brew` / `mise run update:brew` run `mise run brew:tap` first so
 # the installed tap remote matches `__dir__` (required for Homebrew 6 trust).
 tap "civitaspo/dotfiles", __dir__, trusted: true
-tap "nikitabobko/tap", trusted: { casks: ["aerospace"] }
 
 # --- Casks: applications ----------------------------------------------------
 cask "1password"
-cask "nikitabobko/tap/aerospace"
 cask "aqua-voice"
 cask "azookey"
 cask "cleanshot"
