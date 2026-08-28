@@ -79,6 +79,7 @@ in
         "com.apple.sound.beep.volume" = 0.0;
         "com.apple.sound.beep.feedback" = 0;
         "com.apple.trackpad.enableSecondaryClick" = true;
+        "com.apple.trackpad.scaling" = 3.0;
       };
       dock = {
         autohide = false;
@@ -93,6 +94,8 @@ in
       };
       trackpad = {
         Clicking = true;
+        FirstClickThreshold = 0;
+        SecondClickThreshold = 0;
         TrackpadThreeFingerDrag = true;
       };
     };
