@@ -35,7 +35,7 @@ aqua = "latest"
 "aqua:sharkdp/bat" = "latest"
 "aqua:sharkdp/fd" = "latest"
 # btop does not publish macOS release assets; bottom provides a portable TUI monitor.
-"aqua:ClementTsang/bottom" = "0.14.8"
+"aqua:ClementTsang/bottom" = "0.14.9"
 "aqua:dandavison/delta" = "latest"
 # cargo backend: eza has no macOS GitHub release assets, and the asdf/vfox short
 # name cannot list versions under Renovate's MISE_SAFE=1 lock --bump.
