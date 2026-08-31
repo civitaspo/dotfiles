@@ -91,6 +91,8 @@ claude-code = "latest"
 codex = "latest"
 # Inline review UI for agent plans/diffs (https://crit.md/).
 "github:tomasz-tomczyk/crit" = "latest"
+# Browser-based plan and code review UI (https://plannotator.ai/).
+"github:backnotprop/plannotator" = "latest"
 # Agent-native terminal multiplexer (https://herdr.dev/).
 "aqua:herdrdev/herdr" = "latest"
 
