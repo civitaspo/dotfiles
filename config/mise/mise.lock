@@ -396,6 +396,17 @@ backend = "vfox:mise-plugins/vfox-gcloud"
 [tools.gcloud."platforms.macos-arm64"]
 url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-582.0.0-darwin-arm.tar.gz"
 
+[[tools."github:backnotprop/plannotator"]]
+version = "0.27.9"
+backend = "github:backnotprop/plannotator"
+
+[tools."github:backnotprop/plannotator"."platforms.macos-arm64"]
+checksum = "sha256:3caf0e63ba91f9af454ddb40ebfb05f68da0d9ba588beffed974e98b3e33aef5"
+url = "https://github.com/backnotprop/plannotator/releases/download/v0.27.9/plannotator-darwin-arm64"
+url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/532990421"
+provenance = "github-attestations"
+provenance_verified = true
+
 [[tools."github:k1LoW/mo"]]
 version = "1.6.7"
 backend = "github:k1LoW/mo"

@@ -94,6 +94,27 @@ To change a configuration file, edit it under `config/` or `home/` and run
 After the first successful reconcile, home-manager puts mise on `PATH`, so
 `mise run …` works without the `~/.local/bin/mise` prefix.
 
+## Codex + Plannotator
+
+`mise run tools` installs [Plannotator](https://plannotator.ai/) and configures
+its Codex `Stop` hook in `$CODEX_HOME` or `~/.codex`. The setup enables Codex's
+experimental hooks feature and merges an absolute mise shim path into the
+existing `hooks.json`, so existing Codex hooks remain in place. Restart Codex
+Desktop after the first setup.
+
+Plan review opens automatically when Codex finishes a plan. Code review and
+document annotation are available from a Codex prompt:
+
+```text
+!plannotator review
+!plannotator annotate path/to/file.md
+!plannotator last
+```
+
+The public repository does not manage Codex session state or the shared private
+`~/.agents/skills` tree; the commands above do not require installing those
+skills.
+
 ## After the first reconcile
 
 These are manual and are not part of `mise run reconcile`:

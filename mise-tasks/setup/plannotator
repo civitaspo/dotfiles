@@ -1,0 +1,151 @@
+#!/usr/bin/env bash
+#MISE description="Configure Plannotator's Codex Stop hook."
+
+set -euo pipefail
+
+codex_dir="${CODEX_HOME:-${HOME}/.codex}"
+codex_config="${codex_dir}/config.toml"
+codex_hooks="${codex_dir}/hooks.json"
+plannotator_bin="$(command -v plannotator || true)"
+
+if [[ -z "${plannotator_bin}" ]]; then
+  printf '[setup:plannotator] plannotator is not available on PATH\n' >&2
+  exit 1
+fi
+
+mkdir -p "${codex_dir}"
+
+enable_codex_hooks() {
+  if [[ ! -f "${codex_config}" ]]; then
+    cat >"${codex_config}" <<'EOF'
+[features]
+hooks = true
+EOF
+    return 0
+  fi
+
+  if grep -Eq '^[[:space:]]*features[[:space:]]*=' "${codex_config}"; then
+    printf '[setup:plannotator] Codex uses inline features in %s; add [features] hooks = true manually\n' "${codex_config}" >&2
+    return 1
+  fi
+
+  local tmp_config
+  tmp_config="$(mktemp)"
+  if awk '
+    function is_table(line) {
+      return line ~ /^[[:space:]]*\[[^]]+\][[:space:]]*$/
+    }
+    BEGIN {
+      in_features = 0
+      saw_features = 0
+      saw_hooks = 0
+    }
+    {
+      if (is_table($0)) {
+        if (in_features && !saw_hooks) {
+          print "hooks = true"
+          saw_hooks = 1
+        }
+        in_features = ($0 ~ /^[[:space:]]*\[features\][[:space:]]*$/)
+        if (in_features) saw_features = 1
+      }
+      if (in_features && $0 ~ /^[[:space:]]*hooks[[:space:]]*=/) {
+        if ($0 !~ /=[[:space:]]*true([[:space:]]*(#.*)?)?$/) print "hooks = true"
+        else print
+        saw_hooks = 1
+        next
+      }
+      print
+    }
+    END {
+      if (saw_features && in_features && !saw_hooks) {
+        print "hooks = true"
+      } else if (!saw_features) {
+        print ""
+        print "[features]"
+        print "hooks = true"
+      }
+    }
+  ' "${codex_config}" >"${tmp_config}"; then
+    mv "${tmp_config}" "${codex_config}"
+  else
+    rm -f "${tmp_config}"
+    printf '[setup:plannotator] could not update %s\n' "${codex_config}" >&2
+    return 1
+  fi
+}
+
+enable_codex_hooks || true
+
+if ! command -v node >/dev/null 2>&1; then
+  printf '[setup:plannotator] node is required to merge %s\n' "${codex_hooks}" >&2
+  exit 1
+fi
+
+node - "${codex_hooks}" "${plannotator_bin}" <<'NODE'
+const fs = require("fs");
+const path = require("path");
+
+const [hooksPath, command] = process.argv.slice(2);
+let config = {};
+
+if (fs.existsSync(hooksPath)) {
+  try {
+    config = JSON.parse(fs.readFileSync(hooksPath, "utf8"));
+  } catch (error) {
+    console.error(`[setup:plannotator] invalid JSON in ${hooksPath}: ${error.message}`);
+    process.exit(1);
+  }
+}
+
+if (!config || typeof config !== "object" || Array.isArray(config)) {
+  console.error(`[setup:plannotator] expected ${hooksPath} to contain a JSON object`);
+  process.exit(1);
+}
+
+config.hooks ??= {};
+if (typeof config.hooks !== "object" || Array.isArray(config.hooks)) {
+  console.error(`[setup:plannotator] expected the hooks field in ${hooksPath} to be a JSON object`);
+  process.exit(1);
+}
+
+const stopHooks = Array.isArray(config.hooks.Stop) ? config.hooks.Stop : [];
+let found = false;
+
+function isPlannotatorCommand(value) {
+  const current = value.trim();
+  return (
+    current === "plannotator" ||
+    current === command ||
+    (current.startsWith("/") && path.basename(current) === "plannotator")
+  );
+}
+
+for (const entry of stopHooks) {
+  const hooks = Array.isArray(entry?.hooks) ? entry.hooks : [];
+  for (const hook of hooks) {
+    if (hook?.type !== "command" || typeof hook.command !== "string") continue;
+    if (!isPlannotatorCommand(hook.command)) continue;
+    hook.command = command;
+    hook.timeout = 345600;
+    found = true;
+  }
+}
+
+if (!found) {
+  stopHooks.push({
+    hooks: [
+      {
+        type: "command",
+        command,
+        timeout: 345600,
+      },
+    ],
+  });
+}
+
+config.hooks.Stop = stopHooks;
+fs.writeFileSync(hooksPath, `${JSON.stringify(config, null, 2)}\n`);
+NODE
+
+printf '[setup:plannotator] configured Codex Stop hook with %s\n' "${plannotator_bin}"
