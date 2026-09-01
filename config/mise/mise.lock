@@ -95,11 +95,11 @@ url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/531543786"
 provenance = "github-attestations"
 
 [[tools."aqua:aws/aws-cli"]]
-version = "2.36.34"
+version = "2.36.36"
 backend = "aqua:aws/aws-cli"
 
 [tools."aqua:aws/aws-cli"."platforms.macos-arm64"]
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.36.34.pkg"
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.36.36.pkg"
 
 [[tools."aqua:aws/session-manager-plugin"]]
 version = "1.2.835.0"
@@ -390,11 +390,11 @@ checksum = "sha256:213a2f304f04d3c9cb5220669afad138f60a5aab1fe80962abdeb8f35807a
 url = "https://dl.deno.land/release/v2.9.6/deno-aarch64-apple-darwin.zip"
 
 [[tools.gcloud]]
-version = "582.0.0"
+version = "583.0.0"
 backend = "vfox:mise-plugins/vfox-gcloud"
 
 [tools.gcloud."platforms.macos-arm64"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-582.0.0-darwin-arm.tar.gz"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-583.0.0-darwin-arm.tar.gz"
 
 [[tools."github:backnotprop/plannotator"]]
 version = "0.27.9"
@@ -462,7 +462,7 @@ backend = "npm:@mermaid-js/mermaid-cli"
 trust_policy_excludes = '["cytoscape@3.34.1"]'
 
 [[tools."npm:pnpm"]]
-version = "11.24.0"
+version = "11.25.0"
 backend = "npm:pnpm"
 
 [[tools.rust]]
