@@ -14,8 +14,6 @@
 # `mise run brew` / `mise run update:brew` run `mise run brew:tap` first so
 # the installed tap remote matches `__dir__` (required for Homebrew 6 trust).
 tap "civitaspo/dotfiles", __dir__, trusted: true
-# onorca.dev. homebrew/cask "orca" is the disabled Plotly renderer.
-tap "stablyai/orca", trusted: { casks: ["orca"] }
 
 # --- Casks: applications ----------------------------------------------------
 cask "1password"
@@ -36,7 +34,6 @@ cask "mimestream"
 cask "nani"
 cask "civitaspo/dotfiles/nospace"
 cask "civitaspo/dotfiles/openin4"
-cask "stablyai/orca/orca"
 cask "qmk-toolbox"
 cask "raycast"
 cask "civitaspo/dotfiles/reflect-open"
