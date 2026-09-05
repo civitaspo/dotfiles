@@ -1,14 +1,11 @@
--- Move macOS notification banners to the middle-right of the menubar
--- display. Do not run this together with ShoveIt / PingPlace.
+-- Hide macOS Notification Center banners so they do not appear at the
+-- top-right. Notifications are still delivered (Notification Center and
+-- Droppy keep them). This only moves the banner window off-screen.
+-- Do not run this together with ShoveIt / PingPlace.
 --
--- Tune vertical placement with Y_NUDGE (larger = up, negative = down),
--- then Reload Config. If dump() shows kind=other, add that Mac's
--- AXSubrole to bannerSubroles.
+-- If dump() shows kind=other, add that Mac's AXSubrole to bannerSubroles.
 
 local obj = {}
-
--- Larger values move banners up; negative values move them down.
-obj.Y_NUDGE = 0
 
 obj.bannerSubroles = {
   "AXNotificationCenterBanner",
@@ -23,9 +20,9 @@ local NC_BUNDLE_ID = "com.apple.notificationcenterui"
 local WIDGET_EDITOR_ID = "widget-editor-button"
 local WIDGET_ID_PREFIX = "widget-local:"
 local MAX_NODES = 10000
-local RIGHT_PADDING = 16
 local POLL_SECONDS = 0.2
 local MOVE_EPSILON = 1
+local HIDDEN_ORIGIN = { x = -4000, y = -4000 }
 
 local function axGet(el, name)
   if not el then
@@ -91,10 +88,6 @@ local function notificationCenterApp()
   return nil
 end
 
-local function menubarScreen()
-  return hs.screen.primaryScreen()
-end
-
 local function formatPoint(point)
   if type(point) ~= "table" then
     return "nil"
@@ -115,7 +108,6 @@ local function classifyWindow(window)
   local n = 0
   local banner = nil
   local hasWidget = false
-
   local bannerSet = bannerSubroleSet()
 
   while #pending > 0 do
@@ -155,14 +147,6 @@ local function classifyWindow(window)
   return "other", nil
 end
 
-local function targetForBanner(size)
-  local frame = menubarScreen():fullFrame()
-  return {
-    x = frame.x + frame.w - size.w - RIGHT_PADDING,
-    y = frame.y + (frame.h - size.h) / 2 - obj.Y_NUDGE,
-  }
-end
-
 local function farFrom(a, b)
   if type(a) ~= "table" or type(b) ~= "table" then
     return true
@@ -171,18 +155,16 @@ local function farFrom(a, b)
     or math.abs((a.y or 0) - (b.y or 0)) > MOVE_EPSILON
 end
 
-local function moveBanner(window, banner)
+local function hideBanner(window, banner)
   local bannerPos = axGet(banner, "AXPosition")
   local bannerSize = axGet(banner, "AXSize")
   if type(bannerPos) ~= "table" or type(bannerSize) ~= "table" then
     return
   end
 
-  local target = targetForBanner(bannerSize)
-
   if axSettable(banner, "AXPosition") then
-    if farFrom(bannerPos, target) then
-      axSet(banner, "AXPosition", target)
+    if farFrom(bannerPos, HIDDEN_ORIGIN) then
+      axSet(banner, "AXPosition", HIDDEN_ORIGIN)
     end
     return
   end
@@ -197,8 +179,8 @@ local function moveBanner(window, banner)
   end
 
   local windowTarget = {
-    x = target.x - (bannerPos.x - windowPos.x),
-    y = target.y - (bannerPos.y - windowPos.y),
+    x = HIDDEN_ORIGIN.x - (bannerPos.x - windowPos.x),
+    y = HIDDEN_ORIGIN.y - (bannerPos.y - windowPos.y),
   }
   if farFrom(windowPos, windowTarget) then
     axSet(window, "AXPosition", windowTarget)
@@ -219,11 +201,11 @@ local function eachWindow(fn)
   end
 end
 
-local function reposition()
+local function hideVisibleBanners()
   eachWindow(function(window)
     local kind, banner = classifyWindow(window)
     if kind == "banner" and banner then
-      moveBanner(window, banner)
+      hideBanner(window, banner)
     end
   end)
 end
@@ -249,11 +231,11 @@ end
 function obj:dump()
   local app = notificationCenterApp()
   if not app then
-    print("notification_middle_right: dump: Notification Center is not running")
+    print("notification_hide: dump: Notification Center is not running")
     return self
   end
   if not hs.accessibilityState() then
-    print("notification_middle_right: dump: Hammerspoon is not trusted for Accessibility")
+    print("notification_hide: dump: Hammerspoon is not trusted for Accessibility")
   end
 
   local count = 0
@@ -261,7 +243,7 @@ function obj:dump()
     count = count + 1
     local windowKind = classifyWindow(window)
     print(string.format(
-      "notification_middle_right: window#%d windowKind=%s %s",
+      "notification_hide: window#%d windowKind=%s %s",
       count,
       windowKind,
       describe(window)
@@ -278,7 +260,7 @@ function obj:dump()
       local subrole = axGet(el, "AXSubrole")
       local identifier = axGet(el, "AXIdentifier")
       if subrole or identifier or axSettable(el, "AXPosition") then
-        print("notification_middle_right:   " .. describe(el))
+        print("notification_hide:   " .. describe(el))
       end
       for _, child in ipairs(axChildren(el)) do
         table.insert(pending, child)
@@ -287,7 +269,7 @@ function obj:dump()
   end)
 
   if count == 0 then
-    print("notification_middle_right: dump: no AXWindows (send a test banner first)")
+    print("notification_hide: dump: no AXWindows (send a test banner first)")
   end
   return self
 end
@@ -323,7 +305,7 @@ local function attachObserver()
 
   local observer = hs.axuielement.observer.new(app:pid())
   observer:callback(function()
-    reposition()
+    hideVisibleBanners()
   end)
   for _, notification in ipairs(watchNotifications()) do
     if notification then
@@ -348,7 +330,7 @@ function obj:start()
   obj._running = true
 
   if not hs.accessibilityState() then
-    print("notification_middle_right: Hammerspoon needs Accessibility permission")
+    print("notification_hide: Hammerspoon needs Accessibility permission")
   end
 
   attachObserver()
@@ -356,10 +338,10 @@ function obj:start()
     if not obj._observer and notificationCenterApp() then
       attachObserver()
     end
-    reposition()
+    hideVisibleBanners()
   end)
-  reposition()
-  print("notification_middle_right: started")
+  hideVisibleBanners()
+  print("notification_hide: started")
   return self
 end
 
@@ -375,7 +357,7 @@ function obj:stop()
     obj._observer = nil
   end
   obj._running = false
-  print("notification_middle_right: stopped")
+  print("notification_hide: stopped")
   return self
 end
 
