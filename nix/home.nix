@@ -6,8 +6,8 @@
 # Private dotfiles come from the dotfiles-private flake input. Directory
 # sources are linked recursively so a tool can still write runtime state
 # next to its managed files (e.g. ~/.config/nvim).
-# ~/.agents/skills is a single directory symlink from private so Cursor and
-# Codex share the same Agent Skills tree.
+# Agent skill trees are directory symlinks from private so Cursor and Codex
+# share the same managed configuration.
 { lib, inputs, ... }:
 
 let
@@ -40,9 +40,11 @@ in
         # Private dotfiles.
         ".aws" = { source = "${private}/.aws"; recursive = true; };
         ".snowsql" = { source = "${private}/.snowsql"; recursive = true; };
-        # Single directory symlink — recursive per-file links race on mkdir
-        # for this large CoCo skills tree (~2500 files).
+        ".agents/AGENTS.md".source = "${private}/.agents/AGENTS.md";
+        # Keep each Agent Skills tree as a single directory symlink. Recursive
+        # per-file links race on mkdir for the large Snowflake catalog.
         ".agents/skills".source = "${private}/.agents/skills";
+        ".agents/snowflake-skills".source = "${private}/.agents/snowflake-skills";
         ".ssh/config.d" = { source = "${private}/.ssh/config.d"; recursive = true; };
       };
   };
