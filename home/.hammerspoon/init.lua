@@ -18,6 +18,3 @@ end
 
 require("keymap")
 require("key-shortcut")
-
-notificationMiddleRight = require("notification_middle_right")
-notificationMiddleRight:start()
