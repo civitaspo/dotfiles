@@ -19,5 +19,5 @@ end
 require("keymap")
 require("key-shortcut")
 
-notificationMiddleRight = require("notification_middle_right")
-notificationMiddleRight:start()
+notificationHide = require("notification_hide")
+notificationHide:start()
