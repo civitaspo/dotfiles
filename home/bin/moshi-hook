@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+bin="/opt/homebrew/bin/moshi-hook"
+if [[ ! -x "${bin}" ]]; then
+  printf 'moshi-hook is not installed. Run: mise run brew\n' >&2
+  exit 1
+fi
+exec "${bin}" "$@"

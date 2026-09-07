@@ -136,6 +136,20 @@ the unsigned helper `.app`, which makes Gatekeeper show a false
 "damaged and can't be opened" dialog; `~/bin/terminal-browser` and
 `mise run setup:herdr` clear that quarantine attribute.
 
+## Moshi
+
+`mise run brew` installs [`moshi-hook`](https://getmoshi.app/docs/hooks)
+from the [`rjyo/moshi`](https://github.com/rjyo/homebrew-moshi) tap and
+starts the daemon with `brew services`. `~/bin/moshi-hook` (and `~/bin/moshi`)
+expose the CLI without putting Homebrew on `PATH`. `mise run tools` then
+runs `moshi-hook install` so supported agent CLIs report events to Moshi.
+
+Pair the host from the Moshi app (Settings → Hooks):
+
+```sh
+moshi-hook pair --token <token from Moshi>
+```
+
 ## Codex + Plannotator
 
 `mise run tools` installs [Plannotator](https://plannotator.ai/) and configures
@@ -168,6 +182,7 @@ These are manual and are not part of `mise run reconcile`:
 - Git commit signing via 1Password (`op-ssh-sign`)
 - `op signin`, `gh auth`, `gcloud auth`, AWS SSO, SnowSQL, and Atuin
 - Cursor, Claude Code, and Codex sign-in
+- `moshi-hook pair --token <token from Moshi>` (Settings → Hooks in the app)
 
 home-manager moves conflicting files aside with a `.backup` suffix.
 Activation disables Spotlight indexing. `mise run brew` uses
