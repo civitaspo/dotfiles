@@ -41,6 +41,7 @@ cask "civitaspo/dotfiles/reflect-open"
 cask "space-rabbit"
 cask "spotify"
 cask "tabtab"
+cask "terminal-browser"
 
 # --- Casks: fonts -----------------------------------------------------------
 cask "font-monaspice-nerd-font"

@@ -1,0 +1,51 @@
+# Herdr: agent-native terminal multiplexer (https://herdr.dev/).
+# Symlinked to ~/.config/herdr/config.toml by home-manager.
+
+onboarding = false
+
+[keys]
+prefix = "ctrl+t"
+# annotate.open uses the default prefix+o binding.
+open_notification_target = "prefix+shift+y"
+
+# terminal-browser (https://github.com/zenbu-labs/terminal-browser)
+[[keys.command]]
+key = "prefix+u"
+type = "plugin_action"
+command = "zenbu-labs.terminal-browser.open-split"
+description = "open terminal-browser in a right split"
+
+# herdr-annotate (https://github.com/plannotator/herdr-annotate)
+[[keys.command]]
+key = "prefix+a"
+type = "plugin_action"
+command = "annotate.capture"
+description = "annotate text"
+
+[[keys.command]]
+key = "prefix+shift+a"
+type = "plugin_action"
+command = "annotate.copy-context"
+description = "copy annotations as context"
+
+[[keys.command]]
+key = "prefix+m"
+type = "plugin_action"
+command = "annotate.manage"
+description = "manage annotations"
+
+[[keys.command]]
+key = "prefix+o"
+type = "plugin_action"
+command = "annotate.open"
+description = "review documents in this folder"
+
+[[keys.command]]
+key = "prefix+shift+o"
+type = "plugin_action"
+command = "annotate.last"
+description = "review the agent's last reply"
+
+[experimental]
+# Required for terminal-browser (and other Kitty-graphics panes) inside Herdr.
+kitty_graphics = true

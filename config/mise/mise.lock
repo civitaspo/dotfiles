@@ -355,6 +355,14 @@ checksum = "sha256:5e3100de0c5a248eebe6ab176ad94d6e12386af70a58c535368a4301861b1
 url = "https://github.com/x-motemen/ghq/releases/download/v1.10.1/ghq_darwin_arm64.zip"
 url_api = "https://api.github.com/repos/x-motemen/ghq/releases/assets/394135804"
 
+[[tools.bun]]
+version = "1.4.2"
+backend = "core:bun"
+
+[tools.bun."platforms.macos-arm64"]
+checksum = "sha256:90987a3a16d7db556d886ac3d551e7b6d3edf0a1cf43acaed622e8676be1d12f"
+url = "https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-darwin-aarch64.zip"
+
 [[tools."cargo:deadnix"]]
 version = "1.3.1"
 backend = "cargo:deadnix"

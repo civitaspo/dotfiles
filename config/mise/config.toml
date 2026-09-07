@@ -17,6 +17,8 @@ locked = true
 "aqua:spinel-coop/rv" = "latest"
 rust = "latest"
 deno = "latest"
+# Runtime for herdr-annotate plugin actions (https://github.com/plannotator/herdr-annotate).
+bun = "latest"
 java = "temurin-21"
 
 # --- CLI tools (formerly aqua) ----------------------------------------------

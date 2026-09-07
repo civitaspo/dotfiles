@@ -94,6 +94,31 @@ To change a configuration file, edit it under `config/` or `home/` and run
 After the first successful reconcile, home-manager puts mise on `PATH`, so
 `mise run …` works without the `~/.local/bin/mise` prefix.
 
+## Herdr
+
+`mise run tools` installs [Herdr](https://herdr.dev/) plugins after the
+locked CLI is on PATH. The prefix is `ctrl+t` (`config/herdr/config.toml`).
+
+[terminal-browser](https://github.com/zenbu-labs/terminal-browser) is a
+Homebrew cask; `mise run brew` installs it and `~/bin/terminal-browser`
+exposes the binary without putting Homebrew on `PATH`. The Herdr plugin
+opens it in a right split (`prefix+u`).
+
+[Herdr Annotate](https://github.com/plannotator/herdr-annotate) is the
+full install (terminal comments plus Plannotator TUI document review):
+
+| Key | Action |
+| --- | --- |
+| `prefix+a` | comment on the selected text |
+| `prefix+shift+a` | copy annotations as Markdown |
+| `prefix+m` | manage annotations |
+| `prefix+o` | review documents in this folder |
+| `prefix+shift+o` | review the agent's last reply |
+
+Kitty graphics is enabled so terminal-browser can render inside Herdr.
+The first launch of terminal-browser may prompt for Accessibility /
+Input Monitoring; grant those in System Settings.
+
 ## Codex + Plannotator
 
 `mise run tools` installs [Plannotator](https://plannotator.ai/) and configures
@@ -120,7 +145,8 @@ not require installing those skills.
 These are manual and are not part of `mise run reconcile`:
 
 - grant Accessibility / Input Monitoring / Screen Recording to Karabiner,
-  Hammerspoon, Space Rabbit, Homerow, Keyboard Maestro, and CleanShot
+  Hammerspoon, Space Rabbit, Homerow, Keyboard Maestro, CleanShot, and
+  terminal-browser
 - sign into paid apps (CleanShot, Keyboard Maestro, Mimestream, and others)
 - Git commit signing via 1Password (`op-ssh-sign`)
 - `op signin`, `gh auth`, `gcloud auth`, AWS SSO, SnowSQL, and Atuin
