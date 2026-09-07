@@ -54,6 +54,14 @@ if ! terminal_browser_installed; then
   exit 1
 fi
 
+# Unsigned helper .app is quarantined by Homebrew; Gatekeeper then reports
+# it as "damaged" on every launch. Clearing the attribute is enough.
+for dir in /opt/homebrew/Caskroom/terminal-browser "${HOME}/.local/share/terminal-browser"; do
+  if [[ -d "${dir}" ]]; then
+    xattr -dr com.apple.quarantine "${dir}" 2>/dev/null || true
+  fi
+done
+
 config="${XDG_CONFIG_HOME:-${HOME}/.config}/herdr/config.toml"
 if [[ -f "${config}" ]]; then
   "${herdr_bin}" config check
