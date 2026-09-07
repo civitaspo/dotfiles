@@ -7,13 +7,21 @@
 # to in-app updates; check stale Casks/ pins with `mise run livecheck:casks`.
 # Homebrew is intentionally NOT on $PATH --
 # `mise run brew` is the only entry point. CLI binaries come from mise, and
-# base packages plus pinned runtimes come from Nix.
+# base packages plus pinned runtimes come from Nix. The one formula below is
+# a host daemon whose official macOS service is `brew services`.
 
 # --- Taps -------------------------------------------------------------------
 # Clone from this checkout so Brewfile and Casks/ stay in sync.
 # `mise run brew` / `mise run update:brew` run `mise run brew:tap` first so
 # the installed tap remote matches `__dir__` (required for Homebrew 6 trust).
 tap "civitaspo/dotfiles", __dir__, trusted: true
+tap "rjyo/moshi", trusted: true
+
+# --- Formulae ---------------------------------------------------------------
+# moshi-hook: official macOS install is this tap plus `brew services`.
+# aqua-registry has no package, and `moshi-hook service install` is Linux-only.
+# `~/bin/moshi-hook` exposes the CLI without putting Homebrew on PATH.
+brew "rjyo/moshi/moshi-hook", restart_service: :changed
 
 # --- Casks: applications ----------------------------------------------------
 cask "1password"

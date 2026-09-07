@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#MISE description="Install Moshi agent hooks and start the brew service."
+
+set -euo pipefail
+
+brew="/opt/homebrew/bin/brew"
+moshi_hook="$(command -v moshi-hook || true)"
+
+if [[ -z "${moshi_hook}" && -x /opt/homebrew/bin/moshi-hook ]]; then
+  moshi_hook="/opt/homebrew/bin/moshi-hook"
+fi
+
+if [[ -z "${moshi_hook}" ]]; then
+  printf '[setup:moshi-hook] moshi-hook is not installed; run mise run brew\n' >&2
+  exit 1
+fi
+
+printf '[setup:moshi-hook] installing agent hooks\n'
+"${moshi_hook}" install
+
+if [[ -x "${brew}" ]]; then
+  if ! "${brew}" services list | grep -Eq '^moshi-hook[[:space:]]+started'; then
+    printf '[setup:moshi-hook] starting brew service\n'
+    "${brew}" services start moshi-hook
+  fi
+fi
+
+if ! "${moshi_hook}" status --json | python3 -c 'import json, sys; raise SystemExit(0 if json.load(sys.stdin).get("paired") else 1)'; then
+  printf '[setup:moshi-hook] pair this host from the Moshi app: moshi-hook pair --token <token>\n'
+fi
+
+printf '[setup:moshi-hook] moshi-hook ready\n'
