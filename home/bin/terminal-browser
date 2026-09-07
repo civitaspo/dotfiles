@@ -1,9 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Homebrew quarantines unsigned cask payloads. Gatekeeper then shows
+# "terminal-browser.app is damaged" each time the helper .app launches.
+clear_quarantine() {
+  local dir
+  for dir in /opt/homebrew/Caskroom/terminal-browser "${HOME}/.local/share/terminal-browser"; do
+    if [[ -d "${dir}" ]]; then
+      xattr -dr com.apple.quarantine "${dir}" 2>/dev/null || true
+    fi
+  done
+}
+
 bin="/opt/homebrew/bin/terminal-browser"
 if [[ ! -x "${bin}" ]]; then
   printf 'terminal-browser is not installed. Run: mise run brew\n' >&2
   exit 1
 fi
+clear_quarantine
 exec "${bin}" "$@"

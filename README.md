@@ -131,7 +131,10 @@ full install (terminal comments plus Plannotator TUI document review):
 
 Kitty graphics is enabled so terminal-browser can render inside Herdr.
 The first launch of terminal-browser may prompt for Accessibility /
-Input Monitoring; grant those in System Settings.
+Input Monitoring; grant those in System Settings. Homebrew quarantines
+the unsigned helper `.app`, which makes Gatekeeper show a false
+"damaged and can't be opened" dialog; `~/bin/terminal-browser` and
+`mise run setup:herdr` clear that quarantine attribute.
 
 ## Codex + Plannotator
 
