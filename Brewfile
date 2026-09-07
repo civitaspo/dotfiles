@@ -7,8 +7,8 @@
 # to in-app updates; check stale Casks/ pins with `mise run livecheck:casks`.
 # Homebrew is intentionally NOT on $PATH --
 # `mise run brew` is the only entry point. CLI binaries come from mise, and
-# base packages plus pinned runtimes come from Nix. The one formula below is
-# a host daemon whose official macOS service is `brew services`.
+# base packages plus pinned runtimes come from Nix. The formulae below are
+# the Moshi host stack (daemon + mosh transport); Homebrew stays off PATH.
 
 # --- Taps -------------------------------------------------------------------
 # Clone from this checkout so Brewfile and Casks/ stay in sync.
@@ -22,6 +22,9 @@ tap "rjyo/moshi", trusted: true
 # aqua-registry has no package, and `moshi-hook service install` is Linux-only.
 # `~/bin/moshi-hook` exposes the CLI without putting Homebrew on PATH.
 brew "rjyo/moshi/moshi-hook", restart_service: :changed
+# mosh: Moshi prefers this transport. Not in aqua-registry (no prebuilt
+# GitHub release). `~/bin/mosh{,-client,-server}` expose the binaries.
+brew "mosh"
 
 # --- Casks: applications ----------------------------------------------------
 cask "1password"

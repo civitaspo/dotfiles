@@ -140,9 +140,11 @@ the unsigned helper `.app`, which makes Gatekeeper show a false
 
 `mise run brew` installs [`moshi-hook`](https://getmoshi.app/docs/hooks)
 from the [`rjyo/moshi`](https://github.com/rjyo/homebrew-moshi) tap and
-starts the daemon with `brew services`. `~/bin/moshi-hook` (and `~/bin/moshi`)
-expose the CLI without putting Homebrew on `PATH`. `mise run tools` then
-runs `moshi-hook install` so supported agent CLIs report events to Moshi.
+starts the daemon with `brew services`. It also installs [mosh](https://mosh.org)
+so Moshi can use that transport. `~/bin/moshi-hook`, `~/bin/moshi`, and
+`~/bin/mosh{,-client,-server}` expose the CLIs without putting Homebrew on
+`PATH`. `mise run tools` then runs `moshi-hook install` so supported agent
+CLIs report events to Moshi.
 
 Pair the host from the Moshi app (Settings → Hooks):
 
