@@ -39,6 +39,7 @@ description = "Install locked tool versions with mise."
 run = [
   "mise install",
   { task = "setup:plannotator" },
+  { task = "setup:herdr" },
 ]
 
 [tasks.update]
@@ -115,8 +116,8 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
-  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
+  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/setup/herdr mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/setup/herdr mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
 ]
 
 [tasks."check:typos"]

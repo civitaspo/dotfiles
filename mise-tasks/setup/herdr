@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+#MISE description="Install Herdr plugins for terminal-browser and annotate."
+
+set -euo pipefail
+
+herdr_bin="$(command -v herdr || true)"
+
+if [[ -z "${herdr_bin}" ]]; then
+  printf '[setup:herdr] herdr is not available on PATH\n' >&2
+  exit 1
+fi
+
+plugin_is_installed() {
+  local plugin_id="$1"
+  "${herdr_bin}" plugin list --json 2>/dev/null | python3 -c '
+import json, sys
+
+plugin_id = sys.argv[1]
+try:
+    data = json.load(sys.stdin)
+except json.JSONDecodeError:
+    raise SystemExit(1)
+
+plugins = data.get("result", {}).get("plugins", [])
+raise SystemExit(0 if any(plugin.get("id") == plugin_id for plugin in plugins) else 1)
+' "${plugin_id}"
+}
+
+install_plugin() {
+  local spec="$1"
+  local plugin_id="$2"
+
+  if plugin_is_installed "${plugin_id}"; then
+    printf '[setup:herdr] plugin %s already installed\n' "${plugin_id}"
+    return 0
+  fi
+
+  printf '[setup:herdr] installing %s\n' "${spec}"
+  "${herdr_bin}" plugin install "${spec}" --yes
+}
+
+install_plugin "zenbu-labs/terminal-browser/herdr-plugin" "zenbu-labs.terminal-browser"
+install_plugin "plannotator/herdr-annotate" "annotate"
+
+terminal_browser_installed() {
+  command -v terminal-browser >/dev/null 2>&1 && return 0
+  [[ -x /opt/homebrew/bin/terminal-browser ]] && return 0
+  [[ -x "${HOME}/.local/bin/terminal-browser" ]] && return 0
+  return 1
+}
+
+if ! terminal_browser_installed; then
+  printf '[setup:herdr] terminal-browser is not installed; run mise run brew\n' >&2
+  exit 1
+fi
+
+config="${XDG_CONFIG_HOME:-${HOME}/.config}/herdr/config.toml"
+if [[ -f "${config}" ]]; then
+  "${herdr_bin}" config check
+fi
+
+printf '[setup:herdr] herdr plugins ready\n'
