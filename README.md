@@ -113,10 +113,11 @@ Layout and navigation (Emacs-style pane motion: `b`/`p`/`n`/`f`):
 | `prefix+ctrl+w` | new workspace |
 | `prefix+ctrl+d` | close workspace |
 
-[terminal-browser](https://github.com/zenbu-labs/terminal-browser) is a
-Homebrew cask; `mise run brew` installs it and `~/bin/terminal-browser`
-exposes the binary without putting Homebrew on `PATH`. The Herdr plugin
-opens it in a right split (`prefix+u`).
+[terminal-browser](https://github.com/zenbu-labs/terminal-browser) is
+installed by `mise run setup:herdr` via the official installer into
+`~/.local/share/terminal-browser`. `~/bin/terminal-browser` launches that
+binary (Homebrew is not on `PATH`). The Herdr plugin opens it in a right
+split (`prefix+u`).
 
 [Herdr Annotate](https://github.com/plannotator/herdr-annotate) is the
 full install (terminal comments plus Plannotator TUI document review):
@@ -131,10 +132,13 @@ full install (terminal comments plus Plannotator TUI document review):
 
 Kitty graphics is enabled so terminal-browser can render inside Herdr.
 The first launch of terminal-browser may prompt for Accessibility /
-Input Monitoring; grant those in System Settings. Homebrew quarantines
-the unsigned helper `.app`, which makes Gatekeeper show a false
-"damaged and can't be opened" dialog; `~/bin/terminal-browser` and
-`mise run setup:herdr` clear that quarantine attribute.
+Input Monitoring; grant those in System Settings. A Homebrew cask
+extract (or a plain `tar`) leaves the Electron helper `.app` with a
+broken signature, and Gatekeeper then shows a false "damaged and can't
+be opened" dialog on every helper launch — do not move it to Trash.
+Clearing quarantine is not enough; `~/bin/terminal-browser` and
+`mise run setup:herdr` strip extended attributes and ad-hoc re-sign
+every nested `.app` before launch.
 
 ## Moshi
 
