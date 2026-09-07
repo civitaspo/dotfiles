@@ -3,12 +3,41 @@
 
 set -euo pipefail
 
+# The upstream plugin build runs the official installer, which otherwise
+# launches `terminal-browser setup` (and the Gatekeeper dialog) mid-install.
+export TERMINAL_BROWSER_SKIP_SETUP=1
+
 herdr_bin="$(command -v herdr || true)"
 
 if [[ -z "${herdr_bin}" ]]; then
   printf '[setup:herdr] herdr is not available on PATH\n' >&2
   exit 1
 fi
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+# Prefer the repo copy so this task resigns even before `mise run switch`
+# replaces an older ~/bin wrapper that does not understand --prepare-only.
+wrapper="${repo_root}/home/bin/terminal-browser"
+if [[ ! -x "${wrapper}" ]]; then
+  wrapper="${HOME}/bin/terminal-browser"
+fi
+
+official_bin="${HOME}/.local/share/terminal-browser/app/bin/terminal-browser"
+
+install_terminal_browser() {
+  if [[ -x "${official_bin}" ]]; then
+    printf '[setup:herdr] terminal-browser already installed\n'
+    return 0
+  fi
+
+  printf '[setup:herdr] installing terminal-browser via official installer\n'
+  curl -fsSL https://terminal-browser.sh/install | bash
+
+  if [[ ! -x "${official_bin}" ]]; then
+    printf '[setup:herdr] official installer did not produce %s\n' "${official_bin}" >&2
+    exit 1
+  fi
+}
 
 plugin_is_installed() {
   local plugin_id="$1"
@@ -39,28 +68,12 @@ install_plugin() {
   "${herdr_bin}" plugin install "${spec}" --yes
 }
 
+install_terminal_browser
 install_plugin "zenbu-labs/terminal-browser/herdr-plugin" "zenbu-labs.terminal-browser"
 install_plugin "plannotator/herdr-annotate" "annotate"
 
-terminal_browser_installed() {
-  command -v terminal-browser >/dev/null 2>&1 && return 0
-  [[ -x /opt/homebrew/bin/terminal-browser ]] && return 0
-  [[ -x "${HOME}/.local/bin/terminal-browser" ]] && return 0
-  return 1
-}
-
-if ! terminal_browser_installed; then
-  printf '[setup:herdr] terminal-browser is not installed; run mise run brew\n' >&2
-  exit 1
-fi
-
-# Unsigned helper .app is quarantined by Homebrew; Gatekeeper then reports
-# it as "damaged" on every launch. Clearing the attribute is enough.
-for dir in /opt/homebrew/Caskroom/terminal-browser "${HOME}/.local/share/terminal-browser"; do
-  if [[ -d "${dir}" ]]; then
-    xattr -dr com.apple.quarantine "${dir}" 2>/dev/null || true
-  fi
-done
+# Plugin build re-extracts the tarball and can break signatures again.
+"${wrapper}" --prepare-only
 
 config="${XDG_CONFIG_HOME:-${HOME}/.config}/herdr/config.toml"
 if [[ -f "${config}" ]]; then

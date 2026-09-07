@@ -1,21 +1,95 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Homebrew quarantines unsigned cask payloads. Gatekeeper then shows
-# "terminal-browser.app is damaged" each time the helper .app launches.
-clear_quarantine() {
-  local dir
-  for dir in /opt/homebrew/Caskroom/terminal-browser "${HOME}/.local/share/terminal-browser"; do
-    if [[ -d "${dir}" ]]; then
-      xattr -dr com.apple.quarantine "${dir}" 2>/dev/null || true
+# Homebrew (and tar extract) leave the Electron helper .app with a broken
+# code signature. Gatekeeper then shows "terminal-browser.app is damaged"
+# on every helper launch. Quarantine removal alone is not enough: each
+# .app and companion Mach-O must be ad-hoc re-signed.
+OFFICIAL_BIN="${HOME}/.local/share/terminal-browser/app/bin/terminal-browser"
+BREW_BIN="/opt/homebrew/bin/terminal-browser"
+
+resolved_path() {
+  if command -v realpath >/dev/null 2>&1; then
+    realpath "$1"
+  else
+    python3 -c 'import os, sys; print(os.path.realpath(sys.argv[1]))' "$1"
+  fi
+}
+
+app_from_bin() {
+  local resolved app
+  resolved="$(resolved_path "$1" 2>/dev/null || true)"
+  if [[ "${resolved}" == *"/Contents/"* ]]; then
+    app="${resolved%%/Contents/*}"
+    if [[ "${app}" == *.app && -d "${app}" ]]; then
+      printf '%s\n' "${app}"
     fi
+  fi
+}
+
+# Deepest .app first so Electron helpers are signed before the parent.
+list_apps() {
+  local root="$1"
+  find "${root}" -name '*.app' -type d -print 2>/dev/null |
+    awk '{ print length, $0 }' |
+    sort -nr |
+    cut -d' ' -f2-
+}
+
+sign_macho() {
+  local path="$1"
+  [[ -e "${path}" ]] || return 0
+  xattr -cr "${path}" 2>/dev/null || true
+  if command -v codesign >/dev/null 2>&1; then
+    codesign --force --deep --sign - --timestamp=none "${path}" >/dev/null 2>&1 || true
+  fi
+}
+
+prepare_terminal_browser() {
+  [[ "$(uname -s)" == Darwin ]] || return 0
+
+  local root app bin
+  local -a roots
+
+  roots=()
+  [[ -d /opt/homebrew/Caskroom/terminal-browser ]] && roots+=("/opt/homebrew/Caskroom/terminal-browser")
+  [[ -d "${HOME}/.local/share/terminal-browser" ]] && roots+=("${HOME}/.local/share/terminal-browser")
+
+  for bin in "${OFFICIAL_BIN}" "${HOME}/.local/bin/terminal-browser" "${BREW_BIN}"; do
+    [[ -e "${bin}" ]] || continue
+    app="$(app_from_bin "${bin}")"
+    if [[ -n "${app}" ]]; then
+      roots+=("$(dirname "${app}")")
+    fi
+  done
+
+  for root in "${roots[@]}"; do
+    [[ -d "${root}" ]] || continue
+    while IFS= read -r app; do
+      [[ -z "${app}" ]] && continue
+      sign_macho "${app}"
+    done < <(list_apps "${root}")
+
+    while IFS= read -r bin; do
+      [[ -z "${bin}" ]] && continue
+      sign_macho "${bin}"
+    done < <(find "${root}" \( -name 'native-scroll-helper' -o -name 'agent-browser' -o -name 'pixel.node' \) -type f -print 2>/dev/null)
   done
 }
 
-bin="/opt/homebrew/bin/terminal-browser"
-if [[ ! -x "${bin}" ]]; then
-  printf 'terminal-browser is not installed. Run: mise run brew\n' >&2
-  exit 1
+prepare_terminal_browser
+
+if [[ "${1:-}" == "--prepare-only" ]]; then
+  exit 0
 fi
-clear_quarantine
-exec "${bin}" "$@"
+
+if [[ -x "${OFFICIAL_BIN}" ]]; then
+  exec "${OFFICIAL_BIN}" "$@"
+fi
+
+if [[ -x "${BREW_BIN}" ]]; then
+  exec "${BREW_BIN}" "$@"
+fi
+
+printf 'terminal-browser is not installed. Run: mise run setup:herdr\n' >&2
+exit 1
