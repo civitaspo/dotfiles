@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-exec "$(dirname "$0")/moshi-hook" "$@"
+exec moshi-hook "$@"

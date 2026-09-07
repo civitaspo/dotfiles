@@ -6,25 +6,15 @@
 # --no-vscode). Local tap casks are pinned after install so brew leaves them
 # to in-app updates; check stale Casks/ pins with `mise run livecheck:casks`.
 # Homebrew is intentionally NOT on $PATH --
-# `mise run brew` is the only entry point. CLI binaries come from mise, and
-# base packages plus pinned runtimes come from Nix. The formulae below are
-# the Moshi host stack (daemon + mosh transport); Homebrew stays off PATH.
+# `mise run brew` is the only entry point. Casks only; no formulae.
+# CLI binaries come from mise, and base packages plus pinned runtimes
+# come from Nix.
 
 # --- Taps -------------------------------------------------------------------
 # Clone from this checkout so Brewfile and Casks/ stay in sync.
 # `mise run brew` / `mise run update:brew` run `mise run brew:tap` first so
 # the installed tap remote matches `__dir__` (required for Homebrew 6 trust).
 tap "civitaspo/dotfiles", __dir__, trusted: true
-tap "rjyo/moshi", trusted: true
-
-# --- Formulae ---------------------------------------------------------------
-# moshi-hook: official macOS install is this tap plus `brew services`.
-# aqua-registry has no package, and `moshi-hook service install` is Linux-only.
-# `~/bin/moshi-hook` exposes the CLI without putting Homebrew on PATH.
-brew "rjyo/moshi/moshi-hook", restart_service: :changed
-# mosh: Moshi prefers this transport. Not in aqua-registry (no prebuilt
-# GitHub release). `~/bin/mosh{,-client,-server}` expose the binaries.
-brew "mosh"
 
 # --- Casks: applications ----------------------------------------------------
 cask "1password"
