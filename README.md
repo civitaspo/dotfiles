@@ -138,11 +138,11 @@ the unsigned helper `.app`, which makes Gatekeeper show a false
 
 ## Moshi
 
-`mise run brew` installs [`moshi-hook`](https://getmoshi.app/docs/hooks)
-from the [`rjyo/moshi`](https://github.com/rjyo/homebrew-moshi) tap and
-starts the daemon with `brew services`. `~/bin/moshi-hook` (and `~/bin/moshi`)
-expose the CLI without putting Homebrew on `PATH`. `mise run tools` then
-runs `moshi-hook install` so supported agent CLIs report events to Moshi.
+`mise run tools` installs [`moshi-hook`](https://getmoshi.app/docs/hooks)
+from the upstream CDN (aqua-registry has no package) and runs
+`moshi-hook install`. A login LaunchAgent keeps `moshi-hook serve` running.
+[mosh](https://mosh.org) is a nix-darwin base package: upstream has no
+aqua or GitHub binary release, and Homebrew formulae are not used.
 
 Pair the host from the Moshi app (Settings → Hooks):
 
