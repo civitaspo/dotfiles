@@ -158,9 +158,14 @@ moshi-hook pair --token <token from Moshi>
 
 `mise run tools` installs [Plannotator](https://plannotator.ai/) and configures
 its Codex `Stop` hook in `$CODEX_HOME` or `~/.codex`. The setup enables Codex's
-experimental hooks feature and merges an absolute mise shim path into the
-existing `hooks.json`, so existing Codex hooks remain in place. Restart Codex
-Desktop after the first setup.
+hooks feature (`[features] hooks = true`) and merges an absolute mise shim
+path into the existing `hooks.json`, so existing Codex hooks remain in place.
+Restart Codex Desktop after the first setup.
+
+Locked Codex is 0.153.4 or newer. That release accepts nested `[features.*]`
+tables such as `[features.context_management] experimental_mode = true`.
+0.152 treated every `[features]` value as a boolean and refused to start
+with `invalid type: map, expected a boolean`.
 
 Plan review opens automatically when Codex finishes a plan. Code review and
 document annotation are available from a Codex prompt:

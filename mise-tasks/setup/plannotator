@@ -15,6 +15,8 @@ fi
 
 mkdir -p "${codex_dir}"
 
+# Only edit the [features] table. Nested [features.*] blocks (for example
+# [features.context_management]) are valid on Codex 0.153+ and must stay maps.
 enable_codex_hooks() {
   if [[ ! -f "${codex_config}" ]]; then
     cat >"${codex_config}" <<'EOF'

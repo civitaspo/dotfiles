@@ -89,7 +89,8 @@ gcloud = "latest"
 claude-code = "latest"
 # Resolves to aqua:openai/codex (package tar.gz since rust-v0.133.0). Requires a
 # recent mise so the baked aqua registry matches mise.lock; bootstrap.sh pins
-# that mise version.
+# that mise version. 0.153+ is required to parse nested [features.*] tables
+# such as [features.context_management].
 codex = "latest"
 # Inline review UI for agent plans/diffs (https://crit.md/).
 "github:tomasz-tomczyk/crit" = "latest"
