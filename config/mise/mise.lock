@@ -283,22 +283,22 @@ url_api = "https://api.github.com/repos/lima-vm/lima/releases/assets/484813994"
 provenance = "github-attestations"
 
 [[tools."aqua:marp-team/marp-cli"]]
-version = "4.5.0"
+version = "4.5.1"
 backend = "aqua:marp-team/marp-cli"
 
 [tools."aqua:marp-team/marp-cli"."platforms.macos-arm64"]
-checksum = "sha256:f4a0f1e6948aa1c6b71d5e4036b6b96cdfbb24e4090e310d4858aad857199a28"
-url = "https://github.com/marp-team/marp-cli/releases/download/v4.5.0/marp-cli-v4.5.0-mac.tar.gz"
-url_api = "https://api.github.com/repos/marp-team/marp-cli/releases/assets/480911889"
+checksum = "sha256:c012c91e2e6b130c8352522631b1597f156547a1dc961f5ce121839cf003f4b7"
+url = "https://github.com/marp-team/marp-cli/releases/download/v4.5.1/marp-cli-v4.5.1-mac.tar.gz"
+url_api = "https://api.github.com/repos/marp-team/marp-cli/releases/assets/546511603"
 
 [[tools."aqua:mvdan/sh"]]
-version = "3.14.0"
+version = "3.14.1"
 backend = "aqua:mvdan/sh"
 
 [tools."aqua:mvdan/sh"."platforms.macos-arm64"]
-checksum = "sha256:4710ba8074a74334069719d5b82f8cb97532e5623bfe43ef7cdb3442101b9cb2"
-url = "https://github.com/mvdan/sh/releases/download/v3.14.0/shfmt_v3.14.0_darwin_arm64"
-url_api = "https://api.github.com/repos/mvdan/sh/releases/assets/534120008"
+checksum = "sha256:b7c872db63553ccffc7253aba3ed7d4885a27d83f1ba567b1138c6315a5847e5"
+url = "https://github.com/mvdan/sh/releases/download/v3.14.1/shfmt_v3.14.1_darwin_arm64"
+url_api = "https://api.github.com/repos/mvdan/sh/releases/assets/547320930"
 
 [[tools."aqua:neovim/neovim"]]
 version = "0.12.5"
@@ -364,13 +364,13 @@ version = "0.23.5"
 backend = "cargo:eza"
 
 [[tools.claude-code]]
-version = "2.1.261"
+version = "2.1.263"
 backend = "aqua:anthropics/claude-code"
 
 [tools.claude-code."platforms.macos-arm64"]
-checksum = "sha256:041fe31aabf7cd5111bc916e5dc0b5b3a2e8d456a0e007b364beaf602f68c265"
-url = "https://github.com/anthropics/claude-code/releases/download/v2.1.261/claude-darwin-arm64.tar.gz"
-url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/544686529"
+checksum = "sha256:c41b084242538dc94adb60b9cc74dab7571e1eb1d51ac7fb6c60fa9f16531765"
+url = "https://github.com/anthropics/claude-code/releases/download/v2.1.263/claude-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/546595143"
 
 [[tools.codex]]
 version = "0.152.0"
