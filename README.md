@@ -99,6 +99,20 @@ After the first successful reconcile, home-manager puts mise on `PATH`, so
 `mise run tools` installs [Herdr](https://herdr.dev/) plugins after the
 locked CLI is on PATH. The prefix is `ctrl+t` (`config/herdr/config.toml`).
 
+Layout and navigation (Emacs-style pane motion: `b`/`p`/`n`/`f`):
+
+| Key | Action |
+| --- | --- |
+| `prefix+t` | new tab |
+| `prefix+\|` | split right |
+| `prefix+-` | split down |
+| `prefix+ctrl+b` / `+p` / `+n` / `+f` | focus pane left / up / down / right |
+| `prefix+shift+b` / `+p` / `+n` / `+f` | swap pane left / up / down / right |
+| `prefix+ctrl+r` | rename tab |
+| `prefix+ctrl+x` | close tab |
+| `prefix+ctrl+w` | new workspace |
+| `prefix+ctrl+d` | close workspace |
+
 [terminal-browser](https://github.com/zenbu-labs/terminal-browser) is a
 Homebrew cask; `mise run brew` installs it and `~/bin/terminal-browser`
 exposes the binary without putting Homebrew on `PATH`. The Herdr plugin
