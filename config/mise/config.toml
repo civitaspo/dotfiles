@@ -98,13 +98,6 @@ codex = "latest"
 "github:backnotprop/plannotator" = "latest"
 # Agent-native terminal multiplexer (https://herdr.dev/).
 "aqua:herdrdev/herdr" = "latest"
-# Moshi host daemon (https://getmoshi.app). Not in aqua-registry; same CDN
-# tarball the rjyo/moshi tap ships. Homebrew formulae are not used.
-[tools."http:moshi-hook"]
-version = "0.3.19"
-url = "https://cdn.getmoshi.app/hook/v0.3.19/moshi-hook_Darwin_arm64.tar.gz"
-checksum = "sha256:bdaeeb011329e7a5caffcf9c176906f79ee7dcba3b8217743ae89ccfb7ae4773"
-
 [tools."npm:@mermaid-js/mermaid-cli"]
 version = "latest"
 # cytoscape 3.34.1 dropped trusted-publisher metadata that 3.33.4 had.

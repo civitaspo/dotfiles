@@ -140,20 +140,6 @@ Clearing quarantine is not enough; `~/bin/terminal-browser` and
 `mise run setup:herdr` strip extended attributes and ad-hoc re-sign
 every nested `.app` before launch.
 
-## Moshi
-
-`mise run tools` installs [`moshi-hook`](https://getmoshi.app/docs/hooks)
-from the upstream CDN (aqua-registry has no package) and runs
-`moshi-hook install`. A login LaunchAgent keeps `moshi-hook serve` running.
-[mosh](https://mosh.org) is a nix-darwin base package: upstream has no
-aqua or GitHub binary release, and Homebrew formulae are not used.
-
-Pair the host from the Moshi app (Settings → Hooks):
-
-```sh
-moshi-hook pair --token <token from Moshi>
-```
-
 ## Codex + Plannotator
 
 `mise run tools` installs [Plannotator](https://plannotator.ai/) and configures
@@ -191,7 +177,6 @@ These are manual and are not part of `mise run reconcile`:
 - Git commit signing via 1Password (`op-ssh-sign`)
 - `op signin`, `gh auth`, `gcloud auth`, AWS SSO, SnowSQL, and Atuin
 - Cursor, Claude Code, and Codex sign-in
-- `moshi-hook pair --token <token from Moshi>` (Settings → Hooks in the app)
 
 home-manager moves conflicting files aside with a `.backup` suffix.
 Activation disables Spotlight indexing. `mise run brew` uses

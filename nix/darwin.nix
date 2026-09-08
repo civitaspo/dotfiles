@@ -139,9 +139,6 @@ in
     gnupg
     git
     git-lfs
-    # Moshi transport. No aqua/GitHub binary release; Homebrew formulae are
-    # not used, so this is a base CLI package like git/curl.
-    mosh
     htop
     mas
     zsh-autosuggestions
