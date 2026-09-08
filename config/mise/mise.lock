@@ -415,13 +415,13 @@ url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/
 provenance = "github-attestations"
 
 [[tools."github:k1LoW/mo"]]
-version = "1.6.7"
+version = "1.6.8"
 backend = "github:k1LoW/mo"
 
 [tools."github:k1LoW/mo"."platforms.macos-arm64"]
-checksum = "sha256:83c0efa272b3044c8189f6ffb74bc6ecb20e3d9299eed476e63ee72d149643f4"
-url = "https://github.com/k1LoW/mo/releases/download/v1.6.7/mo_v1.6.7_darwin_arm64.zip"
-url_api = "https://api.github.com/repos/k1LoW/mo/releases/assets/499857651"
+checksum = "sha256:234fc265409944a46b90e63ab48917b472a1390b83864593b587f4cf636a5238"
+url = "https://github.com/k1LoW/mo/releases/download/v1.6.8/mo_v1.6.8_darwin_arm64.zip"
+url_api = "https://api.github.com/repos/k1LoW/mo/releases/assets/548262175"
 provenance = "github-attestations"
 
 [[tools."github:sorairolake/qrtool"]]
