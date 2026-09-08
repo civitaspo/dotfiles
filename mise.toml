@@ -40,7 +40,6 @@ run = [
   "mise install",
   { task = "setup:plannotator" },
   { task = "setup:herdr" },
-  { task = "setup:moshi-hook" },
 ]
 
 [tasks.update]
@@ -117,8 +116,8 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/setup/herdr mise-tasks/setup/moshi-hook mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
-  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/setup/herdr mise-tasks/setup/moshi-hook mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
+  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/setup/herdr mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/setup/herdr mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
 ]
 
 [tasks."check:typos"]
