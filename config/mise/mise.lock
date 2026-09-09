@@ -95,11 +95,11 @@ url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/538647916"
 provenance = "github-attestations"
 
 [[tools."aqua:aws/aws-cli"]]
-version = "2.36.40"
+version = "2.36.41"
 backend = "aqua:aws/aws-cli"
 
 [tools."aqua:aws/aws-cli"."platforms.macos-arm64"]
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.36.40.pkg"
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.36.41.pkg"
 
 [[tools."aqua:aws/session-manager-plugin"]]
 version = "1.2.835.0"
@@ -218,13 +218,13 @@ url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/53
 provenance = "github-attestations"
 
 [[tools."aqua:herdrdev/herdr"]]
-version = "0.8.2"
+version = "0.9.0"
 backend = "aqua:herdrdev/herdr"
 
 [tools."aqua:herdrdev/herdr"."platforms.macos-arm64"]
-checksum = "sha256:a5d4f4d504d8b309c91f811050559300faba31258425f53c50852fc96f6ae574"
-url = "https://github.com/herdrdev/herdr/releases/download/v0.8.2/herdr-macos-aarch64"
-url_api = "https://api.github.com/repos/herdrdev/herdr/releases/assets/521169108"
+checksum = "sha256:32b53df09872628059c789a69f02a6b8e29e14ddf26711421f3463f70c1aef17"
+url = "https://github.com/herdrdev/herdr/releases/download/v0.9.0/herdr-macos-aarch64"
+url_api = "https://api.github.com/repos/herdrdev/herdr/releases/assets/549270162"
 
 [[tools."aqua:jesseduffield/lazygit"]]
 version = "0.65.0"
@@ -398,11 +398,11 @@ checksum = "sha256:213a2f304f04d3c9cb5220669afad138f60a5aab1fe80962abdeb8f35807a
 url = "https://dl.deno.land/release/v2.9.6/deno-aarch64-apple-darwin.zip"
 
 [[tools.gcloud]]
-version = "583.0.0"
+version = "584.0.0"
 backend = "vfox:mise-plugins/vfox-gcloud"
 
 [tools.gcloud."platforms.macos-arm64"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-583.0.0-darwin-arm.tar.gz"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-584.0.0-darwin-arm.tar.gz"
 
 [[tools."github:backnotprop/plannotator"]]
 version = "0.27.12"
@@ -434,13 +434,13 @@ url = "https://github.com/sorairolake/qrtool/releases/download/v0.13.2/qrtool-v0
 url_api = "https://api.github.com/repos/sorairolake/qrtool/releases/assets/331043334"
 
 [[tools."github:tomasz-tomczyk/crit"]]
-version = "0.20.0"
+version = "0.20.1"
 backend = "github:tomasz-tomczyk/crit"
 
 [tools."github:tomasz-tomczyk/crit"."platforms.macos-arm64"]
-checksum = "sha256:de8e6edd1ea146c57ee0fda4f2a609e9e1185474aba7081b0b4a93459d7a2231"
-url = "https://github.com/tomasz-tomczyk/crit/releases/download/v0.20.0/crit-darwin-arm64"
-url_api = "https://api.github.com/repos/tomasz-tomczyk/crit/releases/assets/544722226"
+checksum = "sha256:3db861c0d4abf0c5c62c54c5f167c2a601d3587fc00046cc2cf27fed6d8f7fe5"
+url = "https://github.com/tomasz-tomczyk/crit/releases/download/v0.20.1/crit-darwin-arm64"
+url_api = "https://api.github.com/repos/tomasz-tomczyk/crit/releases/assets/550423705"
 
 [[tools."http:antigravity-cli"]]
 version = "1.0.3"
