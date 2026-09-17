@@ -68,8 +68,12 @@ git -C "$tap_path" reset --hard --quiet "$head_sha"
 "$brew" trust "$(git -C "$tap_path" remote get-url origin)"
 
 shopt -s nullglob
+pinned_casks="$("$brew" list --cask --pinned)"
 for cask_file in "$repo_root"/Casks/*.rb; do
   name="$(basename "$cask_file" .rb)"
+  if grep -Fxq "$name" <<< "$pinned_casks"; then
+    continue
+  fi
   if "$brew" list --cask "$name" >/dev/null 2>&1; then
     "$brew" pin --cask "$name"
   fi
