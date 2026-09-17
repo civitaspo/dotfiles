@@ -94,52 +94,6 @@ To change a configuration file, edit it under `config/` or `home/` and run
 After the first successful reconcile, home-manager puts mise on `PATH`, so
 `mise run …` works without the `~/.local/bin/mise` prefix.
 
-## Herdr
-
-`mise run tools` installs [Herdr](https://herdr.dev/) plugins after the
-locked CLI is on PATH. The prefix is `ctrl+t` (`config/herdr/config.toml`).
-
-Layout and navigation (Emacs-style pane motion: `b`/`p`/`n`/`f`):
-
-| Key | Action |
-| --- | --- |
-| `prefix+t` | new tab |
-| `prefix+\|` | split right |
-| `prefix+-` | split down |
-| `prefix+ctrl+b` / `+p` / `+n` / `+f` | focus pane left / up / down / right |
-| `prefix+shift+b` / `+p` / `+n` / `+f` | swap pane left / up / down / right |
-| `prefix+ctrl+r` | rename tab |
-| `prefix+ctrl+x` | close tab |
-| `prefix+ctrl+w` | new workspace |
-| `prefix+ctrl+d` | close workspace |
-
-[terminal-browser](https://github.com/zenbu-labs/terminal-browser) is
-installed by `mise run setup:herdr` via the official installer into
-`~/.local/share/terminal-browser`. `~/bin/terminal-browser` launches that
-binary (Homebrew is not on `PATH`). The Herdr plugin opens it in a right
-split (`prefix+u`).
-
-[Herdr Annotate](https://github.com/plannotator/herdr-annotate) is the
-full install (terminal comments plus Plannotator TUI document review):
-
-| Key | Action |
-| --- | --- |
-| `prefix+a` | comment on the selected text |
-| `prefix+shift+a` | copy annotations as Markdown |
-| `prefix+m` | manage annotations |
-| `prefix+o` | review documents in this folder |
-| `prefix+shift+o` | review the agent's last reply |
-
-Kitty graphics is enabled so terminal-browser can render inside Herdr.
-The first launch of terminal-browser may prompt for Accessibility /
-Input Monitoring; grant those in System Settings. A Homebrew cask
-extract (or a plain `tar`) leaves the Electron helper `.app` with a
-broken signature, and Gatekeeper then shows a false "damaged and can't
-be opened" dialog on every helper launch — do not move it to Trash.
-Clearing quarantine is not enough; `~/bin/terminal-browser` and
-`mise run setup:herdr` strip extended attributes and ad-hoc re-sign
-every nested `.app` before launch.
-
 ## Codex + Plannotator
 
 `mise run tools` installs [Plannotator](https://plannotator.ai/) and configures
@@ -171,8 +125,7 @@ the commands above do not require installing those skills.
 These are manual and are not part of `mise run reconcile`:
 
 - grant Accessibility / Input Monitoring / Screen Recording to Karabiner,
-  Hammerspoon, Space Rabbit, Homerow, Keyboard Maestro, CleanShot, and
-  terminal-browser
+  Hammerspoon, Space Rabbit, Homerow, Keyboard Maestro, and CleanShot
 - sign into paid apps (CleanShot, Keyboard Maestro, Mimestream, and others)
 - Git commit signing via 1Password (`op-ssh-sign`)
 - `op signin`, `gh auth`, `gcloud auth`, AWS SSO, SnowSQL, and Atuin
