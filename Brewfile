@@ -20,6 +20,7 @@ tap "civitaspo/dotfiles", __dir__, trusted: true
 cask "1password"
 cask "aqua-voice"
 cask "azookey"
+cask "claude"
 cask "cleanshot"
 cask "codex-app"
 cask "cursor"
