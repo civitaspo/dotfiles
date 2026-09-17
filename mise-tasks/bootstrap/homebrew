@@ -2,8 +2,8 @@
 #MISE description="Install the pinned Homebrew package."
 set -euo pipefail
 
-BREW_VERSION="6.0.18"
-BREW_SHA256="dc892c034bf7c5567489bd02c34301e9cc63faf246c69372639c943cf5006d12"
+BREW_VERSION="7.0.3"
+BREW_SHA256="3be09c595d37a32e738144ff2af62eb3e84ab0acdd3cf1e81532169a2bffb9af"
 BREW_URL="https://github.com/Homebrew/brew/releases/download/${BREW_VERSION}/Homebrew.pkg"
 BREW_BIN="/opt/homebrew/bin/brew"
 
