@@ -2,8 +2,7 @@ cask "nospace" do
   version "0.1.7"
   sha256 "14f4012a6da34fae84ab90753143e06cd9cdec3290f9829265a21354c60cafb5"
 
-  url "https://github.com/ryotarai/nospace-public/releases/download/v#{version}/Nospace-#{version}.zip",
-      verified: "github.com/ryotarai/nospace-public/"
+  url "https://github.com/ryotarai/nospace-public/releases/download/v#{version}/Nospace-#{version}.zip"
   name "Nospace"
   desc "Menu bar app for AI Japanese conversion without space-key henkan"
   homepage "https://nospace.ryotarai.dev/"

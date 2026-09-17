@@ -5,8 +5,7 @@ cask "reflect-open" do
   sha256 arm:   "a24c0a3a22f003f96e2647212ff42df68934c01522ba4f497bf3e71c8eb923ba",
          intel: "b69b15cb90a69d84e9c71b798842c84ca307334710189a163c82fbe546e66ce4"
 
-  url "https://github.com/team-reflect/reflect-open/releases/download/v#{version}/Reflect.Beta_#{arch}.dmg",
-      verified: "github.com/team-reflect/reflect-open/"
+  url "https://github.com/team-reflect/reflect-open/releases/download/v#{version}/Reflect.Beta_#{arch}.dmg"
   name "Reflect Open"
   desc "Open-source rewrite of the Reflect notes app (beta channel)"
   homepage "https://github.com/team-reflect/reflect-open"

@@ -2,8 +2,7 @@ cask "kanary" do
   version "2.4.2"
   sha256 "67b5c75361e4941b85c86311bc00a28773a498eb9858e6fedd12fa830b054b07"
 
-  url "https://cdn.kanary.download/releases/Kanary-#{version}.zip",
-      verified: "cdn.kanary.download/releases/"
+  url "https://cdn.kanary.download/releases/Kanary-#{version}.zip"
   name "Kanary"
   desc "Menu bar app for on-device meeting recording and keyboard remapping"
   homepage "https://kanary.download/"
