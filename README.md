@@ -163,8 +163,8 @@ document annotation are available from a Codex prompt:
 ```
 
 The public repository does not manage Codex session state or the shared private
-`~/.agents/skills` and `~/.agents/snowflake-skills` trees; the commands above do
-not require installing those skills.
+skill trees (`~/.cursor/skills`, `~/.codex/skills`, and the Snowflake catalogs);
+the commands above do not require installing those skills.
 
 ## After the first reconcile
 
