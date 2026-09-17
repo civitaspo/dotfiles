@@ -6,8 +6,8 @@
 # Private dotfiles come from the dotfiles-private flake input. Directory
 # sources are linked recursively so a tool can still write runtime state
 # next to its managed files (e.g. ~/.config/nvim).
-# Agent skill trees are directory symlinks from private so Cursor and Codex
-# share the same managed configuration.
+# Agent skill trees stay in the private repo under home/.agents/. home-manager
+# does not install ~/.agents; Cursor and Codex each get their own skills root.
 { lib, inputs, ... }:
 
 let
@@ -40,11 +40,15 @@ in
         # Private dotfiles.
         ".aws" = { source = "${private}/.aws"; recursive = true; };
         ".snowsql" = { source = "${private}/.snowsql"; recursive = true; };
-        ".agents/AGENTS.md".source = "${private}/.agents/AGENTS.md";
-        # Keep each Agent Skills tree as a single directory symlink. Recursive
+        # Keep each skill tree as a single directory symlink. Recursive
         # per-file links race on mkdir for the large Snowflake catalog.
-        ".agents/skills".source = "${private}/.agents/skills";
-        ".agents/snowflake-skills".source = "${private}/.agents/snowflake-skills";
+        # Cursor Cloud Agents copy ~/.cursor/skills/ only. Codex reads
+        # ~/.codex/skills/. The catalog sits beside those roots so it is
+        # not auto-scanned.
+        ".cursor/skills".source = "${private}/.agents/skills";
+        ".codex/skills".source = "${private}/.agents/skills";
+        ".cursor/snowflake-skills".source = "${private}/.agents/snowflake-skills";
+        ".codex/snowflake-skills".source = "${private}/.agents/snowflake-skills";
         ".ssh/config.d" = { source = "${private}/.ssh/config.d"; recursive = true; };
       };
   };

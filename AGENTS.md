@@ -48,5 +48,8 @@ mise; `mise run bootstrap` installs Nix and Homebrew.
 This is a **public** repository. Never commit anything tied to an employer or
 other private context. Such configuration belongs in the private repository
 `civitaspo/dotfiles-private`, which supplies `~/.aws/config`,
-`~/.ssh/config.d/`, `~/.snowsql/config`, `~/.agents/AGENTS.md`,
-`~/.agents/skills/`, `~/.agents/snowflake-skills/`, and `~/.config/deck/`.
+`~/.ssh/config.d/`, `~/.snowsql/config`, `~/.cursor/skills/` and
+`~/.codex/skills/` (from private `home/.agents/skills/`),
+`~/.cursor/snowflake-skills/` and `~/.codex/snowflake-skills/` (from private
+`home/.agents/snowflake-skills/`), and `~/.config/deck/`. Do not install
+`~/.agents`; that tree stays inside the private repository.
