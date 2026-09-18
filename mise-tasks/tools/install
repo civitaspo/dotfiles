@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#MISE description="Install configured tools and repair empty installations."
+set -euo pipefail
+
+configured_tools() {
+  mise ls --current --json | jq -r 'to_entries[] | .key as $tool | .value[] | [($tool + "@" + .version), .install_path] | @tsv'
+}
+
+has_payload() {
+  [[ -d "$1" ]] || return 1
+  local files
+  # Accept valid symlinks, including externally managed runtime directories.
+  files="$(find "$1" \( -type f -o \( -type l -exec test -e {} \; \) \) -print -quit)" || exit 1
+  [[ -n "$files" ]]
+}
+
+mise install
+tools="$(configured_tools)"
+while IFS=$'\t' read -r tool install_path; do
+  [[ -n "$tool" ]] || continue
+  if ! has_payload "$install_path"; then
+    printf '[tools:install] repairing empty installation: %s\n' "$tool"
+    mise install --force "$tool"
+    if ! has_payload "$install_path"; then
+      printf '[tools:install] %s is still empty after reinstall\n' "$tool" >&2
+      exit 1
+    fi
+  fi
+done <<<"$tools"

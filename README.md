@@ -94,6 +94,12 @@ To change a configuration file, edit it under `config/` or `home/` and run
 After the first successful reconcile, home-manager puts mise on `PATH`, so
 `mise run …` works without the `~/.local/bin/mise` prefix.
 
+`mise run tools` (also part of `reconcile`) reinstalls configured tools whose
+installation directories contain no files, even when mise reports them as
+installed. Healthy installations and unused versions are left alone. An empty
+installation after repair fails the task. This checks for missing contents;
+it does not verify every installed file's checksum or runtime behavior.
+
 ## Codex + Plannotator
 
 `mise run tools` installs [Plannotator](https://plannotator.ai/) and configures
