@@ -49,7 +49,12 @@ This is a **public** repository. Never commit anything tied to an employer or
 other private context. Such configuration belongs in the private repository
 `civitaspo/dotfiles-private`, which supplies `~/.aws/config`,
 `~/.ssh/config.d/`, `~/.snowsql/config`, `~/.cursor/skills/` and
-`~/.codex/skills/` (from private `home/.agents/skills/`),
-`~/.cursor/snowflake-skills/` and `~/.codex/snowflake-skills/` (from private
+`~/.codex/skills/` (from private `home/.agents/skills/`), flattened
+`~/.claude/skills/<name>/` for Claude Code (same source tree; Claude Code
+does not recurse nested `SKILL.md`), `~/.cursor/snowflake-skills/`,
+`~/.codex/snowflake-skills/`, and `~/.claude/snowflake-skills/` (from private
 `home/.agents/snowflake-skills/`), and `~/.config/deck/`. Do not install
 `~/.agents`; that tree stays inside the private repository.
+
+Claude Code does not load this `AGENTS.md` on its own. The repository
+`CLAUDE.md` imports it with `@AGENTS.md`.
