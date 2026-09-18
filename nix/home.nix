@@ -25,6 +25,9 @@ let
 
   # Directories that contain SKILL.md, stopping at that leaf. Claude Code
   # only loads ~/.claude/skills/<name>/SKILL.md and does not recurse.
+  # Carry the basename from readDir so home.file keys stay free of Nix
+  # string context; baseNameOf (toString path) keeps a store-path context
+  # and fails eval with "is not allowed to refer to a store path".
   collectSkillDirs = dir:
     let
       entries = builtins.readDir dir;
@@ -35,7 +38,7 @@ let
         if entries.${name} != "directory" then
           [ ]
         else if builtins.pathExists (path + "/SKILL.md") then
-          [ path ]
+          [ { inherit name path; } ]
         else
           collectSkillDirs path;
     in
@@ -43,20 +46,19 @@ let
 
   claudeSkillLinks =
     let
-      dirs = collectSkillDirs (private + "/.agents/skills");
-      skillName = d: baseNameOf (toString d);
-      grouped = lib.groupBy skillName dirs;
+      skills = collectSkillDirs (private + "/.agents/skills");
+      grouped = lib.groupBy (s: s.name) skills;
       collisions = lib.filterAttrs (_: xs: lib.length xs > 1) grouped;
     in
     assert lib.assertMsg
       (collisions == { })
       "Duplicate Claude skill basenames under home/.agents/skills: ${lib.concatStringsSep ", " (lib.attrNames collisions)}";
     lib.listToAttrs (map
-      (d: {
-        name = ".claude/skills/${skillName d}";
-        value = { source = d; };
+      (s: {
+        name = ".claude/skills/${s.name}";
+        value = { source = s.path; };
       })
-      dirs);
+      skills);
 in
 {
   home = {
