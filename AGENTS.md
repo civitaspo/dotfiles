@@ -29,10 +29,6 @@ mise; `mise run bootstrap` installs Nix and Homebrew.
   when a prebuilt exists.
 - Keep `mise.toml` declarative; use a file task for defensive shell logic
   (e.g. `brew:tap`).
-- Cursor Cloud Agents install Claude Code and Codex with
-  `scripts/cloud-agent/install-coding-clis.sh` and wire Runtime Secrets plus
-  `~/.cursor/skills` in `scripts/cloud-agent/start-coding-clis.sh`. Do not put
-  tokens in those scripts. Local Macs keep using mise and a normal CLI login.
 
 ## Git workflow
 
