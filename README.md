@@ -131,6 +131,10 @@ These are manual and are not part of `mise run reconcile`:
 - Git commit signing via 1Password (`op-ssh-sign`)
 - `op signin`, `gh auth`, `gcloud auth`, AWS SSO, SnowSQL, and Atuin
 - Cursor, Claude Code, and Codex sign-in
+- Cursor Cloud Agent Runtime Secrets when using Claude Code / Codex from a
+  Cloud Agent (`CLAUDE_CODE_OAUTH_TOKEN`, plus `CODEX_ACCESS_TOKEN` or
+  `CODEX_AUTH_JSON`). The Linux install lives in
+  `scripts/cloud-agent/`; local Macs keep using mise.
 
 home-manager moves conflicting files aside with a `.backup` suffix.
 Activation disables Spotlight indexing. `mise run brew` uses
