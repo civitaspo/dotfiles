@@ -56,5 +56,5 @@ does not recurse nested `SKILL.md`), `~/.cursor/snowflake-skills/`,
 `home/.agents/snowflake-skills/`), and `~/.config/deck/`. Do not install
 `~/.agents`; that tree stays inside the private repository.
 
-Claude Code does not load this `AGENTS.md` on its own. The repository
-`CLAUDE.md` imports it with `@AGENTS.md`.
+Claude Code 2.1.277 and later loads this `AGENTS.md` when no `CLAUDE.md`
+exists in the same directory. Do not add a `CLAUDE.md` shim.
