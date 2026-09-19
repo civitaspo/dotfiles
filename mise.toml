@@ -37,7 +37,7 @@ run = [
 [tasks.tools]
 description = "Install locked tool versions with mise."
 run = [
-  "mise install",
+  { task = "tools:install" },
   { task = "setup:plannotator" },
 ]
 
@@ -98,6 +98,7 @@ run = [
   { task = "check:nix" },
   { task = "check:nix-lint" },
   { task = "check:shell" },
+  { task = "check:tools-install" },
   { task = "check:typos" },
 ]
 
@@ -115,10 +116,14 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
-  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap home/bin/* home/.docker/cli-plugins/*",
+  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh home/bin/* home/.docker/cli-plugins/*",
 ]
 
 [tasks."check:typos"]
 description = "Check spelling in source files."
 run = "typos"
+
+[tasks."check:tools-install"]
+description = "Test recovery of empty mise installations."
+run = "bash tests/test_tools_install.sh"
