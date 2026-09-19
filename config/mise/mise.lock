@@ -363,13 +363,13 @@ version = "0.23.5"
 backend = "cargo:eza"
 
 [[tools.claude-code]]
-version = "2.1.272"
+version = "2.1.278"
 backend = "aqua:anthropics/claude-code"
 
 [tools.claude-code."platforms.macos-arm64"]
-checksum = "sha256:3254b8926b112e5af92dbb9c3840fb33187678c9638807e31f7f9b100bc8c6d5"
-url = "https://github.com/anthropics/claude-code/releases/download/v2.1.272/claude-darwin-arm64.tar.gz"
-url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/564448719"
+checksum = "sha256:d16dc23a4e27155a59cdc35251eccd7fa30ed46482c51af1c33e71b14d790f6b"
+url = "https://github.com/anthropics/claude-code/releases/download/v2.1.278/claude-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/573850762"
 
 [[tools.codex]]
 version = "0.154.0"
