@@ -7,7 +7,10 @@ Guidance for AI coding agents working in this repository.
 civitaspo's macOS configuration. Responsibilities are split across four tools:
 
 - **nix-darwin** (`nix/darwin.nix`) -- macOS system settings and base CLI packages.
-- **home-manager** (`nix/home.nix`) -- symlinks dotfiles into `$HOME`.
+- **home-manager** (`nix/home.nix`) -- symlinks dotfiles into `$HOME` and
+  user LaunchAgents. Codex auth refresh is `home/bin/codex-auth-refresh`
+  plus `launchd.agents.codex-auth-refresh` (`mise run switch` reconciles
+  the agent; `mise run codex-auth-refresh` runs it once).
 - **Homebrew** (`Brewfile`) -- GUI apps and App Store apps (casks only; no formulae). Not on `$PATH`; only `mise run brew` and friends invoke it (via `/opt/homebrew/bin/brew`).
 - **mise** (`config/mise/config.toml`, `mise.toml`, `mise-tasks/`) -- CLI binaries, language runtimes, and repository task orchestration.
 

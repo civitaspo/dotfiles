@@ -92,6 +92,10 @@ run = [
 description = "Capture the live Homebrew state back into the Brewfile."
 run = "/opt/homebrew/bin/brew bundle dump --force --no-vscode --file ./Brewfile"
 
+[tasks.codex-auth-refresh]
+description = "Refresh local Codex auth.json and upload a stripped copy to 1Password."
+run = "./home/bin/codex-auth-refresh"
+
 [tasks.check]
 description = "Validate the configuration."
 run = [

@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+# Mac writer: refresh ~/.codex/auth.json (full bundle) when the access_token
+# JWT is within 2 days of expiry — tighter than Codex CLI's 5-minute window.
+# Upload a copy with refresh_token cleared to 1Password for Cloud Agents.
+# Installed to ~/bin by home-manager; LaunchAgent runs it at login + every 12h.
+# Never print token values.
+set -euo pipefail
+export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:/opt/homebrew/bin:/usr/bin:/bin:$PATH"
+
+DIR="${CODEX_HOME:-$HOME/.codex}"
+AUTH="$DIR/auth.json"
+VAULT="${CODEX_AUTH_OP_VAULT:-CodexAuth}"
+ITEM="${CODEX_AUTH_OP_ITEM:-codex-auth.json}"
+# Public OAuth client id of the Codex CLI (not a secret). Refresh POSTs to
+# auth.openai.com/oauth/token must send the same client_id that minted the
+# tokens. Default is openai/codex `CLIENT_ID` in
+# codex-rs/login/src/auth/manager.rs. CODEX_APP_SERVER_LOGIN_CLIENT_ID is
+# Codex's override for app-server/dev; leave it unset.
+CLIENT_ID="${CODEX_APP_SERVER_LOGIN_CLIENT_ID:-app_EMoamEEZ73f0CkXaXp7hrann}"
+# Codex CLI refreshes when access_token exp is within 5 minutes. Refresh
+# here 2 days before exp so Cloud never enters that window.
+MIN_TTL=$((2 * 86400))
+
+die() {
+  printf '%s\n' "$*" >&2
+  exit 1
+}
+
+# Seconds until access_token JWT exp. 0 if missing or unreadable.
+access_ttl() {
+  local jwt payload padded decoded exp now
+  jwt=$(jq -r '.tokens.access_token // empty' "$AUTH")
+  [[ -n $jwt ]] || {
+    printf '%s\n' 0
+    return
+  }
+  payload=${jwt#*.}
+  payload=${payload%%.*}
+  [[ -n $payload ]] || {
+    printf '%s\n' 0
+    return
+  }
+  padded=$payload
+  case $((${#padded} % 4)) in
+    2) padded=${padded}== ;;
+    3) padded=${padded}= ;;
+    1)
+      printf '%s\n' 0
+      return
+      ;;
+  esac
+  padded=${padded//-/+}
+  padded=${padded//_//}
+  decoded=$(printf '%s' "$padded" | openssl base64 -d -A 2>/dev/null) || {
+    printf '%s\n' 0
+    return
+  }
+  exp=$(printf '%s' "$decoded" | jq -r '.exp // empty')
+  [[ $exp =~ ^[0-9]+$ ]] || {
+    printf '%s\n' 0
+    return
+  }
+  now=$(date +%s)
+  printf '%s\n' $((exp - now))
+}
+
+refresh() {
+  local tmp
+  tmp=$(mktemp)
+  # Read refresh_token from the file so it never appears in argv / `ps`.
+  jq --arg id "$CLIENT_ID" \
+    '{client_id:$id,grant_type:"refresh_token",refresh_token:.tokens.refresh_token}' \
+    "$AUTH" |
+    curl -fsS -o "$tmp" -H 'Content-Type: application/json' -d @- \
+      https://auth.openai.com/oauth/token || {
+    rm -f "$tmp"
+    return 1
+  }
+  jq -e '.access_token | type == "string" and length > 0' "$tmp" >/dev/null ||
+    {
+      rm -f "$tmp"
+      return 1
+    }
+  jq --arg now "$(date -u +%Y-%m-%dT%H:%M:%SZ)" --slurpfile tok "$tmp" '
+    .last_refresh = $now
+    | .tokens.access_token = $tok[0].access_token
+    | .tokens.refresh_token = ($tok[0].refresh_token // .tokens.refresh_token)
+    | .tokens.id_token = ($tok[0].id_token // .tokens.id_token)
+  ' "$AUTH" >"$AUTH.tmp" || {
+    rm -f "$tmp" "$AUTH.tmp"
+    return 1
+  }
+  chmod 600 "$AUTH.tmp"
+  mv -f "$AUTH.tmp" "$AUTH"
+  rm -f "$tmp"
+}
+
+# Write refresh_token="" to 1Password. Keep the full file on this Mac.
+push_stripped() {
+  local stripped existing
+  stripped=$(mktemp)
+  jq '.tokens.refresh_token = ""' "$AUTH" >"$stripped"
+  chmod 600 "$stripped"
+  existing=$(mktemp)
+  if op document get "$ITEM" --vault "$VAULT" --out-file "$existing" 2>/dev/null; then
+    chmod 600 "$existing"
+    rm -f "$existing"
+    op document edit "$ITEM" "$stripped" --vault "$VAULT" >/dev/null
+  else
+    rm -f "$existing"
+    op document create "$stripped" \
+      --title "$ITEM" --file-name auth.json --vault "$VAULT" >/dev/null
+  fi
+  rm -f "$stripped"
+}
+
+for c in jq curl openssl; do
+  command -v "$c" >/dev/null || die "$c not on PATH"
+done
+
+# LaunchAgent runs before the first login; that is not an error.
+if [[ ! -f "$AUTH" ]]; then
+  printf '%s\n' "no $AUTH; skip (file-backed codex login first)" >&2
+  exit 0
+fi
+jq -e '.tokens.refresh_token | type == "string" and length > 0' "$AUTH" >/dev/null ||
+  die "$AUTH has no refresh_token; refusing to act as the Mac writer"
+command -v op >/dev/null || die "op not on PATH"
+
+ttl=$(access_ttl)
+if ((ttl < MIN_TTL)); then
+  refresh || die "refresh failed"
+fi
+push_stripped

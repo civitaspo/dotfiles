@@ -127,6 +127,15 @@ skill trees (`~/.cursor/skills`, `~/.codex/skills`, flattened
 `~/.claude/skills/<name>`, and the Snowflake catalogs);
 the commands above do not require installing those skills.
 
+## Codex auth for Cloud Agents
+
+`home/bin/codex-auth-refresh` is the Mac writer. home-manager installs it as
+`~/bin/codex-auth-refresh` and a LaunchAgent that runs it at login and every
+12 hours (`mise run switch` reconciles the agent). `mise run
+codex-auth-refresh` runs it once. It keeps the full `~/.codex/auth.json` on
+this Mac and uploads a copy **without** `refresh_token` to 1Password vault
+`CodexAuth`. Cloud Agents only pull that copy (private `codex-auth` skill).
+
 ## After the first reconcile
 
 These are manual and are not part of `mise run reconcile`:
@@ -136,7 +145,8 @@ These are manual and are not part of `mise run reconcile`:
 - sign into paid apps (CleanShot, Keyboard Maestro, Mimestream, and others)
 - Git commit signing via 1Password (`op-ssh-sign`)
 - `op signin`, `gh auth`, `gcloud auth`, AWS SSO, SnowSQL, and Atuin
-- Cursor, Claude Code, and Codex sign-in
+- Cursor, Claude Code, and Codex sign-in (file-backed `codex login` so the
+  LaunchAgent can refresh `auth.json` and update 1Password)
 
 home-manager moves conflicting files aside with a `.backup` suffix.
 Activation disables Spotlight indexing. `mise run brew` uses
