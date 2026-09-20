@@ -1,16 +1,15 @@
 # home-manager configuration.
 #
-# Place plain dotfiles:
+# Its only job is to place plain dotfiles:
 #   config/  -> ~/.config
 #   home/    -> $HOME
-# and user LaunchAgents (reconciled on `mise run switch`).
 # Private dotfiles come from the dotfiles-private flake input. Directory
 # sources are linked recursively so a tool can still write runtime state
 # next to its managed files (e.g. ~/.config/nvim).
 # Agent skill trees stay in the private repo under home/.agents/. home-manager
 # does not install ~/.agents; Cursor, Codex, and Claude Code each get a
 # published skills root.
-{ config, lib, inputs, ... }:
+{ lib, inputs, ... }:
 
 let
   # Turn each top-level entry of `dir` into a home-manager file entry.
@@ -94,32 +93,6 @@ in
         ".ssh/config.d" = { source = private + "/.ssh/config.d"; recursive = true; };
       }
       // claudeSkillLinks;
-
-    # Drop the one-shot plist from the private codex-auth skill, if present.
-    activation.unloadLegacyCodexAuthAgent =
-      lib.hm.dag.entryBetween [ "writeBoundary" ] [ "setupLaunchAgents" ] ''
-        old="$HOME/Library/LaunchAgents/jp.civitaspo.codex-auth-refresh.plist"
-        if [[ -f "$old" ]]; then
-          run /bin/launchctl bootout "gui/$(id -u)/jp.civitaspo.codex-auth-refresh" || true
-          run rm -f "$old"
-        fi
-      '';
-  };
-
-  # Mac writer for Cloud Codex: refresh ~/bin/codex-auth-refresh, then
-  # upload a refresh_token-free copy to 1Password. Cloud Agents only pull.
-  launchd.agents.codex-auth-refresh = {
-    enable = true;
-    config = {
-      ProgramArguments = [
-        "/bin/bash"
-        "${config.home.homeDirectory}/bin/codex-auth-refresh"
-      ];
-      RunAtLoad = true;
-      StartInterval = 43200;
-      StandardOutPath = "${config.home.homeDirectory}/Library/Logs/org.nix-community.home.codex-auth-refresh.log";
-      StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/org.nix-community.home.codex-auth-refresh.log";
-    };
   };
 
   xdg = {
