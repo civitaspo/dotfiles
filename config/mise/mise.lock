@@ -95,11 +95,11 @@ url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/553690857"
 provenance = "github-attestations"
 
 [[tools."aqua:aws/aws-cli"]]
-version = "2.36.49"
+version = "2.36.50"
 backend = "aqua:aws/aws-cli"
 
 [tools."aqua:aws/aws-cli"."platforms.macos-arm64"]
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.36.49.pkg"
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.36.50.pkg"
 
 [[tools."aqua:aws/session-manager-plugin"]]
 version = "1.2.835.0"
@@ -389,20 +389,20 @@ checksum = "sha256:5cd46d6268f6f78f5d88bdc7159d20bd44cdaa4b3303474839f87ec6fe7ae
 url = "https://dl.deno.land/release/v2.9.7/deno-aarch64-apple-darwin.zip"
 
 [[tools.gcloud]]
-version = "585.0.0"
+version = "586.0.0"
 backend = "vfox:mise-plugins/vfox-gcloud"
 
 [tools.gcloud."platforms.macos-arm64"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-585.0.0-darwin-arm.tar.gz"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-586.0.0-darwin-arm.tar.gz"
 
 [[tools."github:backnotprop/plannotator"]]
-version = "0.27.16"
+version = "0.27.17"
 backend = "github:backnotprop/plannotator"
 
 [tools."github:backnotprop/plannotator"."platforms.macos-arm64"]
-checksum = "sha256:85506f4ecb46529278e27dd535663391dac44ade6e35cf638e5655ce13a0ac03"
-url = "https://github.com/backnotprop/plannotator/releases/download/v0.27.16/plannotator-darwin-arm64"
-url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/571621235"
+checksum = "sha256:f440cdafaff876d8c28a5dd96cd6e02fbcf92a5ff925c8bc7f31fbedd51bd2ab"
+url = "https://github.com/backnotprop/plannotator/releases/download/v0.27.17/plannotator-darwin-arm64"
+url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/578746940"
 provenance = "github-attestations"
 
 [[tools."github:k1LoW/mo"]]
