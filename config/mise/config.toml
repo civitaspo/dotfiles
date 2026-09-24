@@ -95,6 +95,16 @@ codex = "latest"
 "github:tomasz-tomczyk/crit" = "latest"
 # Browser-based plan and code review UI (https://plannotator.ai/).
 "github:backnotprop/plannotator" = "latest"
+# OpenCode v2 (https://opencode.ai/v2/docs). v2 ships only on npm, not as
+# GitHub release assets, so aqua:anomalyco/opencode stays on v1. allow_builds
+# runs the postinstall script that links the platform binary from
+# @opencode/cli-darwin-arm64. Provides `opencode` and `opencode2`.
+# Pinned because allow_builds runs package code at install time; Renovate
+# opens a separate PR without automerge (see renovate.json).
+[tools."npm:@opencode/cli"]
+version = "2.0.15"
+allow_builds = ["@opencode/cli"]
+
 [tools."npm:@mermaid-js/mermaid-cli"]
 version = "latest"
 # cytoscape 3.34.1 dropped trusted-publisher metadata that 3.33.4 had.

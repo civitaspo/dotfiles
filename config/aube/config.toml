@@ -1,0 +1,7 @@
+# User-scope aube settings. Symlinked to ~/.config/aube/config.toml by
+# home-manager. mise's npm backend embeds aube and reads this file; mise's
+# [env] does not reach it.
+
+# Challenge package names first registered within the last 14 days (default:
+# 30 days) when they are installed by name.
+minimumPackageAge = 20160
