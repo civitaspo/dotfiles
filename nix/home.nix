@@ -6,9 +6,9 @@
 # Private dotfiles come from the dotfiles-private flake input. Directory
 # sources are linked recursively so a tool can still write runtime state
 # next to its managed files (e.g. ~/.config/nvim).
-# Agent skill trees stay in the private repo under home/.agents/. home-manager
-# does not install ~/.agents; Cursor, Codex, and Claude Code each get a
-# published skills root.
+# Agent skill trees come from the private repo's home/.agents/. Codex and
+# Cursor read the nested ~/.agents/skills; Claude Code gets each skill
+# flattened into ~/.claude/skills/<name>.
 { lib, inputs, ... }:
 
 let
@@ -80,16 +80,13 @@ in
         ".snowsql" = { source = private + "/.snowsql"; recursive = true; };
         # Keep each skill tree as a single directory symlink. Recursive
         # per-file links race on mkdir for the large Snowflake catalog.
-        # Cursor Cloud Agents copy ~/.cursor/skills/ only. Codex reads
-        # ~/.codex/skills/. Claude Code only discovers one level under
-        # ~/.claude/skills/, so each skill directory is published flattened
-        # by basename. The catalog sits beside those roots so it is not
-        # auto-scanned.
-        ".cursor/skills".source = private + "/.agents/skills";
-        ".codex/skills".source = private + "/.agents/skills";
-        ".cursor/snowflake-skills".source = private + "/.agents/snowflake-skills";
-        ".codex/snowflake-skills".source = private + "/.agents/snowflake-skills";
-        ".claude/snowflake-skills".source = private + "/.agents/snowflake-skills";
+        # Codex and Cursor read ~/.agents/skills/ recursively. Claude Code
+        # does not read ~/.agents and only discovers one level under
+        # ~/.claude/skills/, so each skill directory is also published
+        # flattened by basename. The catalog sits beside the skills root so
+        # it is not auto-scanned; Claude Code reads it by path.
+        ".agents/skills".source = private + "/.agents/skills";
+        ".agents/snowflake-skills".source = private + "/.agents/snowflake-skills";
         ".ssh/config.d" = { source = private + "/.ssh/config.d"; recursive = true; };
       }
       // claudeSkillLinks;

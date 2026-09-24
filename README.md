@@ -170,8 +170,8 @@ document annotation are available from a Codex prompt:
 ```
 
 The public repository does not manage Codex session state or the shared private
-skill trees (`~/.cursor/skills`, `~/.codex/skills`, flattened
-`~/.claude/skills/<name>`, and the Snowflake catalogs);
+skill trees (`~/.agents/skills`, flattened `~/.claude/skills/<name>`, and the
+Snowflake catalog in `~/.agents/snowflake-skills`);
 the commands above do not require installing those skills.
 
 ## After the first reconcile
