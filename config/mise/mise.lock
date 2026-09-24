@@ -468,6 +468,13 @@ backend = "npm:@mermaid-js/mermaid-cli"
 [tools."npm:@mermaid-js/mermaid-cli".options]
 trust_policy_excludes = '["cytoscape@3.34.1"]'
 
+[[tools."npm:@opencode/cli"]]
+version = "2.0.15"
+backend = "npm:@opencode/cli"
+
+[tools."npm:@opencode/cli".options]
+allow_builds = '["@opencode/cli"]'
+
 [[tools."npm:pnpm"]]
 version = "12.6.0"
 backend = "npm:pnpm"
