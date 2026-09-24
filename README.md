@@ -100,6 +100,53 @@ installed. Healthy installations and unused versions are left alone. An empty
 installation after repair fails the task. This checks for missing contents;
 it does not verify every installed file's checksum or runtime behavior.
 
+## Herdr
+
+mise installs [Herdr](https://herdr.dev/) and, in the tool's `postinstall`,
+its plugins. Herdr has no plugin update command, so plugins are refreshed
+whenever a new Herdr version is installed (force it with
+`mise install -f aqua:herdrdev/herdr`). The prefix is `ctrl+t`
+(`config/herdr/config.toml`).
+
+Layout and navigation (Emacs-style pane motion: `b`/`p`/`n`/`f`):
+
+| Key | Action |
+| --- | --- |
+| `prefix+t` | new tab |
+| `prefix+\|` | split right |
+| `prefix+-` | split down |
+| `prefix+ctrl+b` / `+p` / `+n` / `+f` | focus pane left / up / down / right |
+| `prefix+shift+b` / `+p` / `+n` / `+f` | swap pane left / up / down / right |
+| `prefix+ctrl+r` | rename tab |
+| `prefix+ctrl+x` | close tab |
+| `prefix+ctrl+w` | new workspace |
+| `prefix+ctrl+d` | close workspace |
+
+[terminal-browser](https://github.com/zenbu-labs/terminal-browser) is
+installed by its Herdr plugin via the official installer into
+`~/.local/share/terminal-browser`, with a launcher at
+`~/.local/bin/terminal-browser`. The Herdr plugin opens it in a right split
+(`prefix+u`).
+
+[Herdr Annotate](https://github.com/plannotator/herdr-annotate) is the
+full install (terminal comments plus Plannotator TUI document review):
+
+| Key | Action |
+| --- | --- |
+| `prefix+a` | comment on the selected text |
+| `prefix+shift+a` | copy annotations as Markdown |
+| `prefix+m` | manage annotations |
+| `prefix+o` | review documents in this folder |
+| `prefix+shift+o` | review the agent's last reply |
+
+Kitty graphics is enabled so terminal-browser can render inside Herdr.
+The first launch of terminal-browser may prompt for Accessibility /
+Input Monitoring; grant those in System Settings. The app is notarized,
+but GNU tar (from nix-darwin) extracts its tarball's AppleDouble entries as
+`._*` files, breaking the code seal so Gatekeeper reports it as "damaged".
+The Herdr `postinstall` puts `/usr/bin` first on `PATH` so the installer
+uses macOS tar instead.
+
 ## Codex + Plannotator
 
 `mise run tools` installs [Plannotator](https://plannotator.ai/) and configures
@@ -132,7 +179,8 @@ the commands above do not require installing those skills.
 These are manual and are not part of `mise run reconcile`:
 
 - grant Accessibility / Input Monitoring / Screen Recording to Karabiner,
-  Hammerspoon, Space Rabbit, Homerow, Keyboard Maestro, and CleanShot
+  Hammerspoon, Space Rabbit, Homerow, Keyboard Maestro, CleanShot, and
+  terminal-browser
 - sign into paid apps (CleanShot, Keyboard Maestro, Mimestream, and others)
 - Git commit signing via 1Password (`op-ssh-sign`)
 - `op signin`, `gh auth`, `gcloud auth`, AWS SSO, SnowSQL, and Atuin

@@ -217,6 +217,15 @@ url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.14/leftho
 url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/563149840"
 provenance = "github-attestations"
 
+[[tools."aqua:herdrdev/herdr"]]
+version = "0.9.1"
+backend = "aqua:herdrdev/herdr"
+
+[tools."aqua:herdrdev/herdr"."platforms.macos-arm64"]
+checksum = "sha256:5fc7a7e7adfaca56fa80aa89dcb025693357268dab8285b9ce2d08a2313c89de"
+url = "https://github.com/herdrdev/herdr/releases/download/v0.9.1/herdr-macos-aarch64"
+url_api = "https://api.github.com/repos/herdrdev/herdr/releases/assets/568559677"
+
 [[tools."aqua:jesseduffield/lazygit"]]
 version = "0.65.1"
 backend = "aqua:jesseduffield/lazygit"
