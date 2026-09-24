@@ -3,9 +3,13 @@
 
 set -euo pipefail
 
-# The upstream plugin build runs the official installer, which otherwise
-# launches `terminal-browser setup` (and the Gatekeeper dialog) mid-install.
+# Keep the official installer from launching `terminal-browser setup`
+# mid-install.
 export TERMINAL_BROWSER_SKIP_SETUP=1
+# nix-darwin's GNU tar extracts the tarball's AppleDouble entries as literal
+# `._*` files, which breaks the notarized app's code seal and makes
+# Gatekeeper report it as damaged. macOS bsdtar restores them as xattrs.
+export PATH="/usr/bin:${PATH}"
 
 herdr_bin="$(command -v herdr || true)"
 
@@ -14,18 +18,15 @@ if [[ -z "${herdr_bin}" ]]; then
   exit 1
 fi
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-# Prefer the repo copy so this task resigns even before `mise run switch`
-# replaces an older ~/bin wrapper that does not understand --prepare-only.
-wrapper="${repo_root}/home/bin/terminal-browser"
-if [[ ! -x "${wrapper}" ]]; then
-  wrapper="${HOME}/bin/terminal-browser"
-fi
+app="${XDG_DATA_HOME:-${HOME}/.local/share}/terminal-browser/app"
 
-official_bin="${HOME}/.local/share/terminal-browser/app/bin/terminal-browser"
+terminal_browser_is_valid() {
+  [[ -x "${app}/bin/terminal-browser" ]] &&
+    codesign --verify --deep --strict "${app}/electron/terminal-browser.app" >/dev/null 2>&1
+}
 
 install_terminal_browser() {
-  if [[ -x "${official_bin}" ]]; then
+  if terminal_browser_is_valid; then
     printf '[setup:herdr] terminal-browser already installed\n'
     return 0
   fi
@@ -33,8 +34,8 @@ install_terminal_browser() {
   printf '[setup:herdr] installing terminal-browser via official installer\n'
   curl -fsSL https://terminal-browser.sh/install | bash
 
-  if [[ ! -x "${official_bin}" ]]; then
-    printf '[setup:herdr] official installer did not produce %s\n' "${official_bin}" >&2
+  if ! terminal_browser_is_valid; then
+    printf '[setup:herdr] terminal-browser install at %s failed code signature verification\n' "${app}" >&2
     exit 1
   fi
 }
@@ -68,12 +69,11 @@ install_plugin() {
   "${herdr_bin}" plugin install "${spec}" --yes
 }
 
-install_terminal_browser
 install_plugin "zenbu-labs/terminal-browser/herdr-plugin" "zenbu-labs.terminal-browser"
 install_plugin "plannotator/herdr-annotate" "annotate"
-
-# Plugin build re-extracts the tarball and can break signatures again.
-"${wrapper}" --prepare-only
+# The terminal-browser plugin build reruns the official installer; repair it
+# afterwards in case that ran with GNU tar.
+install_terminal_browser
 
 config="${XDG_CONFIG_HOME:-${HOME}/.config}/herdr/config.toml"
 if [[ -f "${config}" ]]; then

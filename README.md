@@ -121,9 +121,9 @@ Layout and navigation (Emacs-style pane motion: `b`/`p`/`n`/`f`):
 
 [terminal-browser](https://github.com/zenbu-labs/terminal-browser) is
 installed by `mise run setup:herdr` via the official installer into
-`~/.local/share/terminal-browser`. `~/bin/terminal-browser` launches that
-binary (Homebrew is not on `PATH`). The Herdr plugin opens it in a right
-split (`prefix+u`).
+`~/.local/share/terminal-browser`, with a launcher at
+`~/.local/bin/terminal-browser`. The Herdr plugin opens it in a right split
+(`prefix+u`).
 
 [Herdr Annotate](https://github.com/plannotator/herdr-annotate) is the
 full install (terminal comments plus Plannotator TUI document review):
@@ -138,13 +138,11 @@ full install (terminal comments plus Plannotator TUI document review):
 
 Kitty graphics is enabled so terminal-browser can render inside Herdr.
 The first launch of terminal-browser may prompt for Accessibility /
-Input Monitoring; grant those in System Settings. A Homebrew cask
-extract (or a plain `tar`) leaves the Electron helper `.app` with a
-broken signature, and Gatekeeper then shows a false "damaged and can't
-be opened" dialog on every helper launch — do not move it to Trash.
-Clearing quarantine is not enough; `~/bin/terminal-browser` and
-`mise run setup:herdr` strip extended attributes and ad-hoc re-sign
-every nested `.app` before launch.
+Input Monitoring; grant those in System Settings. The app is notarized,
+but GNU tar (from nix-darwin) extracts its tarball's AppleDouble entries as
+`._*` files, breaking the code seal so Gatekeeper reports it as "damaged".
+`mise run setup:herdr` runs the installer with macOS `/usr/bin/tar` and
+reinstalls when `codesign --verify` fails.
 
 ## Codex + Plannotator
 
