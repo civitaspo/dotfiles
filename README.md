@@ -102,8 +102,11 @@ it does not verify every installed file's checksum or runtime behavior.
 
 ## Herdr
 
-`mise run tools` installs [Herdr](https://herdr.dev/) plugins after the
-locked CLI is on PATH. The prefix is `ctrl+t` (`config/herdr/config.toml`).
+mise installs [Herdr](https://herdr.dev/) and, in the tool's `postinstall`,
+its plugins. Herdr has no plugin update command, so plugins are refreshed
+whenever a new Herdr version is installed (force it with
+`mise install -f aqua:herdrdev/herdr`). The prefix is `ctrl+t`
+(`config/herdr/config.toml`).
 
 Layout and navigation (Emacs-style pane motion: `b`/`p`/`n`/`f`):
 
@@ -120,7 +123,7 @@ Layout and navigation (Emacs-style pane motion: `b`/`p`/`n`/`f`):
 | `prefix+ctrl+d` | close workspace |
 
 [terminal-browser](https://github.com/zenbu-labs/terminal-browser) is
-installed by `mise run setup:herdr` via the official installer into
+installed by its Herdr plugin via the official installer into
 `~/.local/share/terminal-browser`, with a launcher at
 `~/.local/bin/terminal-browser`. The Herdr plugin opens it in a right split
 (`prefix+u`).
@@ -141,8 +144,8 @@ The first launch of terminal-browser may prompt for Accessibility /
 Input Monitoring; grant those in System Settings. The app is notarized,
 but GNU tar (from nix-darwin) extracts its tarball's AppleDouble entries as
 `._*` files, breaking the code seal so Gatekeeper reports it as "damaged".
-`mise run setup:herdr` runs the installer with macOS `/usr/bin/tar` and
-reinstalls when `codesign --verify` fails.
+The Herdr `postinstall` puts `/usr/bin` first on `PATH` so the installer
+uses macOS tar instead.
 
 ## Codex + Plannotator
 
