@@ -48,13 +48,15 @@ mise; `mise run bootstrap` installs Nix and Homebrew.
 This is a **public** repository. Never commit anything tied to an employer or
 other private context. Such configuration belongs in the private repository
 `civitaspo/dotfiles-private`, which supplies `~/.aws/config`,
-`~/.ssh/config.d/`, `~/.snowsql/config`, `~/.cursor/skills/` and
-`~/.codex/skills/` (from private `home/.agents/skills/`), flattened
+`~/.ssh/config.d/`, `~/.snowsql/config`, `~/.agents/skills/` for Codex and
+Cursor (from private `home/.agents/skills/`), flattened
 `~/.claude/skills/<name>/` for Claude Code (same source tree; Claude Code
-does not recurse nested `SKILL.md`), `~/.cursor/snowflake-skills/`,
-`~/.codex/snowflake-skills/`, and `~/.claude/snowflake-skills/` (from private
-`home/.agents/snowflake-skills/`), and `~/.config/deck/`. Do not install
-`~/.agents`; that tree stays inside the private repository.
+neither reads `~/.agents` nor recurses nested `SKILL.md`),
+`~/.agents/snowflake-skills/` (from private `home/.agents/snowflake-skills/`),
+and `~/.config/deck/`. Install only those two trees under `~/.agents`, not the
+whole private `home/.agents/`. `nix flake check` runs the private
+`scripts/check-skill-links.py`, which requires relative skill links to resolve
+in both the nested and the flattened layout.
 
 Claude Code 2.1.277 and later loads this `AGENTS.md` when no `CLAUDE.md`
 exists in the same directory. Do not add a `CLAUDE.md` shim.

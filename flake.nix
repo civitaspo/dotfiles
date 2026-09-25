@@ -53,5 +53,16 @@
         enableNixpkgsReleaseCheck = false;
         modules = [ ./nix/darwin.nix ];
       };
+
+      # Private skill links must resolve both nested (~/.agents/skills) and
+      # flattened (~/.claude/skills/<name>); see nix/home.nix.
+      checks.aarch64-darwin.skill-links =
+        let
+          pkgs = inputs.nixpkgs-python.legacyPackages.aarch64-darwin;
+        in
+        pkgs.runCommand "skill-links" { nativeBuildInputs = [ pkgs.python313 ]; } ''
+          python3 ${inputs.dotfiles-private}/scripts/check-skill-links.py
+          touch $out
+        '';
     };
 }
