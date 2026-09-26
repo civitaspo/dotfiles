@@ -65,23 +65,23 @@ url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.10.0/zoxide-0.
 url_api = "https://api.github.com/repos/ajeetdsouza/zoxide/releases/assets/466316174"
 
 [[tools."aqua:astral-sh/ruff"]]
-version = "0.16.8"
+version = "0.16.9"
 backend = "aqua:astral-sh/ruff"
 
 [tools."aqua:astral-sh/ruff"."platforms.macos-arm64"]
-checksum = "sha256:0ffa53899f2970d24f14fbed8d8265c87180b159b7100794d97a1527dc60fa79"
-url = "https://github.com/astral-sh/ruff/releases/download/0.16.8/ruff-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/ruff/releases/assets/568294350"
+checksum = "sha256:33d35394499094cf6eb90f730dc82f11c0fab05d176378ae4f67de985ecc4146"
+url = "https://github.com/astral-sh/ruff/releases/download/0.16.9/ruff-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/ruff/releases/assets/586787913"
 provenance = "github-attestations"
 
 [[tools."aqua:astral-sh/uv"]]
-version = "0.12.18"
+version = "0.12.19"
 backend = "aqua:astral-sh/uv"
 
 [tools."aqua:astral-sh/uv"."platforms.macos-arm64"]
-checksum = "sha256:cf40e0c6a202190ccd9e0406dcfdd5b2d6668a9a5c779b17948963df32aafe5b"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.18/uv-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/582430554"
+checksum = "sha256:a9a8df1eedeb192f2e47e40e2faabfb387db4b850209118786d42f89dde3e0ba"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.19/uv-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/587158826"
 provenance = "github-attestations"
 
 [[tools."aqua:atuinsh/atuin"]]
@@ -95,11 +95,11 @@ url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/580134148"
 provenance = "github-attestations"
 
 [[tools."aqua:aws/aws-cli"]]
-version = "2.37.1"
+version = "2.37.4"
 backend = "aqua:aws/aws-cli"
 
 [tools."aqua:aws/aws-cli"."platforms.macos-arm64"]
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.37.1.pkg"
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.37.4.pkg"
 
 [[tools."aqua:aws/session-manager-plugin"]]
 version = "1.2.835.0"
@@ -137,13 +137,13 @@ url_api = "https://api.github.com/repos/cli/cli/releases/assets/565857200"
 provenance = "github-attestations"
 
 [[tools."aqua:crate-ci/typos"]]
-version = "1.50.2"
+version = "1.50.3"
 backend = "aqua:crate-ci/typos"
 
 [tools."aqua:crate-ci/typos"."platforms.macos-arm64"]
-checksum = "sha256:70d61e9d682034133f0aa56f5a02bae0de168495f3cce62a87054aa7186c1901"
-url = "https://github.com/crate-ci/typos/releases/download/v1.50.2/typos-v1.50.2-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/crate-ci/typos/releases/assets/565802016"
+checksum = "sha256:844d4121fb47a95604aa5566843bb9e3d6078040b3c8f22367709f563038f2c5"
+url = "https://github.com/crate-ci/typos/releases/download/v1.50.3/typos-v1.50.3-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/crate-ci/typos/releases/assets/589002568"
 
 [[tools."aqua:dalance/procs"]]
 version = "0.14.12"
@@ -328,13 +328,13 @@ url = "https://github.com/sharkdp/fd/releases/download/v10.5.0/fd-v10.5.0-aarch6
 url_api = "https://api.github.com/repos/sharkdp/fd/releases/assets/530481346"
 
 [[tools."aqua:spinel-coop/rv"]]
-version = "0.7.0"
+version = "0.7.1"
 backend = "aqua:spinel-coop/rv"
 
 [tools."aqua:spinel-coop/rv"."platforms.macos-arm64"]
-checksum = "sha256:817f52155f786a4297210d928e8c84e43e3abdc4d7c56c0e11942fc5973caad8"
-url = "https://github.com/spinel-coop/rv/releases/download/v0.7.0/rv-aarch64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/spinel-coop/rv/releases/assets/543965922"
+checksum = "sha256:20da71e7896849e5a13e5a65163ec2f9651df693aac73f1623948f4207cd9874"
+url = "https://github.com/spinel-coop/rv/releases/download/v0.7.1/rv-aarch64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/spinel-coop/rv/releases/assets/586621906"
 provenance = "github-attestations"
 
 [[tools."aqua:starship/starship"]]
@@ -372,13 +372,13 @@ version = "0.23.5"
 backend = "cargo:eza"
 
 [[tools.claude-code]]
-version = "2.1.280"
+version = "2.1.283"
 backend = "aqua:anthropics/claude-code"
 
 [tools.claude-code."platforms.macos-arm64"]
-checksum = "sha256:872a1fa1f770165202bfa0e1771a8b02ce0a13b5f6de4f4489ec4ff268946b56"
-url = "https://github.com/anthropics/claude-code/releases/download/v2.1.280/claude-darwin-arm64.tar.gz"
-url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/581709751"
+checksum = "sha256:033f733e135ecd00aeec18ea8990a87a0fd8be220b20548353fd025351a0a9b3"
+url = "https://github.com/anthropics/claude-code/releases/download/v2.1.283/claude-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/588996726"
 
 [[tools.codex]]
 version = "0.156.1"
@@ -405,13 +405,13 @@ backend = "vfox:mise-plugins/vfox-gcloud"
 url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-586.0.0-darwin-arm.tar.gz"
 
 [[tools."github:backnotprop/plannotator"]]
-version = "0.27.18"
+version = "0.27.20"
 backend = "github:backnotprop/plannotator"
 
 [tools."github:backnotprop/plannotator"."platforms.macos-arm64"]
-checksum = "sha256:5313b0432243983b83a4136d20c6da6da6dd5c6ca8b1ffaf5fbef041e78760c2"
-url = "https://github.com/backnotprop/plannotator/releases/download/v0.27.18/plannotator-darwin-arm64"
-url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/582407424"
+checksum = "sha256:edbaeb4ab593a7d07d56e246a1c9e17be90ee61e702b3345eade5e8e1dff1176"
+url = "https://github.com/backnotprop/plannotator/releases/download/v0.27.20/plannotator-darwin-arm64"
+url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/586772399"
 provenance = "github-attestations"
 
 [[tools."github:k1LoW/mo"]]
@@ -434,13 +434,13 @@ url = "https://github.com/sorairolake/qrtool/releases/download/v0.13.2/qrtool-v0
 url_api = "https://api.github.com/repos/sorairolake/qrtool/releases/assets/331043334"
 
 [[tools."github:tomasz-tomczyk/crit"]]
-version = "0.20.2"
+version = "0.20.3"
 backend = "github:tomasz-tomczyk/crit"
 
 [tools."github:tomasz-tomczyk/crit"."platforms.macos-arm64"]
-checksum = "sha256:c9ced30d3b55ba236257e9d2805c8f4bd94abe07c31e20a2f5c299d139d3468e"
-url = "https://github.com/tomasz-tomczyk/crit/releases/download/v0.20.2/crit-darwin-arm64"
-url_api = "https://api.github.com/repos/tomasz-tomczyk/crit/releases/assets/572754735"
+checksum = "sha256:83df98726dbbc85f6d84326d35e335cdbec2756b53b9710eeab92cc1b02334e6"
+url = "https://github.com/tomasz-tomczyk/crit/releases/download/v0.20.3/crit-darwin-arm64"
+url_api = "https://api.github.com/repos/tomasz-tomczyk/crit/releases/assets/586162083"
 
 [[tools."http:antigravity-cli"]]
 version = "1.0.3"
