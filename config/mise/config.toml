@@ -102,7 +102,7 @@ codex = "latest"
 # Pinned because allow_builds runs package code at install time; Renovate
 # opens a separate PR without automerge (see renovate.json).
 [tools."npm:@opencode/cli"]
-version = "2.0.15"
+version = "2.0.18"
 allow_builds = ["@opencode/cli"]
 
 [tools."npm:@mermaid-js/mermaid-cli"]
