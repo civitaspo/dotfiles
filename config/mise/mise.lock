@@ -414,6 +414,15 @@ url = "https://github.com/backnotprop/plannotator/releases/download/v0.27.18/pla
 url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/582407424"
 provenance = "github-attestations"
 
+[[tools."github:civitaspo/hook-relay-client-rs"]]
+version = "0.1.0"
+backend = "github:civitaspo/hook-relay-client-rs"
+
+[tools."github:civitaspo/hook-relay-client-rs"."platforms.macos-arm64"]
+checksum = "sha256:684cd782e6f1ba2fcf6e7dffe069b82efe9397b681b95ae0b17a907c703921eb"
+url = "https://github.com/civitaspo/hook-relay-client-rs/releases/download/v0.1.0/hook-relay-client-aarch64-apple-darwin"
+url_api = "https://api.github.com/repos/civitaspo/hook-relay-client-rs/releases/assets/592651691"
+
 [[tools."github:k1LoW/mo"]]
 version = "1.6.8"
 backend = "github:k1LoW/mo"
