@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# CLI exception: Homebrew verifies Cursor's archive against its published SHA-256.
+exec /opt/homebrew/bin/cursor-agent "$@"

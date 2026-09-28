@@ -76,6 +76,30 @@ the universal App Store IDs; the classic Mac IDs were delisted in April
 Rosetta is required because the committed `mise.lock` entries for dust and
 procs use x86_64 assets on macOS arm64.
 
+## Agent CLI authentication
+
+Cursor Agent is an exception to mise-managed CLIs: Homebrew's `cursor-cli`
+cask publishes the archive SHA-256 before download and verifies it during
+installation. Install and update it with `mise run brew` / `mise run update:brew`.
+The `~/bin/cursor-agent` wrapper exposes only this CLI without adding Homebrew
+to PATH. Use `cursor-agent` to launch it and Homebrew to update it.
+
+```sh
+mise run auth:cursor
+mise run auth:opencode
+```
+
+For OpenCode v2, choose **ChatGPT Pro/Plus (browser)** or **ChatGPT Pro/Plus
+(headless)** and sign in with the account used for Codex. OpenCode supports
+this OAuth flow natively; no additional plugin or API key is needed.
+Check the saved connection with `opencode2 auth list`, then choose an OpenAI
+model with `/models` inside OpenCode.
+
+OpenCode stores its own OAuth credentials in its local SQLite database;
+it does not need a copy of Codex's `auth.json` in either dotfiles repository.
+A saved account takes precedence over `OPENAI_API_KEY`. See the
+[provider account documentation](https://opencode.ai/v2/docs/cli/providers).
+
 ## Daily workflow
 
 ```sh

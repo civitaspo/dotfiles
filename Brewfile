@@ -8,7 +8,7 @@
 # Homebrew is intentionally NOT on $PATH --
 # `mise run brew` is the only entry point. Casks only; no formulae.
 # CLI binaries come from mise, and base packages plus pinned runtimes
-# come from Nix.
+# come from Nix. Cursor CLI is the documented Cask exception below.
 
 # --- Taps -------------------------------------------------------------------
 # Clone from this checkout so Brewfile and Casks/ stay in sync.
@@ -43,6 +43,12 @@ cask "civitaspo/dotfiles/reflect-open"
 cask "space-rabbit"
 cask "spotify"
 cask "tabtab"
+
+# --- Casks: CLI exception ---------------------------------------------------
+# Prefer mise for CLIs. Cursor has no aqua package; this cask publishes and
+# verifies the archive SHA-256 before installation. Expose it via ~/bin/cursor-agent
+# so Homebrew itself stays off PATH.
+cask "cursor-cli"
 
 # --- Casks: fonts -----------------------------------------------------------
 cask "font-monaspice-nerd-font"
