@@ -49,6 +49,14 @@ run = [
   { task = "update:brew" },
 ]
 
+[tasks."auth:opencode"]
+description = "Connect OpenCode to ChatGPT (choose ChatGPT Pro/Plus in the picker)."
+run = "opencode2 auth login openai"
+
+[tasks."auth:cursor"]
+description = "Sign in to Cursor Agent."
+run = "cursor-agent login"
+
 [tasks."update:nix"]
 description = "Update flake inputs and re-activate nix-darwin."
 run = [
