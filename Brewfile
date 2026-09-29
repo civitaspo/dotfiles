@@ -15,6 +15,9 @@
 # `mise run brew` / `mise run update:brew` run `mise run brew:tap` first so
 # the installed tap remote matches `__dir__` (required for Homebrew 6 trust).
 tap "civitaspo/dotfiles", __dir__, trusted: true
+# Native window for the Herdr daemon (https://github.com/penso/herdr-gpui).
+# Trust this cask only; the tap also ships unrelated packages.
+tap "penso/tap", trusted: { casks: ["herdr-gpui"] }
 
 # --- Casks: applications ----------------------------------------------------
 cask "1password"
@@ -28,6 +31,7 @@ cask "droppy"
 cask "facescreen"
 cask "ghostty"
 cask "hammerspoon"
+cask "herdr-gpui"
 cask "homerow"
 cask "civitaspo/dotfiles/kanary"
 cask "karabiner-elements"
