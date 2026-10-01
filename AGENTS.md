@@ -53,7 +53,9 @@ Cursor (from private `home/.agents/skills/`), flattened
 `~/.claude/skills/<name>/` for Claude Code (same source tree; Claude Code
 neither reads `~/.agents` nor recurses nested `SKILL.md`),
 `~/.agents/snowflake-skills/` (from private `home/.agents/snowflake-skills/`),
-and `~/.config/deck/`. Install only those two trees under `~/.agents`, not the
+and every directory under private `config/` into `~/.config/` (for example
+`~/.config/deck/` and `~/.config/herdr-linear-agent/`). Install only those two
+trees under `~/.agents`, not the
 whole private `home/.agents/`. `nix flake check` runs the private
 `scripts/check-skill-links.py`, which requires relative skill links to resolve
 in both the nested and the flattened layout.

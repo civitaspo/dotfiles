@@ -96,14 +96,9 @@ in
     enable = true;
     configFile =
       let
-        privateDeck = inputs.dotfiles-private + "/config/deck";
+        privateConfig = inputs.dotfiles-private + "/config";
       in
       linkDir ../config
-      // lib.optionalAttrs (builtins.pathExists privateDeck) {
-        deck = {
-          source = privateDeck;
-          recursive = true;
-        };
-      };
+      // lib.optionalAttrs (builtins.pathExists privateConfig) (linkDir privateConfig);
   };
 }
