@@ -123,6 +123,8 @@ postinstall = """
 export PATH="/usr/bin:$PATH" TERMINAL_BROWSER_SKIP_SETUP=1
 herdr plugin install zenbu-labs/terminal-browser/herdr-plugin --yes
 herdr plugin install plannotator/herdr-annotate --yes
+herdr plugin install civitaspo/herdr-linear-agent --yes
+herdr plugin install civitaspo/herdr-infobox --yes
 """
 
 [tools."http:antigravity-cli"]

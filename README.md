@@ -167,6 +167,16 @@ full install (terminal comments plus Plannotator TUI document review):
 | `prefix+o` | review documents in this folder |
 | `prefix+shift+o` | review the agent's last reply |
 
+[herdr-linear-agent](https://github.com/civitaspo/herdr-linear-agent) runs
+coding agents for Linear issues delegated to its app user. Its build step
+downloads the release binary named by the repository's `.release-version`.
+Its config lives in `~/.config/herdr-linear-agent/` (see its README).
+
+[herdr-infobox](https://github.com/civitaspo/herdr-infobox) shows a session's
+repositories, diffs, references, and plans (Herdr action **Toggle Info**). It
+has no release binary yet, so its build step compiles it with the mise Rust
+toolchain. Provider hooks are not installed; see its installation guide.
+
 Kitty graphics is enabled so terminal-browser can render inside Herdr.
 The first launch of terminal-browser may prompt for Accessibility /
 Input Monitoring; grant those in System Settings. The app is notarized,
