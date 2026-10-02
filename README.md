@@ -172,6 +172,8 @@ coding agents for Linear issues delegated to its app user. Its build step
 downloads the release binary named by the repository's `.release-version`.
 Its config and agent profiles come from dotfiles-private
 (`config/herdr-linear-agent/`), linked into `~/.config/herdr-linear-agent/`.
+`config/opencode/opencode.json` defines the `herdr-linear-agent-coordinator`
+agent, which denies subagents, for coordinators that run on OpenCode.
 
 [herdr-infobox](https://github.com/civitaspo/herdr-infobox) shows a session's
 repositories, diffs, references, and plans (Herdr action **Toggle Info**). It

@@ -1,4 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "update": "disable"
+  "update": "disable",
+  "agent": {
+    "herdr-linear-agent-coordinator": {
+      "mode": "primary",
+      "description": "herdr-linear-agent coordinator",
+      "permission": { "subagent": "deny" }
+    }
+  }
 }
