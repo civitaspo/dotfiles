@@ -73,6 +73,11 @@ idempotent; rerun the task that stopped. Keynote, Numbers, and Pages use
 the universal App Store IDs; the classic Mac IDs were delisted in April
 2026 and cannot be installed by mas.
 
+`mise run brew` and `mise run update:brew` accept the Xcode license before
+running Homebrew and after installing or upgrading App Store apps. They
+request sudo only when the installed Xcode license has not been accepted.
+To fix an existing installation directly, run `mise run setup:xcode`.
+
 Rosetta is required because the committed `mise.lock` entries for dust and
 procs use x86_64 assets on macOS arm64.
 
