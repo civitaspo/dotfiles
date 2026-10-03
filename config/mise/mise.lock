@@ -15,8 +15,8 @@ version = "2.40.0"
 backend = "aqua:1password/cli"
 
 [tools."aqua:1password/cli"."platforms.macos-arm64"]
-checksum = "blake3:5b933123d7e1de7abfd93c279fe5953af82735386f6cf9a43d6165a7fd79b54b"
-url = "https://cache.agilebits.com/dist/1P/op2/pkg/v2.39.0/op_darwin_arm64_v2.40.0.zip"
+checksum = "sha256:43b9e7c245b48207c789ba1b8a481ccf4a658f60dbed8cc8b70d36044548a994"
+url = "https://cache.agilebits.com/dist/1P/op2/pkg/v2.40.0/op_darwin_arm64_v2.40.0.zip"
 
 [[tools."aqua:BurntSushi/ripgrep"]]
 version = "15.2.0"

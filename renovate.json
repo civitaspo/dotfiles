@@ -44,7 +44,7 @@
       "matchStrings": [
         "\"aqua:1password/cli\"\\s*=\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\"",
         "\\[\\[tools\\.\"aqua:1password/cli\"\\]\\]\\nversion = \"(?<currentValue>\\d+\\.\\d+\\.\\d+)\"",
-        "pkg/v(?<currentValue>\\d+\\.\\d+\\.\\d+)/op_darwin_arm64_v\\d+\\.\\d+\\.\\d+\\.zip",
+        "pkg/v(?<currentValue>\\d+\\.\\d+\\.\\d+)/",
         "op_darwin_arm64_v(?<currentValue>\\d+\\.\\d+\\.\\d+)\\.zip"
       ],
       "depNameTemplate": "1password-cli",
