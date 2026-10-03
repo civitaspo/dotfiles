@@ -5,6 +5,27 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Change right_shift to F18 on the built-in keyboard",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "right_shift",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f18" }],
+                                "conditions": [
+                                    {
+                                        "type": "device_if",
+                                        "identifiers": [
+                                            { "is_built_in_keyboard": true }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "description": "Change Left_control P/N/B/F/A/E/D/K In Reflect",
                         "manipulators": [
                             {
