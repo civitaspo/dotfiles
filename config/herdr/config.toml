@@ -36,6 +36,13 @@ type = "plugin_action"
 command = "zenbu-labs.terminal-browser.open-split"
 description = "open terminal-browser in a right split"
 
+# herdr-infobox (https://github.com/civitaspo/herdr-infobox)
+[[keys.command]]
+key = "prefix+i"
+type = "plugin_action"
+command = "herdr-infobox.toggle"
+description = "toggle session repositories, diffs, references, and plans"
+
 # herdr-annotate (https://github.com/plannotator/herdr-annotate)
 [[keys.command]]
 key = "prefix+a"
