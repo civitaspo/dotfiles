@@ -30,8 +30,11 @@ run = [
 [tasks.brew]
 description = "Apply the Brewfile and remove unlisted packages."
 run = [
+  { task = "setup:xcode" },
   { task = "brew:tap" },
   "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup",
+  # Run directly because mise deduplicates repeated task references.
+  "./mise-tasks/setup/xcode",
 ]
 
 [tasks.tools]
@@ -82,10 +85,13 @@ run = "mise lock --global --platform macos-arm64"
 [tasks."update:brew"]
 description = "Upgrade Homebrew packages."
 run = [
+  { task = "setup:xcode" },
   { task = "brew:tap" },
   "/opt/homebrew/bin/brew update",
   "/opt/homebrew/bin/brew upgrade",
   "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup",
+  # Run directly because mise deduplicates repeated task references.
+  "./mise-tasks/setup/xcode",
   "/opt/homebrew/bin/brew cleanup",
 ]
 
@@ -124,8 +130,8 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh home/bin/* home/.docker/cli-plugins/*",
-  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh home/bin/* home/.docker/cli-plugins/*",
+  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh home/bin/* home/.docker/cli-plugins/*",
 ]
 
 [tasks."check:typos"]

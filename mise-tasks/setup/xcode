@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#MISE description="Accept the installed Xcode license if needed."
+set -euo pipefail
+
+# Use the Brewfile's Xcode even when xcode-select points to Command Line Tools.
+xcodebuild="/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild"
+if [[ ! -x "$xcodebuild" ]] || "$xcodebuild" -license check >/dev/null 2>&1; then
+  exit 0
+fi
+
+sudo "$xcodebuild" -license accept
