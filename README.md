@@ -182,7 +182,10 @@ Its config and agent profiles come from dotfiles-private
 agent, which denies subagents, for coordinators that run on OpenCode.
 
 [herdr-infobox](https://github.com/civitaspo/herdr-infobox) shows a session's
-repositories, diffs, references, and plans (Herdr action **Toggle Info**). It
+repositories, diffs, references, and plans. Press `ctrl+t`, then `i` to open
+or close Info (Herdr action **Toggle Info**). Inside Info, `s` selects a
+session, `Tab` switches sections, `Enter` opens details, and `d` shows changed
+files. Press `p` to resume following the current tab's agent session. It
 has no release binary yet, so its build step compiles it with the mise Rust
 toolchain. Provider hooks are not installed; see its installation guide.
 
