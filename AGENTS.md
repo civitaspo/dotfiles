@@ -32,6 +32,10 @@ mise; `mise run bootstrap` installs Nix and Homebrew.
 
 ## Git workflow
 
+- Complete repository changes by committing, pushing a feature branch,
+  opening a non-draft pull request, waiting for required checks, and merging
+  it. Do not stop after local edits or activation unless the user explicitly
+  asks to leave the change unmerged.
 - Before creating a feature branch or worktree, run `git fetch origin main`.
 - Base new feature branches and worktrees on `origin/main`, not a stale local
   `main`.
