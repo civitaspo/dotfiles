@@ -5,11 +5,16 @@ repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 test_dir="$(mktemp -d)"
 trap 'rm -rf "$test_dir"' EXIT
 export TEST_ROOT="$test_dir"
+export EXPECTED_REPO_ROOT="$repo_root"
 mkdir -p "$test_dir/bin" "$test_dir/empty/bin" "$test_dir/healthy/bin"
 touch "$test_dir/healthy/bin/tool"
 cat >"$test_dir/bin/mise" <<'MISE'
 #!/usr/bin/env bash
 set -euo pipefail
+[[ "$MISE_GLOBAL_CONFIG_FILE" == "$EXPECTED_REPO_ROOT/config/mise/config.toml" ]]
+[[ "$MISE_GLOBAL_CONFIG_ROOT" == "$EXPECTED_REPO_ROOT/config/mise" ]]
+[[ "$MISE_OVERRIDE_CONFIG_FILENAMES" == mise.toml ]]
+[[ "$PWD" == "$EXPECTED_REPO_ROOT" ]]
 printf '%s\n' "$*" >> "$TEST_ROOT/calls"
 case "$*" in
   'ls --current --json')
@@ -29,6 +34,11 @@ esac
 MISE
 chmod +x "$test_dir/bin/mise"
 export PATH="$test_dir/bin:$PATH"
+# Stale inherited settings must not override the checkout, from any cwd.
+export MISE_GLOBAL_CONFIG_FILE="$test_dir/stale/config.toml"
+export MISE_GLOBAL_CONFIG_ROOT="$test_dir/stale"
+export MISE_OVERRIDE_CONFIG_FILENAMES=config.toml
+cd "$test_dir"
 
 bash "$repo_root/mise-tasks/tools/install"
 [[ "$(grep -c '^install --force ' "$test_dir/calls")" == 1 ]]

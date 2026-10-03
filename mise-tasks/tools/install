@@ -2,6 +2,14 @@
 #MISE description="Install configured tools and repair empty installations."
 set -euo pipefail
 
+# Install from the checkout even before home-manager activation.
+repo_root="$(cd "$(dirname "$0")/../.." && pwd)"
+export MISE_GLOBAL_CONFIG_FILE="$repo_root/config/mise/config.toml"
+export MISE_GLOBAL_CONFIG_ROOT="$repo_root/config/mise"
+# Do not rediscover ~/.config/mise/config.toml as a local ancestor config.
+export MISE_OVERRIDE_CONFIG_FILENAMES=mise.toml
+cd "$repo_root"
+
 configured_tools() {
   mise ls --current --json | jq -r 'to_entries[] | .key as $tool | .value[] | [($tool + "@" + .version), .install_path] | @tsv'
 }

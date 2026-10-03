@@ -70,7 +70,7 @@ run = [
 [tasks."update:mise"]
 description = "Upgrade mise-managed tools and drop unused versions."
 dir = "{{config_root}}/config/mise"
-env = { MISE_GLOBAL_CONFIG_FILE = "{{config_root}}/config/mise/config.toml", MISE_GLOBAL_CONFIG_ROOT = "{{config_root}}/config/mise", MISE_LOCKED = "false" }
+env = { MISE_GLOBAL_CONFIG_FILE = "{{config_root}}/config/mise/config.toml", MISE_GLOBAL_CONFIG_ROOT = "{{config_root}}/config/mise", MISE_OVERRIDE_CONFIG_FILENAMES = "mise.toml", MISE_LOCKED = "false" }
 run = [
   "mise upgrade",
   "mise prune",
@@ -79,7 +79,7 @@ run = [
 [tasks."lock:mise"]
 description = "Refresh the committed mise lockfile."
 dir = "{{config_root}}/config/mise"
-env = { MISE_GLOBAL_CONFIG_FILE = "{{config_root}}/config/mise/config.toml", MISE_GLOBAL_CONFIG_ROOT = "{{config_root}}/config/mise", MISE_LOCKED = "false" }
+env = { MISE_GLOBAL_CONFIG_FILE = "{{config_root}}/config/mise/config.toml", MISE_GLOBAL_CONFIG_ROOT = "{{config_root}}/config/mise", MISE_OVERRIDE_CONFIG_FILENAMES = "mise.toml", MISE_LOCKED = "false" }
 run = "mise lock --global --platform macos-arm64"
 
 [tasks."update:brew"]
