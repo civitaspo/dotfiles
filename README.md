@@ -168,7 +168,8 @@ full install (terminal comments plus Plannotator TUI document review):
 | `prefix+shift+o` | review the agent's last reply |
 
 [herdr-linear-agent](https://github.com/civitaspo/herdr-linear-agent) runs
-coding agents for Linear issues delegated to its app user. Its build step
+coding agents for Linear issues delegated to its app user. The Herdr
+postinstall pins it to `v0.7.0`. Its build step
 downloads the release binary named by the repository's `.release-version`.
 Its config and agent profiles come from dotfiles-private
 (`config/herdr-linear-agent/`), linked into `~/.config/herdr-linear-agent/`.
