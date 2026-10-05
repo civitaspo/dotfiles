@@ -67,7 +67,6 @@ cask "font-monaspice-nerd-font"
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
 mas "Bear", id: 1091189122
-mas "Display Menu", id: 549083868
 mas "Keynote", id: 361285480
 mas "Kindle", id: 302584613
 mas "Klack", id: 6446206067
