@@ -37,6 +37,16 @@ url = "https://github.com/ClementTsang/bottom/releases/download/0.14.9/bottom_aa
 url_api = "https://api.github.com/repos/ClementTsang/bottom/releases/assets/531978112"
 provenance = "github-attestations"
 
+[[tools."aqua:DataDog/pup"]]
+version = "1.24.0"
+backend = "aqua:DataDog/pup"
+
+[tools."aqua:DataDog/pup"."platforms.macos-arm64"]
+checksum = "sha256:ad0b33953b51b825aba5213ab8ca7f3a5185d1486144fd000c55210e7756c6f6"
+url = "https://github.com/DataDog/pup/releases/download/v1.24.0/pup_1.24.0_Darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/DataDog/pup/releases/assets/606127105"
+provenance = "cosign"
+
 [[tools."aqua:Songmu/laminate"]]
 version = "0.0.4"
 backend = "aqua:Songmu/laminate"
