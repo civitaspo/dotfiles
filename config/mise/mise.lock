@@ -85,13 +85,13 @@ url_api = "https://api.github.com/repos/astral-sh/ruff/releases/assets/603826852
 provenance = "github-attestations"
 
 [[tools."aqua:astral-sh/uv"]]
-version = "0.12.22"
+version = "0.12.23"
 backend = "aqua:astral-sh/uv"
 
 [tools."aqua:astral-sh/uv"."platforms.macos-arm64"]
-checksum = "sha256:5d714de09501a59393ceca78f4bc232a50478729640d251907160299b2a93ddd"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.22/uv-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/604418308"
+checksum = "sha256:50487ae565ccd96e499056b4674d438f4c53170202617b4c759defe0c6a1b544"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.23/uv-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/608232483"
 provenance = "github-attestations"
 
 [[tools."aqua:atuinsh/atuin"]]
@@ -165,13 +165,13 @@ url = "https://github.com/dalance/procs/releases/download/v0.14.12/procs-v0.14.1
 url_api = "https://api.github.com/repos/dalance/procs/releases/assets/457525354"
 
 [[tools."aqua:dandavison/delta"]]
-version = "0.19.2"
+version = "0.20.1"
 backend = "aqua:dandavison/delta"
 
 [tools."aqua:dandavison/delta"."platforms.macos-arm64"]
-checksum = "sha256:9be36612a5a13e9e386dc498fb8e50dc87c72ee42b63db0ea05b32f99a72a69a"
-url = "https://github.com/dandavison/delta/releases/download/0.19.2/delta-0.19.2-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/dandavison/delta/releases/assets/383662310"
+checksum = "sha256:bc1839cea69288d4673a24faffbb825d408ca907e0f7d33b1678c9e6cdd5e58e"
+url = "https://github.com/dandavison/delta/releases/download/0.20.1/delta-0.20.1-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/dandavison/delta/releases/assets/610498923"
 
 [[tools."aqua:direnv/direnv"]]
 version = "2.37.1"
@@ -218,13 +218,13 @@ url = "https://github.com/duckdb/duckdb/releases/download/v1.5.6/duckdb_cli-osx-
 url_api = "https://api.github.com/repos/duckdb/duckdb/releases/assets/595495619"
 
 [[tools."aqua:evilmartians/lefthook"]]
-version = "2.1.16"
+version = "2.1.17"
 backend = "aqua:evilmartians/lefthook"
 
 [tools."aqua:evilmartians/lefthook"."platforms.macos-arm64"]
-checksum = "sha256:3deee257054b3cd3d3288bef65436e17239d49ebb738af939e4a92f573865151"
-url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.16/lefthook_2.1.16_MacOS_arm64.gz"
-url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/603767184"
+checksum = "sha256:aabf434ea7049af9854eb5205520bc16fc52d3d55459c2332a3711cdd6743d34"
+url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.17/lefthook_2.1.17_MacOS_arm64.gz"
+url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/611879927"
 provenance = "github-attestations"
 
 [[tools."aqua:herdrdev/herdr"]]
@@ -237,13 +237,13 @@ url = "https://github.com/herdrdev/herdr/releases/download/v0.9.3/herdr-macos-aa
 url_api = "https://api.github.com/repos/herdrdev/herdr/releases/assets/599036381"
 
 [[tools."aqua:jesseduffield/lazygit"]]
-version = "0.65.1"
+version = "0.66.0"
 backend = "aqua:jesseduffield/lazygit"
 
 [tools."aqua:jesseduffield/lazygit"."platforms.macos-arm64"]
-checksum = "sha256:65a367c6ea9a88efebaaf7998a6835eedb987e04916cef677264ff9b31b1b13e"
-url = "https://github.com/jesseduffield/lazygit/releases/download/v0.65.1/lazygit_0.65.1_darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/jesseduffield/lazygit/releases/assets/560658243"
+checksum = "sha256:e9fe2fe1f1bbc1b4c3214b33e8e0d57a4d6e3c2276aa9aa713f9bcbdc223e65c"
+url = "https://github.com/jesseduffield/lazygit/releases/download/v0.66.0/lazygit_0.66.0_darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/jesseduffield/lazygit/releases/assets/613198499"
 
 [[tools."aqua:jqlang/jq"]]
 version = "1.8.2"
@@ -283,13 +283,13 @@ url = "https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellche
 url_api = "https://api.github.com/repos/koalaman/shellcheck/releases/assets/279056932"
 
 [[tools."aqua:lima-vm/lima"]]
-version = "2.2.0"
+version = "2.2.1"
 backend = "aqua:lima-vm/lima"
 
 [tools."aqua:lima-vm/lima"."platforms.macos-arm64"]
-checksum = "sha256:bbdef91774885a0d05f7b048c4eb89ae2bcf3a0c252ae7ca7934e63df76d93c3"
-url = "https://github.com/lima-vm/lima/releases/download/v2.2.0/lima-2.2.0-Darwin-arm64.tar.gz"
-url_api = "https://api.github.com/repos/lima-vm/lima/releases/assets/484813994"
+checksum = "sha256:9e9eacce88f37e185c346bad73aa6136f738d8cdf8c3bb23cd42b071824bc66e"
+url = "https://github.com/lima-vm/lima/releases/download/v2.2.1/lima-2.2.1-Darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/lima-vm/lima/releases/assets/607822568"
 provenance = "github-attestations"
 
 [[tools."aqua:marp-team/marp-cli"]]
@@ -382,22 +382,22 @@ version = "0.23.5"
 backend = "cargo:eza"
 
 [[tools.claude-code]]
-version = "2.1.288"
+version = "2.1.289"
 backend = "aqua:anthropics/claude-code"
 
 [tools.claude-code."platforms.macos-arm64"]
-checksum = "sha256:86616c1bdb2d3581343b41bf1674b936991d74d14b6d5cf205194cd7d2e104fe"
-url = "https://github.com/anthropics/claude-code/releases/download/v2.1.288/claude-darwin-arm64.tar.gz"
-url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/606215765"
+checksum = "sha256:20acfc89a32ed7260b63fd2f3fd71a33de7b2d74b82c724d25941ad73d2e0e96"
+url = "https://github.com/anthropics/claude-code/releases/download/v2.1.289/claude-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/608449164"
 
 [[tools.codex]]
-version = "0.159.2"
+version = "0.160.0"
 backend = "aqua:openai/codex"
 
 [tools.codex."platforms.macos-arm64"]
-checksum = "sha256:38aaf6dce63099fd10988948d03bbc6c0474253aef6961fcbe60f8d154b39101"
-url = "https://github.com/openai/codex/releases/download/rust-v0.159.2/codex-package-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/openai/codex/releases/assets/599532693"
+checksum = "sha256:007df41b607dbbc8d204b9746ce7fed2d4ce6c813f44c32ceee54175ca796525"
+url = "https://github.com/openai/codex/releases/download/rust-v0.160.0/codex-package-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/openai/codex/releases/assets/604060802"
 
 [[tools.deno]]
 version = "2.9.7"
@@ -408,20 +408,20 @@ checksum = "sha256:5cd46d6268f6f78f5d88bdc7159d20bd44cdaa4b3303474839f87ec6fe7ae
 url = "https://dl.deno.land/release/v2.9.7/deno-aarch64-apple-darwin.zip"
 
 [[tools.gcloud]]
-version = "587.0.0"
+version = "588.0.0"
 backend = "vfox:mise-plugins/vfox-gcloud"
 
 [tools.gcloud."platforms.macos-arm64"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-587.0.0-darwin-arm.tar.gz"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-588.0.0-darwin-arm.tar.gz"
 
 [[tools."github:backnotprop/plannotator"]]
-version = "0.27.25"
+version = "0.28.3"
 backend = "github:backnotprop/plannotator"
 
 [tools."github:backnotprop/plannotator"."platforms.macos-arm64"]
-checksum = "sha256:24de60fbf8e3bdab5197cf3adf9ce381e8a818f2d54b2a055f61291c7b2260ea"
-url = "https://github.com/backnotprop/plannotator/releases/download/v0.27.25/plannotator-darwin-arm64"
-url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/604441006"
+checksum = "sha256:69249f7609261c204acb30e38bf0325f75fc0b0e234a00107b22228dca8477c8"
+url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.3/plannotator-darwin-arm64"
+url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/612132338"
 provenance = "github-attestations"
 
 [[tools."github:civitaspo/hook-relay-client-rs"]]
@@ -495,7 +495,7 @@ backend = "npm:@opencode/cli"
 allow_builds = '["@opencode/cli"]'
 
 [[tools."npm:pnpm"]]
-version = "12.8.1"
+version = "12.9.1"
 backend = "npm:pnpm"
 
 [[tools.rust]]
