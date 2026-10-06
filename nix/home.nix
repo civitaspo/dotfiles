@@ -22,6 +22,17 @@ let
       (builtins.readDir dir);
 
   private = inputs.dotfiles-private + "/home";
+  privateMcpConfig = inputs.dotfiles-private + "/config/dotfiles/mcp.json";
+  hasPrivateMcpConfig = builtins.pathExists privateMcpConfig;
+  mcpServers = if hasPrivateMcpConfig then
+    (builtins.fromJSON (builtins.readFile privateMcpConfig)).mcpServers
+  else
+    { };
+  openCodeMcpServers = lib.mapAttrs (_: server: {
+    type = "remote";
+    inherit (server) url;
+  }) mcpServers;
+  openCodeConfig = builtins.fromJSON (builtins.readFile ../config/opencode/opencode.json);
 
   # Directories that contain SKILL.md, stopping at that leaf. Claude Code
   # only loads ~/.claude/skills/<name>/SKILL.md and does not recurse.
@@ -89,7 +100,11 @@ in
         ".agents/snowflake-skills".source = private + "/.agents/snowflake-skills";
         ".ssh/config.d" = { source = private + "/.ssh/config.d"; recursive = true; };
       }
-      // claudeSkillLinks;
+      // claudeSkillLinks
+      // lib.optionalAttrs hasPrivateMcpConfig {
+        ".cursor/mcp.json".source = builtins.toFile "cursor-mcp.json"
+          ((builtins.toJSON { inherit mcpServers; }) + "\n");
+      };
   };
 
   xdg = {
@@ -98,7 +113,13 @@ in
       let
         privateConfig = inputs.dotfiles-private + "/config";
       in
-      linkDir ../config
+      builtins.removeAttrs (linkDir ../config) (lib.optional hasPrivateMcpConfig "opencode")
+      // lib.optionalAttrs hasPrivateMcpConfig {
+        "opencode/opencode.json".source = builtins.toFile "opencode.json"
+          ((builtins.toJSON (lib.recursiveUpdate openCodeConfig {
+            mcp.servers = openCodeMcpServers;
+          })) + "\n");
+      }
       // lib.optionalAttrs (builtins.pathExists privateConfig) (linkDir privateConfig);
   };
 }
