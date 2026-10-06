@@ -67,6 +67,10 @@ installs pinned, signed Determinate Nix and Homebrew packages. `mise run
 reconcile` is the only apply step: nix-darwin, Homebrew, then locked mise
 tools.
 
+Private MCP servers are installed from the private configuration during
+`mise run switch`. If a client CLI was unavailable during setup, install it
+and run `mise run mcp:sync` to register the servers later.
+
 If App Store apps fail until they have been acquired on this Apple ID, Get
 them once in the App Store and rerun `mise run brew`. Other failed steps are
 idempotent; rerun the task that stopped. Keynote, Numbers, and Pages use

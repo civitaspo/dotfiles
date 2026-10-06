@@ -18,3 +18,5 @@ fi
 sudo nix-env -p /nix/var/nix/profiles/system --set ./result
 sudo ./result/activate
 rm -f ./result
+
+./mise-tasks/mcp/sync

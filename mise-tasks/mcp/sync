@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+#MISE description="Register configured HTTP MCP servers with CLI-managed clients."
+set -euo pipefail
+
+mcp_config="$HOME/.config/dotfiles/mcp.json"
+if [[ ! -f "$mcp_config" ]]; then
+  exit 0
+fi
+
+if ! command -v jq >/dev/null 2>&1; then
+  printf 'mcp:sync requires jq. Install repository tools, then run mise run mcp:sync again.\n' >&2
+  exit 1
+fi
+
+if ! jq -e '
+  type == "object" and
+  (.mcpServers | type == "object") and
+  all(.mcpServers | to_entries[];
+    (.key | length > 0) and
+    (.key | test("^[A-Za-z0-9][A-Za-z0-9_-]*$")) and
+    (.value | type == "object" and keys == ["url"]) and
+    (.value.url | type == "string" and test("^https?://[^[:space:]]+$"))
+  )
+' "$mcp_config" >/dev/null; then
+  printf 'Invalid MCP config in %s. Expected mcpServers with HTTP URL entries.\n' "$mcp_config" >&2
+  exit 1
+fi
+
+codex_available=0
+claude_available=0
+codex_config='[]'
+claude_config='{}'
+if command -v codex >/dev/null 2>&1; then
+  codex_available=1
+  codex_config=$(codex mcp list --json) || {
+    printf 'Could not read Codex MCP configuration. No clients were changed.\n' >&2
+    exit 1
+  }
+  if ! jq -e 'type == "array"' <<<"$codex_config" >/dev/null; then
+    printf 'Codex returned an unexpected MCP configuration. No clients were changed.\n' >&2
+    exit 1
+  fi
+fi
+
+claude_config_path="$HOME/.claude.json"
+if command -v claude >/dev/null 2>&1; then
+  claude_available=1
+fi
+if ((claude_available)) && [[ -f "$claude_config_path" ]]; then
+  claude_config=$(jq -c 'select(type == "object" and ((has("mcpServers") | not) or (.mcpServers | type == "object")))' "$claude_config_path") || {
+    printf 'Could not read Claude Code MCP configuration. No clients were changed.\n' >&2
+    exit 1
+  }
+  if [[ -z "$claude_config" ]]; then
+    printf 'Claude Code returned an unexpected MCP configuration. No clients were changed.\n' >&2
+    exit 1
+  fi
+fi
+
+while IFS=$'\t' read -r name url; do
+  if ((codex_available)); then
+    existing=$(jq -c --arg name "$name" '[.[] | select(.name == $name)]' <<<"$codex_config")
+    if [[ "$existing" != '[]' ]] && ! jq -e --arg url "$url" 'length == 1 and .[0].transport.type == "streamable_http" and .[0].transport.url == $url' <<<"$existing" >/dev/null; then
+      printf 'Codex already has a different MCP server named %s. No clients were changed.\n' "$name" >&2
+      exit 1
+    fi
+  fi
+
+  if ((claude_available)); then
+    existing=$(jq -c --arg name "$name" '[.mcpServers[$name] // empty]' <<<"$claude_config")
+    if [[ "$existing" != '[]' ]] && ! jq -e --arg url "$url" 'length == 1 and .[0].type == "http" and .[0].url == $url' <<<"$existing" >/dev/null; then
+      printf 'Claude Code already has a different MCP server named %s. No clients were changed.\n' "$name" >&2
+      exit 1
+    fi
+  fi
+done < <(jq -r '.mcpServers | to_entries[] | [.key, .value.url] | @tsv' "$mcp_config")
+
+while IFS=$'\t' read -r name url; do
+  if ((codex_available)); then
+    existing=$(jq -c --arg name "$name" '[.[] | select(.name == $name)]' <<<"$codex_config")
+    if [[ "$existing" == '[]' ]]; then
+      codex mcp add "$name" --url "$url"
+    fi
+  else
+    printf 'Codex CLI is unavailable. Run mise run mcp:sync after installing it.\n' >&2
+  fi
+
+  if ((claude_available)); then
+    existing=$(jq -c --arg name "$name" '[.mcpServers[$name] // empty]' <<<"$claude_config")
+    if [[ "$existing" == '[]' ]]; then
+      claude mcp add --transport http --scope user "$name" "$url"
+    fi
+  else
+    printf 'Claude Code CLI is unavailable. Run mise run mcp:sync after installing it.\n' >&2
+  fi
+done < <(jq -r '.mcpServers | to_entries[] | [.key, .value.url] | @tsv' "$mcp_config")
