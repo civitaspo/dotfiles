@@ -114,6 +114,7 @@ run = [
   { task = "check:shell" },
   { task = "check:mcp-sync" },
   { task = "check:tools-install" },
+  { task = "check:github-key" },
   { task = "check:typos" },
 ]
 
@@ -131,8 +132,8 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh tests/test_mcp_sync.sh home/bin/* home/.docker/cli-plugins/*",
-  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh tests/test_mcp_sync.sh home/bin/* home/.docker/cli-plugins/*",
+  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh tests/test_mcp_sync.sh tests/test_github_key.sh home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh tests/test_mcp_sync.sh tests/test_github_key.sh home/bin/* home/.docker/cli-plugins/*",
 ]
 
 [tasks."check:typos"]
@@ -142,6 +143,10 @@ run = "typos"
 [tasks."check:tools-install"]
 description = "Test recovery of empty mise installations."
 run = "bash tests/test_tools_install.sh"
+
+[tasks."check:github-key"]
+description = "Test Secure Enclave key setup and GitHub registration retries."
+run = "bash tests/test_github_key.sh"
 
 [tasks."check:mcp-sync"]
 description = "Test MCP server registration and conflict handling."

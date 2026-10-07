@@ -1,7 +1,7 @@
 [user]
 	name = Takahiro Nakayama
 	email = civitaspo@gmail.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlmYWLNT2IyKC0InCp3Upis6d3pH25NcQaPuDntjSWJ
+	signingkey = ~/.ssh/id_github_secure_enclave
 
 [core]
 	pager = delta
@@ -13,11 +13,14 @@
 [commit]
 	gpgsign = true
 
+[tag]
+	gpgsign = true
+
 [gpg]
 	format = ssh
 
 [gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	program = /Users/takahiro.nakayama/bin/ssh-sign
 
 [push]
 	default = simple
