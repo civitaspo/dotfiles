@@ -132,8 +132,6 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck scripts/adapt-snowflake-skills.sh tests/test_snowflake_skills.sh",
-  "shfmt -d -i 2 -ci scripts/adapt-snowflake-skills.sh tests/test_snowflake_skills.sh",
   "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh tests/test_mcp_sync.sh tests/test_github_key.sh home/bin/* home/.docker/cli-plugins/*",
   "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install tests/test_tools_install.sh tests/test_mcp_sync.sh tests/test_github_key.sh home/bin/* home/.docker/cli-plugins/*",
 ]

@@ -3,17 +3,19 @@
 `nix/snowflake-skills.nix` downloads a pinned official Cortex Code CLI archive
 and extracts only `bundled_skills/`. The CLI is not installed or executed.
 home-manager links the generated catalog to `~/.agents/snowflake-skills`.
-The private repository keeps the small Snowflake router and host adaptation
-files, not the catalog.
+Upstream files are preserved without patches or injected notices.
 
-Host customizations come from the private input's `snowflake-skills/`:
-`catalog.patch`, a single-line `notice.md`, and `CURSOR_ADAPTATION.md`.
-The generic shell adapter inserts the notice after Markdown frontmatter.
-Keep organization-specific tool names and instructions in those private files.
+The private repository keeps the small Snowflake router and shared
+`snowflake-skills/CURSOR_ADAPTATION.md` guide, not the catalog. The build copies
+that guide into the catalog root. The router requires agents to read it before
+loading any upstream entrypoint, including in later sessions and after updates.
+Keep organization-specific tool names and instructions in the private guide.
+This relies on agents following the router and guide; it does not rewrite or
+make upstream helpers compatible with the host. CoCo-only tools and helpers
+requiring direct connections may be unavailable.
+
 The trial lockfile pins the companion private branch. After adopting both
-PRs, refresh the private input from its default branch.
-The original Python helpers and dependency manifests remain in the generated
-catalog. Helpers requiring a direct connection retain that requirement.
+PRs, refresh the private input from its default branch before deleting that branch.
 
 Build without activation:
 
@@ -21,17 +23,18 @@ Build without activation:
 nix build .#snowflake-skills --no-link --print-out-paths
 ```
 
-To update, read the official installer's current distribution prefix and its
+Ordinary installations use the pinned version and hash. To update deliberately,
+read the official installer's current distribution prefix and its
 `stable_version.txt`, then read that version's `manifest.json`. Update `version`
 and the Linux amd64 archive's SHA-256 in `nix/snowflake-skills.nix`. The Linux
 archive is used as a platform-independent source of skill assets.
 
 Official installer: <https://ai.snowflake.com/static/cc-scripts/install.sh>
 
-Run `mise run check`. Patch application uses zero fuzz and fails the build
-when a hunk no longer applies; review the new upstream instructions and update
-the patch before adopting a new version. Review offsets reported by `patch`
-as well.
+Run `mise run check` and review upstream release notes for changes to tool
+contracts or catalog layout. Update the shared private guide only when those
+contracts change. There are no patch hunks to rebase on each release; build
+checks validate extraction and configuration, not every upstream workflow.
 
 Keep upstream manifests out of Git: committing the generated catalog would
 make those helper dependencies visible to Dependabot again. This removes
