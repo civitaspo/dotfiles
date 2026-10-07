@@ -61,7 +61,8 @@
           pkgs = inputs.nixpkgs-python.legacyPackages.aarch64-darwin;
         in
         pkgs.runCommand "skill-links" { nativeBuildInputs = [ pkgs.python313 ]; } ''
-          python3 ${inputs.dotfiles-private}/scripts/check-skill-links.py
+          python3 ${./tests/test_skill_links.py} ${./scripts/check-skill-links.py}
+          python3 ${./scripts/check-skill-links.py} ${inputs.dotfiles-private}/home/.agents/skills
           touch $out
         '';
     };
