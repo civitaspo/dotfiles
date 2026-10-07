@@ -35,9 +35,7 @@ to rebase. Update the private guide only when host translations need to change.
 
 Official installer: <https://ai.snowflake.com/static/cc-scripts/install.sh>
 
-The trial flake lock pins the companion private branch. After adopting both
-PRs, refresh the private input from its default branch before deleting that
-branch. home-manager removes the previous managed `~/.agents/snowflake-skills`
+home-manager removes the previous managed `~/.agents/snowflake-skills`
 link during activation; the router uses mise directly.
 
 Keep upstream skill assets and dependency manifests out of Git. Their presence
