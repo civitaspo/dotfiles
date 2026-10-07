@@ -1,0 +1,176 @@
+#!/usr/bin/env bash
+#MISE description="Create and register this Mac's GitHub Secure Enclave key."
+
+set -euo pipefail
+
+sc_auth_bin="${SC_AUTH_BIN:-/usr/sbin/sc_auth}"
+ssh_keygen_bin="${SSH_KEYGEN_BIN:-/usr/bin/ssh-keygen}"
+ssh_sk_provider="${SSH_SK_PROVIDER:-/usr/lib/ssh-keychain.dylib}"
+expect_bin="${EXPECT_BIN:-/usr/bin/expect}"
+gh_bin="${GH_BIN:-gh}"
+key_label=dotfiles-github
+key_type=p-256-ne
+key_protection=none
+ssh_dir="${HOME}/.ssh"
+key_file="${ssh_dir}/id_github_secure_enclave"
+public_file="${key_file}.pub"
+
+fail() {
+  printf '[setup:github-key] %s\n' "$1" >&2
+  exit 1
+}
+
+command -v "$sc_auth_bin" >/dev/null 2>&1 || fail "${sc_auth_bin} is unavailable"
+command -v "$ssh_keygen_bin" >/dev/null 2>&1 || fail "${ssh_keygen_bin} is unavailable"
+command -v "$expect_bin" >/dev/null 2>&1 || fail "${expect_bin} is unavailable"
+command -v "$gh_bin" >/dev/null 2>&1 || fail "${gh_bin} is unavailable"
+
+auth_status="$($gh_bin auth status --hostname github.com --json hosts --jq '.hosts["github.com"][] | select(.active) | [.login, .scopes] | @tsv' 2>/dev/null)" || fail 'gh authentication is unavailable; run gh auth login first'
+[[ -n "$auth_status" ]] || fail 'no active github.com gh account was found'
+IFS=$'\t' read -r gh_login gh_scopes <<<"$auth_status"
+gh_scopes="${gh_scopes// /}"
+[[ "$gh_login" == civitaspo ]] || fail "active gh account is ${gh_login}, expected civitaspo"
+case ",${gh_scopes}," in
+  *,admin:public_key,*) ;;
+  *) fail 'gh needs admin:public_key and admin:ssh_signing_key scopes; run gh auth refresh -h github.com -s admin:public_key -s admin:ssh_signing_key' ;;
+esac
+case ",${gh_scopes}," in
+  *,admin:ssh_signing_key,*) ;;
+  *) fail 'gh needs admin:public_key and admin:ssh_signing_key scopes; run gh auth refresh -h github.com -s admin:public_key -s admin:ssh_signing_key' ;;
+esac
+api_login="$("$gh_bin" api user --jq .login --hostname github.com 2>/dev/null)" || fail 'could not verify the active GitHub API account'
+[[ "$api_login" == civitaspo ]] || fail "GitHub API account is ${api_login}, expected civitaspo"
+
+mkdir -p "$ssh_dir"
+chmod 700 "$ssh_dir"
+if [[ -L "$key_file" || -L "$public_file" ]]; then
+  fail 'target key files must not be symlinks'
+fi
+if [[ (-e "$key_file" && ! -f "$key_file") || (-e "$public_file" && ! -f "$public_file") ]]; then
+  fail 'target key paths must be regular files'
+fi
+if [[ -e "$key_file" && ! -e "$public_file" || ! -e "$key_file" && -e "$public_file" ]]; then
+  fail 'only one target key file exists; move it aside before retrying'
+fi
+
+identity_list="$($sc_auth_bin list-ctk-identities)" || fail 'sc_auth could not list Secure Enclave identities'
+identity_rows="$(printf '%s\n' "$identity_list" | awk -v label="$key_label" 'NR > 1 && $4 == label { print $1, $2, $3 }')"
+identity_count="$(printf '%s\n' "$identity_rows" | awk 'NF { count++ } END { print count + 0 }')"
+if [[ "$identity_count" -gt 1 ]]; then
+  fail "multiple identities use the ${key_label} label; resolve them manually"
+elif [[ "$identity_count" -eq 1 ]]; then
+  read -r found_type identity_hash found_protection <<<"$identity_rows"
+  [[ "$found_type" == "$key_type" && "$found_protection" == "$key_protection" ]] || fail "existing ${key_label} identity has unexpected type or protection"
+else
+  [[ ! -e "$key_file" ]] || fail "target files exist but the ${key_label} identity is missing"
+  "$sc_auth_bin" create-ctk-identity -l "$key_label" -k "$key_type" -t "$key_protection" || fail 'Secure Enclave identity creation failed'
+  identity_list="$($sc_auth_bin list-ctk-identities)" || fail 'sc_auth could not verify the created identity'
+  identity_rows="$(printf '%s\n' "$identity_list" | awk -v label="$key_label" 'NR > 1 && $4 == label { print $1, $2, $3 }')"
+  identity_count="$(printf '%s\n' "$identity_rows" | awk 'NF { count++ } END { print count + 0 }')"
+  [[ "$identity_count" == 1 ]] || fail 'created identity is missing or duplicated; retry after inspecting sc_auth output'
+  read -r found_type identity_hash found_protection <<<"$identity_rows"
+  [[ "$found_type" == "$key_type" && "$found_protection" == "$key_protection" ]] || fail 'created identity has unexpected type or protection'
+fi
+[[ "${#identity_hash}" == 40 ]] || fail 'selected identity has an invalid public key hash'
+case "$identity_hash" in
+  *[![:xdigit:]]*) fail 'selected identity has an invalid public key hash' ;;
+esac
+
+ssh_identity_list="$($sc_auth_bin list-ctk-identities -t ssh)" || fail 'sc_auth could not list SSH identity fingerprints'
+ssh_identity_rows="$(printf '%s\n' "$ssh_identity_list" | awk -v label="$key_label" 'NR > 1 && $4 == label { print $1, $2, $3 }')"
+ssh_identity_count="$(printf '%s\n' "$ssh_identity_rows" | awk 'NF { count++ } END { print count + 0 }')"
+[[ "$ssh_identity_count" == 1 ]] || fail "expected one SSH fingerprint for ${key_label}"
+read -r ssh_found_type identity_fingerprint ssh_found_protection <<<"$ssh_identity_rows"
+[[ "$ssh_found_type" == "$key_type" && "$ssh_found_protection" == "$key_protection" ]] || fail 'SSH identity has unexpected type or protection'
+case "$identity_fingerprint" in
+  SHA256:*) ;;
+  *) fail 'selected identity has an invalid SSH fingerprint' ;;
+esac
+fingerprint_payload="${identity_fingerprint#SHA256:}"
+case "$fingerprint_payload" in
+  '' | *[![:alnum:]+/=]*) fail 'selected identity has an invalid SSH fingerprint' ;;
+esac
+
+if [[ -e "$key_file" ]]; then
+  public_fingerprint="$("$ssh_keygen_bin" -lf "$public_file" -E sha256 2>/dev/null | awk 'NR == 1 { print $2 }')" || fail 'could not read the existing public key fingerprint'
+  [[ "$public_fingerprint" == "$identity_fingerprint" ]] || fail 'existing public key does not match the selected identity'
+  existing_body="$(awk 'NF >= 2 { print $1 " " $2; exit }' "$public_file")"
+  derived_public="$("$ssh_keygen_bin" -y -P '' -w "$ssh_sk_provider" -f "$key_file" 2>/dev/null)" || fail 'existing private key handle cannot be read'
+  derived_body="$(printf '%s\n' "$derived_public" | awk 'NF >= 2 { print $1 " " $2; exit }')"
+  [[ "$derived_body" == "$existing_body" ]] || fail 'existing private key handle does not match its public key'
+  expected_body="$existing_body"
+else
+  tmp_dir="$(mktemp -d)"
+  trap 'rm -rf "$tmp_dir"' EXIT
+  if ! (
+    cd "$tmp_dir"
+    "$expect_bin" -f - "$ssh_keygen_bin" -K -w "$ssh_sk_provider" -N '' <<'EXPECT'
+set timeout 30
+log_user 0
+set n 0
+spawn -noecho {*}$argv
+expect {
+  -re {Enter PIN for authenticator:} { send "\r"; exp_continue }
+  -re {Overwrite \(y/n\)\?} {
+    foreach private [glob -nocomplain id_*_sk_rk] {
+      if {![file isfile "${private}.pub"]} {
+        close
+        catch wait
+        exit 1
+      }
+      file rename $private "${private}_$n"
+      file rename "${private}.pub" "${private}_$n.pub"
+      incr n
+    }
+    send "y\r"
+    exp_continue
+  }
+  eof {}
+  timeout {
+    close
+    catch wait
+    exit 1
+  }
+}
+set result [wait]
+if {[llength $result] != 4 || [lindex $result 2] != 0 || [lindex $result 3] != 0} { exit 1 }
+exit [lindex $result 3]
+EXPECT
+  ); then
+    fail 'could not export Secure Enclave keys'
+  fi
+  exported_private=""
+  exported_public=""
+  exported_matches=0
+  for candidate in "$tmp_dir"/id_*_sk_rk*; do
+    [[ -f "$candidate" && "$candidate" != *.pub ]] || continue
+    candidate_public="${candidate}.pub"
+    [[ -f "$candidate_public" && ! -L "$candidate" && ! -L "$candidate_public" ]] || fail 'export produced an invalid key pair'
+    candidate_fingerprint="$("$ssh_keygen_bin" -lf "$candidate_public" -E sha256 2>/dev/null | awk 'NR == 1 { print $2 }')" || fail 'could not read an exported key fingerprint'
+    if [[ "$candidate_fingerprint" == "$identity_fingerprint" ]]; then
+      exported_matches=$((exported_matches + 1))
+      exported_private="$candidate"
+      exported_public="$candidate_public"
+    fi
+  done
+  [[ "$exported_matches" == 1 ]] || fail 'expected exactly one exported key matching the selected identity'
+  expected_body="$(awk 'NF >= 2 { print $1 " " $2; exit }' "$exported_public")"
+  [[ -n "$expected_body" ]] || fail 'exported public key is invalid'
+  install -m 600 "$exported_private" "$key_file"
+  install -m 644 "$exported_public" "$public_file"
+fi
+chmod 600 "$key_file"
+chmod 644 "$public_file"
+
+register_key() {
+  local endpoint=$1
+  local existing
+  existing="$("$gh_bin" api --paginate --jq '.[].key' "$endpoint" --hostname github.com)" || fail "could not list GitHub keys at ${endpoint}"
+  if ! printf '%s\n' "$existing" | awk -v expected="$expected_body" 'NF >= 2 && ($1 " " $2) == expected { found = 1 } END { exit !found }'; then
+    "$gh_bin" api --method POST "$endpoint" -f "title=${key_label}" -f "key=$(cat "$public_file")" --hostname github.com >/dev/null || fail "could not register key at ${endpoint}"
+  fi
+}
+
+register_key /user/keys
+register_key /user/ssh_signing_keys
+printf '[setup:github-key] Secure Enclave key is ready and registered for civitaspo\n'

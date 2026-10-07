@@ -44,7 +44,8 @@ Then pause and do the following by hand:
 - Enable Settings → Developer → SSH Agent.
 - Confirm the keys named in `config/1Password/ssh/agent.toml`.
 - Sign into the Mac App Store with the Apple ID that owns the Brewfile `mas` apps.
-- Confirm GitHub access to `civitaspo/dotfiles-private` (`ssh -T git@github.com`).
+- Configure the Secure Enclave key using the steps below, then confirm access
+  to `civitaspo/dotfiles-private` (`git ls-remote git@github.com:civitaspo/dotfiles-private.git`).
 - Optionally clone the private repo for editing:
 
   ```sh
@@ -54,6 +55,16 @@ Then pause and do the following by hand:
 
   That checkout is not the symlink source. `mise run switch` fetches the
   locked `dotfiles-private` flake input over SSH.
+
+Install the CLI tools and register this Mac's GitHub key before applying the
+SSH configuration:
+
+```sh
+~/.local/bin/mise run tools:install
+gh auth login --hostname github.com --git-protocol ssh --skip-ssh-key
+gh auth refresh --hostname github.com --scopes admin:public_key,admin:ssh_signing_key
+~/.local/bin/mise run setup:github-key
+```
 
 Open a new terminal and apply the configuration:
 
@@ -236,7 +247,7 @@ These are manual and are not part of `mise run reconcile`:
   Hammerspoon, Space Rabbit, Homerow, Keyboard Maestro, CleanShot, and
   terminal-browser
 - sign into paid apps (CleanShot, Keyboard Maestro, Mimestream, and others)
-- Git commit signing via 1Password (`op-ssh-sign`)
+- verify Git commit and tag signing with this Mac's Secure Enclave key
 - `op signin`, `gh auth`, `gcloud auth`, AWS SSO, SnowSQL, and Atuin
 - Cursor, Claude Code, and Codex sign-in
 
@@ -245,6 +256,48 @@ Activation disables Spotlight indexing. `mise run brew` uses
 `brew bundle --force-cleanup`, so packages not listed in the Brewfile are
 removed. Local tap casks (Kanary, Nospace, OpenIn, Reflect Open) are
 pinned and self-update in-app; `brew upgrade` skips them.
+
+## Set up GitHub authentication and Git signing
+
+Run `mise run setup:github-key` explicitly on each Mac. The task creates a
+non-exportable P-256 key in Secure Enclave with label `dotfiles-github` and
+registers its public key with the `civitaspo` GitHub account for authentication
+and signing. It is not part of `reconcile`.
+
+The key uses `sc_auth` protection `none`, so signing and SSH authentication
+do not request Touch ID. Processes running as your macOS user can use it
+without an approval prompt. The secret key stays in Secure Enclave;
+`~/.ssh/id_github_secure_enclave` is its local reference file. Keep that file
+and its `.pub` companion outside this repository. Generate a separate key
+on each Mac rather than copying these files between machines.
+
+For an existing installation, register the key before `mise run switch`.
+The task requires `gh` to be signed into `civitaspo` with `admin:public_key`
+and `admin:ssh_signing_key` scopes. If needed, run:
+
+```sh
+gh auth refresh --hostname github.com --scopes admin:public_key,admin:ssh_signing_key
+mise run setup:github-key
+mise run switch
+ssh -T git@github.com
+```
+
+GitHub's successful SSH test prints `Hi civitaspo!` and exits with status 1
+because it does not provide shell access. A new signed commit pushed to
+GitHub must display `Verified`. Git and annotated tags use `~/bin/ssh-sign`,
+which selects Apple's SSH keychain provider. GitHub connects through
+`ssh.github.com:443` using the dedicated key. Other SSH hosts retain their
+existing configuration and 1Password agent.
+
+Rerun the task after an interruption. It reuses the identity and key files
+and registers only missing GitHub entries. If it finds duplicate identities,
+partial key files, or a mismatch, it stops without replacing them. Inspect
+`sc_auth list-ctk-identities` and the reported fingerprints before repairing
+the local state. Preserve the old 1Password keys and GitHub registrations
+until the replacement is verified. To roll back, restore the previous Git
+and SSH configuration and run `mise run switch`; do not delete either key.
+
+This setup follows [mizdra's Secure Enclave guide](https://www.mizdra.net/entry/2026/08/07/101542).
 
 ## Dependency updates
 
