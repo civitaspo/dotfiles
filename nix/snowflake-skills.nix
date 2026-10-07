@@ -1,12 +1,12 @@
 # Only bundled skill assets are extracted; the CoCo executable is not installed.
 { pkgs, adaptations }:
 let
-  version = "1.1.27+200623.07dcb388081e";
+  version = "1.1.104+041358.66de1c44636f";
   archiveRoot = "coco-${version}-linux-amd64";
   source = pkgs.fetchurl {
     url = builtins.replaceStrings [ "+" ] [ "%2B" ]
       "https://sfc-repo.snowflakecomputing.com/cortex-code-cli/a4643c4278/${version}/${archiveRoot}.tar.gz";
-    sha256 = "d1a85cf7e5ab946c560334944fa5cc5a74e12d468139f9329bbef3261b8cef69";
+    sha256 = "149d0c225a174e0efcf384031c4d2849a97f09b43c10bb3427ce271e5fafd372";
   };
 in
 pkgs.runCommand "snowflake-skills-${version}" {
