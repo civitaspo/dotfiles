@@ -53,14 +53,17 @@ This is a **public** repository. Never commit anything tied to an employer or
 other private context. Such configuration belongs in the private repository
 `civitaspo/dotfiles-private`, which supplies `~/.aws/config`,
 `~/.ssh/config.d/`, `~/.snowsql/config`, `~/.agents/skills/` for Codex and
-Cursor (from private `home/.agents/skills/`), flattened
+Cursor and OpenCode (from private `home/.agents/skills/`), flattened
 `~/.claude/skills/<name>/` for Claude Code (same source tree; Claude Code
 neither reads `~/.agents` nor recurses nested `SKILL.md`),
-`~/.agents/snowflake-skills/` (from private `home/.agents/snowflake-skills/`),
 and every directory under private `config/` into `~/.config/` (for example
-`~/.config/deck/` and `~/.config/herdr-linear-agent/`). Install only those two
-trees under `~/.agents`, not the
-whole private `home/.agents/`. `nix flake check` runs the private
+`~/.config/deck/` and `~/.config/herdr-linear-agent/`). The on-demand Snowflake
+catalog comes from the mise-managed CoCo CLI installation (public
+`config/mise/config.toml`). The private Snowflake router resolves its
+`bundled_skills/` directory and reads the adjacent `HOST_ADAPTATION.md` first.
+Keep organization-specific tool names out of public configuration, tests,
+documentation, and PR text. Install only the private skills tree under
+`~/.agents`, not the whole private `home/.agents/`. `nix flake check` runs the private
 `scripts/check-skill-links.py`, which requires relative skill links to resolve
 in both the nested and the flattened layout.
 

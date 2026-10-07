@@ -6,9 +6,9 @@
 # Private dotfiles come from the dotfiles-private flake input. Directory
 # sources are linked recursively so a tool can still write runtime state
 # next to its managed files (e.g. ~/.config/nvim).
-# Agent skill trees come from the private repo's home/.agents/. Codex and
-# Cursor read the nested ~/.agents/skills; Claude Code gets each skill
-# flattened into ~/.claude/skills/<name>.
+# Personal skills come from the private repo's home/.agents/skills. Codex
+# Cursor, and OpenCode read the nested tree; Claude Code gets each skill flattened
+# into ~/.claude/skills/<name>. CoCo bundled skills stay in the mise installation.
 { lib, inputs, ... }:
 
 let
@@ -90,14 +90,12 @@ in
         ".aws" = { source = private + "/.aws"; recursive = true; };
         ".snowsql" = { source = private + "/.snowsql"; recursive = true; };
         # Keep each skill tree as a single directory symlink. Recursive
-        # per-file links race on mkdir for the large Snowflake catalog.
-        # Codex and Cursor read ~/.agents/skills/ recursively. Claude Code
+        # per-file links are unnecessary for these immutable source directories.
+        # Codex, Cursor, and OpenCode read ~/.agents/skills/ recursively. Claude Code
         # does not read ~/.agents and only discovers one level under
         # ~/.claude/skills/, so each skill directory is also published
-        # flattened by basename. The catalog sits beside the skills root so
-        # it is not auto-scanned; Claude Code reads it by path.
+        # flattened by basename. CoCo assets stay outside these discovery roots.
         ".agents/skills".source = private + "/.agents/skills";
-        ".agents/snowflake-skills".source = private + "/.agents/snowflake-skills";
         ".ssh/config.d" = { source = private + "/.ssh/config.d"; recursive = true; };
       }
       // claudeSkillLinks
