@@ -141,3 +141,16 @@ rename_exe = "agy"
 [tools."github:civitaspo/hook-relay-client-rs"]
 version = "latest"
 rename_exe = "hook-relay-client"
+
+# No usable aqua package exists for CoCo. Keep the complete official archive
+# so agents can read bundled_skills without executing the CLI. Raw blocks
+# defer URL encoding until mise resolves the version; config evaluation
+# otherwise applies the filter to the literal version placeholder.
+[tools."http:coco"]
+version = "latest"
+version_list_url = "https://sfc-repo.snowflakecomputing.com/cortex-code-cli/a4643c4278/stable_version.txt"
+url = '{% raw %}https://sfc-repo.snowflakecomputing.com/cortex-code-cli/a4643c4278/{{ version | replace(from="+", to="%2B") }}/coco-{{ version | replace(from="+", to="%2B") }}-darwin-arm64.tar.gz{% endraw %}'
+strip_components = 1
+bin_path = "."
+checksum_url = '{% raw %}https://sfc-repo.snowflakecomputing.com/cortex-code-cli/a4643c4278/{{ version | replace(from="+", to="%2B") }}/manifest.json{% endraw %}'
+checksum_expr = '"sha256:" + fromJSON(body).packages.darwin.arm64.checksum'

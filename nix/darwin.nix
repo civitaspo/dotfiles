@@ -4,7 +4,7 @@
 # language runtimes / tools (see flake.nix for the per-tool nixpkgs inputs).
 # Most binaries come from mise; applications from Homebrew (Brewfile);
 # dotfiles from home-manager (nix/home.nix).
-{ pkgs, inputs, snowflakeSkills, ... }:
+{ pkgs, inputs, ... }:
 
 let
   system = "aarch64-darwin";
@@ -117,7 +117,7 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "backup";
-    extraSpecialArgs = { inherit inputs snowflakeSkills; };
+    extraSpecialArgs = { inherit inputs; };
     users."takahiro.nakayama" = import ./home.nix;
   };
 

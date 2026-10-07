@@ -1,48 +1,45 @@
-# Generated Snowflake skills
+# mise-managed Snowflake skills
 
-`nix/snowflake-skills.nix` downloads a pinned official Cortex Code CLI archive
-and extracts only `bundled_skills/`. The CLI is not installed or executed.
-home-manager links the generated catalog to `~/.agents/snowflake-skills`.
-Upstream files are preserved without patches or injected notices.
+Public dotfiles manages CoCo CLI with `http:coco` in `config/mise/config.toml`.
+The official macOS arm64 archive contains both `cortex` and `bundled_skills/`.
+mise retains the full archive payload. The CLI does not need to run for agents
+to read these skills, and Nix does not download or extract the catalog.
 
-The private repository keeps the small Snowflake router and shared
-`snowflake-skills/HOST_ADAPTATION.md` guide, not the catalog. The build copies
-that guide into the catalog root. The router requires agents to read it before
-loading any upstream entrypoint, including in later sessions and after updates.
+The small private Snowflake router resolves the global installation using
+`mise -C "$HOME" where http:coco`, then reads its `bundled_skills/` directory.
+It must first read its adjacent `HOST_ADAPTATION.md`. Host mappings remain
+private and work in both the nested and flattened skill layouts. Missing
+installation, catalog, or guide stops catalog use; the router does not install
+or launch CoCo implicitly. Direct-connection helpers are not automatically
+portable to other agent runtimes.
+
 Codex, Cursor, and OpenCode discover the nested router in `~/.agents/skills`;
 Claude Code gets the same router at `~/.claude/skills/snowflake`.
-OpenCode supports recursive `SKILL.md` discovery in its compatibility roots
-without an additional skill path configuration:
+OpenCode supports recursive compatibility-root discovery without extra paths:
 <https://opencode.ai/v2/docs/skills#discovery>.
-`HOST_ADAPTATION.md` is an ordinary shared document, loaded by the router's
-instructions rather than automatically by any client.
-Keep organization-specific tool names and instructions in the private guide.
-This relies on agents following the router and guide; it does not rewrite or
-make upstream helpers compatible with the host. CoCo-only tools and helpers
-requiring direct connections may be unavailable.
 
-The trial lockfile pins the companion private branch. After adopting both
-PRs, refresh the private input from its default branch before deleting that branch.
-
-Build without activation:
+`latest` resolves from the official distribution's `stable_version.txt`;
+`config/mise/mise.lock` records the selected version, URL, and archive checksum.
+After activating the configuration, update only this tool with:
 
 ```sh
-nix build .#snowflake-skills --no-link --print-out-paths
+mise lock --global --bump http:coco --platform macos-arm64
+mise install http:coco
 ```
 
-Ordinary installations use the pinned version and hash. To update deliberately,
-read the official installer's current distribution prefix and its
-`stable_version.txt`, then read that version's `manifest.json`. Update `version`
-and the Linux amd64 archive's SHA-256 in `nix/snowflake-skills.nix`. The Linux
-archive is used as a platform-independent source of skill assets.
+When editing the repository configuration instead, run these commands from
+`config/mise` and omit `--global`. Commit the updated lockfile. Checksums are resolved automatically from the selected release's official
+`manifest.json` through `checksum_url` and `checksum_expr`. Review
+changes to tool contracts or catalog layout. There are no per-file patches
+to rebase. Update the private guide only when host translations need to change.
 
 Official installer: <https://ai.snowflake.com/static/cc-scripts/install.sh>
 
-Run `mise run check` and review upstream release notes for changes to tool
-contracts or catalog layout. Update the shared private guide only when those
-contracts change. There are no patch hunks to rebase on each release; build
-checks validate extraction and configuration, not every upstream workflow.
+The trial flake lock pins the companion private branch. After adopting both
+PRs, refresh the private input from its default branch before deleting that
+branch. home-manager removes the previous managed `~/.agents/snowflake-skills`
+link during activation; the router uses mise directly.
 
-Keep upstream manifests out of Git: committing the generated catalog would
-make those helper dependencies visible to Dependabot again. This removes
-Dependabot entries for this catalog only; other vendored skills are unchanged.
+Keep upstream skill assets and dependency manifests out of Git. Their presence
+in a local mise installation does not create Dependabot entries in either
+repository; other vendored skills are unchanged.

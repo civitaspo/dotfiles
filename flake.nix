@@ -40,28 +40,19 @@
   };
 
   outputs = { darwin, ... }@inputs:
-    let
-      snowflakeSkills = import ./nix/snowflake-skills.nix {
-        pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
-        adaptations = inputs.dotfiles-private + "/snowflake-skills";
-      };
-    in
     {
       # Single hostname-agnostic configuration, keyed by system. Every
       # machine activates it as `.#aarch64-darwin`. The macOS hostname is
       # left alone.
       darwinConfigurations.aarch64-darwin = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        specialArgs = { inherit inputs snowflakeSkills; };
+        specialArgs = { inherit inputs; };
         # Pairing nix-darwin's release-25.11 branch with nixpkgs-unstable
         # is intentional (see the nixpkgs comment above); bypass the
         # branch-matching check that would otherwise refuse it.
         enableNixpkgsReleaseCheck = false;
         modules = [ ./nix/darwin.nix ];
       };
-
-      packages.aarch64-darwin.snowflake-skills = snowflakeSkills;
-      checks.aarch64-darwin.snowflake-skills = snowflakeSkills;
 
       # Private skill links must resolve both nested (~/.agents/skills) and
       # flattened (~/.claude/skills/<name>); see nix/home.nix.
