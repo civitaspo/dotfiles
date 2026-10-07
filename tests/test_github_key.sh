@@ -7,6 +7,12 @@ trap 'rm -rf "$test_root"' EXIT
 fake_bin="$test_root/bin"
 mkdir -p "$fake_bin"
 
+cat >"$fake_bin/uname" <<'EOF'
+#!/usr/bin/env bash
+[[ "$*" == -n ]] || exit 2
+printf '%s\n' "${UNAME_OUTPUT:-test-mac.local}"
+EOF
+
 cat >"$fake_bin/sc_auth" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
@@ -22,8 +28,8 @@ case "$1" in
     ;;
   create-ctk-identity)
     [[ "${FAIL_IDENTITY_CREATE:-0}" == 0 ]] || exit 1
-    [[ "$2 $3 $4 $5 $6 $7" == '-l dotfiles-github -k p-256-ne -t none' ]] || exit 2
-    printf 'p-256-ne %s none dotfiles-github dotfiles-github 2027/09/02, 7:22 YES\n' "$IDENTITY_HASH" >>"$IDENTITIES"
+    [[ "$2 $3 $4 $5 $6 $7" == '-l macbook-pro-test-mac.local -k p-256-ne -t none' ]] || exit 2
+    printf 'p-256-ne %s none macbook-pro-test-mac.local macbook-pro-test-mac.local 2027/09/02, 7:22 YES\n' "$IDENTITY_HASH" >>"$IDENTITIES"
     ;;
   *) exit 2 ;;
 esac
@@ -153,7 +159,7 @@ reset_case() {
   export GH_BIN="$fake_bin/gh"
   export EXPORT_LOG="$test_root/export.log"
   export PATH="$fake_bin:/usr/bin:/bin"
-  unset FAIL_IDENTITY_LIST FAIL_IDENTITY_CREATE FAIL_EXPORT EXTRA_EXPORT FAIL_GH_STATUS FAIL_GH_USER FAIL_GH_LIST FAIL_GH_POST FAIL_SIGNING_POST_ONCE GH_LOGIN GH_API_LOGIN GH_SCOPES SSH_FINGERPRINT DUPLICATE_FINGERPRINT DUPLICATE_KEY_BODY
+  unset FAIL_IDENTITY_LIST FAIL_IDENTITY_CREATE FAIL_EXPORT EXTRA_EXPORT FAIL_GH_STATUS FAIL_GH_USER FAIL_GH_LIST FAIL_GH_POST FAIL_SIGNING_POST_ONCE GH_LOGIN GH_API_LOGIN GH_SCOPES SSH_FINGERPRINT DUPLICATE_FINGERPRINT DUPLICATE_KEY_BODY UNAME_OUTPUT
   rm -rf "$HOME" "$SIGNING_POST_FAILED"
   mkdir -p "$HOME"
   : >"$IDENTITIES"
@@ -190,30 +196,35 @@ run_task >/dev/null
 [[ $(wc -l <"$EXPORT_LOG" | tr -d ' ') == 2 ]]
 
 reset_case
+export UNAME_OUTPUT='bad host'
+if run_task >/dev/null 2>&1; then exit 1; fi
+[[ ! -s "$IDENTITIES" ]]
+
+reset_case
 printf 'p-256-ne OTHERHASH none other other 2027/09/02, 7:22 YES\n' >"$IDENTITIES"
 run_task >/dev/null
 [[ $(wc -l <"$IDENTITIES" | tr -d ' ') == 2 ]]
 
 reset_case
-printf 'p-256-ne %s none dotfiles-github dotfiles-github 2027/09/02, 7:22 YES\np-256-ne SECONDHASH none dotfiles-github dotfiles-github 2027/09/02, 7:22 YES\n' "$IDENTITY_HASH" >"$IDENTITIES"
+printf 'p-256-ne %s none macbook-pro-test-mac.local macbook-pro-test-mac.local 2027/09/02, 7:22 YES\np-256-ne SECONDHASH none macbook-pro-test-mac.local macbook-pro-test-mac.local 2027/09/02, 7:22 YES\n' "$IDENTITY_HASH" >"$IDENTITIES"
 if run_task >/dev/null 2>&1; then exit 1; fi
 [[ ! -e "$HOME/.ssh/id_github_secure_enclave" ]]
 
 reset_case
-printf 'p-256-ne %s none dotfiles-github dotfiles-github 2027/09/02, 7:22 YES\n' "$IDENTITY_HASH" >"$IDENTITIES"
+printf 'p-256-ne %s none macbook-pro-test-mac.local macbook-pro-test-mac.local 2027/09/02, 7:22 YES\n' "$IDENTITY_HASH" >"$IDENTITIES"
 mkdir -p "$HOME/.ssh"
 printf 'handle %s\n' "$KEY_BODY" >"$HOME/.ssh/id_github_secure_enclave"
 if run_task >/dev/null 2>&1; then exit 1; fi
 
 reset_case
-printf 'p-256-ne %s none dotfiles-github dotfiles-github 2027/09/02, 7:22 YES\n' "$IDENTITY_HASH" >"$IDENTITIES"
+printf 'p-256-ne %s none macbook-pro-test-mac.local macbook-pro-test-mac.local 2027/09/02, 7:22 YES\n' "$IDENTITY_HASH" >"$IDENTITIES"
 mkdir -p "$HOME/.ssh"
 printf 'handle B\n' >"$HOME/.ssh/id_github_secure_enclave"
 printf '%s test-key\n' "$KEY_BODY" >"$HOME/.ssh/id_github_secure_enclave.pub"
 if run_task >/dev/null 2>&1; then exit 1; fi
 
 reset_case
-printf 'p-256-ne %s none dotfiles-github dotfiles-github 2027/09/02, 7:22 YES\n' "$IDENTITY_HASH" >"$IDENTITIES"
+printf 'p-256-ne %s none macbook-pro-test-mac.local macbook-pro-test-mac.local 2027/09/02, 7:22 YES\n' "$IDENTITY_HASH" >"$IDENTITIES"
 export FAIL_GH_STATUS=1
 if run_task >/dev/null 2>&1; then exit 1; fi
 [[ ! -e "$HOME/.ssh/id_github_secure_enclave" ]]
