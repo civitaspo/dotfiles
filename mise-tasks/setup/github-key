@@ -38,7 +38,7 @@ case ",${gh_scopes}," in
   *,admin:ssh_signing_key,*) ;;
   *) fail 'gh needs admin:public_key and admin:ssh_signing_key scopes; run gh auth refresh -h github.com -s admin:public_key -s admin:ssh_signing_key' ;;
 esac
-api_login="$($gh_bin api user --jq .login 2>/dev/null)" || fail 'could not verify the active GitHub API account'
+api_login="$("$gh_bin" api user --jq .login --hostname github.com 2>/dev/null)" || fail 'could not verify the active GitHub API account'
 [[ "$api_login" == civitaspo ]] || fail "GitHub API account is ${api_login}, expected civitaspo"
 
 mkdir -p "$ssh_dir"
@@ -165,9 +165,9 @@ chmod 644 "$public_file"
 register_key() {
   local endpoint=$1
   local existing
-  existing="$($gh_bin api --paginate --jq '.[].key' "$endpoint")" || fail "could not list GitHub keys at ${endpoint}"
+  existing="$("$gh_bin" api --paginate --jq '.[].key' "$endpoint" --hostname github.com)" || fail "could not list GitHub keys at ${endpoint}"
   if ! printf '%s\n' "$existing" | awk -v expected="$expected_body" 'NF >= 2 && ($1 " " $2) == expected { found = 1 } END { exit !found }'; then
-    "$gh_bin" api --method POST "$endpoint" -f "title=${key_label}" -f "key=$(cat "$public_file")" >/dev/null || fail "could not register key at ${endpoint}"
+    "$gh_bin" api --method POST "$endpoint" -f "title=${key_label}" -f "key=$(cat "$public_file")" --hostname github.com >/dev/null || fail "could not register key at ${endpoint}"
   fi
 }
 

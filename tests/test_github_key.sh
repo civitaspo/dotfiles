@@ -98,6 +98,9 @@ EOF
 cat >"$fake_bin/gh" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
+if [[ "$1" == api ]]; then
+  [[ "${*: -2}" == '--hostname github.com' ]] || exit 2
+fi
 if [[ "$1 $2" == 'auth status' ]]; then
   [[ "${FAIL_GH_STATUS:-0}" == 0 ]] || exit 1
   printf '%s\t%s\n' "${GH_LOGIN:-civitaspo}" "${GH_SCOPES:-admin:public_key, admin:ssh_signing_key}"
@@ -132,6 +135,7 @@ EOF
 chmod +x "$fake_bin"/*
 
 reset_case() {
+  export GH_HOST=enterprise.invalid
   export HOME="$test_root/home"
   export IDENTITIES="$test_root/identities"
   export AUTH_KEYS="$test_root/auth-keys"
