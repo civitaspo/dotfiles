@@ -7,7 +7,7 @@
 # sources are linked recursively so a tool can still write runtime state
 # next to its managed files (e.g. ~/.config/nvim).
 # Personal skills come from the private repo's home/.agents/skills. Codex
-# and Cursor read the nested tree; Claude Code gets each skill flattened
+# Cursor, and OpenCode read the nested tree; Claude Code gets each skill flattened
 # into ~/.claude/skills/<name>. The Snowflake catalog is generated separately.
 { lib, inputs, snowflakeSkills, ... }:
 
@@ -91,7 +91,7 @@ in
         ".snowsql" = { source = private + "/.snowsql"; recursive = true; };
         # Keep each skill tree as a single directory symlink. Recursive
         # per-file links race on mkdir for the large Snowflake catalog.
-        # Codex and Cursor read ~/.agents/skills/ recursively. Claude Code
+        # Codex, Cursor, and OpenCode read ~/.agents/skills/ recursively. Claude Code
         # does not read ~/.agents and only discovers one level under
         # ~/.claude/skills/, so each skill directory is also published
         # flattened by basename. The catalog sits beside the skills root so

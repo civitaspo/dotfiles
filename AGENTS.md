@@ -53,7 +53,7 @@ This is a **public** repository. Never commit anything tied to an employer or
 other private context. Such configuration belongs in the private repository
 `civitaspo/dotfiles-private`, which supplies `~/.aws/config`,
 `~/.ssh/config.d/`, `~/.snowsql/config`, `~/.agents/skills/` for Codex and
-Cursor (from private `home/.agents/skills/`), flattened
+Cursor and OpenCode (from private `home/.agents/skills/`), flattened
 `~/.claude/skills/<name>/` for Claude Code (same source tree; Claude Code
 neither reads `~/.agents` nor recurses nested `SKILL.md`),
 and every directory under private `config/` into `~/.config/` (for example

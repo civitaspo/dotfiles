@@ -6,9 +6,16 @@ home-manager links the generated catalog to `~/.agents/snowflake-skills`.
 Upstream files are preserved without patches or injected notices.
 
 The private repository keeps the small Snowflake router and shared
-`snowflake-skills/CURSOR_ADAPTATION.md` guide, not the catalog. The build copies
+`snowflake-skills/HOST_ADAPTATION.md` guide, not the catalog. The build copies
 that guide into the catalog root. The router requires agents to read it before
 loading any upstream entrypoint, including in later sessions and after updates.
+Codex, Cursor, and OpenCode discover the nested router in `~/.agents/skills`;
+Claude Code gets the same router at `~/.claude/skills/snowflake`.
+OpenCode supports recursive `SKILL.md` discovery in its compatibility roots
+without an additional skill path configuration:
+<https://opencode.ai/v2/docs/skills#discovery>.
+`HOST_ADAPTATION.md` is an ordinary shared document, loaded by the router's
+instructions rather than automatically by any client.
 Keep organization-specific tool names and instructions in the private guide.
 This relies on agents following the router and guide; it does not rewrite or
 make upstream helpers compatible with the host. CoCo-only tools and helpers
