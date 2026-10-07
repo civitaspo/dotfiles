@@ -8,7 +8,7 @@ ssh_keygen_bin="${SSH_KEYGEN_BIN:-/usr/bin/ssh-keygen}"
 ssh_sk_provider="${SSH_SK_PROVIDER:-/usr/lib/ssh-keychain.dylib}"
 expect_bin="${EXPECT_BIN:-/usr/bin/expect}"
 gh_bin="${GH_BIN:-gh}"
-key_label=dotfiles-github
+key_label="macbook-pro-$(uname -n)"
 key_type=p-256-ne
 key_protection=none
 ssh_dir="${HOME}/.ssh"
@@ -19,6 +19,11 @@ fail() {
   printf '[setup:github-key] %s\n' "$1" >&2
   exit 1
 }
+
+[[ "$key_label" != macbook-pro- ]] || fail 'hostname is empty'
+case "$key_label" in
+  *[[:space:]]*) fail 'hostname contains whitespace and cannot be used as a key label' ;;
+esac
 
 command -v "$sc_auth_bin" >/dev/null 2>&1 || fail "${sc_auth_bin} is unavailable"
 command -v "$ssh_keygen_bin" >/dev/null 2>&1 || fail "${ssh_keygen_bin} is unavailable"

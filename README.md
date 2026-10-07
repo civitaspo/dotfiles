@@ -260,7 +260,7 @@ pinned and self-update in-app; `brew upgrade` skips them.
 ## Set up GitHub authentication and Git signing
 
 Run `mise run setup:github-key` explicitly on each Mac. The task creates a
-non-exportable P-256 key in Secure Enclave with label `dotfiles-github` and
+non-exportable P-256 key in Secure Enclave with label `macbook-pro-$(uname -n)` and
 registers its public key with the `civitaspo` GitHub account for authentication
 and signing. It is not part of `reconcile`.
 
@@ -269,7 +269,10 @@ do not request Touch ID. Processes running as your macOS user can use it
 without an approval prompt. The secret key stays in Secure Enclave;
 `~/.ssh/id_github_secure_enclave` is its local reference file. Keep that file
 and its `.pub` companion outside this repository. Generate a separate key
-on each Mac rather than copying these files between machines.
+on each Mac rather than copying these files between machines. The GitHub key
+title uses the same device label. If you change the Mac's hostname, the task
+stops when the installed files belong to the previous label. Archive both
+reference files before explicitly generating and registering the replacement.
 
 For an existing installation, register the key before `mise run switch`.
 The task requires `gh` to be signed into `civitaspo` with `admin:public_key`
