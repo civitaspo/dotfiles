@@ -1,4 +1,5 @@
 {
+  "automergeType": "pr",
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "timezone": "Asia/Tokyo",
@@ -12,7 +13,7 @@
     "vulnerabilityFixStrategy": "highest"
   },
   "branchPrefix": "renovate/",
-  "platformAutomerge": true,
+  "platformAutomerge": false,
   "automergeStrategy": "squash",
   "nix": {
     "enabled": true
