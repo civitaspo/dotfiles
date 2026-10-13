@@ -105,11 +105,11 @@ url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/580134148"
 provenance = "github-attestations"
 
 [[tools."aqua:aws/aws-cli"]]
-version = "2.37.12"
+version = "2.37.13"
 backend = "aqua:aws/aws-cli"
 
 [tools."aqua:aws/aws-cli"."platforms.macos-arm64"]
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.37.12.pkg"
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.37.13.pkg"
 
 [[tools."aqua:aws/session-manager-plugin"]]
 version = "1.2.896.0"
@@ -123,9 +123,9 @@ version = "1.2.6"
 backend = "aqua:bootandy/dust"
 
 [tools."aqua:bootandy/dust"."platforms.macos-arm64"]
-checksum = "sha256:7603c92462bd56305847732eb25d70ab06386d7bcfbce7532b7cf3937fd9684f"
-url = "https://github.com/bootandy/dust/releases/download/v1.2.6/dust-v1.2.6-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/568852877"
+checksum = "sha256:5c37ee0d353165c73aedd6b21b9133182221efe08f9a5e76c082d9d6d5a0935d"
+url = "https://github.com/bootandy/dust/releases/download/v1.2.6/dust-v1.2.6-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/568852617"
 
 [[tools."aqua:charmbracelet/freeze"]]
 version = "0.2.2"
@@ -237,13 +237,13 @@ url = "https://github.com/herdrdev/herdr/releases/download/v0.9.3/herdr-macos-aa
 url_api = "https://api.github.com/repos/herdrdev/herdr/releases/assets/599036381"
 
 [[tools."aqua:jesseduffield/lazygit"]]
-version = "0.66.0"
+version = "0.66.1"
 backend = "aqua:jesseduffield/lazygit"
 
 [tools."aqua:jesseduffield/lazygit"."platforms.macos-arm64"]
-checksum = "sha256:e9fe2fe1f1bbc1b4c3214b33e8e0d57a4d6e3c2276aa9aa713f9bcbdc223e65c"
-url = "https://github.com/jesseduffield/lazygit/releases/download/v0.66.0/lazygit_0.66.0_darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/jesseduffield/lazygit/releases/assets/613198499"
+checksum = "sha256:c66b15f666216142a2f39143f5540c6a572473f03fab014dae07c33cd76e719a"
+url = "https://github.com/jesseduffield/lazygit/releases/download/v0.66.1/lazygit_0.66.1_darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/jesseduffield/lazygit/releases/assets/630328410"
 
 [[tools."aqua:jqlang/jq"]]
 version = "1.8.2"
@@ -256,13 +256,13 @@ url_api = "https://api.github.com/repos/jqlang/jq/releases/assets/453012783"
 provenance = "github-attestations"
 
 [[tools."aqua:junegunn/fzf"]]
-version = "0.74.4"
+version = "0.74.5"
 backend = "aqua:junegunn/fzf"
 
 [tools."aqua:junegunn/fzf"."platforms.macos-arm64"]
-checksum = "sha256:4f6a113bfc0c7959e0005c78d566a51afc4fcefc956f43735c62a9deb19e92ae"
-url = "https://github.com/junegunn/fzf/releases/download/v0.74.4/fzf-0.74.4-darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/junegunn/fzf/releases/assets/558287774"
+checksum = "sha256:ada808c7401b9949ce8842274ac16a6b6193fd32dcada396884a6a9a89e5985a"
+url = "https://github.com/junegunn/fzf/releases/download/v0.74.5/fzf-0.74.5-darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/junegunn/fzf/releases/assets/629581702"
 
 [[tools."aqua:k1LoW/deck"]]
 version = "1.24.2"
@@ -408,20 +408,20 @@ checksum = "sha256:5cd46d6268f6f78f5d88bdc7159d20bd44cdaa4b3303474839f87ec6fe7ae
 url = "https://dl.deno.land/release/v2.9.7/deno-aarch64-apple-darwin.zip"
 
 [[tools.gcloud]]
-version = "588.0.0"
+version = "589.0.0"
 backend = "vfox:mise-plugins/vfox-gcloud"
 
 [tools.gcloud."platforms.macos-arm64"]
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-588.0.0-darwin-arm.tar.gz"
+url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-589.0.0-darwin-arm.tar.gz"
 
 [[tools."github:backnotprop/plannotator"]]
-version = "0.28.11"
+version = "0.28.17"
 backend = "github:backnotprop/plannotator"
 
 [tools."github:backnotprop/plannotator"."platforms.macos-arm64"]
-checksum = "sha256:3e0fe77a8f4617b7e22849098125a4c4f0d5b81e2b0fe872861042775442f324"
-url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.11/plannotator-darwin-arm64"
-url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/628346402"
+checksum = "sha256:7faf6018a8d526c7b286bbb697783715478d3c21918d812f3b72bee5115b9879"
+url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.17/plannotator-darwin-arm64"
+url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/633493996"
 provenance = "github-attestations"
 
 [[tools."github:civitaspo/hook-relay-client-rs"]]
@@ -473,15 +473,15 @@ checksum = "sha512:b2c0d21876ae9b6faf6164b15b573d76e379f643e040e77d528ebafa5d5bd
 url = "https://storage.googleapis.com/antigravity-public/antigravity-cli/1.0.3-6260531212976128/darwin-arm/cli_mac_arm64.tar.gz"
 
 [[tools."http:coco"]]
-version = "1.1.104+041358.66de1c44636f"
+version = "1.2.14+213013.25aeae2a44ca"
 backend = "http:coco"
 
 [tools."http:coco".options]
 strip_components = "1"
 
 [tools."http:coco"."platforms.macos-arm64"]
-checksum = "sha256:a71e985f0b719dc425f9023aa5b6833e7a3a4e4290e0126cd08c008a8c713a39"
-url = "https://sfc-repo.snowflakecomputing.com/cortex-code-cli/a4643c4278/1.1.104%2B041358.66de1c44636f/coco-1.1.104%2B041358.66de1c44636f-darwin-arm64.tar.gz"
+checksum = "sha256:5c6c09b4a388f163d825470d40f2ec5f4cd1245b56cc19718744fe8ba1482de9"
+url = "https://sfc-repo.snowflakecomputing.com/cortex-code-cli/a4643c4278/1.2.14%2B213013.25aeae2a44ca/coco-1.2.14%2B213013.25aeae2a44ca-darwin-arm64.tar.gz"
 
 [[tools.java]]
 version = "temurin-21.0.12+101.0.LTS"
