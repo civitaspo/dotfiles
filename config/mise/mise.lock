@@ -38,13 +38,13 @@ url_api = "https://api.github.com/repos/ClementTsang/bottom/releases/assets/5319
 provenance = "github-attestations"
 
 [[tools."aqua:DataDog/pup"]]
-version = "1.27.0"
+version = "1.26.0"
 backend = "aqua:DataDog/pup"
 
 [tools."aqua:DataDog/pup"."platforms.macos-arm64"]
-checksum = "sha256:545ba13b2d5ac9814e5d90946dc390ed7ffb4c29c4bb9a0afb42c6013fdbf097"
-url = "https://github.com/DataDog/pup/releases/download/v1.27.0/pup_1.27.0_Darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/DataDog/pup/releases/assets/638225118"
+checksum = "sha256:73635a547142f5b40dc7255af2555419d0f6ab52991a1974f9ee5e3397e57aa2"
+url = "https://github.com/DataDog/pup/releases/download/v1.26.0/pup_1.26.0_Darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/DataDog/pup/releases/assets/623068837"
 provenance = "cosign"
 
 [[tools."aqua:Songmu/laminate"]]
@@ -415,13 +415,13 @@ backend = "vfox:mise-plugins/vfox-gcloud"
 url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-589.0.0-darwin-arm.tar.gz"
 
 [[tools."github:backnotprop/plannotator"]]
-version = "0.28.19"
+version = "0.28.18"
 backend = "github:backnotprop/plannotator"
 
 [tools."github:backnotprop/plannotator"."platforms.macos-arm64"]
-checksum = "sha256:f265cec9efa92fdf8813cd149e2198c1b9a1ee99027b45d6f2542675467aac23"
-url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.19/plannotator-darwin-arm64"
-url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/637919603"
+checksum = "sha256:b958616dbe84b6a18d594966f5f48eadfa06efc8be376ec7adb035feb5076d69"
+url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.18/plannotator-darwin-arm64"
+url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/637106024"
 provenance = "github-attestations"
 
 [[tools."github:civitaspo/hook-relay-client-rs"]]
