@@ -38,13 +38,13 @@ url_api = "https://api.github.com/repos/ClementTsang/bottom/releases/assets/5319
 provenance = "github-attestations"
 
 [[tools."aqua:DataDog/pup"]]
-version = "1.27.1"
+version = "2.0.0"
 backend = "aqua:DataDog/pup"
 
 [tools."aqua:DataDog/pup"."platforms.macos-arm64"]
-checksum = "sha256:526a865fd4e7c89dab1dbf95651bb696d561b8ae3d95513ad321f5eb32c483b8"
-url = "https://github.com/DataDog/pup/releases/download/v1.27.1/pup_1.27.1_Darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/DataDog/pup/releases/assets/641419619"
+checksum = "sha256:aa8d4f32e712f7eef940345662e0e9f71932bc02327ed32349cf130249dca848"
+url = "https://github.com/DataDog/pup/releases/download/v2.0.0/pup_2.0.0_Darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/DataDog/pup/releases/assets/644432939"
 provenance = "cosign"
 
 [[tools."aqua:Songmu/laminate"]]
