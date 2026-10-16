@@ -38,13 +38,13 @@ url_api = "https://api.github.com/repos/ClementTsang/bottom/releases/assets/5319
 provenance = "github-attestations"
 
 [[tools."aqua:DataDog/pup"]]
-version = "1.27.0"
+version = "1.27.1"
 backend = "aqua:DataDog/pup"
 
 [tools."aqua:DataDog/pup"."platforms.macos-arm64"]
-checksum = "sha256:545ba13b2d5ac9814e5d90946dc390ed7ffb4c29c4bb9a0afb42c6013fdbf097"
-url = "https://github.com/DataDog/pup/releases/download/v1.27.0/pup_1.27.0_Darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/DataDog/pup/releases/assets/638225118"
+checksum = "sha256:526a865fd4e7c89dab1dbf95651bb696d561b8ae3d95513ad321f5eb32c483b8"
+url = "https://github.com/DataDog/pup/releases/download/v1.27.1/pup_1.27.1_Darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/DataDog/pup/releases/assets/641419619"
 provenance = "cosign"
 
 [[tools."aqua:Songmu/laminate"]]
@@ -75,13 +75,13 @@ url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.10.0/zoxide-0.
 url_api = "https://api.github.com/repos/ajeetdsouza/zoxide/releases/assets/466316174"
 
 [[tools."aqua:astral-sh/ruff"]]
-version = "0.17.0"
+version = "0.17.1"
 backend = "aqua:astral-sh/ruff"
 
 [tools."aqua:astral-sh/ruff"."platforms.macos-arm64"]
-checksum = "sha256:59afe64c227e5f9a39d85c4d6be6e2d8e9a85c55f0887baad9c9e2f775a1c119"
-url = "https://github.com/astral-sh/ruff/releases/download/0.17.0/ruff-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/ruff/releases/assets/625999213"
+checksum = "sha256:1c8e6e36538eaa0b996378a20c226403c4ca6369ac24884751b024d3a9530b86"
+url = "https://github.com/astral-sh/ruff/releases/download/0.17.1/ruff-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/ruff/releases/assets/644283324"
 provenance = "github-attestations"
 
 [[tools."aqua:astral-sh/uv"]]
@@ -95,13 +95,13 @@ url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/639312976"
 provenance = "github-attestations"
 
 [[tools."aqua:atuinsh/atuin"]]
-version = "18.23.0"
+version = "18.24.0"
 backend = "aqua:atuinsh/atuin"
 
 [tools."aqua:atuinsh/atuin"."platforms.macos-arm64"]
-checksum = "sha256:c988be1cde19cd7295ce64bc8b955d42fb1855e5227cb640c87fc09c8408c3fc"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.23.0/atuin-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/580134148"
+checksum = "sha256:4705a4eb10991e0a143e70cac134a658ce8dbb1ec7c91a9a938175a2095e93b1"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.24.0/atuin-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/645524638"
 provenance = "github-attestations"
 
 [[tools."aqua:aws/aws-cli"]]
@@ -192,11 +192,11 @@ url = "https://github.com/docker/buildx/releases/download/v0.38.0/buildx-v0.38.0
 url_api = "https://api.github.com/repos/docker/buildx/releases/assets/620148395"
 
 [[tools."aqua:docker/cli"]]
-version = "29.9.0"
+version = "29.9.1"
 backend = "aqua:docker/cli"
 
 [tools."aqua:docker/cli"."platforms.macos-arm64"]
-url = "https://download.docker.com/mac/static/stable/aarch64/docker-29.9.0.tgz"
+url = "https://download.docker.com/mac/static/stable/aarch64/docker-29.9.1.tgz"
 
 [[tools."aqua:docker/compose"]]
 version = "5.6.0"
@@ -382,13 +382,13 @@ version = "0.23.5"
 backend = "cargo:eza"
 
 [[tools.claude-code]]
-version = "2.1.300"
+version = "2.1.301"
 backend = "aqua:anthropics/claude-code"
 
 [tools.claude-code."platforms.macos-arm64"]
-checksum = "sha256:c18b0721712908fbeeb16f5a95338a4968db7f98c3031b684e402f472b923751"
-url = "https://github.com/anthropics/claude-code/releases/download/v2.1.300/claude-darwin-arm64.tar.gz"
-url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/640629982"
+checksum = "sha256:f25bc45464024006c042b0342b5f0afea4eab949d56c53cc9513a29900f510e2"
+url = "https://github.com/anthropics/claude-code/releases/download/v2.1.301/claude-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/644133000"
 
 [[tools.codex]]
 version = "0.162.1"
@@ -415,13 +415,13 @@ backend = "vfox:mise-plugins/vfox-gcloud"
 url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-589.0.0-darwin-arm.tar.gz"
 
 [[tools."github:backnotprop/plannotator"]]
-version = "0.28.20"
+version = "0.28.21"
 backend = "github:backnotprop/plannotator"
 
 [tools."github:backnotprop/plannotator"."platforms.macos-arm64"]
-checksum = "sha256:c6be88da5cb6a02549bf84befeef2f757e5e5b238001e4f5fdc2a3f58a12989d"
-url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.20/plannotator-darwin-arm64"
-url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/641219516"
+checksum = "sha256:6aadd7aa552f7f8643480115bd2fd41c2943d7ff3dbadc4c572f37dddcada04c"
+url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.21/plannotator-darwin-arm64"
+url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/643804574"
 provenance = "github-attestations"
 
 [[tools."github:civitaspo/hook-relay-client-rs"]]
@@ -510,7 +510,7 @@ version = "12.11.2"
 backend = "npm:pnpm"
 
 [[tools.rust]]
-version = "1.99.0"
+version = "1.99.1"
 backend = "core:rust"
 
 [[tools."ubi:docker/docker-credential-helpers"]]
