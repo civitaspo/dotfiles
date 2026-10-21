@@ -147,10 +147,10 @@ it does not verify every installed file's checksum or runtime behavior.
 ## Herdr
 
 mise installs [Herdr](https://herdr.dev/) and, in the tool's `postinstall`,
-its plugins. Herdr has no plugin update command, so plugins are refreshed
-whenever a new Herdr version is installed (force it with
-`mise install -f aqua:herdrdev/herdr`). The prefix is `ctrl+t`
-(`config/herdr/config.toml`).
+its plugins. That script also uninstalls the terminal-browser plugin.
+Herdr has no plugin update command, so the script runs when a new Herdr
+version is installed (force it with `mise install -f aqua:herdrdev/herdr`).
+The prefix is `ctrl+t` (`config/herdr/config.toml`).
 
 [Herdr GPUI](https://github.com/penso/herdr-gpui) attaches to that daemon as a
 native window. `mise run brew` installs the signed cask from `penso/tap`
@@ -199,8 +199,6 @@ has no release binary yet, so its build step compiles it with the mise Rust
 toolchain. Provider hooks are not installed; see its installation guide.
 
 Kitty graphics is enabled for panes that use it inside Herdr.
-`mise run tools` uninstalls the terminal-browser Herdr plugin and deletes
-the app files its installer wrote under `~/.local`.
 
 ## Codex + Plannotator
 
