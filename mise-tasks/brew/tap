@@ -67,6 +67,14 @@ git -C "$tap_path" reset --hard --quiet "$head_sha"
 # Name-based trust does not match a custom-remote tap; trust the path remote.
 "$brew" trust "$(git -C "$tap_path" remote get-url origin)"
 
+# openin4 and Homebrew's openin cask both install OpenIn.app. brew bundle
+# installs before cleanup and will not overwrite an existing app, so drop the
+# local token first. No --zap: preferences stay.
+# ponytail: one-shot rename; delete once every Mac has run `mise run brew`.
+if "$brew" list --cask openin4 >/dev/null 2>&1; then
+  "$brew" uninstall --cask --force openin4
+fi
+
 shopt -s nullglob
 pinned_casks="$("$brew" list --cask --pinned)"
 for cask_file in "$repo_root"/Casks/*.rb; do
