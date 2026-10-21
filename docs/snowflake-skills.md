@@ -9,7 +9,7 @@ The small private Snowflake router resolves the global installation using
 `mise -C "$HOME" where http:coco`, then reads its `bundled_skills/` directory.
 It must first read its adjacent `HOST_ADAPTATION.md`. Host mappings remain
 private. The skills CLI installs the router from
-`civitaspo/dotfiles-private/.agents/skills`. Missing installation, catalog,
+`civitaspo/dotfiles-private`. Missing installation, catalog,
 or guide stops catalog use; the router does not install or launch CoCo
 implicitly. Direct-connection helpers are not automatically portable to other
 agent runtimes.

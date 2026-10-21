@@ -152,12 +152,6 @@ whenever a new Herdr version is installed (force it with
 `mise install -f aqua:herdrdev/herdr`). The prefix is `ctrl+t`
 (`config/herdr/config.toml`).
 
-The terminal-browser plugin is not in that list. Its build runs
-`https://terminal-browser.sh/install`, which writes
-`~/.local/share/terminal-browser`, a launcher at `~/.local/bin/terminal-browser`,
-and skill links recorded in `~/.local/state/terminal-browser/skills.links`.
-`mise run tools` removes those. Herdr's plugin uninstall does not.
-
 [Herdr GPUI](https://github.com/penso/herdr-gpui) attaches to that daemon as a
 native window. `mise run brew` installs the signed cask from `penso/tap`
 (`Herdr.app`). The cask requires macOS Sequoia or newer.
@@ -228,11 +222,13 @@ document annotation are available from a Codex prompt:
 !plannotator last
 ```
 
-`mise run tools` also installs agent skills. Official repositories and
-`civitaspo/dotfiles-private/.agents/skills` are installed globally for
-Claude Code, Cursor, Codex, OpenCode, and Pi. Matt Pocock's skills use the
-Claude Code and Codex plugins, and the skills CLI for Cursor, OpenCode, and
-Pi. The Snowflake catalog stays in the mise-managed CoCo installation.
+`mise run tools` also installs agent skills. The skills CLI installs each
+repository for Claude Code, Cursor, Codex, OpenCode, and Pi. Personal skills
+come from `civitaspo/dotfiles-private`, which publishes them under `skills/`.
+Claude Code installs pstack and Matt Pocock's skills from their plugin
+marketplaces. Codex installs Matt Pocock's skills from its plugin marketplace.
+pstack has no Codex plugin, so Codex gets that tree from the skills CLI.
+The Snowflake catalog stays in the mise-managed CoCo installation.
 
 ## After the first reconcile
 
