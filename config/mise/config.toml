@@ -121,8 +121,6 @@ trust_policy_excludes = ["cytoscape@3.34.1"]
 [tools."aqua:herdrdev/herdr"]
 version = "latest"
 postinstall = """
-# herdr exits 1 when this plugin is already absent.
-herdr plugin uninstall zenbu-labs/terminal-browser/herdr-plugin || [ $? -eq 1 ]
 herdr plugin install plannotator/herdr-annotate --yes
 herdr plugin install civitaspo/herdr-linear-agent --ref v0.7.0 --yes
 herdr plugin install civitaspo/herdr-infobox --yes
