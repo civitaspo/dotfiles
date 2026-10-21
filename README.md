@@ -152,6 +152,12 @@ whenever a new Herdr version is installed (force it with
 `mise install -f aqua:herdrdev/herdr`). The prefix is `ctrl+t`
 (`config/herdr/config.toml`).
 
+The terminal-browser plugin is not in that list. Its build runs
+`https://terminal-browser.sh/install`, which writes
+`~/.local/share/terminal-browser`, a launcher at `~/.local/bin/terminal-browser`,
+and skill links recorded in `~/.local/state/terminal-browser/skills.links`.
+`mise run tools` removes those. Herdr's plugin uninstall does not.
+
 [Herdr GPUI](https://github.com/penso/herdr-gpui) attaches to that daemon as a
 native window. `mise run brew` installs the signed cask from `penso/tap`
 (`Herdr.app`). The cask requires macOS Sequoia or newer.

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+#MISE description="Remove the terminal-browser app its Herdr plugin installer wrote."
+set -euo pipefail
+
+# The plugin build runs https://terminal-browser.sh/install. Herdr's own
+# uninstall drops the plugin checkout and leaves that app in place.
+if command -v herdr >/dev/null 2>&1; then
+  herdr plugin uninstall zenbu-labs/terminal-browser/herdr-plugin || [ $? -eq 1 ]
+fi
+
+data="${XDG_DATA_HOME:-${HOME}/.local/share}/terminal-browser"
+bin="${XDG_BIN_HOME:-${HOME}/.local/bin}/terminal-browser"
+state="${XDG_STATE_HOME:-${HOME}/.local/state}/terminal-browser"
+
+if [[ -f "${state}/skills.links" ]]; then
+  while IFS= read -r link || [[ -n "${link}" ]]; do
+    [[ -n "${link}" && -L "${link}" ]] && rm -f -- "${link}"
+  done <"${state}/skills.links"
+fi
+
+rm -rf -- "${data}" "${state}"
+if [[ -f "${bin}" ]] && grep -F -q -- "${data}/app/bin/terminal-browser" "${bin}"; then
+  rm -f -- "${bin}"
+fi
