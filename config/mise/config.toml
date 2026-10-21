@@ -32,6 +32,8 @@ aqua = "latest"
 "aqua:marp-team/marp-cli" = "latest"
 # pnpm via npm (aqua-registry's pnpm asset name does not match upstream on macOS).
 "npm:pnpm" = "latest"
+# Pinned because `skills add` clones repositories and writes into $HOME.
+"npm:skills" = "1.7.4"
 "aqua:aws/aws-cli" = "latest"
 "aqua:astral-sh/ruff" = "latest"
 "aqua:astral-sh/uv" = "latest"
@@ -116,13 +118,9 @@ trust_policy_excludes = ["cytoscape@3.34.1"]
 
 # Agent-native terminal multiplexer (https://herdr.dev/). Plugins are
 # reinstalled (herdr's only update path) whenever mise installs a new version.
-# /usr/bin comes first so terminal-browser's installer extracts with macOS tar;
-# GNU tar leaves `._*` files that break the app's code signature.
 [tools."aqua:herdrdev/herdr"]
 version = "latest"
 postinstall = """
-export PATH="/usr/bin:$PATH" TERMINAL_BROWSER_SKIP_SETUP=1
-herdr plugin install zenbu-labs/terminal-browser/herdr-plugin --yes
 herdr plugin install plannotator/herdr-annotate --yes
 herdr plugin install civitaspo/herdr-linear-agent --ref v0.7.0 --yes
 herdr plugin install civitaspo/herdr-infobox --yes

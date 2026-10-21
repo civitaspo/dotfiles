@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+#MISE description="Install global agent skills and remove terminal-browser."
+set -euo pipefail
+
+# Claude Code, Cursor, Codex, OpenCode, and Pi. Matt Pocock's Claude Code and
+# Codex installs use each agent's plugin command instead of this list.
+agents=(claude-code cursor codex opencode pi)
+matt_agents=(cursor opencode pi)
+
+# Private skills are first so a missing checkout fails before other installs.
+sources=(
+  'civitaspo/dotfiles-private/.agents/skills'
+  'https://github.com/cursor/plugins/tree/main/pstack'
+  'DietrichGebert/ponytail'
+  'backnotprop/plannotator/apps/skills/core'
+  'backnotprop/plannotator/apps/skills/extra'
+  'nanaism/yomiyasu'
+)
+
+remove_terminal_browser() {
+  if command -v herdr >/dev/null 2>&1; then
+    if herdr plugin list --json 2>/dev/null | grep -q 'terminal-browser'; then
+      herdr plugin uninstall zenbu-labs/terminal-browser/herdr-plugin
+    fi
+  fi
+  rm -rf -- "${HOME}/.local/share/terminal-browser" \
+    "${HOME}/.local/share/terminal-browser-interop"
+  rm -f -- "${HOME}/.local/bin/terminal-browser"
+}
+
+# A home-manager generation used to point this path at the private tree.
+# The skills CLI writes its canonical copies here and must not follow that link.
+replace_skills_symlink() {
+  local skills_root="${HOME}/.agents/skills"
+  if [[ -L "${skills_root}" ]]; then
+    rm -f -- "${skills_root}"
+  fi
+  mkdir -p -- "${skills_root}"
+}
+
+add_skills() {
+  local source="$1"
+  local selector="$2"
+  shift 2
+  local -a cmd=(skills add "${source}" --skill "${selector}" -g -y)
+  local agent
+  for agent in "$@"; do
+    cmd+=(-a "${agent}")
+  done
+  if [[ "${SKILLS_SYNC_PRINT_PLAN:-}" == 1 ]]; then
+    printf '%q ' "${cmd[@]}"
+    printf '\n'
+    return 0
+  fi
+  "${cmd[@]}"
+}
+
+run_plugin() {
+  local bin="$1"
+  shift
+  if [[ "${SKILLS_SYNC_PRINT_PLAN:-}" == 1 ]]; then
+    printf '%s' "${bin}"
+    local arg
+    for arg in "$@"; do
+      printf ' %q' "${arg}"
+    done
+    printf '\n'
+    return 0
+  fi
+  if ! command -v "${bin}" >/dev/null 2>&1; then
+    printf '[skills:sync] sign in, then run: %s %s\n' "${bin}" "$*" >&2
+    return 0
+  fi
+  if ! "${bin}" "$@" </dev/null; then
+    printf '[skills:sync] sign in, then run: %s %s\n' "${bin}" "$*" >&2
+  fi
+}
+
+print_or_update() {
+  if [[ "${SKILLS_SYNC_PRINT_PLAN:-}" == 1 ]]; then
+    printf '%s\n' 'skills update -g -y'
+    return 0
+  fi
+  skills update -g -y
+}
+
+emit_plan() {
+  local source
+  for source in "${sources[@]}"; do
+    add_skills "${source}" '*' "${agents[@]}"
+  done
+  add_skills 'herdrdev/herdr' 'herdr' "${agents[@]}"
+  add_skills 'mattpocock/skills' '*' "${matt_agents[@]}"
+  run_plugin claude plugin install mattpocock-skills@claude-plugins-official
+  run_plugin codex plugin marketplace add mattpocock/skills
+  run_plugin codex plugin add mattpocock-skills@mattpocock
+  print_or_update
+}
+
+if [[ "${SKILLS_SYNC_PRINT_PLAN:-}" == 1 ]]; then
+  emit_plan
+  exit 0
+fi
+
+remove_terminal_browser
+
+if ! command -v skills >/dev/null 2>&1; then
+  printf '[skills:sync] skills is not on PATH; run mise install npm:skills\n' >&2
+  exit 1
+fi
+
+replace_skills_symlink
+emit_plan

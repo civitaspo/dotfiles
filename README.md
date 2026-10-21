@@ -170,12 +170,6 @@ Layout and navigation (Emacs-style pane motion: `b`/`p`/`n`/`f`):
 | `prefix+ctrl+w` | new workspace |
 | `prefix+ctrl+d` | close workspace |
 
-[terminal-browser](https://github.com/zenbu-labs/terminal-browser) is
-installed by its Herdr plugin via the official installer into
-`~/.local/share/terminal-browser`, with a launcher at
-`~/.local/bin/terminal-browser`. The Herdr plugin opens it in a right split
-(`prefix+u`).
-
 [Herdr Annotate](https://github.com/plannotator/herdr-annotate) is the
 full install (terminal comments plus Plannotator TUI document review):
 
@@ -204,13 +198,9 @@ files. Press `p` to resume following the current tab's agent session. It
 has no release binary yet, so its build step compiles it with the mise Rust
 toolchain. Provider hooks are not installed; see its installation guide.
 
-Kitty graphics is enabled so terminal-browser can render inside Herdr.
-The first launch of terminal-browser may prompt for Accessibility /
-Input Monitoring; grant those in System Settings. The app is notarized,
-but GNU tar (from nix-darwin) extracts its tarball's AppleDouble entries as
-`._*` files, breaking the code seal so Gatekeeper reports it as "damaged".
-The Herdr `postinstall` puts `/usr/bin` first on `PATH` so the installer
-uses macOS tar instead.
+Kitty graphics is enabled for panes that use it inside Herdr.
+`mise run tools` uninstalls the terminal-browser Herdr plugin and deletes
+the app files its installer wrote under `~/.local`.
 
 ## Codex + Plannotator
 
@@ -234,18 +224,18 @@ document annotation are available from a Codex prompt:
 !plannotator last
 ```
 
-The public repository does not manage Codex session state or the shared private
-skill trees (`~/.agents/skills`, flattened `~/.claude/skills/<name>`, and the
-Snowflake catalog in `~/.agents/snowflake-skills`);
-the commands above do not require installing those skills.
+`mise run tools` also installs agent skills. Official repositories and
+`civitaspo/dotfiles-private/.agents/skills` are installed globally for
+Claude Code, Cursor, Codex, OpenCode, and Pi. Matt Pocock's skills use the
+Claude Code and Codex plugins, and the skills CLI for Cursor, OpenCode, and
+Pi. The Snowflake catalog stays in the mise-managed CoCo installation.
 
 ## After the first reconcile
 
 These are manual and are not part of `mise run reconcile`:
 
 - grant Accessibility / Input Monitoring / Screen Recording to Karabiner,
-  Hammerspoon, Space Rabbit, Homerow, Keyboard Maestro, CleanShot, and
-  terminal-browser
+  Hammerspoon, Space Rabbit, Homerow, Keyboard Maestro, and CleanShot
 - sign into paid apps (CleanShot, Keyboard Maestro, Mimestream, and others)
 - verify Git commit and tag signing with this Mac's Secure Enclave key
 - `op signin`, `gh auth`, `gcloud auth`, AWS SSO, SnowSQL, and Atuin
