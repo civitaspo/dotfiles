@@ -54,8 +54,8 @@
         modules = [ ./nix/darwin.nix ];
       };
 
-      # Private skill links must resolve both nested (~/.agents/skills) and
-      # flattened (~/.claude/skills/<name>); see nix/home.nix.
+      # Private skill links must resolve both in .agents/skills and when the
+      # skills CLI publishes each skill as a sibling.
       checks.aarch64-darwin.skill-links =
         let
           pkgs = inputs.nixpkgs-python.legacyPackages.aarch64-darwin;

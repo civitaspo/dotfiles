@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+#MISE description="Install declared global skills and remove every other global skill."
+set -euo pipefail
+
+mode="${SKILLS_RECONCILE:-sync}"
+agents=(claude-code cursor codex opencode pi)
+sources=(
+  'civitaspo/dotfiles-private'
+  'https://github.com/cursor/plugins/tree/main/pstack'
+  'DietrichGebert/ponytail'
+  'backnotprop/plannotator/apps/skills/core'
+  'backnotprop/plannotator/apps/skills/extra'
+  'nanaism/yomiyasu'
+  'herdrdev/herdr/skills/herdr'
+  'mattpocock/skills'
+)
+
+if ! command -v skills >/dev/null 2>&1; then
+  printf 'skills is not on PATH\n' >&2
+  exit 1
+fi
+if ! command -v jq >/dev/null 2>&1; then
+  printf 'jq is not on PATH\n' >&2
+  exit 1
+fi
+
+names_from_source() {
+  local source="$1"
+  skills add "${source}" --list | sed $'s/\x1b\\[[0-9;?]*[a-zA-Z]//g' | awk '
+    index($0, "Available Skills") { on = 1; next }
+    !on { next }
+    {
+      line = $0
+      sub(/^[^│]*│/, "", line)
+      if (line ~ /^    [^ ]/) {
+        sub(/^    /, "", line)
+        sub(/[[:space:]]+$/, "", line)
+        if (line !~ /^ / && line != "") print line
+      }
+    }
+  '
+}
+
+tmp="$(mktemp -d)"
+trap 'rm -rf "${tmp}"' EXIT
+
+for source in "${sources[@]}"; do
+  names_from_source "${source}"
+done | sort -u >"${tmp}/desired"
+
+skills ls -g --json | jq -r '.[].name' | sort -u >"${tmp}/installed"
+
+: >"${tmp}/add"
+: >"${tmp}/remove"
+comm -23 "${tmp}/desired" "${tmp}/installed" >"${tmp}/add"
+comm -13 "${tmp}/desired" "${tmp}/installed" >"${tmp}/remove"
+
+while IFS= read -r name; do
+  [[ -n "${name}" ]] && printf '+ %s\n' "${name}"
+done <"${tmp}/add"
+while IFS= read -r name; do
+  [[ -n "${name}" ]] && printf '- %s\n' "${name}"
+done <"${tmp}/remove"
+
+add_count="$(grep -c . "${tmp}/add" || true)"
+remove_count="$(grep -c . "${tmp}/remove" || true)"
+if [[ "${add_count}" -eq 0 && "${remove_count}" -eq 0 ]]; then
+  printf 'No changes.\n'
+else
+  printf '%s to add, %s to remove.\n' "${add_count}" "${remove_count}"
+fi
+
+[[ "${mode}" == plan ]] && exit 0
+
+if [[ "${remove_count}" -gt 0 ]]; then
+  # shellcheck disable=SC2046
+  skills remove -g -y $(cat "${tmp}/remove")
+fi
+
+for source in "${sources[@]}"; do
+  cmd=(skills add "${source}" --skill '*' -g -y)
+  for agent in "${agents[@]}"; do
+    cmd+=(-a "${agent}")
+  done
+  "${cmd[@]}"
+done

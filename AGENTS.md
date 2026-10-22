@@ -52,20 +52,20 @@ mise; `mise run bootstrap` installs Nix and Homebrew.
 This is a **public** repository. Never commit anything tied to an employer or
 other private context. Such configuration belongs in the private repository
 `civitaspo/dotfiles-private`, which supplies `~/.aws/config`,
-`~/.ssh/config.d/`, `~/.snowsql/config`, `~/.agents/skills/` for Codex and
-Cursor and OpenCode (from private `home/.agents/skills/`), flattened
-`~/.claude/skills/<name>/` for Claude Code (same source tree; Claude Code
-neither reads `~/.agents` nor recurses nested `SKILL.md`),
-and every directory under private `config/` into `~/.config/` (for example
-`~/.config/deck/` and `~/.config/herdr-linear-agent/`). The on-demand Snowflake
-catalog comes from the mise-managed CoCo CLI installation (public
-`config/mise/config.toml`). The private Snowflake router resolves its
-`bundled_skills/` directory and reads the adjacent `HOST_ADAPTATION.md` first.
-Keep organization-specific tool names out of public configuration, tests,
-documentation, and PR text. Install only the private skills tree under
-`~/.agents`, not the whole private `home/.agents/`. `nix flake check` runs the private
-`scripts/check-skill-links.py`, which requires relative skill links to resolve
-in both the nested and the flattened layout.
+`~/.ssh/config.d/`, `~/.snowsql/config`, and every directory under private
+`config/` into `~/.config/` (for example `~/.config/deck/` and
+`~/.config/herdr-linear-agent/`). Personal skills live in the private
+repository under `skills/`. `mise run tools` installs that repository, and the
+official skill repositories, with the `skills` CLI into `~/.agents/skills/`
+and each agent's skill directory. home-manager does not publish skills.
+The on-demand Snowflake catalog comes from the mise-managed CoCo CLI
+installation (public `config/mise/config.toml`). The private Snowflake router
+resolves its `bundled_skills/` directory and reads the adjacent
+`HOST_ADAPTATION.md` first. Keep organization-specific tool names out of
+public configuration, tests, documentation, and PR text. `nix flake check`
+runs the private `scripts/check-skill-links.py`, which requires relative skill
+links to resolve both in the private tree and when each skill is installed as
+a sibling.
 
 Claude Code 2.1.277 and later loads this `AGENTS.md` when no `CLAUDE.md`
 exists in the same directory. Do not add a `CLAUDE.md` shim.

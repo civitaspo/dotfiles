@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Show global skills that would be installed or removed."
+set -euo pipefail
+export SKILLS_RECONCILE=plan
+exec "$(dirname "$0")/sync"

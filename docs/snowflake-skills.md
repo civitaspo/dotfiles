@@ -8,13 +8,14 @@ to read these skills, and Nix does not download or extract the catalog.
 The small private Snowflake router resolves the global installation using
 `mise -C "$HOME" where http:coco`, then reads its `bundled_skills/` directory.
 It must first read its adjacent `HOST_ADAPTATION.md`. Host mappings remain
-private and work in both the nested and flattened skill layouts. Missing
-installation, catalog, or guide stops catalog use; the router does not install
-or launch CoCo implicitly. Direct-connection helpers are not automatically
-portable to other agent runtimes.
+private. The skills CLI installs the router from
+`civitaspo/dotfiles-private`. Missing installation, catalog,
+or guide stops catalog use; the router does not install or launch CoCo
+implicitly. Direct-connection helpers are not automatically portable to other
+agent runtimes.
 
-Codex, Cursor, and OpenCode discover the nested router in `~/.agents/skills`;
-Claude Code gets the same router at `~/.claude/skills/snowflake`.
+The CLI links the router into `~/.agents/skills/snowflake` and
+`~/.claude/skills/snowflake`.
 OpenCode supports recursive compatibility-root discovery without extra paths:
 <https://opencode.ai/v2/docs/skills#discovery>.
 
@@ -40,4 +41,4 @@ link during activation; the router uses mise directly.
 
 Keep upstream skill assets and dependency manifests out of Git. Their presence
 in a local mise installation does not create Dependabot entries in either
-repository; other vendored skills are unchanged.
+repository. Official skills are installed by `mise run tools`, not committed.

@@ -105,6 +105,13 @@
       "matchDepNames": ["npm:@opencode/cli"],
       "groupName": "opencode",
       "automerge": false
+    },
+    {
+      "description": "The skills CLI clones repositories into the home directory; review each bump.",
+      "matchManagers": ["mise"],
+      "matchDepNames": ["npm:skills"],
+      "groupName": "skills",
+      "automerge": false
     }
   ]
 }
