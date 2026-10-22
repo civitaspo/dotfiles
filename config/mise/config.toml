@@ -13,6 +13,12 @@ locked = true
 # civitaspo's own OSS tracks the newest release, so it skips mise's default
 # 24h minimum release age. Keep this list to tools civitaspo publishes.
 minimum_release_age_excludes = ["github:civitaspo/hook-relay-client-rs"]
+# Herdr runs plugin builds with stdin closed, so mise cannot prompt. The
+# herdr-infobox checkout's mise.toml uses tool option tables, and the rustc
+# shim then refuses to start. Trusting this directory lets that build use the
+# plugin's pinned toolchain. mise 2026.8.8 does not apply ignored_config_paths
+# from this file. Development clones outside this directory are unaffected.
+trusted_config_paths = ["~/.config/herdr/plugins"]
 
 [tools]
 # --- Language runtimes (others come from Nix; see flake.nix) ----------------
@@ -26,7 +32,8 @@ java = "temurin-21"
 # --- CLI tools (formerly aqua) ----------------------------------------------
 # Pin aqua:1password/cli: the aqua HTTP package cannot resolve "latest", and the
 # vfox short name fails under Renovate's MISE_SAFE=1 lock --bump. Version bumps
-# come from renovate.json's custom manager + Homebrew cask API.
+# come from renovate.json's custom manager + Homebrew cask API. A bump rewrites
+# the lock entry's macOS arm64 checksum from that API's top-level sha256.
 "aqua:1password/cli" = "2.41.0"
 aqua = "latest"
 "aqua:marp-team/marp-cli" = "latest"

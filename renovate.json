@@ -31,24 +31,34 @@
     "1password-cli": {
       "defaultRegistryUrlTemplate": "https://formulae.brew.sh/api/cask/1password-cli.json",
       "transformTemplates": [
-        "{\"releases\":[{\"version\": version}]}"
+        "{\"releases\":[{\"version\": version, \"digest\": sha256}]}"
       ]
     }
   },
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Bump pinned aqua:1password/cli in mise config and lock (aqua HTTP packages have no version list).",
+      "description": "Bump pinned aqua:1password/cli in mise config (aqua HTTP packages have no version list).",
       "managerFilePatterns": [
-        "/(^|/)config/mise/config\\.toml$/",
+        "/(^|/)config/mise/config\\.toml$/"
+      ],
+      "matchStrings": [
+        "\"aqua:1password/cli\"\\s*=\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
+      ],
+      "depNameTemplate": "1password-cli",
+      "datasourceTemplate": "custom.1password-cli",
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "description": "Rewrite the 1Password CLI lock entry, including its archive checksum. A first-match version replace leaves the previous zip's SHA-256 in place.",
+      "managerFilePatterns": [
         "/(^|/)config/mise/mise\\.lock$/"
       ],
       "matchStrings": [
-        "\"aqua:1password/cli\"\\s*=\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\"",
-        "\\[\\[tools\\.\"aqua:1password/cli\"\\]\\]\\nversion = \"(?<currentValue>\\d+\\.\\d+\\.\\d+)\"",
-        "pkg/v(?<currentValue>\\d+\\.\\d+\\.\\d+)/",
-        "op_darwin_arm64_v(?<currentValue>\\d+\\.\\d+\\.\\d+)\\.zip"
+        "\\[\\[tools\\.\"aqua:1password/cli\"\\]\\]\\nversion = \"(?<currentValue>\\d+\\.\\d+\\.\\d+)\"\\nbackend = \"aqua:1password/cli\"\\n\\n\\[tools\\.\"aqua:1password/cli\"\\.\"platforms\\.macos-arm64\"\\]\\nchecksum = \"sha256:(?<currentDigest>[a-f0-9]{64})\"\\nurl = \"https://cache\\.agilebits\\.com/dist/1P/op2/pkg/v\\d+\\.\\d+\\.\\d+/op_darwin_arm64_v\\d+\\.\\d+\\.\\d+\\.zip\""
       ],
+      "autoReplaceStringTemplate": "[[tools.\"aqua:1password/cli\"]]\nversion = \"{{{newValue}}}\"\nbackend = \"aqua:1password/cli\"\n\n[tools.\"aqua:1password/cli\".\"platforms.macos-arm64\"]\nchecksum = \"sha256:{{{newDigest}}}\"\nurl = \"https://cache.agilebits.com/dist/1P/op2/pkg/v{{{newValue}}}/op_darwin_arm64_v{{{newValue}}}.zip\"",
       "depNameTemplate": "1password-cli",
       "datasourceTemplate": "custom.1password-cli",
       "versioningTemplate": "semver"

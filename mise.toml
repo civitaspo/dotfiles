@@ -115,6 +115,7 @@ run = [
   { task = "check:shell" },
   { task = "check:mcp-sync" },
   { task = "check:tools-install" },
+  { task = "check:1password" },
   { task = "check:github-key" },
   { task = "check:typos" },
 ]
@@ -144,6 +145,10 @@ run = "typos"
 [tasks."check:tools-install"]
 description = "Test recovery of empty mise installations."
 run = "bash tests/test_tools_install.sh"
+
+[tasks."check:1password"]
+description = "Test the 1Password lock entry and its Renovate replacement."
+run = "python3 tests/test_renovate_1password.py"
 
 [tasks."check:github-key"]
 description = "Test Secure Enclave key setup and GitHub registration retries."
