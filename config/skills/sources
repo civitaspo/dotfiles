@@ -1,0 +1,11 @@
+# Global skill sources for mise run skills:plan and mise run skills:sync.
+# One source per line. Blank lines and # comments are ignored.
+# home-manager links this file to ${XDG_CONFIG_HOME:-~/.config}/skills/sources.
+civitaspo/dotfiles-private
+https://github.com/cursor/plugins/tree/main/pstack
+DietrichGebert/ponytail
+backnotprop/plannotator/apps/skills/core
+backnotprop/plannotator/apps/skills/extra
+nanaism/yomiyasu
+herdrdev/herdr/skills/herdr
+mattpocock/skills
