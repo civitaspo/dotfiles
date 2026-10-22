@@ -2,44 +2,25 @@
 #MISE description="Install global agent skills."
 set -euo pipefail
 
-# Claude Code, Cursor, Codex, OpenCode, and Pi.
 agents=(claude-code cursor codex opencode pi)
 
 add() {
   local source="$1"
-  shift
   local -a cmd=(skills add "${source}" --skill '*' -g -y)
   local agent
-  for agent in "$@"; do
+  for agent in "${agents[@]}"; do
     cmd+=(-a "${agent}")
   done
   "${cmd[@]}"
 }
 
-plugin() {
-  local bin="$1"
-  shift
-  if ! command -v "${bin}" >/dev/null 2>&1 || ! "${bin}" "$@" </dev/null; then
-    printf '[skills:sync] sign in, then run: %s %s\n' "${bin}" "$*" >&2
-  fi
-}
-
-add 'civitaspo/dotfiles-private' "${agents[@]}"
-add 'DietrichGebert/ponytail' "${agents[@]}"
-add 'backnotprop/plannotator/apps/skills/core' "${agents[@]}"
-add 'backnotprop/plannotator/apps/skills/extra' "${agents[@]}"
-add 'nanaism/yomiyasu' "${agents[@]}"
-add 'herdrdev/herdr/skills/herdr' "${agents[@]}"
-
-# Claude Code installs these from their plugin marketplaces. Codex has a
-# marketplace entry for mattpocock and none for pstack.
-add 'https://github.com/cursor/plugins/tree/main/pstack' cursor codex opencode pi
-add 'mattpocock/skills' cursor opencode pi
-
-plugin claude plugin marketplace add cursor/plugins
-plugin claude plugin install pstack@cursor-plugins
-plugin claude plugin install mattpocock-skills@claude-plugins-official
-plugin codex plugin marketplace add mattpocock/skills
-plugin codex plugin add mattpocock-skills@mattpocock
+add 'civitaspo/dotfiles-private'
+add 'https://github.com/cursor/plugins/tree/main/pstack'
+add 'DietrichGebert/ponytail'
+add 'backnotprop/plannotator/apps/skills/core'
+add 'backnotprop/plannotator/apps/skills/extra'
+add 'nanaism/yomiyasu'
+add 'herdrdev/herdr/skills/herdr'
+add 'mattpocock/skills'
 
 skills update -g -y

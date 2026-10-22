@@ -222,13 +222,10 @@ document annotation are available from a Codex prompt:
 !plannotator last
 ```
 
-`mise run tools` also installs agent skills. The skills CLI installs each
-repository for Claude Code, Cursor, Codex, OpenCode, and Pi. Personal skills
-come from `civitaspo/dotfiles-private`, which publishes them under `skills/`.
-Claude Code installs pstack and Matt Pocock's skills from their plugin
-marketplaces. Codex installs Matt Pocock's skills from its plugin marketplace.
-pstack has no Codex plugin, so Codex gets that tree from the skills CLI.
-The Snowflake catalog stays in the mise-managed CoCo installation.
+`mise run tools` also installs agent skills with the skills CLI, for Claude
+Code, Cursor, Codex, OpenCode, and Pi. Personal skills come from
+`civitaspo/dotfiles-private`, which publishes them under `skills/`. The
+Snowflake catalog stays in the mise-managed CoCo installation.
 
 ## After the first reconcile
 
