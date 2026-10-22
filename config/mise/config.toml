@@ -122,7 +122,7 @@ trust_policy_excludes = ["cytoscape@3.34.1"]
 version = "latest"
 postinstall = """
 herdr plugin install plannotator/herdr-annotate --yes
-herdr plugin install civitaspo/herdr-linear-agent --ref v0.7.0 --yes
+herdr plugin install civitaspo/herdr-linear-agent --ref v0.8.0 --yes
 herdr plugin install civitaspo/herdr-infobox --yes
 """
 
