@@ -4,20 +4,16 @@ set -euo pipefail
 
 mode="${SKILLS_RECONCILE:-sync}"
 agents=(claude-code cursor codex opencode pi)
-sources_file="$(cd "$(dirname "$0")/../.." && pwd)/config/skills/sources"
-if [[ ! -f "${sources_file}" ]]; then
-  printf 'missing %s\n' "${sources_file}" >&2
-  exit 1
-fi
-sources=()
-while IFS= read -r source || [[ -n "${source}" ]]; do
-  [[ "${source}" =~ ^[[:space:]]*(#|$) ]] && continue
-  sources+=("${source}")
-done <"${sources_file}"
-if [[ "${#sources[@]}" -eq 0 ]]; then
-  printf 'no sources in %s\n' "${sources_file}" >&2
-  exit 1
-fi
+sources=(
+  'civitaspo/dotfiles-private'
+  'https://github.com/cursor/plugins/tree/main/pstack'
+  'DietrichGebert/ponytail'
+  'backnotprop/plannotator/apps/skills/core'
+  'backnotprop/plannotator/apps/skills/extra'
+  'nanaism/yomiyasu'
+  'herdrdev/herdr/skills/herdr'
+  'mattpocock/skills'
+)
 
 if ! command -v skills >/dev/null 2>&1; then
   printf 'skills is not on PATH\n' >&2
