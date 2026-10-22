@@ -222,7 +222,9 @@ document annotation are available from a Codex prompt:
 !plannotator last
 ```
 
-`mise run tools` also installs agent skills with the skills CLI, for Claude
+`mise run tools` installs the declared agent skills and removes every other
+global skill. `mise run skills:plan` prints that diff and changes nothing.
+The sources are the list in `mise-tasks/skills/sync`, installed for Claude
 Code, Cursor, Codex, OpenCode, and Pi. Personal skills come from
 `civitaspo/dotfiles-private`, which publishes them under `skills/`. The
 Snowflake catalog stays in the mise-managed CoCo installation.
