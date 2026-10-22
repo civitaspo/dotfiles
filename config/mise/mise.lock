@@ -209,7 +209,7 @@ url_api = "https://api.github.com/repos/docker/compose/releases/assets/605922795
 provenance = "cosign"
 
 [[tools."aqua:duckdb/duckdb"]]
-version = "1.5.6"
+version = "2.0.0"
 backend = "aqua:duckdb/duckdb"
 
 [tools."aqua:duckdb/duckdb"."platforms.macos-arm64"]
