@@ -1,4 +1,4 @@
-# Homebrew bundle: GUI applications, local casks, and App Store apps.
+# Homebrew bundle: GUI applications and local casks.
 #
 # This file is the source of truth. Apply it with `mise run brew` (installs,
 # upgrades, and uninstalls packages not listed here) and capture drift with
@@ -59,19 +59,6 @@ cask "cursor-cli"
 cask "font-monaspice-nerd-font"
 
 # --- Mac App Store ----------------------------------------------------------
-# Keynote/Numbers/Pages use the universal App Store IDs. Apple delisted the
-# classic Mac ADAM IDs (409183694, 409203825, 409201541) in April 2026, so
-# mas fails those with "No apps found in the App Store". The current
-# listings install as Creator Studio builds (com.apple.Keynote and friends)
-# alongside any remaining classic iWork apps (com.apple.iWork.*).
-mas "1Password for Safari", id: 1569813296
-mas "Amphetamine", id: 937984704
-mas "Bear", id: 1091189122
-mas "Keynote", id: 361285480
-mas "Kindle", id: 302584613
-mas "Klack", id: 6446206067
-mas "LINE", id: 539883307
-mas "Numbers", id: 361304891
-mas "Pages", id: 361309726
-mas "Twingate", id: 1501592214
-mas "Xcode", id: 497799835
+# App Store apps live in mise.toml's [bootstrap.packages]. Do not add `mas`
+# entries here: while any exists, --force-cleanup runs `mas uninstall` for
+# every App Store app not listed in this file.
