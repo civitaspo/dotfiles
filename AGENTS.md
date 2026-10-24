@@ -8,8 +8,8 @@ civitaspo's macOS configuration. Responsibilities are split across four tools:
 
 - **nix-darwin** (`nix/darwin.nix`) -- macOS system settings and base CLI packages.
 - **home-manager** (`nix/home.nix`) -- symlinks dotfiles into `$HOME`.
-- **Homebrew** (`Brewfile`) -- GUI apps and App Store apps (casks only; no formulae). Not on `$PATH`; only `mise run brew` and friends invoke it (via `/opt/homebrew/bin/brew`).
-- **mise** (`config/mise/config.toml`, `mise.toml`, `mise-tasks/`) -- CLI binaries, language runtimes, and repository task orchestration.
+- **Homebrew** (`Brewfile`) -- GUI apps (casks only; no formulae). Not on `$PATH`; only `mise run brew` and friends invoke it (via `/opt/homebrew/bin/brew`).
+- **mise** (`config/mise/config.toml`, `mise.toml`, `mise-tasks/`) -- CLI binaries, language runtimes, App Store apps (`mas:` entries in `mise.toml`'s `[bootstrap.packages]`), and repository task orchestration. Run named `mise bootstrap` parts such as `mise bootstrap packages apply`; bare `mise bootstrap` also runs `[tasks.bootstrap]`.
 
 Dotfiles are plain files under `config/` (-> `~/.config`) and `home/`
 (-> `$HOME`); home-manager symlinks them. `bootstrap.sh` installs a pinned

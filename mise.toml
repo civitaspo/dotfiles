@@ -7,6 +7,27 @@ task.run_auto_install = false
 [task_config]
 includes = ["mise-tasks"]
 
+# Mac App Store apps, installed by `mise run mas` with the `mas` CLI.
+# Run named bootstrap parts only: bare `mise bootstrap` also runs
+# [tasks.bootstrap], which installs Nix and Homebrew.
+# Keynote/Numbers/Pages use the universal App Store IDs. Apple delisted the
+# classic Mac ADAM IDs (409183694, 409203825, 409201541) in April 2026, so
+# mas fails those with "No apps found in the App Store". The current
+# listings install as Creator Studio builds (com.apple.Keynote and friends)
+# alongside any remaining classic iWork apps (com.apple.iWork.*).
+[bootstrap.packages]
+"mas:1569813296" = "latest" # 1Password for Safari
+"mas:937984704" = "latest" # Amphetamine
+"mas:1091189122" = "latest" # Bear
+"mas:361285480" = "latest" # Keynote
+"mas:302584613" = "latest" # Kindle
+"mas:6446206067" = "latest" # Klack
+"mas:539883307" = "latest" # LINE
+"mas:361304891" = "latest" # Numbers
+"mas:361309726" = "latest" # Pages
+"mas:1501592214" = "latest" # Twingate
+"mas:497799835" = "latest" # Xcode
+
 [tasks.default]
 description = "List available repository tasks."
 run = "mise tasks ls --local"
@@ -24,6 +45,7 @@ description = "Apply the whole configuration to this machine."
 run = [
   { task = "switch" },
   { task = "brew" },
+  { task = "mas" },
   { task = "tools" },
 ]
 
@@ -33,6 +55,12 @@ run = [
   { task = "setup:xcode" },
   { task = "brew:tap" },
   "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup",
+]
+
+[tasks.mas]
+description = "Install missing Mac App Store apps."
+run = [
+  "mise bootstrap packages apply --manager mas --yes",
   # Run directly because mise deduplicates repeated task references.
   "./mise-tasks/setup/xcode",
 ]
@@ -46,11 +74,12 @@ run = [
 ]
 
 [tasks.update]
-description = "Update Nix inputs, mise tools, and Homebrew packages."
+description = "Update Nix inputs, mise tools, Homebrew packages, and App Store apps."
 run = [
   { task = "update:nix" },
   { task = "update:mise" },
   { task = "update:brew" },
+  { task = "update:mas" },
 ]
 
 [tasks."auth:opencode"]
@@ -91,9 +120,15 @@ run = [
   "/opt/homebrew/bin/brew update",
   "/opt/homebrew/bin/brew upgrade",
   "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup",
+  "/opt/homebrew/bin/brew cleanup",
+]
+
+[tasks."update:mas"]
+description = "Upgrade Mac App Store apps."
+run = [
+  "mise bootstrap packages upgrade --manager mas --yes",
   # Run directly because mise deduplicates repeated task references.
   "./mise-tasks/setup/xcode",
-  "/opt/homebrew/bin/brew cleanup",
 ]
 
 [tasks."livecheck:casks"]
@@ -134,8 +169,8 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_mcp_sync.sh tests/test_github_key.sh home/bin/* home/.docker/cli-plugins/*",
-  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_mcp_sync.sh tests/test_github_key.sh home/bin/* home/.docker/cli-plugins/*",
+  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh home/bin/* home/.docker/cli-plugins/*",
 ]
 
 [tasks."check:typos"]

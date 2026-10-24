@@ -34,6 +34,32 @@ jobs:
     steps:
       - run: exit 0
 
+  # Runs the pinned mise from bootstrap.sh against this checkout. HOME and the
+  # XDG directories point at the runner's temp directory, so no real user
+  # configuration, cache, or global mise config is read.
+  mise-packages:
+    runs-on: macos-15
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check App Store packages
+        run: |
+          export HOME="$RUNNER_TEMP/home"
+          export XDG_CONFIG_HOME="$HOME/.config"
+          export XDG_DATA_HOME="$HOME/.local/share"
+          export XDG_CACHE_HOME="$HOME/.cache"
+          export XDG_STATE_HOME="$HOME/.local/state"
+          export MISE_TRUSTED_CONFIG_PATHS="$GITHUB_WORKSPACE"
+          mkdir -p "$HOME"
+          ./bootstrap.sh
+          MISE="$HOME/.local/bin/mise" bash tests/test_mas_packages.sh
+
   status-check:
     runs-on: ubuntu-latest
     if: always()
@@ -41,8 +67,10 @@ jobs:
     permissions: {}
     needs:
       - ok
+      - mise-packages
     steps:
       - name: Require successful checks
         env:
-          JOB_RESULT: ${{ needs.ok.result }}
-        run: test "$JOB_RESULT" = success
+          OK_RESULT: ${{ needs.ok.result }}
+          MISE_PACKAGES_RESULT: ${{ needs.mise-packages.result }}
+        run: test "$OK_RESULT" = success && test "$MISE_PACKAGES_RESULT" = success

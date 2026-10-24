@@ -4,6 +4,13 @@
 version: 'v0.0.3'
 workflows:
     '.github/workflows/approve-request.yml': []
-    '.github/workflows/ci.yml': []
+    '.github/workflows/ci.yml':
+        - 'actions/checkout@v7.0.1'
     '.github/workflows/merge-request.yml': []
     '.github/workflows/policy-check.yml': []
+dependencies:
+    'actions/checkout@v7.0.1':
+        ref: 'v7.0.1'
+        commit: 'sha1-3d3c42e5aac5ba805825da76410c181273ba90b1'
+        owner_id: 44036562
+        repo_id: 197814629

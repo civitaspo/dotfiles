@@ -10,8 +10,8 @@ Each tool owns one clear responsibility:
 |------|----------------|-------|
 | [nix-darwin](https://github.com/nix-darwin/nix-darwin) | macOS system settings, base CLI packages | `flake.nix`, `nix/darwin.nix` |
 | [home-manager](https://github.com/nix-community/home-manager) | Dotfile placement (symlinks into `$HOME`) | `nix/home.nix` |
-| [Homebrew](https://brew.sh) | GUI apps, local casks and App Store apps | `Brewfile`, `Casks/` |
-| [mise](https://mise.jdx.dev) | CLI binaries, language runtimes, and repository workflows | `config/mise/config.toml`, `mise.toml`, `mise-tasks/` |
+| [Homebrew](https://brew.sh) | GUI apps and local casks | `Brewfile`, `Casks/` |
+| [mise](https://mise.jdx.dev) | CLI binaries, language runtimes, App Store apps, and repository workflows | `config/mise/config.toml`, `mise.toml`, `mise-tasks/` |
 
 Dotfiles are plain files: `config/` is placed into `~/.config` and `home/`
 into `$HOME` by home-manager. Private configuration (work accounts, internal
@@ -43,7 +43,7 @@ Then pause and do the following by hand:
 - Open 1Password and sign in.
 - Enable Settings → Developer → SSH Agent.
 - Confirm the keys named in `config/1Password/ssh/agent.toml`.
-- Sign into the Mac App Store with the Apple ID that owns the Brewfile `mas` apps.
+- Sign into the Mac App Store with the Apple ID that owns the `mas` apps in `mise.toml`.
 - Configure the Secure Enclave key using the steps below, then confirm access
   to `civitaspo/dotfiles-private` (`git ls-remote git@github.com:civitaspo/dotfiles-private.git`).
 - Optionally clone the private repo for editing:
@@ -75,23 +75,31 @@ cd ~/src/github.com/civitaspo/dotfiles
 
 `bootstrap.sh` only installs a pinned, verified mise. `mise run bootstrap`
 installs pinned, signed Determinate Nix and Homebrew packages. `mise run
-reconcile` is the only apply step: nix-darwin, Homebrew, then locked mise
-tools.
+reconcile` is the only apply step: nix-darwin, Homebrew, App Store apps,
+then locked mise tools.
 
 Private MCP servers are installed from the private configuration during
 `mise run switch`. If a client CLI was unavailable during setup, install it
 and run `mise run mcp:sync` to register the servers later.
 
+App Store apps are `mas:<id>` entries in `mise.toml`'s
+`[bootstrap.packages]`. `mise run mas` installs missing ones with
+`mise bootstrap packages apply --manager mas`, and `mise run update:mas`
+upgrades installed ones. mise never uninstalls App Store apps. Run only
+named `mise bootstrap` parts: bare `mise bootstrap` also runs
+`mise run bootstrap`, which installs Nix and Homebrew.
+
 If App Store apps fail until they have been acquired on this Apple ID, Get
-them once in the App Store and rerun `mise run brew`. Other failed steps are
+them once in the App Store and rerun `mise run mas`. Other failed steps are
 idempotent; rerun the task that stopped. Keynote, Numbers, and Pages use
 the universal App Store IDs; the classic Mac IDs were delisted in April
 2026 and cannot be installed by mas.
 
 `mise run brew` and `mise run update:brew` accept the Xcode license before
-running Homebrew and after installing or upgrading App Store apps. They
-request sudo only when the installed Xcode license has not been accepted.
-To fix an existing installation directly, run `mise run setup:xcode`.
+running Homebrew. `mise run mas` and `mise run update:mas` accept it after
+installing or upgrading App Store apps. They request sudo only when the
+installed Xcode license has not been accepted. To fix an existing
+installation directly, run `mise run setup:xcode`.
 
 Rosetta is required because the committed `mise.lock` entries for dust and
 procs use x86_64 assets on macOS arm64.
@@ -124,9 +132,10 @@ A saved account takes precedence over `OPENAI_API_KEY`. See the
 
 ```sh
 mise run               # list available tasks
-mise run reconcile     # apply everything: nix-darwin + home-manager + Homebrew + mise
+mise run reconcile     # apply everything: nix-darwin + home-manager + Homebrew + App Store + mise
 mise run switch        # apply only the Nix configuration (nix-darwin + home-manager)
-mise run update        # update Nix inputs, mise tools and Homebrew packages
+mise run mas           # install missing App Store apps
+mise run update        # update Nix inputs, mise tools, Homebrew packages and App Store apps
 mise run import:brew   # capture the live Homebrew state back into the Brewfile
 mise run livecheck:casks # show newer upstream versions for local tap casks
 mise run check         # validate the configuration
