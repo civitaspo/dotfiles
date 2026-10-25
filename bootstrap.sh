@@ -2,8 +2,8 @@
 # Install the pinned mise binary. All other setup lives in mise tasks.
 set -euo pipefail
 
-MISE_VERSION="2026.8.8"
-MISE_SHA256="d2928a49a03eee76f51175406570b9d871835421f65b5776b70fe7b3bfc0193e"
+MISE_VERSION="2026.10.7"
+MISE_SHA256="f5171e341518a57e8c4e9280e28443e35d66212c51164c83be76794e0a78b014"
 MISE_TEAM_ID="4993Y37DX6"
 MISE_URL="https://github.com/jdx/mise/releases/download/v${MISE_VERSION}/mise-v${MISE_VERSION}-macos-arm64"
 MISE_BIN="${HOME}/.local/bin/mise"

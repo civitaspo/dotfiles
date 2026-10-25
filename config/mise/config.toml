@@ -16,8 +16,9 @@ minimum_release_age_excludes = ["github:civitaspo/hook-relay-client-rs"]
 # Herdr runs plugin builds with stdin closed, so mise cannot prompt. The
 # herdr-infobox checkout's mise.toml uses tool option tables, and the rustc
 # shim then refuses to start. Trusting this directory lets that build use the
-# plugin's pinned toolchain. mise 2026.8.8 does not apply ignored_config_paths
-# from this file. Development clones outside this directory are unaffected.
+# plugin's pinned toolchain. ignored_config_paths cannot replace this here: mise
+# reads it only from miserc.toml or MISE_IGNORED_CONFIG_PATHS, not from this
+# file. Development clones outside this directory are unaffected.
 trusted_config_paths = ["~/.config/herdr/plugins"]
 
 [tools]
