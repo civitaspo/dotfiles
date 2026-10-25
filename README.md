@@ -128,6 +128,17 @@ it does not need a copy of Codex's `auth.json` in either dotfiles repository.
 A saved account takes precedence over `OPENAI_API_KEY`. See the
 [provider account documentation](https://opencode.ai/v2/docs/cli/providers).
 
+## Pull request automation
+
+[csm-ci-server](https://github.com/civitaspo/csm-ci-server) handles approvals,
+policy checks and merges through the pinned workflows in `.github/workflows/`.
+For sensitive changes, comment `/approve` to authorize the current signed head.
+After `status-check` and `csm-ci/policy` pass, comment `/merge` to request a
+Server App squash merge. A new commit dismisses the previous approval.
+
+The server manages the merge settings, required checks and common caller
+workflows. Dotfiles has no automated release pipeline.
+
 ## Daily workflow
 
 ```sh

@@ -1,6 +1,4 @@
-# Minimal CI gate for the default-branch ruleset required context `status-check`.
-# Matches the SecureFix client pattern: status-check fails only when a needed job
-# fails/cancels; on green it is skipped and the ruleset still allows merge.
+# Required CI gate for the managed review-and-checks ruleset.
 
 name: CI
 
