@@ -3,11 +3,11 @@
 # Docs: https://gh.io/actions-lockfile
 version: 'v0.0.3'
 workflows:
-    '.github/workflows/approve-request.yml': []
     '.github/workflows/ci.yml':
         - 'actions/checkout@v7.0.1'
-    '.github/workflows/merge-request.yml': []
-    '.github/workflows/policy-check.yml': []
+    '.github/workflows/csm-ci-approve.yml': []
+    '.github/workflows/csm-ci-merge.yml': []
+    '.github/workflows/csm-ci-policy-check.yml': []
 dependencies:
     'actions/checkout@v7.0.1':
         ref: 'v7.0.1'
