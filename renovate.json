@@ -83,9 +83,9 @@
       "groupName": "GitHub Actions"
     },
     {
-      "description": "Automerge securefix-server reusable workflow pin bumps",
+      "description": "Automerge csm-ci-actions reusable workflow pin bumps",
       "matchManagers": ["github-actions"],
-      "matchPackageNames": ["civitaspo/securefix-server/**"],
+      "matchPackageNames": ["civitaspo/csm-ci-actions/**"],
       "automerge": true
     },
     {
