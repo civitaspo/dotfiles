@@ -316,13 +316,17 @@ This setup follows [mizdra's Secure Enclave guide](https://www.mizdra.net/entry/
 The Renovate GitHub App runs daily on weekdays to open dependency update pull
 requests for GitHub Actions, Nix flake inputs and mise-managed tools.
 
-Trusted PRs (Renovate, Dependabot, and `civitaspo`) request approval through
-[`civitaspo/securefix-server`](https://github.com/civitaspo/securefix-server)
-via `.github/workflows/approve-request.yml`. Non-major Renovate updates enable
-GitHub auto-merge (`platformAutomerge: true`); after the Securefix bot
-approves, the `main` ruleset lets GitHub squash-merge.
+The managed `.github/workflows/csm-ci-approve.yml` caller submits approval
+requests to [`civitaspo/csm-ci-server`](https://github.com/civitaspo/csm-ci-server).
+The server checks signed commits, trusted committers and sensitive paths
+before the Approver App approves the current head. Eligible non-major
+Renovate updates post `/merge` with `platformAutomerge: false`. The managed
+merge caller forwards that comment; the server requires the configured Bot
+to own the PR and every commit, and checks current approval, policy and CI
+before squash-merging through the Server App. Major updates remain manual.
 
 The private flake input `dotfiles-private` is ignored by Renovate (SSH lookup
 is impossible from the Mend app). Repository access for Renovate is scoped by
-the Renovate GitHub App installation. Approve requests need the repository
-secret `SECUREFIX_CLIENT_PRIVATE_KEY` only.
+the Renovate GitHub App installation. Requests need only the repository's `CSM_CI_CLIENT_APP_PRIVATE_KEY` secret
+and the `CSM_CI_CLIENT_APP_CLIENT_ID` and `CSM_CI_SERVER_REPOSITORY` variables.
+Server and Approver App keys stay in the server's `csm-ci` environment.
