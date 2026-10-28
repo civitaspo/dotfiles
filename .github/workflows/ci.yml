@@ -36,7 +36,7 @@ jobs:
   # XDG directories point at the runner's temp directory, so no real user
   # configuration, cache, or global mise config is read.
   mise:
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 20
     permissions:
       contents: read
