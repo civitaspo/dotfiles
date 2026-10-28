@@ -35,9 +35,9 @@ jobs:
   # Runs the pinned mise from bootstrap.sh against this checkout. HOME and the
   # XDG directories point at the runner's temp directory, so no real user
   # configuration, cache, or global mise config is read.
-  mise-packages:
+  mise:
     runs-on: macos-15
-    timeout-minutes: 15
+    timeout-minutes: 20
     permissions:
       contents: read
     env:
@@ -46,17 +46,25 @@ jobs:
       - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
-      - name: Check App Store packages
+      - name: Isolate mise state
         run: |
-          export HOME="$RUNNER_TEMP/home"
-          export XDG_CONFIG_HOME="$HOME/.config"
-          export XDG_DATA_HOME="$HOME/.local/share"
-          export XDG_CACHE_HOME="$HOME/.cache"
-          export XDG_STATE_HOME="$HOME/.local/state"
-          export MISE_TRUSTED_CONFIG_PATHS="$GITHUB_WORKSPACE"
-          mkdir -p "$HOME"
-          ./bootstrap.sh
-          MISE="$HOME/.local/bin/mise" bash tests/test_mas_packages.sh
+          home="$RUNNER_TEMP/home"
+          mkdir -p "$home"
+          {
+            echo "HOME=$home"
+            echo "XDG_CONFIG_HOME=$home/.config"
+            echo "XDG_DATA_HOME=$home/.local/share"
+            echo "XDG_CACHE_HOME=$home/.cache"
+            echo "XDG_STATE_HOME=$home/.local/state"
+            echo "MISE_TRUSTED_CONFIG_PATHS=$GITHUB_WORKSPACE"
+            echo "MISE=$home/.local/bin/mise"
+          } >>"$GITHUB_ENV"
+      - name: Install the pinned mise
+        run: ./bootstrap.sh
+      - name: Check App Store packages
+        run: bash tests/test_mas_packages.sh
+      - name: Check the global lockfile
+        run: bash tests/test_mise_lock.sh
 
   status-check:
     runs-on: ubuntu-latest
@@ -65,10 +73,10 @@ jobs:
     permissions: {}
     needs:
       - ok
-      - mise-packages
+      - mise
     steps:
       - name: Require successful checks
         env:
           OK_RESULT: ${{ needs.ok.result }}
-          MISE_PACKAGES_RESULT: ${{ needs.mise-packages.result }}
-        run: test "$OK_RESULT" = success && test "$MISE_PACKAGES_RESULT" = success
+          MISE_RESULT: ${{ needs.mise.result }}
+        run: test "$OK_RESULT" = success && test "$MISE_RESULT" = success
