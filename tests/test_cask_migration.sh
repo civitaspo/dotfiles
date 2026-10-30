@@ -3,7 +3,7 @@
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-token="${1:?usage: test_cask_migration.sh {tabtab|raycast}}"
+token="${1:?select tabtab or raycast}"
 brew="/opt/homebrew/bin/brew"
 helper="$root/mise-tasks/migrate/cask-ownership"
 guard="$root/mise-tasks/brew/check-cask-ownership"
