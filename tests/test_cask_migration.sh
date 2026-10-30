@@ -178,17 +178,13 @@ MISE="$MISE" \
 }
 [[ ! -e "$caskroom/.metadata" ]] || fail "successful transfer retained Homebrew .metadata"
 # `brew list` can list mise's marker even without a Homebrew receipt.
-# Bundle cleanup must use installed metadata and leave this cask alone.
-"$brew" --version
-"$brew" list --cask "$token" >"$tmp_dir/brew-list-after.log" 2>&1 || true
-"$brew" bundle cleanup --cask --file "$tmp_dir/final-config/Brewfile" >"$tmp_dir/cleanup.log" 2>&1 || {
-  cat "$tmp_dir/cleanup.log" >&2
-  fail "Homebrew cleanup dry run failed after migration"
-}
-if grep -Eiq "(^|[[:space:]])${token}([[:space:]]|$)" "$tmp_dir/cleanup.log"; then
-  cat "$tmp_dir/cleanup.log" >&2
-  fail "Homebrew cleanup would remove $token after migration"
+# Keep the runner's other casks and exercise real cleanup on disposable CI.
+"$brew" bundle dump --cask --file "$tmp_dir/cleanup.Brewfile"
+if grep -Eq "^[[:space:]]*cask[[:space:]]+\"$token\"([[:space:]]|$)" "$tmp_dir/cleanup.Brewfile"; then
+  fail "Homebrew dump still considers $token installed after migration"
 fi
+"$brew" bundle cleanup --cask --force --file "$tmp_dir/cleanup.Brewfile"
+[[ -d "$caskroom" && ! -e "$caskroom/.metadata" ]] || fail "Homebrew cleanup altered the mise cask record"
 [[ "$(stat -f '%i' "$app")" == "$app_inode" ]] || fail "successful transfer replaced app inode"
 fingerprint "$app" "$tmp_dir/app.after-success"
 cmp -s "$tmp_dir/app.before" "$tmp_dir/app.after-success" || fail "successful transfer changed app contents"
