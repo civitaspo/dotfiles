@@ -158,7 +158,7 @@ if MISE="$tmp_dir/mise-fails" \
   bash "$helper" "$token" "$app" >"$tmp_dir/failure.log" 2>&1; then
   fail "migration unexpectedly succeeded with a failing mise executable"
 fi
-"$brew" list --cask "$token" >/dev/null 2>&1 || fail "failure rollback lost Homebrew ownership"
+[[ -d "$caskroom/.metadata" ]] || fail "failure rollback lost Homebrew ownership"
 [[ -e "$caskroom/.metadata" ]] || fail "failure rollback did not restore Homebrew .metadata"
 [[ "$(stat -f '%i' "$app")" == "$app_inode" ]] || fail "failure rollback changed app inode"
 fingerprint "$app" "$tmp_dir/app.after-failure"
@@ -177,14 +177,11 @@ MISE="$MISE" \
   fail "migration helper failed for $token"
 }
 [[ ! -e "$caskroom/.metadata" ]] || fail "successful transfer retained Homebrew .metadata"
-for attempt in {1..20}; do
-  if "$brew" list --cask "$token" >"$tmp_dir/brew-list-after.log" 2>&1; then
-    cat "$tmp_dir/success.log" "$tmp_dir/brew-list-after.log" >&2
-    find "$caskroom" -maxdepth 5 -print >&2
-    fail "Homebrew still lists $token after migration (attempt $attempt)"
-  fi
-done
-"$brew" bundle cleanup --file "$tmp_dir/final-config/Brewfile" >"$tmp_dir/cleanup.log" 2>&1 || {
+# `brew list` can list mise's marker even without a Homebrew receipt.
+# Bundle cleanup must use installed metadata and leave this cask alone.
+"$brew" --version
+"$brew" list --cask "$token" >"$tmp_dir/brew-list-after.log" 2>&1 || true
+"$brew" bundle cleanup --cask --file "$tmp_dir/final-config/Brewfile" >"$tmp_dir/cleanup.log" 2>&1 || {
   cat "$tmp_dir/cleanup.log" >&2
   fail "Homebrew cleanup dry run failed after migration"
 }

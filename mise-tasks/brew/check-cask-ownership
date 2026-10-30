@@ -24,7 +24,7 @@ for token in raycast tabtab; do
   else
     in_brewfile=0
   fi
-  if "$brew" list --cask "$token" >/dev/null 2>&1; then
+  if [[ -e "$caskroom/.metadata" || -L "$caskroom/.metadata" ]]; then
     brew_owned=1
   else
     brew_owned=0

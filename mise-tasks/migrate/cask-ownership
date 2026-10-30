@@ -146,9 +146,9 @@ baseline_inode="$(stat -f '%i' "$app")"
 baseline_fingerprint="$(mktemp "${TMPDIR:-/tmp}/mise-cask-fingerprint.XXXXXX")"
 app_fingerprint "$app" "$baseline_fingerprint"
 
-if "$brew" list --cask "$token" >/dev/null 2>&1; then
-  [[ -d "$caskroom" && -e "$caskroom/.metadata" ]] ||
-    fail "Homebrew lists $token but its expected Caskroom metadata is missing"
+if [[ -e "$caskroom/.metadata" || -L "$caskroom/.metadata" ]]; then
+  [[ -d "$caskroom" && -d "$caskroom/.metadata" && ! -L "$caskroom/.metadata" ]] ||
+    fail "Homebrew metadata for $token is not a normal directory"
   backup_dir="$(mktemp -d "$backup_root/$token.XXXXXX")"
   cp "$baseline_fingerprint" "$backup_dir/app.sha256"
   printf '%s\n' "$baseline_inode" >"$backup_dir/app.inode"
