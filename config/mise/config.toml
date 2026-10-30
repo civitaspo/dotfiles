@@ -1,9 +1,8 @@
 # Tool versions managed by mise.
 # Symlinked to ~/.config/mise/config.toml by home-manager.
 #
-# mise owns most CLI binaries. Some language runtimes (Python, Node.js, Go)
-# and tools (Terraform, process-compose, k6) are pinned through dedicated
-# nixpkgs inputs instead -- see flake.nix.
+# mise owns most CLI binaries. Nix still provides a fallback for the pinned
+# runtimes and tools until the Nix migration is complete.
 
 [settings]
 # Consume the committed lockfile during normal installs. This keeps "latest"
@@ -22,7 +21,13 @@ minimum_release_age_excludes = ["github:civitaspo/hook-relay-client-rs"]
 trusted_config_paths = ["~/.config/herdr/plugins"]
 
 [tools]
-# --- Language runtimes (others come from Nix; see flake.nix) ----------------
+# --- Language runtimes ------------------------------------------------------
+python = "3.13.12"
+node = "22.22.2"
+go = "1.26.2"
+"aqua:hashicorp/terraform" = "1.14.3"
+"aqua:F1bonacc1/process-compose" = "1.110.0"
+"aqua:grafana/k6" = "1.7.1"
 # Ruby versions are managed by rv instead of mise's core Ruby backend.
 "aqua:spinel-coop/rv" = "latest"
 rust = "latest"
