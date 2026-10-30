@@ -3,7 +3,7 @@
 set -euo pipefail
 
 mode="${SKILLS_RECONCILE:-sync}"
-agents=(claude-code cursor codex opencode pi)
+agents=(claude-code cursor codex pi)
 sources=(
   'civitaspo/dotfiles-private'
   'https://github.com/cursor/plugins/tree/main/pstack'

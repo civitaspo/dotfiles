@@ -21,18 +21,23 @@ else
 fi
 
 # Move the public links before home-manager cleans up its old generation.
-public_home="$HOME/src/github.com/civitaspo/dotfiles/home"
-if [[ ! -d "$public_home" || ! "$public_home" -ef "$MISE_PROJECT_ROOT/home" ]]; then
-  printf 'Run switch from the checkout configured in dotfile_groups.public-home.\n' >&2
+public_root="$HOME/src/github.com/civitaspo/dotfiles"
+if [[ ! -d "$public_root/home" || ! "$public_root/home" -ef "$MISE_PROJECT_ROOT/home" || ! -d "$public_root/config" || ! "$public_root/config" -ef "$MISE_PROJECT_ROOT/config" ]]; then
+  printf 'Run switch from the checkout configured in the public dotfile groups.\n' >&2
   exit 1
 fi
-mise dotfiles apply --yes "$HOME"
+mise dotfiles apply --yes "$HOME" "$HOME/.config"
 while IFS= read -r -d '' path; do
-  if [[ ! -L "$HOME/${path#home/}" || ! "$HOME/${path#home/}" -ef "$MISE_PROJECT_ROOT/$path" ]]; then
+  if [[ "$path" == config/* ]]; then
+    target="$HOME/.config/${path#config/}"
+  else
+    target="$HOME/${path#home/}"
+  fi
+  if [[ ! -L "$target" || ! "$target" -ef "$MISE_PROJECT_ROOT/$path" ]]; then
     printf 'Public dotfile was not linked: %s\n' "$path" >&2
     exit 1
   fi
-done < <(git ls-files -z home)
+done < <(git ls-files -z home config)
 
 sudo nix-env -p /nix/var/nix/profiles/system --set ./result
 sudo ./result/activate

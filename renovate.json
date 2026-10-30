@@ -110,13 +110,6 @@
       "groupName": "mise tools"
     },
     {
-      "description": "OpenCode v2 runs its postinstall script via allow_builds; review each bump in its own PR.",
-      "matchManagers": ["mise"],
-      "matchDepNames": ["npm:@opencode/cli"],
-      "groupName": "opencode",
-      "automerge": false
-    },
-    {
       "description": "The skills CLI clones repositories into the home directory; review each bump.",
       "matchManagers": ["mise"],
       "matchDepNames": ["npm:skills"],

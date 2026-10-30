@@ -13,6 +13,12 @@ target = "~"
 mode = "symlink-each"
 manifest = "git"
 
+[dotfile_groups.public-config]
+root = "~/src/github.com/civitaspo/dotfiles/config"
+target = "~/.config"
+mode = "symlink-each"
+manifest = "git"
+
 [bootstrap.macos.defaults.NSGlobalDomain]
 AppleICUForce24HourTime = true
 AppleInterfaceStyle = "Dark"
@@ -129,10 +135,6 @@ run = [
   { task = "update:brew" },
   { task = "update:mas" },
 ]
-
-[tasks."auth:opencode"]
-description = "Connect OpenCode to ChatGPT (choose ChatGPT Pro/Plus in the picker)."
-run = "opencode2 auth login openai"
 
 [tasks."auth:cursor"]
 description = "Sign in to Cursor Agent."

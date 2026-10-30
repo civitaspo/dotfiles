@@ -114,19 +114,7 @@ to PATH. Use `cursor-agent` to launch it and Homebrew to update it.
 
 ```sh
 mise run auth:cursor
-mise run auth:opencode
 ```
-
-For OpenCode v2, choose **ChatGPT Pro/Plus (browser)** or **ChatGPT Pro/Plus
-(headless)** and sign in with the account used for Codex. OpenCode supports
-this OAuth flow natively; no additional plugin or API key is needed.
-Check the saved connection with `opencode2 auth list`, then choose an OpenAI
-model with `/models` inside OpenCode.
-
-OpenCode stores its own OAuth credentials in its local SQLite database;
-it does not need a copy of Codex's `auth.json` in either dotfiles repository.
-A saved account takes precedence over `OPENAI_API_KEY`. See the
-[provider account documentation](https://opencode.ai/v2/docs/cli/providers).
 
 ## Pull request automation
 
@@ -153,7 +141,10 @@ mise run check         # validate the configuration
 ```
 
 To change a configuration file, edit it under `config/` or `home/` and run
-`mise run switch`; home-manager re-links it into place.
+`mise run switch`. mise links public files; home-manager still manages private
+files. Always use `mise run switch`
+or `mise run reconcile` to activate Nix: direct `darwin-rebuild switch` skips
+the public dotfile handoff and can remove links from an older generation.
 
 After the first successful reconcile, home-manager puts mise on `PATH`, so
 `mise run …` works without the `~/.local/bin/mise` prefix.
@@ -207,8 +198,6 @@ postinstall pins it to `v0.7.0`. Its build step
 downloads the release binary named by the repository's `.release-version`.
 Its config and agent profiles come from dotfiles-private
 (`config/herdr-linear-agent/`), linked into `~/.config/herdr-linear-agent/`.
-`config/opencode/opencode.json` defines the `herdr-linear-agent-coordinator`
-agent, which denies subagents, for coordinators that run on OpenCode.
 
 [herdr-infobox](https://github.com/civitaspo/herdr-infobox) shows a session's
 repositories, diffs, references, and plans. Press `ctrl+t`, then `i` to open
@@ -245,7 +234,7 @@ document annotation are available from a Codex prompt:
 `mise run tools` installs the declared agent skills and removes every other
 global skill. `mise run skills:plan` prints that diff and changes nothing.
 The sources are the list in `mise-tasks/skills/sync`, installed for Claude
-Code, Cursor, Codex, OpenCode, and Pi. Personal skills come from
+Code, Cursor, Codex, and Pi. Personal skills come from
 `civitaspo/dotfiles-private`, which publishes them under `skills/`. The
 Snowflake catalog stays in the mise-managed CoCo installation.
 

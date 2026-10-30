@@ -19,14 +19,17 @@ mkdir -p "$HOME/.ssh" "$HOME/.hammerspoon"
 printf 'old\n' >"$test_home/old-zshrc"
 ln -s "$test_home/old-zshrc" "$HOME/.zshrc"
 printf 'keep\n' >"$HOME/.hammerspoon/unmanaged"
-mkdir -p "$HOME/.config/mise"
-cat >"$HOME/.config/mise/config.toml" <<'EOF'
+mkdir -p "$HOME/.config/nvim"
+printf 'keep\n' >"$HOME/.config/nvim/unmanaged"
+export MISE_GLOBAL_CONFIG_FILE="$HOME/global.toml"
+export MISE_GLOBAL_CONFIG_ROOT="$HOME"
+cat >"$MISE_GLOBAL_CONFIG_FILE" <<'EOF'
 [dotfiles]
 "~/.unrelated" = { content = "do not apply" }
 EOF
 
 cd "$repo_root"
-"$MISE" dotfiles apply --yes "$HOME"
+"$MISE" dotfiles apply --yes "$HOME" "$HOME/.config"
 
 while IFS= read -r path; do
   target="$HOME/${path#home/}"
@@ -35,9 +38,17 @@ while IFS= read -r path; do
     exit 1
   }
 done < <(git ls-files home)
+while IFS= read -r path; do
+  target="$HOME/.config/${path#config/}"
+  [[ -L "$target" && "$target" -ef "$repo_root/$path" ]] || {
+    printf 'incorrect config link: %s\n' "$path" >&2
+    exit 1
+  }
+done < <(git ls-files config)
 [[ "$(cat "$HOME/.hammerspoon/unmanaged")" == keep ]]
+[[ "$(cat "$HOME/.config/nvim/unmanaged")" == keep ]]
 [[ ! -e "$HOME/.unrelated" ]]
 
-"$MISE" dotfiles apply --yes "$HOME"
+"$MISE" dotfiles apply --yes "$HOME" "$HOME/.config"
 [[ "$(cat "$HOME/.hammerspoon/unmanaged")" == keep ]]
 echo 'ok - public home dotfiles preserve unmanaged files and apply twice'
