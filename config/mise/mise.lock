@@ -47,6 +47,15 @@ url = "https://github.com/DataDog/pup/releases/download/v2.0.1/pup_2.0.1_Darwin_
 url_api = "https://api.github.com/repos/DataDog/pup/releases/assets/658085640"
 provenance = "cosign"
 
+[[tools."aqua:F1bonacc1/process-compose"]]
+version = "1.110.0"
+backend = "aqua:F1bonacc1/process-compose"
+
+[tools."aqua:F1bonacc1/process-compose"."platforms.macos-arm64"]
+checksum = "sha256:4abc00e402bee5a700e3ec1c94ffda2fe73b414866286a59134d81f372595ebb"
+url = "https://github.com/F1bonacc1/process-compose/releases/download/v1.110.0/process-compose_darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/F1bonacc1/process-compose/releases/assets/410009632"
+
 [[tools."aqua:Songmu/laminate"]]
 version = "0.0.4"
 backend = "aqua:Songmu/laminate"
@@ -226,6 +235,23 @@ checksum = "sha256:aef03ff2faaf87594068ec3ab794dcc1acd8d64f2aa3109785244c8359fbf
 url = "https://github.com/evilmartians/lefthook/releases/download/v2.2.2/lefthook_2.2.2_MacOS_arm64.gz"
 url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/636518817"
 provenance = "github-attestations"
+
+[[tools."aqua:grafana/k6"]]
+version = "1.7.1"
+backend = "aqua:grafana/k6"
+
+[tools."aqua:grafana/k6"."platforms.macos-arm64"]
+checksum = "sha256:9cace748ebeddb92432f606c6c53d964772176fdf1a0ebb4db5ead3df39ba761"
+url = "https://github.com/grafana/k6/releases/download/v1.7.1/k6-v1.7.1-macos-arm64.zip"
+url_api = "https://api.github.com/repos/grafana/k6/releases/assets/384650593"
+
+[[tools."aqua:hashicorp/terraform"]]
+version = "1.14.3"
+backend = "aqua:hashicorp/terraform"
+
+[tools."aqua:hashicorp/terraform"."platforms.macos-arm64"]
+checksum = "sha256:c45e74c19f38ec7fcb55f74b9788a75a2cbb07da45343b197ae4a41637e571b6"
+url = "https://releases.hashicorp.com/terraform/1.14.3/terraform_1.14.3_darwin_arm64.zip"
 
 [[tools."aqua:herdrdev/herdr"]]
 version = "0.9.5"
@@ -461,6 +487,14 @@ checksum = "sha256:f5dadb8ea4a680492f284772bfb9e54a1eaea57d9d4e672662278af7aa4fb
 url = "https://github.com/tomasz-tomczyk/crit/releases/download/v0.23.0/crit-darwin-arm64"
 url_api = "https://api.github.com/repos/tomasz-tomczyk/crit/releases/assets/648371549"
 
+[[tools.go]]
+version = "1.26.2"
+backend = "core:go"
+
+[tools.go."platforms.macos-arm64"]
+checksum = "sha256:32af1522bf3e3ff3975864780a429cc0b41d190ec7bf90faa661d6d64566e7af"
+url = "https://dl.google.com/go/go1.26.2.darwin-arm64.tar.gz"
+
 [[tools."http:antigravity-cli"]]
 version = "1.0.3"
 backend = "http:antigravity-cli"
@@ -491,6 +525,14 @@ backend = "core:java"
 checksum = "sha256:3623232f33a9c3baadf304480b2535f9a3cba8a58d42ecbb438ba267315d9998"
 url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.12.1_1.tar.gz"
 
+[[tools.node]]
+version = "22.22.2"
+backend = "core:node"
+
+[tools.node."platforms.macos-arm64"]
+checksum = "sha256:db4b275b83736df67533529a18cc55de2549a8329ace6c7bcc68f8d22d3c9000"
+url = "https://nodejs.org/dist/v22.22.2/node-v22.22.2-darwin-arm64.tar.gz"
+
 [[tools."npm:@mermaid-js/mermaid-cli"]]
 version = "12.0.0"
 backend = "npm:@mermaid-js/mermaid-cli"
@@ -499,7 +541,7 @@ backend = "npm:@mermaid-js/mermaid-cli"
 trust_policy_excludes = '["cytoscape@3.34.1"]'
 
 [[tools."npm:@opencode/cli"]]
-version = "2.0.30"
+version = "2.2.4"
 backend = "npm:@opencode/cli"
 
 [tools."npm:@opencode/cli".options]
@@ -513,6 +555,15 @@ backend = "npm:pnpm"
 version = "1.7.4"
 backend = "npm:skills"
 
+[[tools.python]]
+version = "3.13.12"
+backend = "core:python"
+
+[tools.python."platforms.macos-arm64"]
+checksum = "sha256:3de7059c87c0e7604e3e9397a547020c161f65c8d51d358e230d3a7d3a456aaa"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260324/cpython-3.13.12+20260324-aarch64-apple-darwin-install_only_stripped.tar.gz"
+provenance = "github-attestations"
+
 [[tools.rust]]
 version = "1.99.1"
 backend = "core:rust"
@@ -523,49 +574,3 @@ backend = "ubi:docker/docker-credential-helpers"
 
 [tools."ubi:docker/docker-credential-helpers".options]
 exe = "docker-credential-osxkeychain"
-
-[[tools."aqua:F1bonacc1/process-compose"]]
-version = "1.110.0"
-backend = "aqua:F1bonacc1/process-compose"
-
-[tools."aqua:F1bonacc1/process-compose"."platforms.macos-arm64"]
-checksum = "sha256:4abc00e402bee5a700e3ec1c94ffda2fe73b414866286a59134d81f372595ebb"
-url = "https://github.com/F1bonacc1/process-compose/releases/download/v1.110.0/process-compose_darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/F1bonacc1/process-compose/releases/assets/410009632"
-[[tools."aqua:grafana/k6"]]
-version = "1.7.1"
-backend = "aqua:grafana/k6"
-
-[tools."aqua:grafana/k6"."platforms.macos-arm64"]
-checksum = "sha256:9cace748ebeddb92432f606c6c53d964772176fdf1a0ebb4db5ead3df39ba761"
-url = "https://github.com/grafana/k6/releases/download/v1.7.1/k6-v1.7.1-macos-arm64.zip"
-url_api = "https://api.github.com/repos/grafana/k6/releases/assets/384650593"
-[[tools."aqua:hashicorp/terraform"]]
-version = "1.14.3"
-backend = "aqua:hashicorp/terraform"
-
-[tools."aqua:hashicorp/terraform"."platforms.macos-arm64"]
-checksum = "sha256:c45e74c19f38ec7fcb55f74b9788a75a2cbb07da45343b197ae4a41637e571b6"
-url = "https://releases.hashicorp.com/terraform/1.14.3/terraform_1.14.3_darwin_arm64.zip"
-[[tools.go]]
-version = "1.26.2"
-backend = "core:go"
-
-[tools.go."platforms.macos-arm64"]
-checksum = "sha256:32af1522bf3e3ff3975864780a429cc0b41d190ec7bf90faa661d6d64566e7af"
-url = "https://dl.google.com/go/go1.26.2.darwin-arm64.tar.gz"
-[[tools.node]]
-version = "22.22.2"
-backend = "core:node"
-
-[tools.node."platforms.macos-arm64"]
-checksum = "sha256:db4b275b83736df67533529a18cc55de2549a8329ace6c7bcc68f8d22d3c9000"
-url = "https://nodejs.org/dist/v22.22.2/node-v22.22.2-darwin-arm64.tar.gz"
-[[tools.python]]
-version = "3.13.12"
-backend = "core:python"
-
-[tools.python."platforms.macos-arm64"]
-checksum = "sha256:3de7059c87c0e7604e3e9397a547020c161f65c8d51d358e230d3a7d3a456aaa"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260324/cpython-3.13.12+20260324-aarch64-apple-darwin-install_only_stripped.tar.gz"
-provenance = "github-attestations"
