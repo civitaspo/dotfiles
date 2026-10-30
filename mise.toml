@@ -3,13 +3,12 @@
 
 [settings]
 task.run_auto_install = false
-dotfiles.root = "{{config_root}}"
 
 [task_config]
 includes = ["mise-tasks"]
 
 [dotfile_groups.public-home]
-root = "home"
+root = "~/src/github.com/civitaspo/dotfiles/home"
 target = "~"
 mode = "symlink-each"
 manifest = "git"

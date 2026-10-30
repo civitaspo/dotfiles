@@ -11,6 +11,9 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
+mkdir -p "$HOME/src/github.com/civitaspo"
+ln -s "$repo_root" "$HOME/src/github.com/civitaspo/dotfiles"
+
 # Simulate an existing home-manager link and an unmanaged neighboring file.
 mkdir -p "$HOME/.ssh" "$HOME/.hammerspoon"
 ln -s "$test_home/old-zshrc" "$HOME/.zshrc"
