@@ -7,7 +7,7 @@ cd "${MISE_PROJECT_ROOT:?}"
 # Install replacements before activating the system without the Nix packages.
 MISE_GLOBAL_CONFIG_FILE="$MISE_PROJECT_ROOT/config/mise/config.toml" \
   MISE_GLOBAL_CONFIG_ROOT="$MISE_PROJECT_ROOT/config/mise" \
-  mise install python node go aqua:hashicorp/terraform aqua:F1bonacc1/process-compose aqua:grafana/k6
+  mise install python node go aqua:hashicorp/terraform aqua:F1bonacc1/process-compose aqua:grafana/k6 aqua:git-lfs/git-lfs
 
 onepassword_socket="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 if [[ -S "$onepassword_socket" ]]; then
