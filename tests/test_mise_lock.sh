@@ -20,6 +20,12 @@ echo "ok - mise resolves every configured tool from the lockfile"
 # Renovate rewrites by hand. Rust, Java, and cargo tools are left out because
 # they take too long to install.
 tools=(
+  python
+  node
+  go
+  aqua:hashicorp/terraform
+  aqua:F1bonacc1/process-compose
+  aqua:grafana/k6
   aqua:jqlang/jq
   aqua:1password/cli
   github:k1LoW/mo
@@ -35,3 +41,16 @@ for tool in "${tools[@]}"; do
   }
 done
 echo "ok - mise installs ${#tools[@]} locked tools across backends"
+
+# Verify that the Nix replacement tools run from the isolated mise installs.
+# shellcheck disable=SC2016
+"$mise" exec python node go aqua:hashicorp/terraform aqua:F1bonacc1/process-compose aqua:grafana/k6 -- \
+  bash -euo pipefail -c '
+    [[ "$(python --version)" == "Python 3.13.12" ]]
+    [[ "$(node --version)" == "v22.22.2" ]]
+    [[ "$(go version)" == "go version go1.26.2 "* ]]
+    [[ "$(terraform version)" == "Terraform v1.14.3"* ]]
+    process-compose version >/dev/null
+    [[ "$(k6 version)" == "k6 v1.7.1 "* ]]
+  '
+echo "ok - Nix replacement runtimes and tools execute from mise"

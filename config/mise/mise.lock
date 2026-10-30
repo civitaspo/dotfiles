@@ -523,3 +523,49 @@ backend = "ubi:docker/docker-credential-helpers"
 
 [tools."ubi:docker/docker-credential-helpers".options]
 exe = "docker-credential-osxkeychain"
+
+[[tools."aqua:F1bonacc1/process-compose"]]
+version = "1.110.0"
+backend = "aqua:F1bonacc1/process-compose"
+
+[tools."aqua:F1bonacc1/process-compose"."platforms.macos-arm64"]
+checksum = "sha256:4abc00e402bee5a700e3ec1c94ffda2fe73b414866286a59134d81f372595ebb"
+url = "https://github.com/F1bonacc1/process-compose/releases/download/v1.110.0/process-compose_darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/F1bonacc1/process-compose/releases/assets/410009632"
+[[tools."aqua:grafana/k6"]]
+version = "1.7.1"
+backend = "aqua:grafana/k6"
+
+[tools."aqua:grafana/k6"."platforms.macos-arm64"]
+checksum = "sha256:9cace748ebeddb92432f606c6c53d964772176fdf1a0ebb4db5ead3df39ba761"
+url = "https://github.com/grafana/k6/releases/download/v1.7.1/k6-v1.7.1-macos-arm64.zip"
+url_api = "https://api.github.com/repos/grafana/k6/releases/assets/384650593"
+[[tools."aqua:hashicorp/terraform"]]
+version = "1.14.3"
+backend = "aqua:hashicorp/terraform"
+
+[tools."aqua:hashicorp/terraform"."platforms.macos-arm64"]
+checksum = "sha256:c45e74c19f38ec7fcb55f74b9788a75a2cbb07da45343b197ae4a41637e571b6"
+url = "https://releases.hashicorp.com/terraform/1.14.3/terraform_1.14.3_darwin_arm64.zip"
+[[tools.go]]
+version = "1.26.2"
+backend = "core:go"
+
+[tools.go."platforms.macos-arm64"]
+checksum = "sha256:32af1522bf3e3ff3975864780a429cc0b41d190ec7bf90faa661d6d64566e7af"
+url = "https://dl.google.com/go/go1.26.2.darwin-arm64.tar.gz"
+[[tools.node]]
+version = "22.22.2"
+backend = "core:node"
+
+[tools.node."platforms.macos-arm64"]
+checksum = "sha256:db4b275b83736df67533529a18cc55de2549a8329ace6c7bcc68f8d22d3c9000"
+url = "https://nodejs.org/dist/v22.22.2/node-v22.22.2-darwin-arm64.tar.gz"
+[[tools.python]]
+version = "3.13.12"
+backend = "core:python"
+
+[tools.python."platforms.macos-arm64"]
+checksum = "sha256:3de7059c87c0e7604e3e9397a547020c161f65c8d51d358e230d3a7d3a456aaa"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260324/cpython-3.13.12+20260324-aarch64-apple-darwin-install_only_stripped.tar.gz"
+provenance = "github-attestations"
