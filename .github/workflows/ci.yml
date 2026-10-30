@@ -65,6 +65,8 @@ jobs:
         run: bash tests/test_mas_packages.sh
       - name: Check the global lockfile
         run: bash tests/test_mise_lock.sh
+      - name: Check public home dotfiles
+        run: bash tests/test_public_home_dotfiles.sh
       - name: Check the skills sync plan
         run: bash tests/test_skills_sync.sh
 
