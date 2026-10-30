@@ -7,6 +7,12 @@ task.run_auto_install = false
 [task_config]
 includes = ["mise-tasks"]
 
+[dotfile_groups.public-home]
+root = "{{config_root}}/home"
+target = "~"
+mode = "symlink-each"
+manifest = "git"
+
 # Mac App Store apps, installed by `mise run mas` with the `mas` CLI.
 # Run named bootstrap parts only: bare `mise bootstrap` also runs
 # [tasks.bootstrap], which installs Nix and Homebrew.
