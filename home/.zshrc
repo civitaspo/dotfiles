@@ -44,6 +44,10 @@ fpath=(
   ~/.config/zsh-site-functions(N-/)
   $fpath
 )
+if command -v mise &> /dev/null; then
+  _zsh_completions=$(mise where http:zsh-completions 2> /dev/null) && fpath=("$_zsh_completions/src" $fpath)
+  unset _zsh_completions
+fi
 autoload -Uz compinit && compinit -u
 
 # --- Key bindings ------------------------------------------------------------
@@ -133,11 +137,10 @@ if _command_ready gw; then
 fi
 unfunction _command_ready
 
-# --- Plugins (Nix) -----------------------------------------------------------
-if [ -f /run/current-system/sw/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source /run/current-system/sw/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-# Syntax highlighting must be sourced last.
-if [ -f /run/current-system/sw/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /run/current-system/sw/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# --- Plugins -----------------------------------------------------------------
+if command -v mise &> /dev/null; then
+  _zsh_autosuggestions=$(mise where http:zsh-autosuggestions 2> /dev/null) && source "$_zsh_autosuggestions/zsh-autosuggestions.zsh"
+  # Syntax highlighting must be sourced last.
+  _zsh_highlighting=$(mise where http:zsh-syntax-highlighting 2> /dev/null) && source "$_zsh_highlighting/zsh-syntax-highlighting.zsh"
+  unset _zsh_autosuggestions _zsh_highlighting
 fi

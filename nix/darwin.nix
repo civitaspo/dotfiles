@@ -77,10 +77,6 @@
     gnupg
     git
     htop
-    mas
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    zsh-completions
   ];
 
   # Touch ID for sudo.

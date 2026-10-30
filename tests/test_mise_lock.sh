@@ -27,6 +27,10 @@ tools=(
   aqua:F1bonacc1/process-compose
   aqua:grafana/k6
   aqua:git-lfs/git-lfs
+  aqua:mas-cli/mas
+  http:zsh-autosuggestions
+  http:zsh-syntax-highlighting
+  http:zsh-completions
   aqua:jqlang/jq
   aqua:1password/cli
   github:k1LoW/mo
@@ -56,3 +60,18 @@ echo "ok - mise installs ${#tools[@]} locked tools across backends"
     [[ "$(git-lfs version)" == "git-lfs/3.7.1 "* ]]
   '
 echo "ok - Nix replacement runtimes and tools execute from mise"
+
+# Check that an interactive shell loads the installed plugins and completions.
+PATH="$(dirname "$mise"):/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH
+export ZDOTDIR="$HOME/zsh-test"
+mkdir -p "$ZDOTDIR"
+cp "$root/home/.zshrc" "$ZDOTDIR/.zshrc"
+zsh -i -c '
+  (( $+functions[_zsh_autosuggest_start] )) || exit 1
+  (( $+functions[_zsh_highlight] )) || exit 1
+  [[ " $fpath " == *"/http-zsh-completions/0.35.0/src"* ]] || exit 1
+  [[ ${_comps[afew]} == _afew ]]
+'
+"$mise" exec aqua:mas-cli/mas -- mas version | grep -qx '6.0.1'
+echo "ok - mise provides mas and zsh plugins"

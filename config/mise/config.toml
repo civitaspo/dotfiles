@@ -60,6 +60,7 @@ aqua = "latest"
 "cargo:eza" = "latest"
 "aqua:cli/cli" = "latest"
 "aqua:git-lfs/git-lfs" = "3.7.1"
+"aqua:mas-cli/mas" = "6.0.1"
 "aqua:x-motemen/ghq" = "latest"
 "aqua:jqlang/jq" = "latest"
 "aqua:jesseduffield/lazygit" = "latest"
@@ -155,3 +156,19 @@ strip_components = 1
 bin_path = "."
 checksum_url = '{% raw %}https://sfc-repo.snowflakecomputing.com/cortex-code-cli/a4643c4278/{{ version | replace(from="+", to="%2B") }}/manifest.json{% endraw %}'
 checksum_expr = '"sha256:" + fromJSON(body).packages.darwin.arm64.checksum'
+
+# Shell plugins are source-only releases; update each version, URL, and checksum together.
+[tools."http:zsh-autosuggestions"]
+version = "0.7.1"
+url = "https://github.com/zsh-users/zsh-autosuggestions/archive/refs/tags/v0.7.1.tar.gz"
+checksum = "sha256:0df7affff21cd87ed298e6a3970ed08a1dd66a6efa676454ee5b091ad503badf"
+
+[tools."http:zsh-syntax-highlighting"]
+version = "0.8.0"
+url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/tags/0.8.0.tar.gz"
+checksum = "sha256:5981c19ebaab027e356fe1ee5284f7a021b89d4405cc53dc84b476c3aee9cc32"
+
+[tools."http:zsh-completions"]
+version = "0.35.0"
+url = "https://github.com/zsh-users/zsh-completions/archive/refs/tags/0.35.0.tar.gz"
+checksum = "sha256:811bb4213622720872e08d6e0857f1dd7bc12ff7aa2099a170b76301a53f4fbe"

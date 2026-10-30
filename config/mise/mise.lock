@@ -36,6 +36,15 @@ checksum = "sha256:76260fb34f4ee622ff0a66b857e5954aa49c7e343a92e57a1ec4a760618c9
 url = "https://github.com/git-lfs/git-lfs/releases/download/v3.7.1/git-lfs-darwin-arm64-v3.7.1.zip"
 url_api = "https://api.github.com/repos/git-lfs/git-lfs/releases/assets/305262593"
 
+[[tools."aqua:mas-cli/mas"]]
+version = "6.0.1"
+backend = "aqua:mas-cli/mas"
+
+[tools."aqua:mas-cli/mas"."platforms.macos-arm64"]
+checksum = "sha256:059f5413c1f6f248ea88c35d2c3514c82f6669d478ac157598b506ca3ea89776"
+url = "https://github.com/mas-cli/mas/releases/download/v6.0.1/mas-6.0.1-arm64.pkg"
+url_api = "https://api.github.com/repos/mas-cli/mas/releases/assets/370854867"
+
 [[tools."aqua:ClementTsang/bottom"]]
 version = "0.14.9"
 backend = "aqua:ClementTsang/bottom"
@@ -491,6 +500,30 @@ strip_components = "1"
 [tools."http:coco"."platforms.macos-arm64"]
 checksum = "sha256:0dc9e79466020ab550bc3639c2814fa3d2a5090b3f14dfddd834c3520202364d"
 url = "https://sfc-repo.snowflakecomputing.com/cortex-code-cli/a4643c4278/1.2.18%2B192728.aa2238062732/coco-1.2.18%2B192728.aa2238062732-darwin-arm64.tar.gz"
+
+[[tools."http:zsh-autosuggestions"]]
+version = "0.7.1"
+backend = "http:zsh-autosuggestions"
+
+[tools."http:zsh-autosuggestions"."platforms.macos-arm64"]
+checksum = "sha256:0df7affff21cd87ed298e6a3970ed08a1dd66a6efa676454ee5b091ad503badf"
+url = "https://github.com/zsh-users/zsh-autosuggestions/archive/refs/tags/v0.7.1.tar.gz"
+
+[[tools."http:zsh-completions"]]
+version = "0.35.0"
+backend = "http:zsh-completions"
+
+[tools."http:zsh-completions"."platforms.macos-arm64"]
+checksum = "sha256:811bb4213622720872e08d6e0857f1dd7bc12ff7aa2099a170b76301a53f4fbe"
+url = "https://github.com/zsh-users/zsh-completions/archive/refs/tags/0.35.0.tar.gz"
+
+[[tools."http:zsh-syntax-highlighting"]]
+version = "0.8.0"
+backend = "http:zsh-syntax-highlighting"
+
+[tools."http:zsh-syntax-highlighting"."platforms.macos-arm64"]
+checksum = "sha256:5981c19ebaab027e356fe1ee5284f7a021b89d4405cc53dc84b476c3aee9cc32"
+url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/tags/0.8.0.tar.gz"
 
 [[tools.java]]
 version = "temurin-21.0.12+101.0.LTS"
