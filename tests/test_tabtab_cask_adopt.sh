@@ -87,6 +87,24 @@ EOF
   fail "adoption changed TabTab app contents"
 echo "ok - mise adopted TabTab without replacing its app bundle"
 
+# Reapplying and upgrading the same pinned cask must preserve the adopted
+# ownership state and app bundle.
+(
+  cd "$tmp_dir"
+  MISE_GLOBAL_CONFIG_FILE="$config" \
+    MISE_GLOBAL_CONFIG_ROOT="$tmp_dir" \
+    "$mise" bootstrap packages apply brew-cask:tabtab --yes
+  MISE_GLOBAL_CONFIG_FILE="$config" \
+    MISE_GLOBAL_CONFIG_ROOT="$tmp_dir" \
+    "$mise" bootstrap packages upgrade brew-cask:tabtab --yes
+)
+[[ -d "$caskroom" ]] || fail "repeat apply or upgrade lost the TabTab Caskroom token"
+[[ ! -e "$caskroom/.metadata" ]] || fail "repeat apply or upgrade wrote Homebrew .metadata"
+[[ "$(stat -f '%i' "$app")" == "$app_inode" ]] || fail "repeat apply or upgrade replaced the TabTab app inode"
+[[ "$(app_fingerprint)" == "$app_content" ]] ||
+  fail "repeat apply or upgrade changed TabTab app contents"
+echo "ok - repeated apply and targeted upgrade preserve mise ownership and the app bundle"
+
 # Explicitly roll back the Caskroom transition, then prove the original token
 # directory and app are still present. The EXIT trap also performs this on any
 # earlier failure, so CI never leaves the runner in a partial state.
