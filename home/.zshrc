@@ -45,7 +45,7 @@ fpath=(
   $fpath
 )
 if command -v mise &> /dev/null; then
-  _zsh_completions=$(mise where http:zsh-completions 2> /dev/null) && fpath=("$_zsh_completions/src" $fpath)
+  _zsh_completions=$(mise -C "$HOME" where http:zsh-completions 2> /dev/null) && fpath=("$_zsh_completions/src" $fpath)
   unset _zsh_completions
 fi
 autoload -Uz compinit && compinit -u
@@ -139,8 +139,8 @@ unfunction _command_ready
 
 # --- Plugins -----------------------------------------------------------------
 if command -v mise &> /dev/null; then
-  _zsh_autosuggestions=$(mise where http:zsh-autosuggestions 2> /dev/null) && source "$_zsh_autosuggestions/zsh-autosuggestions.zsh"
+  _zsh_autosuggestions=$(mise -C "$HOME" where http:zsh-autosuggestions 2> /dev/null) && source "$_zsh_autosuggestions/zsh-autosuggestions.zsh"
   # Syntax highlighting must be sourced last.
-  _zsh_highlighting=$(mise where http:zsh-syntax-highlighting 2> /dev/null) && source "$_zsh_highlighting/zsh-syntax-highlighting.zsh"
+  _zsh_highlighting=$(mise -C "$HOME" where http:zsh-syntax-highlighting 2> /dev/null) && source "$_zsh_highlighting/zsh-syntax-highlighting.zsh"
   unset _zsh_autosuggestions _zsh_highlighting
 fi

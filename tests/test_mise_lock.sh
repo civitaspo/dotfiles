@@ -67,11 +67,15 @@ export PATH
 export ZDOTDIR="$HOME/zsh-test"
 mkdir -p "$ZDOTDIR"
 cp "$root/home/.zshrc" "$ZDOTDIR/.zshrc"
+mkdir -p "$HOME/untrusted-project"
+printf '[tools]\n' >"$HOME/untrusted-project/mise.toml"
+cd "$HOME/untrusted-project"
 zsh -i -c '
   (( $+functions[_zsh_autosuggest_start] )) || exit 1
   (( $+functions[_zsh_highlight] )) || exit 1
   [[ " $fpath " == *"/http-zsh-completions/0.35.0/src"* ]] || exit 1
   [[ ${_comps[afew]} == _afew ]]
 '
+cd "$HOME"
 "$mise" exec aqua:mas-cli/mas -- mas version | grep -qx '6.0.1'
 echo "ok - mise provides mas and zsh plugins"
