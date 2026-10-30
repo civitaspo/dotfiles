@@ -1,8 +1,7 @@
 # Tool versions managed by mise.
 # Symlinked to ~/.config/mise/config.toml by home-manager.
 #
-# mise owns most CLI binaries. Nix still provides a fallback for the pinned
-# runtimes and tools until the Nix migration is complete.
+# mise owns most CLI binaries.
 
 [settings]
 # Consume the committed lockfile during normal installs. This keeps "latest"
