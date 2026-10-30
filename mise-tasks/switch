@@ -20,6 +20,20 @@ else
   nix build ".#darwinConfigurations.aarch64-darwin.system"
 fi
 
+# Move the public links before home-manager cleans up its old generation.
+public_home="$HOME/src/github.com/civitaspo/dotfiles/home"
+if [[ ! -d "$public_home" || ! "$public_home" -ef "$MISE_PROJECT_ROOT/home" ]]; then
+  printf 'Run switch from the checkout configured in dotfile_groups.public-home.\n' >&2
+  exit 1
+fi
+mise dotfiles apply --yes "$HOME"
+while IFS= read -r -d '' path; do
+  if [[ ! -L "$HOME/${path#home/}" || ! "$HOME/${path#home/}" -ef "$MISE_PROJECT_ROOT/$path" ]]; then
+    printf 'Public dotfile was not linked: %s\n' "$path" >&2
+    exit 1
+  fi
+done < <(git ls-files -z home)
+
 sudo nix-env -p /nix/var/nix/profiles/system --set ./result
 sudo ./result/activate
 rm -f ./result
