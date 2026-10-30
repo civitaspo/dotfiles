@@ -28,7 +28,6 @@ if [[ ! -d "$public_root/home" || ! "$public_root/home" -ef "$MISE_PROJECT_ROOT/
 fi
 mise dotfiles apply --yes "$HOME" "$HOME/.config"
 while IFS= read -r -d '' path; do
-  [[ "$path" == config/opencode/* ]] && continue
   if [[ "$path" == config/* ]]; then
     target="$HOME/.config/${path#config/}"
   else

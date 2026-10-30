@@ -16,8 +16,6 @@ agent runtimes.
 
 The CLI links the router into `~/.agents/skills/snowflake` and
 `~/.claude/skills/snowflake`.
-OpenCode supports recursive compatibility-root discovery without extra paths:
-<https://opencode.ai/v2/docs/skills#discovery>.
 
 `latest` resolves from the official distribution's `stable_version.txt`;
 `config/mise/mise.lock` records the selected version, URL, and archive checksum.

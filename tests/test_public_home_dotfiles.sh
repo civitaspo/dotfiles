@@ -19,8 +19,7 @@ mkdir -p "$HOME/.ssh" "$HOME/.hammerspoon"
 printf 'old\n' >"$test_home/old-zshrc"
 ln -s "$test_home/old-zshrc" "$HOME/.zshrc"
 printf 'keep\n' >"$HOME/.hammerspoon/unmanaged"
-mkdir -p "$HOME/.config/opencode" "$HOME/.config/nvim"
-printf 'private-generated\n' >"$HOME/.config/opencode/opencode.json"
+mkdir -p "$HOME/.config/nvim"
 printf 'keep\n' >"$HOME/.config/nvim/unmanaged"
 export MISE_GLOBAL_CONFIG_FILE="$HOME/global.toml"
 export MISE_GLOBAL_CONFIG_ROOT="$HOME"
@@ -40,7 +39,6 @@ while IFS= read -r path; do
   }
 done < <(git ls-files home)
 while IFS= read -r path; do
-  [[ "$path" == config/opencode/* ]] && continue
   target="$HOME/.config/${path#config/}"
   [[ -L "$target" && "$target" -ef "$repo_root/$path" ]] || {
     printf 'incorrect config link: %s\n' "$path" >&2
@@ -49,7 +47,6 @@ while IFS= read -r path; do
 done < <(git ls-files config)
 [[ "$(cat "$HOME/.hammerspoon/unmanaged")" == keep ]]
 [[ "$(cat "$HOME/.config/nvim/unmanaged")" == keep ]]
-[[ "$(cat "$HOME/.config/opencode/opencode.json")" == private-generated ]]
 [[ ! -e "$HOME/.unrelated" ]]
 
 "$MISE" dotfiles apply --yes "$HOME" "$HOME/.config"

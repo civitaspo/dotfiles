@@ -1,7 +1,7 @@
 # home-manager configuration.
 #
 # Its only job is to place plain dotfiles:
-#   private config/ and generated OpenCode config -> ~/.config
+#   private config/ -> ~/.config
 #   private home/ -> $HOME
 # Private dotfiles come from the dotfiles-private flake input. Directory
 # sources are linked recursively so a tool can still write runtime state
@@ -27,14 +27,9 @@ let
     (builtins.fromJSON (builtins.readFile privateMcpConfig)).mcpServers
   else
     { };
-  openCodeMcpServers = lib.mapAttrs (_: server: {
-    type = "remote";
-    inherit (server) url;
-  }) mcpServers;
-  openCodeConfig = builtins.fromJSON (builtins.readFile ../config/opencode/opencode.json);
   privateConfig = inputs.dotfiles-private + "/config";
   privateConfigEntries = lib.optionalAttrs (builtins.pathExists privateConfig) (builtins.readDir privateConfig);
-  publicConfigEntries = builtins.removeAttrs (builtins.readDir ../config) [ "opencode" ];
+  publicConfigEntries = builtins.readDir ../config;
 in
 {
   assertions = [{
@@ -62,15 +57,6 @@ in
 
   xdg = {
     enable = true;
-    configFile =
-      (if hasPrivateMcpConfig then {
-        "opencode/opencode.json".source = builtins.toFile "opencode.json"
-          ((builtins.toJSON (lib.recursiveUpdate openCodeConfig {
-            mcp.servers = openCodeMcpServers;
-          })) + "\n");
-      } else {
-        opencode = { source = ../config/opencode; recursive = true; };
-      })
-      // lib.optionalAttrs (builtins.pathExists privateConfig) (linkDir privateConfig);
+    configFile = lib.optionalAttrs (builtins.pathExists privateConfig) (linkDir privateConfig);
   };
 }
