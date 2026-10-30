@@ -177,7 +177,8 @@ MISE="$MISE" \
   fail "migration helper failed for $token"
 }
 [[ ! -e "$caskroom/.metadata" ]] || fail "successful transfer retained Homebrew .metadata"
-if "$brew" list --cask "$token" >/dev/null 2>&1; then
+if "$brew" list --cask "$token" >"$tmp_dir/brew-list-after.log" 2>&1; then
+  cat "$tmp_dir/success.log" "$tmp_dir/brew-list-after.log" >&2
   fail "Homebrew still lists $token after migration"
 fi
 [[ "$(stat -f '%i' "$app")" == "$app_inode" ]] || fail "successful transfer replaced app inode"
