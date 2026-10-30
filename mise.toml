@@ -13,6 +13,13 @@ target = "~"
 mode = "symlink-each"
 manifest = "git"
 
+[dotfile_groups.public-config]
+root = "~/src/github.com/civitaspo/dotfiles/config"
+target = "~/.config"
+mode = "symlink-each"
+manifest = "git"
+exclude = ["opencode/**"]
+
 [bootstrap.macos.defaults.NSGlobalDomain]
 AppleICUForce24HourTime = true
 AppleInterfaceStyle = "Dark"

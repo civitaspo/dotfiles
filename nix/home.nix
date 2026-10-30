@@ -1,7 +1,7 @@
 # home-manager configuration.
 #
 # Its only job is to place plain dotfiles:
-#   config/  -> ~/.config
+#   private config/ and generated OpenCode config -> ~/.config
 #   private home/ -> $HOME
 # Private dotfiles come from the dotfiles-private flake input. Directory
 # sources are linked recursively so a tool can still write runtime state
@@ -32,8 +32,16 @@ let
     inherit (server) url;
   }) mcpServers;
   openCodeConfig = builtins.fromJSON (builtins.readFile ../config/opencode/opencode.json);
+  privateConfig = inputs.dotfiles-private + "/config";
+  privateConfigEntries = lib.optionalAttrs (builtins.pathExists privateConfig) (builtins.readDir privateConfig);
+  publicConfigEntries = builtins.removeAttrs (builtins.readDir ../config) [ "opencode" ];
 in
 {
+  assertions = [{
+    assertion = builtins.attrNames (builtins.intersectAttrs publicConfigEntries privateConfigEntries) == [ ];
+    message = "Public and private config directories overlap; resolve ownership before switching.";
+  }];
+
   home = {
     stateVersion = "24.11";
 
@@ -55,16 +63,14 @@ in
   xdg = {
     enable = true;
     configFile =
-      let
-        privateConfig = inputs.dotfiles-private + "/config";
-      in
-      builtins.removeAttrs (linkDir ../config) (lib.optional hasPrivateMcpConfig "opencode")
-      // lib.optionalAttrs hasPrivateMcpConfig {
+      (if hasPrivateMcpConfig then {
         "opencode/opencode.json".source = builtins.toFile "opencode.json"
           ((builtins.toJSON (lib.recursiveUpdate openCodeConfig {
             mcp.servers = openCodeMcpServers;
           })) + "\n");
-      }
+      } else {
+        opencode = { source = ../config/opencode; recursive = true; };
+      })
       // lib.optionalAttrs (builtins.pathExists privateConfig) (linkDir privateConfig);
   };
 }

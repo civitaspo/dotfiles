@@ -153,7 +153,10 @@ mise run check         # validate the configuration
 ```
 
 To change a configuration file, edit it under `config/` or `home/` and run
-`mise run switch`; home-manager re-links it into place.
+`mise run switch`. mise links public files; home-manager still manages private
+files and the generated OpenCode configuration. Always use `mise run switch`
+or `mise run reconcile` to activate Nix: direct `darwin-rebuild switch` skips
+the public dotfile handoff and can remove links from an older generation.
 
 After the first successful reconcile, home-manager puts mise on `PATH`, so
 `mise run …` works without the `~/.local/bin/mise` prefix.
