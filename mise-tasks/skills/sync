@@ -59,7 +59,7 @@ while IFS= read -r name; do
   [[ -n "${name}" ]] && printf '+ %s\n' "${name}"
 done <"${tmp}/add"
 while IFS= read -r name; do
-  [[ -n "${name}" ]] && printf '- %s\n' "${name}"
+  [[ -n "${name}" ]] && printf '%s\n' "- ${name}"
 done <"${tmp}/remove"
 
 add_count="$(grep -c . "${tmp}/add" || true)"
