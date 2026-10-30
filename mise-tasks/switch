@@ -27,6 +27,12 @@ if [[ ! -d "$public_home" || ! "$public_home" -ef "$MISE_PROJECT_ROOT/home" ]]; 
   exit 1
 fi
 mise dotfiles apply --yes "$HOME"
+while IFS= read -r -d '' path; do
+  if [[ ! -L "$HOME/${path#home/}" || ! "$HOME/${path#home/}" -ef "$MISE_PROJECT_ROOT/$path" ]]; then
+    printf 'Public dotfile was not linked: %s\n' "$path" >&2
+    exit 1
+  fi
+done < <(git ls-files -z home)
 
 sudo nix-env -p /nix/var/nix/profiles/system --set ./result
 sudo ./result/activate
