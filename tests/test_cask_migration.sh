@@ -177,9 +177,20 @@ MISE="$MISE" \
   fail "migration helper failed for $token"
 }
 [[ ! -e "$caskroom/.metadata" ]] || fail "successful transfer retained Homebrew .metadata"
-if "$brew" list --cask "$token" >"$tmp_dir/brew-list-after.log" 2>&1; then
-  cat "$tmp_dir/success.log" "$tmp_dir/brew-list-after.log" >&2
-  fail "Homebrew still lists $token after migration"
+for attempt in {1..20}; do
+  if "$brew" list --cask "$token" >"$tmp_dir/brew-list-after.log" 2>&1; then
+    cat "$tmp_dir/success.log" "$tmp_dir/brew-list-after.log" >&2
+    find "$caskroom" -maxdepth 5 -print >&2
+    fail "Homebrew still lists $token after migration (attempt $attempt)"
+  fi
+done
+"$brew" bundle cleanup --file "$tmp_dir/final-config/Brewfile" >"$tmp_dir/cleanup.log" 2>&1 || {
+  cat "$tmp_dir/cleanup.log" >&2
+  fail "Homebrew cleanup dry run failed after migration"
+}
+if grep -Eiq "(^|[[:space:]])${token}([[:space:]]|$)" "$tmp_dir/cleanup.log"; then
+  cat "$tmp_dir/cleanup.log" >&2
+  fail "Homebrew cleanup would remove $token after migration"
 fi
 [[ "$(stat -f '%i' "$app")" == "$app_inode" ]] || fail "successful transfer replaced app inode"
 fingerprint "$app" "$tmp_dir/app.after-success"
