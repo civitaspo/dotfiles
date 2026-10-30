@@ -19,4 +19,5 @@ sudo nix-env -p /nix/var/nix/profiles/system --set ./result
 sudo ./result/activate
 rm -f ./result
 
+mise bootstrap macos defaults apply --yes
 ./mise-tasks/mcp/sync

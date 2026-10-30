@@ -13,6 +13,48 @@ target = "~"
 mode = "symlink-each"
 manifest = "git"
 
+[bootstrap.macos.defaults.NSGlobalDomain]
+AppleICUForce24HourTime = true
+AppleInterfaceStyle = "Dark"
+AppleInterfaceStyleSwitchesAutomatically = false
+AppleMeasurementUnits = "Centimeters"
+ApplePressAndHoldEnabled = false
+AppleShowAllExtensions = true
+AppleShowScrollBars = "WhenScrolling"
+AppleTemperatureUnit = "Celsius"
+InitialKeyRepeat = 15
+KeyRepeat = 1
+NSAutomaticCapitalizationEnabled = false
+NSAutomaticDashSubstitutionEnabled = false
+NSAutomaticPeriodSubstitutionEnabled = false
+NSAutomaticQuoteSubstitutionEnabled = false
+NSAutomaticSpellingCorrectionEnabled = false
+NSAutomaticWindowAnimationsEnabled = false
+NSDisableAutomaticTermination = true
+NSWindowResizeTime = 0.001
+"com.apple.mouse.tapBehavior" = 1
+"com.apple.sound.beep.volume" = 0.0
+"com.apple.sound.beep.feedback" = 0
+"com.apple.trackpad.enableSecondaryClick" = true
+
+[bootstrap.macos.defaults."com.apple.LaunchServices"]
+LSQuarantine = false
+
+[bootstrap.macos.defaults."com.apple.dock"]
+autohide = false
+show-recents = false
+launchanim = true
+mouse-over-hilite-stack = true
+orientation = "bottom"
+tilesize = 48
+
+[bootstrap.macos.defaults."com.apple.finder"]
+_FXShowPosixPathInTitle = false
+
+[bootstrap.macos.trackpad]
+tap_to_click = true
+three_finger_drag = true
+
 # Mac App Store apps, installed by `mise run mas` with the `mas` CLI.
 # Run named bootstrap parts only: bare `mise bootstrap` also runs
 # [tasks.bootstrap], which installs Nix and Homebrew.
