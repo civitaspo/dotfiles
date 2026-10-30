@@ -1,0 +1,200 @@
+#!/usr/bin/env bash
+# Back up a Homebrew-owned cask record, then adopt its identical app with mise.
+set -euo pipefail
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+brew="/opt/homebrew/bin/brew"
+mise="${MISE:-}"
+if [[ -z "$mise" ]]; then
+  mise="$(command -v mise || true)"
+fi
+token="${1:-}"
+app="${2:-}"
+
+fail() {
+  echo "error: $*" >&2
+  exit 1
+}
+
+case "$token" in
+  raycast)
+    expected_app="Raycast.app"
+    expected_bundle_id="com.raycast.macos"
+    ;;
+  tabtab)
+    expected_app="TabTab.app"
+    expected_bundle_id=""
+    ;;
+  *)
+    fail "usage: $0 {raycast|tabtab} /Applications/<App>.app"
+    ;;
+esac
+[[ -n "$app" ]] || fail "an explicit app bundle path is required"
+[[ "$(basename "$app")" == "$expected_app" ]] || fail "expected app bundle $expected_app, got $app"
+[[ -d "$app" && ! -L "$app" ]] || fail "app bundle is missing or is a symlink: $app"
+[[ -x "$brew" ]] || fail "Homebrew is unavailable at $brew"
+[[ -x "$mise" ]] || fail "mise is unavailable at $mise"
+
+appdir="$(dirname "$app")"
+# Keep the app in its current directory for this invocation. Explicit cask
+# appdir entries take precedence, so the shared declarations leave it unset.
+export MISE_BREW_CASK_OPT_APPDIR="$appdir"
+
+if [[ -n "$expected_bundle_id" ]]; then
+  bundle_id="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Contents/Info.plist")"
+  [[ "$bundle_id" == "$expected_bundle_id" ]] || fail "unexpected bundle identifier: $bundle_id"
+fi
+
+prefix="$("$brew" --prefix)"
+caskroom="$prefix/Caskroom/$token"
+prefix_real="$(cd "$prefix" && pwd -P)"
+backup_candidate="${MISE_CASK_MIGRATION_BACKUP_ROOT:-$HOME/Library/Application Support/mise/cask-migration-backups}"
+mkdir -p "$backup_candidate"
+backup_root="$(cd "$backup_candidate" && pwd -P)"
+case "$backup_root" in
+  "$prefix_real" | "$prefix_real"/*)
+    fail "backup root must be outside the Homebrew prefix: $backup_root"
+    ;;
+esac
+lock_root="$backup_root/.locks"
+mkdir -p "$lock_root"
+lock="$lock_root/$token.lock"
+mkdir "$lock" 2>/dev/null || fail "another migration may be running or lock exists: $lock"
+lock_owned=1
+backup_dir=""
+moved_record=0
+complete=0
+baseline_inode=""
+baseline_fingerprint=""
+
+app_fingerprint() {
+  local bundle="$1"
+  local output="$2"
+  (
+    cd "$bundle"
+    {
+      find . -type f -exec shasum -a 256 {} + | sort
+      find . -type l -exec sh -c '
+        for path do
+          printf "link %s -> %s\n" "$path" "$(readlink "$path")"
+        done
+      ' sh {} + | sort
+    } >"$output"
+  )
+}
+
+rollback() {
+  local status="$1"
+  local recovery_dir
+  local current_fingerprint
+  local failed=0
+  if ((moved_record)); then
+    if [[ -e "$caskroom" ]]; then
+      recovery_dir="$(mktemp -d "$backup_dir/recovery.XXXXXX")" || failed=1
+      if ((! failed)); then
+        mv "$caskroom" "$recovery_dir/created-caskroom" || failed=1
+      fi
+    fi
+    if ((! failed)) && [[ -e "$backup_dir/$token" ]]; then
+      mv "$backup_dir/$token" "$caskroom" || failed=1
+    fi
+  fi
+  if [[ -e "$app" ]]; then
+    [[ "$(stat -f '%i' "$app")" == "$baseline_inode" ]] || failed=1
+    current_fingerprint="$(mktemp "${TMPDIR:-/tmp}/mise-cask-current.XXXXXX")" || failed=1
+    if ((! failed)); then
+      app_fingerprint "$app" "$current_fingerprint" || failed=1
+      if ((! failed)) && ! cmp -s "$baseline_fingerprint" "$current_fingerprint"; then
+        echo "error: app contents changed; app was left untouched and its pre-migration fingerprint remains at $backup_dir/app.sha256" >&2
+        failed=1
+      fi
+    fi
+    if ((failed)); then
+      echo "error: app identity changed; original app was not overwritten" >&2
+    fi
+  else
+    echo "error: app bundle disappeared; fingerprint and Homebrew record remain under $backup_dir" >&2
+    failed=1
+  fi
+  if ((failed)); then
+    echo "error: automatic rollback was incomplete; all records remain under $backup_dir" >&2
+    return 1
+  fi
+  echo "migration failed; original Homebrew record restored from $backup_dir/$token" >&2
+  return "$status"
+}
+
+finish() {
+  local status=$?
+  trap - EXIT INT TERM
+  if ((! complete)) && [[ -n "$backup_dir" ]]; then
+    rollback "$status" || status=1
+  fi
+  if ((lock_owned)); then
+    rmdir "$lock" 2>/dev/null || echo "warning: remove migration lock manually: $lock" >&2
+  fi
+  if [[ -n "$baseline_fingerprint" ]]; then
+    rm -f "$baseline_fingerprint" "$baseline_fingerprint.after"
+  fi
+  exit "$status"
+}
+trap finish EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
+baseline_inode="$(stat -f '%i' "$app")"
+baseline_fingerprint="$(mktemp "${TMPDIR:-/tmp}/mise-cask-fingerprint.XXXXXX")"
+app_fingerprint "$app" "$baseline_fingerprint"
+
+if [[ -e "$caskroom/.metadata" || -L "$caskroom/.metadata" ]]; then
+  [[ -d "$caskroom" && -d "$caskroom/.metadata" && ! -L "$caskroom/.metadata" ]] ||
+    fail "Homebrew metadata for $token is not a normal directory"
+  backup_dir="$(mktemp -d "$backup_root/$token.XXXXXX")"
+  cp "$baseline_fingerprint" "$backup_dir/app.sha256"
+  printf '%s\n' "$baseline_inode" >"$backup_dir/app.inode"
+  cask_device="$(stat -f '%d' "$caskroom")"
+  backup_device="$(stat -f '%d' "$backup_dir")"
+  [[ "$cask_device" == "$backup_device" ]] || fail "backup is on a different filesystem; refusing non-atomic record move"
+  printf 'Pause other Homebrew and mise commands while ownership transfers. The lock only coordinates this helper.\n' >&2
+  mv "$caskroom" "$backup_dir/$token"
+  moved_record=1
+elif [[ -d "$caskroom" && ! -e "$caskroom/.metadata" ]]; then
+  prior_backup=""
+  for candidate in "$backup_root/$token."*; do
+    if [[ -f "$candidate/complete" && -d "$candidate/$token" ]]; then
+      prior_backup="$candidate"
+    fi
+  done
+  [[ -n "$prior_backup" ]] || fail "$token has no Homebrew receipt but no completed migration backup; inspect the state manually"
+  [[ -f "$prior_backup/app.sha256" && -f "$prior_backup/app.inode" ]] ||
+    fail "completed migration backup is missing its app fingerprint"
+  [[ "$(cat "$prior_backup/app.inode")" == "$baseline_inode" ]] || fail "app inode differs from the completed migration"
+  cmp -s "$baseline_fingerprint" "$prior_backup/app.sha256" || fail "app contents differ from the completed migration"
+  complete=1
+  echo "transfer already complete; verified prior backup $prior_backup; no new backup created"
+  exit 0
+else
+  fail "$token is not in a recognized Homebrew-owned or mise-adopted state"
+fi
+
+(
+  cd "$root"
+  "$mise" bootstrap packages apply "brew-cask:$token" --yes
+)
+
+[[ -d "$caskroom" ]] || fail "mise did not create the $token Caskroom token"
+[[ ! -e "$caskroom/.metadata" ]] || fail "mise left Homebrew .metadata in the $token Caskroom token"
+[[ "$(stat -f '%i' "$app")" == "$baseline_inode" ]] || fail "mise replaced the app bundle inode"
+app_fingerprint "$app" "$baseline_fingerprint.after"
+cmp -s "$baseline_fingerprint" "$baseline_fingerprint.after" || fail "mise changed the app bundle contents"
+
+cp "$baseline_fingerprint" "$backup_dir/app.sha256"
+printf '%s\n' "$baseline_inode" >"$backup_dir/app.inode"
+touch "$backup_dir/complete"
+complete=1
+if ((moved_record)); then
+  printf 'transfer complete; recovery record retained at %s\n' "$backup_dir"
+else
+  printf 'transfer already complete; no new backup was created\n'
+fi
+printf 'Do not run brew bundle until the %s line is removed from Brewfile.\n' "$token"

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Prevent Brewfile cleanup before a cask transfer and reinstall after one.
+set -euo pipefail
+
+root="${MISE_BREWFILE_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
+brew="/opt/homebrew/bin/brew"
+require_mise=0
+if [[ "${1:-}" == "--require-mise" ]]; then
+  require_mise=1
+fi
+
+fail() {
+  echo "error: $*" >&2
+  exit 1
+}
+
+backup_root="${MISE_CASK_MIGRATION_BACKUP_ROOT:-$HOME/Library/Application Support/mise/cask-migration-backups}"
+for token in raycast tabtab; do
+  [[ ! -e "$backup_root/.locks/$token.lock" ]] ||
+    fail "$token migration lock exists; finish or recover the migration before running brew"
+  caskroom="$("$brew" --prefix)/Caskroom/$token"
+  if grep -Eq "^[[:space:]]*cask[[:space:]]+\"$token\"([[:space:]]|$)" "$root/Brewfile"; then
+    in_brewfile=1
+  else
+    in_brewfile=0
+  fi
+  if [[ -e "$caskroom/.metadata" || -L "$caskroom/.metadata" ]]; then
+    brew_owned=1
+  else
+    brew_owned=0
+  fi
+
+  if ((in_brewfile && ! brew_owned)) && [[ -d "$caskroom" && ! -e "$caskroom/.metadata" ]]; then
+    fail "$token has been transferred to mise but remains in Brewfile; remove its cask line before running brew bundle"
+  fi
+  if ((require_mise && (in_brewfile || brew_owned))); then
+    fail "$token must be removed from Brewfile and transferred to mise before cask upgrade"
+  fi
+  if ((! in_brewfile && brew_owned)); then
+    fail "$token is still Homebrew-owned but absent from Brewfile; run mise-tasks/migrate/cask-ownership before brew cleanup"
+  fi
+  if ((! in_brewfile && ! brew_owned)) && [[ -e "$caskroom/.metadata" ]]; then
+    fail "$token has Homebrew metadata but is not listed in Brewfile; refusing ambiguous cleanup"
+  fi
+done

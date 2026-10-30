@@ -27,6 +27,8 @@ includes = ["mise-tasks"]
 "mas:361309726" = "latest" # Pages
 "mas:1501592214" = "latest" # Twingate
 "mas:497799835" = "latest" # Xcode
+"brew-cask:raycast" = { adopt = true }
+"brew-cask:tabtab" = { adopt = true }
 
 [tasks.default]
 description = "List available repository tasks."
@@ -44,6 +46,7 @@ run = [
 description = "Apply the whole configuration to this machine."
 run = [
   { task = "switch" },
+  { task = "brew-casks" },
   { task = "brew" },
   { task = "mas" },
   { task = "tools" },
@@ -52,10 +55,15 @@ run = [
 [tasks.brew]
 description = "Apply the Brewfile and remove unlisted packages."
 run = [
+  "bash ./mise-tasks/brew/check-cask-ownership",
   { task = "setup:xcode" },
   { task = "brew:tap" },
   "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup",
 ]
+
+[tasks."brew-casks"]
+description = "Install Raycast and TabTab through mise."
+run = "mise bootstrap packages apply brew-cask:raycast brew-cask:tabtab --yes"
 
 [tasks.mas]
 description = "Install missing Mac App Store apps."
@@ -78,6 +86,7 @@ description = "Update Nix inputs, mise tools, Homebrew packages, and App Store a
 run = [
   { task = "update:nix" },
   { task = "update:mise" },
+  { task = "update:brew-casks" },
   { task = "update:brew" },
   { task = "update:mas" },
 ]
@@ -115,12 +124,20 @@ run = "mise lock --global --platform macos-arm64"
 [tasks."update:brew"]
 description = "Upgrade Homebrew packages."
 run = [
+  "bash ./mise-tasks/brew/check-cask-ownership",
   { task = "setup:xcode" },
   { task = "brew:tap" },
   "/opt/homebrew/bin/brew update",
   "/opt/homebrew/bin/brew upgrade",
   "/opt/homebrew/bin/brew bundle --file ./Brewfile --force-cleanup",
   "/opt/homebrew/bin/brew cleanup",
+]
+
+[tasks."update:brew-casks"]
+description = "Upgrade mise-managed Raycast and TabTab casks."
+run = [
+  "bash ./mise-tasks/brew/check-cask-ownership --require-mise",
+  "mise bootstrap packages upgrade brew-cask:raycast brew-cask:tabtab --yes",
 ]
 
 [tasks."update:mas"]
@@ -170,8 +187,8 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
-  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
+  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/brew/check-cask-ownership mise-tasks/migrate/cask-ownership mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh tests/test_cask_migration.sh home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/brew/check-cask-ownership mise-tasks/migrate/cask-ownership mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh tests/test_cask_migration.sh home/bin/* home/.docker/cli-plugins/*",
 ]
 
 [tasks."check:typos"]
