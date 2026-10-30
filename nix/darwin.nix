@@ -76,7 +76,6 @@
     openssl
     gnupg
     git
-    git-lfs
     htop
     mas
     zsh-autosuggestions

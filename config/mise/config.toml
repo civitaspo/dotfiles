@@ -59,6 +59,7 @@ aqua = "latest"
 # name cannot list versions under Renovate's MISE_SAFE=1 lock --bump.
 "cargo:eza" = "latest"
 "aqua:cli/cli" = "latest"
+"aqua:git-lfs/git-lfs" = "3.7.1"
 "aqua:x-motemen/ghq" = "latest"
 "aqua:jqlang/jq" = "latest"
 "aqua:jesseduffield/lazygit" = "latest"
