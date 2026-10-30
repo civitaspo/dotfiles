@@ -1,27 +1,9 @@
 # nix-darwin system configuration.
 #
-# Scope: macOS system-level settings plus base CLI packages and pinned
-# language runtimes / tools (see flake.nix for the per-tool nixpkgs inputs).
+# Scope: macOS system-level settings and base CLI packages.
 # Most binaries come from mise; applications from Homebrew (Brewfile);
 # dotfiles from home-manager (nix/home.nix).
 { pkgs, inputs, ... }:
-
-let
-  system = "aarch64-darwin";
-  # Each per-tool nixpkgs input is imported with `allowUnfree` so packages
-  # like Terraform (BSL) evaluate cleanly. We use `import` rather than
-  # `legacyPackages` so we can pass `config`.
-  mkPkgs = src: import src {
-    inherit system;
-    config = { allowUnfree = true; };
-  };
-  pkgsPython         = mkPkgs inputs.nixpkgs-python;
-  pkgsNode           = mkPkgs inputs.nixpkgs-node;
-  pkgsGo             = mkPkgs inputs.nixpkgs-go;
-  pkgsTerraform      = mkPkgs inputs.nixpkgs-terraform;
-  pkgsProcessCompose = mkPkgs inputs.nixpkgs-process-compose;
-  pkgsK6             = mkPkgs inputs.nixpkgs-k6;
-in
 {
   imports = [ inputs.home-manager.darwinModules.home-manager ];
 
@@ -81,8 +63,7 @@ in
   programs.zsh.enable = true;
   environment.shells = with pkgs; [ bashInteractive zsh ];
 
-  # Base CLI packages from nixpkgs-unstable plus language runtimes / tools
-  # pinned through their own nixpkgs inputs.
+  # Base CLI packages from nixpkgs-unstable.
   environment.systemPackages = with pkgs; [
     coreutils
     findutils
@@ -101,15 +82,6 @@ in
     zsh-autosuggestions
     zsh-syntax-highlighting
     zsh-completions
-  ] ++ [
-    # Pinned per-tool packages -- bump with:
-    #   nix flake update nixpkgs-<tool>
-    pkgsPython.python313
-    pkgsNode.nodejs_22
-    pkgsGo.go
-    pkgsTerraform.terraform
-    pkgsProcessCompose.process-compose
-    pkgsK6.k6
   ];
 
   # Touch ID for sudo.
