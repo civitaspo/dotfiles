@@ -29,7 +29,7 @@ MISE_TRUSTED_CONFIG_PATHS="$private_root${MISE_TRUSTED_CONFIG_PATHS:+:$MISE_TRUS
 for root in "$MISE_PROJECT_ROOT" "$private_root"; do
   while IFS= read -r -d '' path; do
     case "$path" in
-    config/mise/*) [[ "$root" == "$private_root" ]] && continue ;;
+      config/mise/*) [[ "$root" == "$private_root" ]] && continue ;;
     esac
     if [[ "$path" == config/* ]]; then
       target="$HOME/.config/${path#config/}"
