@@ -53,10 +53,11 @@ other private context. Such configuration belongs in the private repository
 `civitaspo/dotfiles-private`, which supplies `~/.aws/config`,
 `~/.ssh/config.d/`, `~/.snowsql/config`, and every directory under private
 `config/` into `~/.config/` (for example `~/.config/deck/` and
-`~/.config/herdr-linear-agent/`). Personal skills live in the private
-repository under `skills/`. `mise run tools` installs that repository, and the
-official skill repositories, with the `skills` CLI into `~/.agents/skills/`
-and each agent's skill directory.
+`~/.config/herdr-linear-agent/`). Public OSS setup skills live under `skills/`
+in this repository. Personal skills live in the private repository under
+`skills/`. `mise run tools` installs both repositories and the official skill
+repositories with the `skills` CLI into `~/.agents/skills/` and each agent's
+skill directory.
 The on-demand Snowflake catalog comes from the mise-managed CoCo CLI
 installation (public `config/mise/config.toml`). The private Snowflake router
 resolves its `bundled_skills/` directory and reads the adjacent
