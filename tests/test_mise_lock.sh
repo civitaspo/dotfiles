@@ -23,10 +23,13 @@ tools=(
   python
   node
   go
+  bun
+  aqua:denoland/deno
   aqua:hashicorp/terraform
   aqua:F1bonacc1/process-compose
   aqua:grafana/k6
   aqua:git-lfs/git-lfs
+  aqua:stunnel/static-curl
   aqua:mas-cli/mas
   http:zsh-autosuggestions
   http:zsh-syntax-highlighting
@@ -49,17 +52,20 @@ echo "ok - mise installs ${#tools[@]} locked tools across backends"
 
 # Verify that the Nix replacement tools run from the isolated mise installs.
 # shellcheck disable=SC2016
-"$mise" exec python node go aqua:hashicorp/terraform aqua:F1bonacc1/process-compose aqua:grafana/k6 aqua:git-lfs/git-lfs -- \
+"$mise" exec python node go bun aqua:denoland/deno aqua:hashicorp/terraform aqua:F1bonacc1/process-compose aqua:grafana/k6 aqua:git-lfs/git-lfs -- \
   bash -euo pipefail -c '
-    [[ "$(python --version)" == "Python 3.13.12" ]]
-    [[ "$(node --version)" == "v22.22.2" ]]
-    [[ "$(go version)" == "go version go1.26.2 "* ]]
+    [[ "$(python --version)" == "Python 3.13.18" ]]
+    [[ "$(node --version)" == "v22.23.4" ]]
+    [[ "$(go version)" == "go version go1.26.10 "* ]]
+    bun --version >/dev/null
+    deno --version >/dev/null
     [[ "$(terraform version)" == "Terraform v1.14.3"* ]]
     process-compose version >/dev/null
     [[ "$(k6 version)" == "k6 v1.7.1 "* ]]
-    [[ "$(git-lfs version)" == "git-lfs/3.7.1 "* ]]
+    [[ "$(git-lfs version)" == "git-lfs/3.8.1 "* ]]
   '
 echo "ok - Nix replacement runtimes and tools execute from mise"
+"$mise" exec aqua:stunnel/static-curl -- python3 "$root/tests/test_curl_tls.py"
 
 # Check that an interactive shell loads the installed plugins and completions.
 PATH="$(dirname "$mise"):/usr/bin:/bin:/usr/sbin:/sbin"

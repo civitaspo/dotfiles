@@ -59,7 +59,6 @@
     gnutar
     gawk
     gnugrep
-    curl
     wget
     openssl
     gnupg
