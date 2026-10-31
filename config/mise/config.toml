@@ -20,12 +20,12 @@ trusted_config_paths = ["~/.config/herdr/plugins"]
 
 [tools]
 # --- Language runtimes ------------------------------------------------------
-python = "3.13.18"
+python = "3.15.2"
 node = "22.23.4"
-go = "1.26.10"
+go = "1.27.3"
 "aqua:hashicorp/terraform" = "1.17.1"
 "aqua:F1bonacc1/process-compose" = "1.124.0"
-"aqua:grafana/k6" = "1.7.1"
+"aqua:grafana/k6" = "1.8.2"
 # Ruby versions are managed by rv instead of mise's core Ruby backend.
 "aqua:spinel-coop/rv" = "latest"
 rust = "latest"
@@ -38,7 +38,7 @@ java = "temurin-21"
 # vfox short name fails under Renovate's MISE_SAFE=1 lock --bump. Version bumps
 # come from renovate.json's custom manager + Homebrew cask API. A bump rewrites
 # the lock entry's macOS arm64 checksum from that API's top-level sha256.
-"aqua:1password/cli" = "2.41.0"
+"aqua:1password/cli" = "2.41.1"
 aqua = "latest"
 "aqua:marp-team/marp-cli" = "latest"
 # pnpm via npm (aqua-registry's pnpm asset name does not match upstream on macOS).
