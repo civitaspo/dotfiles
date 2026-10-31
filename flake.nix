@@ -11,7 +11,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Pinned Python for the private skill-links check.
-    nixpkgs-python.url = "github:NixOS/nixpkgs/9d29d5f667d7467f98efc31881e824fa586c927e";
+    nixpkgs-python.url = "github:NixOS/nixpkgs/5cf1ba568dd5c875ad16fc959e5df930085be1d1";
 
     # nix-darwin is pinned to a release branch; no `master`.
     darwin = {
