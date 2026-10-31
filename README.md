@@ -9,15 +9,14 @@ Each tool owns one clear responsibility:
 | Tool | Responsibility | Files |
 |------|----------------|-------|
 | [nix-darwin](https://github.com/nix-darwin/nix-darwin) | macOS system settings, base CLI packages | `flake.nix`, `nix/darwin.nix` |
-| [home-manager](https://github.com/nix-community/home-manager) | Dotfile placement (symlinks into `$HOME`) | `nix/home.nix` |
 | [Homebrew](https://brew.sh) | GUI apps and local casks | `Brewfile`, `Casks/` |
-| [mise](https://mise.jdx.dev) | CLI binaries, language runtimes, App Store apps, and repository workflows | `config/mise/config.toml`, `mise.toml`, `mise-tasks/` |
+| [mise](https://mise.jdx.dev) | Dotfile placement, CLI binaries, language runtimes, App Store apps, and repository workflows | `config/mise/config.toml`, `mise.toml`, `mise-tasks/` |
 
 Dotfiles are plain files: `config/` is placed into `~/.config` and `home/`
-into `$HOME` by home-manager. Private configuration (work accounts, internal
+into `$HOME` by mise. Private configuration (work accounts, internal
 hosts, agent settings) lives in the separate private repository
 [civitaspo/dotfiles-private](https://github.com/civitaspo/dotfiles-private),
-consumed as a flake input.
+used from a local checkout. The private skill check also uses a locked flake input.
 
 ## First-time setup
 
@@ -46,15 +45,14 @@ Then pause and do the following by hand:
 - Sign into the Mac App Store with the Apple ID that owns the `mas` apps in `mise.toml`.
 - Configure the Secure Enclave key using the steps below, then confirm access
   to `civitaspo/dotfiles-private` (`git ls-remote git@github.com:civitaspo/dotfiles-private.git`).
-- Optionally clone the private repo for editing:
+- Clone the private repo for dotfile placement:
 
   ```sh
   git clone git@github.com:civitaspo/dotfiles-private.git \
     ~/src/github.com/civitaspo/dotfiles-private
   ```
 
-  That checkout is not the symlink source. `mise run switch` fetches the
-  locked `dotfiles-private` flake input over SSH.
+  Keep this checkout up to date before running `mise run switch`.
 
 Install the CLI tools and register this Mac's GitHub key before applying the
 SSH configuration:
@@ -131,8 +129,8 @@ workflows. Dotfiles has no automated release pipeline.
 
 ```sh
 mise run               # list available tasks
-mise run reconcile     # apply everything: nix-darwin + home-manager + Homebrew + App Store + mise
-mise run switch        # apply only the Nix configuration (nix-darwin + home-manager)
+mise run reconcile     # apply everything: nix-darwin + dotfiles + Homebrew + App Store + mise
+mise run switch        # apply nix-darwin and dotfiles
 mise run mas           # install missing App Store apps
 mise run update        # update Nix inputs, mise tools, Homebrew packages and App Store apps
 mise run import:brew   # capture the live Homebrew state back into the Brewfile
@@ -141,13 +139,13 @@ mise run check         # validate the configuration
 ```
 
 To change a configuration file, edit it under `config/` or `home/` and run
-`mise run switch`. mise links public files; home-manager still manages private
-files. Always use `mise run switch`
-or `mise run reconcile` to activate Nix: direct `darwin-rebuild switch` skips
-the public dotfile handoff and can remove links from an older generation.
+`mise run switch`. mise links public and private files from their local
+checkouts. Cursor shares the private MCP configuration file with other clients.
+Always use `mise run switch` or `mise run reconcile` to activate Nix: direct
+`darwin-rebuild switch` skips the dotfile handoff.
 
-After the first successful reconcile, home-manager puts mise on `PATH`, so
-`mise run …` works without the `~/.local/bin/mise` prefix.
+After the first successful reconcile, the shell configuration puts mise on
+`PATH`, so `mise run …` works without the `~/.local/bin/mise` prefix.
 
 `mise run tools` (also part of `reconcile`) reinstalls configured tools whose
 installation directories contain no files, even when mise reports them as
@@ -249,7 +247,6 @@ These are manual and are not part of `mise run reconcile`:
 - `op signin`, `gh auth`, `gcloud auth`, AWS SSO, SnowSQL, and Atuin
 - Cursor, Claude Code, and Codex sign-in
 
-home-manager moves conflicting files aside with a `.backup` suffix.
 Activation disables Spotlight indexing. `mise run brew` uses
 `brew bundle --force-cleanup`, so packages not listed in the Brewfile are
 removed. Local tap casks (Kanary, Nospace, Reflect Open) are
