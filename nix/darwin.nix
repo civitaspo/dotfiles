@@ -28,19 +28,6 @@
     primaryUser = "takahiro.nakayama";
 
     stateVersion = 4;
-
-    keyboard = {
-      enableKeyMapping = true;
-      remapCapsLockToControl = true;
-    };
-
-    # Disable Spotlight indexing.
-    activationScripts.postActivation.text = ''
-      printf "disabling spotlight indexing... "
-      mdutil -i off -d / &> /dev/null
-      mdutil -E / &> /dev/null
-      echo "ok"
-    '';
   };
 
   users.users."takahiro.nakayama" = {
