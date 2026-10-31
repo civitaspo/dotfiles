@@ -69,8 +69,6 @@
   # Touch ID for sudo.
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  time.timeZone = "Asia/Tokyo";
-
   # Raise file descriptor limits (2^19).
   launchd.daemons = {
     sysctl = {
