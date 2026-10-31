@@ -1,5 +1,5 @@
 {
-  description = "civitaspo's macOS configuration (nix-darwin + home-manager)";
+  description = "civitaspo's macOS configuration (nix-darwin + mise)";
 
   inputs = {
     # nixpkgs-unstable follows nixpkgs/master with a few-days delay through
@@ -13,17 +13,12 @@
     # Pinned Python for the private skill-links check.
     nixpkgs-python.url = "github:NixOS/nixpkgs/9d29d5f667d7467f98efc31881e824fa586c927e";
 
-    # nix-darwin and home-manager are pinned to release branches; no `master`.
+    # nix-darwin is pinned to a release branch; no `master`.
     darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Private dotfiles, placed into $HOME by home-manager.
+    # Private skill links are checked against this locked input.
     dotfiles-private = {
       url = "git+ssh://git@github.com/civitaspo/dotfiles-private";
       flake = false;

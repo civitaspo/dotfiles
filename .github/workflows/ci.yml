@@ -67,6 +67,8 @@ jobs:
         run: bash tests/test_mise_lock.sh
       - name: Check public home dotfiles
         run: bash tests/test_public_home_dotfiles.sh
+      - name: Check private dotfile handoff
+        run: bash tests/test_private_dotfiles_handoff.sh
       - name: Check the skills sync plan
         run: bash tests/test_skills_sync.sh
 

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#MISE hide=true
+set -euo pipefail
+
+public_root="$HOME/src/github.com/civitaspo/dotfiles"
+private_root="$HOME/src/github.com/civitaspo/dotfiles-private"
+if [[ ! -d "$public_root/home" || ! "$public_root/home" -ef "$MISE_PROJECT_ROOT/home" || ! -d "$public_root/config" || ! "$public_root/config" -ef "$MISE_PROJECT_ROOT/config" ]]; then
+  printf 'Run switch from the checkout configured in the public dotfile groups.\n' >&2
+  exit 1
+fi
+if [[ ! -f "$private_root/mise.toml" || ! -d "$private_root/home" || ! -d "$private_root/config" ]]; then
+  printf 'Clone and update the private dotfiles checkout before running switch.\n' >&2
+  exit 1
+fi
+for path in "$MISE_PROJECT_ROOT"/config/*; do
+  name=${path##*/}
+  if [[ "$name" != mise && -e "$private_root/config/$name" ]]; then
+    printf 'Public and private config directories overlap.\n' >&2
+    exit 1
+  fi
+done
+
+python3 "$private_root/scripts/check-skill-links.py"
+/bin/bash "$private_root/scripts/check-mcp-config.sh" "$private_root/config/dotfiles/mcp.json"
+mise dotfiles apply --yes "$HOME" "$HOME/.config"
+MISE_TRUSTED_CONFIG_PATHS="$private_root${MISE_TRUSTED_CONFIG_PATHS:+:$MISE_TRUSTED_CONFIG_PATHS}" \
+  mise -C "$private_root" dotfiles apply --yes "$HOME" "$HOME/.config" "$HOME/.cursor/mcp.json"
+
+for root in "$MISE_PROJECT_ROOT" "$private_root"; do
+  while IFS= read -r -d '' path; do
+    case "$path" in
+    config/mise/*) [[ "$root" == "$private_root" ]] && continue ;;
+    esac
+    if [[ "$path" == config/* ]]; then
+      target="$HOME/.config/${path#config/}"
+    else
+      target="$HOME/${path#home/}"
+    fi
+    if [[ ! -L "$target" || ! "$target" -ef "$root/$path" ]]; then
+      printf 'A managed dotfile was not linked; activation stopped.\n' >&2
+      exit 1
+    fi
+  done < <(git -C "$root" ls-files -z home config)
+done
+if [[ ! -L "$HOME/.cursor/mcp.json" || ! "$HOME/.cursor/mcp.json" -ef "$private_root/config/dotfiles/mcp.json" ]]; then
+  printf 'Cursor MCP configuration was not linked; activation stopped.\n' >&2
+  exit 1
+fi
