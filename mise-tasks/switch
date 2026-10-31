@@ -28,5 +28,6 @@ sudo ./result/activate
 rm -f ./result
 
 ./mise-tasks/setup/timezone
+./mise-tasks/setup/system-settings
 mise bootstrap macos defaults apply --yes
 ./mise-tasks/mcp/sync

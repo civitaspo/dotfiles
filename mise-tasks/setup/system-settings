@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#MISE description="Apply keyboard and Spotlight settings."
+set -euo pipefail
+
+sudo /usr/bin/hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":30064771129,"HIDKeyboardModifierMappingDst":30064771296}]}' >/dev/null
+
+printf 'disabling spotlight indexing... '
+sudo /usr/bin/mdutil -i off -d / >/dev/null 2>&1 || true
+sudo /usr/bin/mdutil -E / >/dev/null 2>&1 || true
+echo 'ok'

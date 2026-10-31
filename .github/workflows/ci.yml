@@ -73,6 +73,8 @@ jobs:
         run: bash tests/test_skills_sync.sh
       - name: Check time zone setup
         run: bash tests/test_timezone.sh
+      - name: Check keyboard and Spotlight setup
+        run: bash tests/test_system_settings.sh
 
   status-check:
     runs-on: ubuntu-latest
