@@ -20,6 +20,7 @@ echo "ok - mise resolves every configured tool from the lockfile"
 # Renovate rewrites by hand. Rust, Java, and cargo tools are left out because
 # they take too long to install.
 tools=(
+  aqua
   python
   node
   go
@@ -51,6 +52,7 @@ for tool in "${tools[@]}"; do
   }
 done
 echo "ok - mise installs ${#tools[@]} locked tools across backends"
+"$mise" exec aqua -- aqua --version
 
 # Verify that the Nix replacement tools run from the isolated mise installs.
 # shellcheck disable=SC2016
