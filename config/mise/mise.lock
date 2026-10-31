@@ -214,11 +214,12 @@ url = "https://github.com/docker/buildx/releases/download/v0.38.1/buildx-v0.38.1
 url_api = "https://api.github.com/repos/docker/buildx/releases/assets/660654886"
 
 [[tools."aqua:docker/cli"]]
-version = "29.9.1"
+version = "29.9.2"
 backend = "aqua:docker/cli"
 
 [tools."aqua:docker/cli"."platforms.macos-arm64"]
-url = "https://download.docker.com/mac/static/stable/aarch64/docker-29.9.1.tgz"
+checksum = "sha256:ea8a2ce5ac31f9f5f3fb711a7a485e1e46cc7a69798a629a70306f6e6af25b7a"
+url = "https://download.docker.com/mac/static/stable/aarch64/docker-29.9.2.tgz"
 
 [[tools."aqua:docker/compose"]]
 version = "5.6.1"
@@ -553,7 +554,7 @@ version = "1.99.1"
 backend = "core:rust"
 
 [[tools."ubi:docker/docker-credential-helpers"]]
-version = "0.9.10"
+version = "0.9.12"
 backend = "ubi:docker/docker-credential-helpers"
 
 [tools."ubi:docker/docker-credential-helpers".options]

@@ -30,6 +30,7 @@ tools=(
   aqua:F1bonacc1/process-compose
   aqua:grafana/k6
   aqua:git-lfs/git-lfs
+  aqua:docker/cli
   aqua:docker/compose
   aqua:docker/buildx
   aqua:stunnel/static-curl
@@ -74,6 +75,11 @@ echo "ok - Nix replacement runtimes and tools execute from mise"
   docker-cli-plugin-docker-buildx version >/dev/null
 '
 echo "ok - mise provides the Docker plugins"
+"$mise" exec aqua:docker/cli 'ubi:docker/docker-credential-helpers[exe=docker-credential-osxkeychain]' -- bash -euo pipefail -c '
+  docker --version
+  docker-credential-osxkeychain version
+'
+echo "ok - mise provides the Docker CLI and credential helper"
 "$mise" exec aqua:stunnel/static-curl -- python3 "$root/tests/test_curl_tls.py"
 
 # Check that an interactive shell loads the installed plugins and completions.
