@@ -21,11 +21,11 @@ trusted_config_paths = ["~/.config/herdr/plugins"]
 [tools]
 # --- Language runtimes ------------------------------------------------------
 python = "3.13.18"
-node = "22.23.4"
+node = "26.13.0"
 go = "1.26.10"
 "aqua:hashicorp/terraform" = "1.17.1"
 "aqua:F1bonacc1/process-compose" = "1.124.0"
-"aqua:grafana/k6" = "1.7.1"
+"aqua:grafana/k6" = "2.3.0"
 # Ruby versions are managed by rv instead of mise's core Ruby backend.
 "aqua:spinel-coop/rv" = "latest"
 rust = "latest"
@@ -60,7 +60,7 @@ aqua = "latest"
 "aqua:cli/cli" = "latest"
 "aqua:git-lfs/git-lfs" = "3.8.1"
 "aqua:stunnel/static-curl" = "8.23.0-1"
-"aqua:mas-cli/mas" = "6.0.1"
+"aqua:mas-cli/mas" = "7.0.0"
 "aqua:x-motemen/ghq" = "latest"
 "aqua:jqlang/jq" = "latest"
 "aqua:jesseduffield/lazygit" = "latest"
