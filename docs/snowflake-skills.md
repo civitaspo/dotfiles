@@ -34,8 +34,7 @@ to rebase. Update the private guide only when host translations need to change.
 
 Official installer: <https://ai.snowflake.com/static/cc-scripts/install.sh>
 
-home-manager removes the previous managed `~/.agents/snowflake-skills`
-link during activation; the router uses mise directly.
+The router uses mise directly.
 
 Keep upstream skill assets and dependency manifests out of Git. Their presence
 in a local mise installation does not create Dependabot entries in either

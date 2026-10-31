@@ -20,8 +20,14 @@ for path in "$MISE_PROJECT_ROOT"/config/*; do
   fi
 done
 
-python3 "$private_root/scripts/check-skill-links.py"
-/bin/bash "$private_root/scripts/check-mcp-config.sh" "$private_root/config/dotfiles/mcp.json"
+while IFS= read -r -d '' path; do
+  if git -C "$private_root" --literal-pathspecs ls-files --error-unmatch -- "$path" >/dev/null 2>&1; then
+    printf 'Public and private home files overlap.\n' >&2
+    exit 1
+  fi
+done < <(git -C "$MISE_PROJECT_ROOT" ls-files -z home)
+
+/bin/bash "$MISE_PROJECT_ROOT/mise-tasks/check/private"
 mise dotfiles apply --yes "$HOME" "$HOME/.config"
 MISE_TRUSTED_CONFIG_PATHS="$private_root${MISE_TRUSTED_CONFIG_PATHS:+:$MISE_TRUSTED_CONFIG_PATHS}" \
   mise -C "$private_root" dotfiles apply --yes "$HOME" "$HOME/.config" "$HOME/.cursor/mcp.json"

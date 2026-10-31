@@ -1,5 +1,5 @@
 # Herdr: agent-native terminal multiplexer (https://herdr.dev/).
-# Symlinked to ~/.config/herdr/config.toml by home-manager.
+# Symlinked to ~/.config/herdr/config.toml by mise.
 
 onboarding = false
 

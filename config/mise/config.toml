@@ -1,12 +1,11 @@
 # Tool versions managed by mise.
-# Symlinked to ~/.config/mise/config.toml by home-manager.
+# Symlinked to ~/.config/mise/config.toml by mise.
 #
 # mise owns most CLI binaries.
 
 [settings]
 # Consume the committed lockfile during normal installs. This keeps "latest"
-# declarations reproducible and avoids writing the home-manager-managed
-# lockfile under /nix/store.
+# declarations reproducible.
 locked = true
 # civitaspo's own OSS tracks the newest release, so it skips mise's default
 # 24h minimum release age. Keep this list to tools civitaspo publishes.

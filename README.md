@@ -16,7 +16,7 @@ Dotfiles are plain files: `config/` is placed into `~/.config` and `home/`
 into `$HOME` by mise. Private configuration (work accounts, internal
 hosts, agent settings) lives in the separate private repository
 [civitaspo/dotfiles-private](https://github.com/civitaspo/dotfiles-private),
-used from a local checkout. The private skill check also uses a locked flake input.
+used and validated from a local checkout.
 
 ## First-time setup
 
@@ -135,7 +135,7 @@ mise run mas           # install missing App Store apps
 mise run update        # update Nix inputs, mise tools, Homebrew packages and App Store apps
 mise run import:brew   # capture the live Homebrew state back into the Brewfile
 mise run livecheck:casks # show newer upstream versions for local tap casks
-mise run check         # validate the configuration
+mise run check         # validate Nix, private configuration, and repository checks
 ```
 
 To change a configuration file, edit it under `config/` or `home/` and run
@@ -311,8 +311,6 @@ merge caller forwards that comment; the server requires the configured Bot
 to own the PR and every commit, and checks current approval, policy and CI
 before squash-merging through the Server App. Major updates remain manual.
 
-The private flake input `dotfiles-private` is ignored by Renovate (SSH lookup
-is impossible from the Mend app). Repository access for Renovate is scoped by
-the Renovate GitHub App installation. Requests need only the repository's `CSM_CI_CLIENT_APP_PRIVATE_KEY` secret
+Repository access for Renovate is scoped by the Renovate GitHub App installation. Requests need only the repository's `CSM_CI_CLIENT_APP_PRIVATE_KEY` secret
 and the `CSM_CI_CLIENT_APP_CLIENT_ID` and `CSM_CI_SERVER_REPOSITORY` variables.
 Server and Approver App keys stay in the server's `csm-ci` environment.
