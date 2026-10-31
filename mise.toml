@@ -204,6 +204,7 @@ run = [
   { task = "check:skills-sync" },
   { task = "check:1password" },
   { task = "check:github-key" },
+  { task = "check:timezone" },
   { task = "check:typos" },
 ]
 
@@ -221,8 +222,8 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
-  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
+  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/timezone mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_timezone.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/timezone mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_timezone.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
 ]
 
 [tasks."check:typos"]
@@ -248,3 +249,7 @@ run = "bash tests/test_github_key.sh"
 [tasks."check:mcp-sync"]
 description = "Test MCP server registration and conflict handling."
 run = "bash tests/test_mcp_sync.sh"
+
+[tasks."check:timezone"]
+description = "Test macOS time zone setup."
+run = "bash tests/test_timezone.sh"

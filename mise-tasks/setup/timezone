@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Set the macOS time zone to Asia/Tokyo."
+set -euo pipefail
+
+sudo /usr/sbin/systemsetup -settimezone Asia/Tokyo

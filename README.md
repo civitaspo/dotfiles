@@ -134,7 +134,7 @@ workflows. Dotfiles has no automated release pipeline.
 ```sh
 mise run               # list available tasks
 mise run reconcile     # apply everything: nix-darwin + dotfiles + Homebrew + App Store + mise
-mise run switch        # apply nix-darwin and dotfiles
+mise run switch        # apply nix-darwin, dotfiles, and time zone
 mise run mas           # install missing App Store apps
 mise run update        # update Nix inputs, mise tools, Homebrew packages and App Store apps
 mise run import:brew   # capture the live Homebrew state back into the Brewfile

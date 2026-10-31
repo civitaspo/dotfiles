@@ -71,6 +71,8 @@ jobs:
         run: bash tests/test_private_dotfiles_handoff.sh
       - name: Check the skills sync plan
         run: bash tests/test_skills_sync.sh
+      - name: Check time zone setup
+        run: bash tests/test_timezone.sh
 
   status-check:
     runs-on: ubuntu-latest
