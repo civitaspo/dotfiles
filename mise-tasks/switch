@@ -23,8 +23,7 @@ fi
 # Transfer links before activating the configuration without home-manager.
 ./mise-tasks/dotfiles-apply
 
-sudo nix-env -p /nix/var/nix/profiles/system --set ./result
-sudo ./result/activate
+sudo ./mise-tasks/setup/activate-system ./result/activate /etc/pam.d/sudo /etc/pam.d/sudo_local
 rm -f ./result
 
 ./mise-tasks/setup/system-settings
