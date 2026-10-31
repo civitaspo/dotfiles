@@ -2,6 +2,8 @@
 #MISE description="Apply keyboard and Spotlight settings."
 set -euo pipefail
 
+# Remap Caps Lock (0x700000039) to left Control (0x7000000e0).
+# This replaces the complete user key mapping, as nix-darwin did.
 sudo /usr/bin/hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":30064771129,"HIDKeyboardModifierMappingDst":30064771296}]}' >/dev/null
 
 printf 'disabling spotlight indexing... '
