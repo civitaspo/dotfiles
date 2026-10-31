@@ -102,6 +102,10 @@ installation directly, run `mise run setup:xcode`.
 Rosetta is required because the committed `mise.lock` entries for dust and
 procs use x86_64 assets on macOS arm64.
 
+The `curl` executable comes from the pinned `aqua:stunnel/static-curl` build.
+It supports Apple system trust and `--cacert`, but does not include TLS-SRP,
+which was available in the previous Nix build.
+
 ## Agent CLI authentication
 
 Cursor Agent is an exception to mise-managed CLIs: Homebrew's `cursor-cli`

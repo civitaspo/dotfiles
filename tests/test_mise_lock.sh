@@ -27,6 +27,7 @@ tools=(
   aqua:F1bonacc1/process-compose
   aqua:grafana/k6
   aqua:git-lfs/git-lfs
+  aqua:stunnel/static-curl
   aqua:mas-cli/mas
   http:zsh-autosuggestions
   http:zsh-syntax-highlighting
@@ -60,6 +61,7 @@ echo "ok - mise installs ${#tools[@]} locked tools across backends"
     [[ "$(git-lfs version)" == "git-lfs/3.7.1 "* ]]
   '
 echo "ok - Nix replacement runtimes and tools execute from mise"
+"$mise" exec aqua:stunnel/static-curl -- python3 "$root/tests/test_curl_tls.py"
 
 # Check that an interactive shell loads the installed plugins and completions.
 PATH="$(dirname "$mise"):/usr/bin:/bin:/usr/sbin:/sbin"

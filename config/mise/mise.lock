@@ -604,3 +604,13 @@ backend = "core:python"
 checksum = "sha256:3de7059c87c0e7604e3e9397a547020c161f65c8d51d358e230d3a7d3a456aaa"
 url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260324/cpython-3.13.12+20260324-aarch64-apple-darwin-install_only_stripped.tar.gz"
 provenance = "github-attestations"
+
+[[tools."aqua:stunnel/static-curl"]]
+version = "8.23.0-1"
+backend = "aqua:stunnel/static-curl"
+specifiers = ["8.23.0-1"]
+
+[tools."aqua:stunnel/static-curl"."platforms.macos-arm64"]
+checksum = "sha256:a325796c52907d30981e0cee6563a747ec6062cf4a0db93e5f3452e776499d42"
+url = "https://github.com/stunnel/static-curl/releases/download/8.23.0-1/curl-macos-arm64-dev-8.23.0-1.tar.xz"
+url_api = "https://api.github.com/repos/stunnel/static-curl/releases/assets/665720037"
