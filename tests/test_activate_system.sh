@@ -44,7 +44,8 @@ cmp "$test_root/expected" "$local_config"
 
 # Preserve Touch ID even if activation fails after removing its old file.
 rm "$local_config"
-if ACTIVATION_EXIT=1 "$root/mise-tasks/setup/activate-system" "$activation" "$sudo_config" "$local_config"; then
+ln -s "$test_root/nix-managed" "$local_config"
+if REMOVE_LOCAL=1 ACTIVATION_EXIT=1 "$root/mise-tasks/setup/activate-system" "$activation" "$sudo_config" "$local_config"; then
   echo 'activation failure must be reported' >&2
   exit 1
 fi
