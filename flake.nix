@@ -10,21 +10,11 @@
     # call below.
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    # Pinned Python for the private skill-links check.
-    nixpkgs-python.url = "github:NixOS/nixpkgs/9d29d5f667d7467f98efc31881e824fa586c927e";
-
     # nix-darwin is pinned to a release branch; no `master`.
     darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Private skill links are checked against this locked input.
-    dotfiles-private = {
-      url = "git+ssh://git@github.com/civitaspo/dotfiles-private";
-      flake = false;
-    };
-
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { darwin, ... }@inputs:
@@ -41,16 +31,5 @@
         enableNixpkgsReleaseCheck = false;
         modules = [ ./nix/darwin.nix ];
       };
-
-      # Private skill links must resolve both in .agents/skills and when the
-      # skills CLI publishes each skill as a sibling.
-      checks.aarch64-darwin.skill-links =
-        let
-          pkgs = inputs.nixpkgs-python.legacyPackages.aarch64-darwin;
-        in
-        pkgs.runCommand "skill-links" { nativeBuildInputs = [ pkgs.python313 ]; } ''
-          python3 ${inputs.dotfiles-private}/scripts/check-skill-links.py
-          touch $out
-        '';
     };
 }

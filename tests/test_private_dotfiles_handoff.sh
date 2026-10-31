@@ -43,6 +43,22 @@ git -C "$private_root" add home config
 export MISE_GLOBAL_CONFIG_FILE="$HOME/global.toml" MISE_GLOBAL_CONFIG_ROOT="$HOME"
 printf '[dotfiles]\n"~/.unrelated" = { content = "do not apply" }\n' >"$MISE_GLOBAL_CONFIG_FILE"
 cd "$repo_root"
+printf 'private fixture\n' >"$private_root/home/.zshrc"
+git -C "$private_root" add -f home/.zshrc
+if bash mise-tasks/dotfiles-apply; then
+  echo 'overlapping home file must fail' >&2
+  exit 1
+fi
+[[ ! -e "$HOME/.zshrc" && "$HOME/.cursor/mcp.json" -ef "$HOME/store/old" ]]
+git -C "$private_root" rm -q --cached home/.zshrc
+rm "$private_root/home/.zshrc"
+printf 'raise SystemExit(1)\n' >"$private_root/scripts/check-skill-links.py"
+if bash mise-tasks/dotfiles-apply; then
+  echo 'invalid private skill links must fail' >&2
+  exit 1
+fi
+[[ ! -e "$HOME/.zshrc" && "$HOME/.cursor/mcp.json" -ef "$HOME/store/old" ]]
+printf 'pass\n' >"$private_root/scripts/check-skill-links.py"
 bash mise-tasks/dotfiles-apply
 bash mise-tasks/dotfiles-apply
 [[ "$HOME/.ssh/config.d/fixture" -ef "$private_root/home/.ssh/config.d/fixture" ]]

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#MISE description="Validate private skill links and MCP configuration."
+set -euo pipefail
+
+private_root="$HOME/src/github.com/civitaspo/dotfiles-private"
+python3 "$private_root/scripts/check-skill-links.py"
+/bin/bash "$private_root/scripts/check-mcp-config.sh" "$private_root/config/dotfiles/mcp.json"

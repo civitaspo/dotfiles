@@ -4,15 +4,14 @@ Guidance for AI coding agents working in this repository.
 
 ## What this repository is
 
-civitaspo's macOS configuration. Responsibilities are split across four tools:
+civitaspo's macOS configuration. Responsibilities are split across three tools:
 
 - **nix-darwin** (`nix/darwin.nix`) -- macOS system settings and base CLI packages.
-- **home-manager** (`nix/home.nix`) -- symlinks dotfiles into `$HOME`.
 - **Homebrew** (`Brewfile`) -- GUI apps (casks only; no formulae). Not on `$PATH`; only `mise run brew` and friends invoke it (via `/opt/homebrew/bin/brew`).
-- **mise** (`config/mise/config.toml`, `mise.toml`, `mise-tasks/`) -- CLI binaries, language runtimes, App Store apps (`mas:` entries in `mise.toml`'s `[bootstrap.packages]`), and repository task orchestration. Run named `mise bootstrap` parts such as `mise bootstrap packages apply`; bare `mise bootstrap` also runs `[tasks.bootstrap]`.
+- **mise** (`config/mise/config.toml`, `mise.toml`, `mise-tasks/`) -- dotfile links, CLI binaries, language runtimes, App Store apps (`mas:` entries in `mise.toml`'s `[bootstrap.packages]`), and repository task orchestration. Run named `mise bootstrap` parts such as `mise bootstrap packages apply`; bare `mise bootstrap` also runs `[tasks.bootstrap]`.
 
 Dotfiles are plain files under `config/` (-> `~/.config`) and `home/`
-(-> `$HOME`); home-manager symlinks them. `bootstrap.sh` installs a pinned
+(-> `$HOME`); mise symlinks them. `bootstrap.sh` installs a pinned
 mise; `mise run bootstrap` installs Nix and Homebrew.
 
 ## Conventions
@@ -57,12 +56,12 @@ other private context. Such configuration belongs in the private repository
 `~/.config/herdr-linear-agent/`). Personal skills live in the private
 repository under `skills/`. `mise run tools` installs that repository, and the
 official skill repositories, with the `skills` CLI into `~/.agents/skills/`
-and each agent's skill directory. home-manager does not publish skills.
+and each agent's skill directory.
 The on-demand Snowflake catalog comes from the mise-managed CoCo CLI
 installation (public `config/mise/config.toml`). The private Snowflake router
 resolves its `bundled_skills/` directory and reads the adjacent
 `HOST_ADAPTATION.md` first. Keep organization-specific tool names out of
-public configuration, tests, documentation, and PR text. `nix flake check`
+public configuration, tests, documentation, and PR text. `mise run check:private`
 runs the private `scripts/check-skill-links.py`, which requires relative skill
 links to resolve both in the private tree and when each skill is installed as
 a sibling.
