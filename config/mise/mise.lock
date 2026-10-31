@@ -201,13 +201,17 @@ url = "https://github.com/direnv/direnv/releases/download/v2.38.2/direnv.darwin-
 url_api = "https://api.github.com/repos/direnv/direnv/releases/assets/627455431"
 
 [[tools."aqua:docker/buildx"]]
-version = "0.38.0"
+version = "0.38.1"
 backend = "aqua:docker/buildx"
+specifiers = [
+    "0.38.1",
+    "latest",
+]
 
 [tools."aqua:docker/buildx"."platforms.macos-arm64"]
-checksum = "sha256:85989b895add5f119c1ccf8eada2f6892fc33ccf16bd8917638eae404ef26344"
-url = "https://github.com/docker/buildx/releases/download/v0.38.0/buildx-v0.38.0.darwin-arm64"
-url_api = "https://api.github.com/repos/docker/buildx/releases/assets/620148395"
+checksum = "sha256:6f20ba2437865311ef99015bf5d1039c3c8e4d2177c1c64aa41b134b5ecd3012"
+url = "https://github.com/docker/buildx/releases/download/v0.38.1/buildx-v0.38.1.darwin-arm64"
+url_api = "https://api.github.com/repos/docker/buildx/releases/assets/660654886"
 
 [[tools."aqua:docker/cli"]]
 version = "29.9.1"
@@ -217,15 +221,18 @@ backend = "aqua:docker/cli"
 url = "https://download.docker.com/mac/static/stable/aarch64/docker-29.9.1.tgz"
 
 [[tools."aqua:docker/compose"]]
-version = "5.6.0"
+version = "5.6.1"
 backend = "aqua:docker/compose"
+specifiers = [
+    "5.6.1",
+    "latest",
+]
 
 [tools."aqua:docker/compose"."platforms.macos-arm64"]
-checksum = "sha256:bd714a42b46e51757fc1121085b3096b9064e3f80d3ca5a991e33f44df4f43c9"
-url = "https://github.com/docker/compose/releases/download/v5.6.0/docker-compose-darwin-aarch64"
-url_api = "https://api.github.com/repos/docker/compose/releases/assets/605922795"
+checksum = "sha256:fcce41226abd2b7b2936094e688bbd61284673dddafea542e08cb9a3b4423a8b"
+url = "https://github.com/docker/compose/releases/download/v5.6.1/docker-compose-darwin-aarch64"
+url_api = "https://api.github.com/repos/docker/compose/releases/assets/661714755"
 provenance = "cosign"
-
 [[tools."aqua:duckdb/duckdb"]]
 version = "1.5.6"
 backend = "aqua:duckdb/duckdb"
@@ -571,12 +578,13 @@ checksum = "sha256:9cace748ebeddb92432f606c6c53d964772176fdf1a0ebb4db5ead3df39ba
 url = "https://github.com/grafana/k6/releases/download/v1.7.1/k6-v1.7.1-macos-arm64.zip"
 url_api = "https://api.github.com/repos/grafana/k6/releases/assets/384650593"
 [[tools."aqua:hashicorp/terraform"]]
-version = "1.14.3"
+version = "1.17.1"
 backend = "aqua:hashicorp/terraform"
+specifiers = ["1.17.1"]
 
 [tools."aqua:hashicorp/terraform"."platforms.macos-arm64"]
-checksum = "sha256:c45e74c19f38ec7fcb55f74b9788a75a2cbb07da45343b197ae4a41637e571b6"
-url = "https://releases.hashicorp.com/terraform/1.14.3/terraform_1.14.3_darwin_arm64.zip"
+checksum = "sha256:b1ecb3fe0d0a0290c1ab6f83d967d43f25da05d0b671ee0fb355252268dce95a"
+url = "https://releases.hashicorp.com/terraform/1.17.1/terraform_1.17.1_darwin_arm64.zip"
 [[tools.go]]
 version = "1.26.10"
 backend = "core:go"

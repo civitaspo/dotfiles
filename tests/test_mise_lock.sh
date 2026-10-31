@@ -29,6 +29,8 @@ tools=(
   aqua:F1bonacc1/process-compose
   aqua:grafana/k6
   aqua:git-lfs/git-lfs
+  aqua:docker/compose
+  aqua:docker/buildx
   aqua:stunnel/static-curl
   aqua:mas-cli/mas
   http:zsh-autosuggestions
@@ -59,12 +61,17 @@ echo "ok - mise installs ${#tools[@]} locked tools across backends"
     [[ "$(go version)" == "go version go1.26.10 "* ]]
     bun --version >/dev/null
     deno --version >/dev/null
-    [[ "$(terraform version)" == "Terraform v1.14.3"* ]]
+    [[ "$(terraform version)" == "Terraform v1.17.1"* ]]
     process-compose version >/dev/null
     [[ "$(k6 version)" == "k6 v1.7.1 "* ]]
     [[ "$(git-lfs version)" == "git-lfs/3.8.1 "* ]]
   '
 echo "ok - Nix replacement runtimes and tools execute from mise"
+"$mise" exec aqua:docker/compose aqua:docker/buildx -- bash -euo pipefail -c '
+  docker-cli-plugin-docker-compose version >/dev/null
+  docker-cli-plugin-docker-buildx version >/dev/null
+'
+echo "ok - mise provides the Docker plugins"
 "$mise" exec aqua:stunnel/static-curl -- python3 "$root/tests/test_curl_tls.py"
 
 # Check that an interactive shell loads the installed plugins and completions.
