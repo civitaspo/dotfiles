@@ -4,6 +4,9 @@ set -euo pipefail
 activation="${1:?activation script required}"
 sudo_config="${2:?sudo PAM configuration required}"
 local_config="${3:?sudo_local PAM configuration required}"
+services_source="${4:?launchd configuration required}"
+services_target="${5:?launchd directory required}"
+services_previous="${6:?previous launchd directory required}"
 
 if ! awk '$1 == "auth" && $2 == "include" && $3 == "sudo_local" && $0 !~ /security[.]pam[.]services[.]sudo_local/ { found = 1 } END { exit !found }' "$sudo_config"; then
   echo "sudo PAM configuration does not include sudo_local: $sudo_config" >&2
@@ -20,6 +23,26 @@ check_local_config() {
 }
 
 check_local_config
+
+# nix-darwin removes every formerly managed service, even if its file was edited.
+for name in sysctl.plist launchctl.maxfiles.plist; do
+  target="$services_target/$name"
+  previous="$services_previous/$name"
+  expected="$(plutil -convert json -o - "$services_source/$name")"
+  if [[ -e "$target" || -L "$target" ]]; then
+    if [[ -e "$previous" ]]; then
+      if [[ -L "$target" ]] || ! cmp -s "$previous" "$target"; then
+        echo "refusing to remove modified launchd service: $target" >&2
+        exit 1
+      fi
+    fi
+    if [[ -L "$target" ]] || ! actual="$(plutil -convert json -o - "$target")" || [[ "$actual" != "$expected" ]]; then
+      echo "refusing to replace existing launchd service: $target" >&2
+      exit 1
+    fi
+  fi
+done
+
 nix-env -p /nix/var/nix/profiles/system --set ./result
 activation_status=0
 "$activation" || activation_status=$?
@@ -31,5 +54,28 @@ if [[ ! -e "$local_config" ]]; then
   printf 'auth       sufficient     pam_tid.so\n' >"$temporary"
   chmod 644 "$temporary"
   ln "$temporary" "$local_config"
+  rm "$temporary"
+  trap - EXIT
 fi
+
+for name in sysctl.plist launchctl.maxfiles.plist; do
+  target="$services_target/$name"
+  if [[ ! -e "$target" && ! -L "$target" ]]; then
+    temporary="$(mktemp "$services_target/.${name}.XXXXXX")"
+    trap 'rm -f "$temporary"' EXIT
+    cat "$services_source/$name" >"$temporary"
+    chmod 644 "$temporary"
+    ln "$temporary" "$target"
+    rm "$temporary"
+    trap - EXIT
+  fi
+  expected="$(plutil -convert json -o - "$services_source/$name")"
+  if [[ -L "$target" ]] || ! actual="$(plutil -convert json -o - "$target")" || [[ "$actual" != "$expected" ]]; then
+    echo "refusing to load conflicting launchd service: $target" >&2
+    exit 1
+  fi
+  if ! launchctl print "system/${name%.plist}" >/dev/null 2>&1; then
+    launchctl load -w "$target"
+  fi
+done
 exit "$activation_status"
