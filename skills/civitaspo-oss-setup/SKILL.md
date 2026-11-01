@@ -13,10 +13,11 @@ The authoritative configuration is [`civitaspo/csm-ci-server`](https://github.co
 
 1. Create the public repository and its initial default branch. Repo-settings does not create repositories. If the repository is empty, use a minimal signed bootstrap commit; use PRs for subsequent changes.
 2. Add only the foundation files the project needs, including an English README, license, `AGENTS.md`, project tooling, tests, and CI. Provide a PR workflow with the `status-check` required by the server. Pin GitHub Actions and reusable workflows to reviewed full commit SHAs.
-3. Configure Renovate using [renovate.json5](renovate.json5) as the baseline. Adapt language-specific settings to the project. Renovate requests merges with `/merge`; it does not use GitHub platform automerge.
-4. Enroll the repository and enable its client workflows using [enrollment.md](enrollment.md). Review and verify the caller workflows before activating the server-managed rulesets.
-5. For releases, enable only the operations and build type the project needs. Follow the deployed version of the csm-ci-actions release and release-PR guides. Keep publishing and signing credentials on the server.
-6. Verify a real PR: confirm `csm-ci/policy`, `status-check`, approval, and a merge request work for the current head. Confirm an eligible Renovate PR requests `/merge` and a major update does not. Verify the applied repository settings and rulesets.
+3. Configure [mise task management and GitHub Actions linting](tooling.md). Run the same lint and test tasks locally and in PR CI.
+4. Configure Renovate using [renovate.json5](renovate.json5) as the baseline. Adapt language-specific settings to the project. Renovate requests merges with `/merge`; it does not use GitHub platform automerge.
+5. Enroll the repository and enable its client workflows using [enrollment.md](enrollment.md). Review and verify the caller workflows before activating the server-managed rulesets.
+6. For releases, enable only the operations and build type the project needs. Follow the deployed version of the csm-ci-actions release and release-PR guides. Keep publishing and signing credentials on the server.
+7. Verify a real PR: confirm `csm-ci/policy`, `status-check`, approval, and a merge request work for the current head. Confirm an eligible Renovate PR requests `/merge` and a major update does not. Verify the applied repository settings and rulesets.
 
 ## Pull requests
 
