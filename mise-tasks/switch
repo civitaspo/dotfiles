@@ -23,7 +23,8 @@ fi
 # Transfer links before activating the configuration without home-manager.
 ./mise-tasks/dotfiles-apply
 
-sudo ./mise-tasks/setup/activate-system ./result/activate /etc/pam.d/sudo /etc/pam.d/sudo_local
+sudo ./mise-tasks/setup/activate-system ./result/activate /etc/pam.d/sudo /etc/pam.d/sudo_local \
+  "$MISE_PROJECT_ROOT/system/launchd" /Library/LaunchDaemons /run/current-system/Library/LaunchDaemons
 rm -f ./result
 
 ./mise-tasks/setup/system-settings
