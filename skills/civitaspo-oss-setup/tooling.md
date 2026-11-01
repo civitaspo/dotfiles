@@ -11,7 +11,7 @@ Install these GitHub Actions tools through mise, using reviewed versions availab
 - `aqua:koalaman/shellcheck` checks shell scripts, including workflow `run` steps via jactionlint.
 - `aqua:ast-grep/ast-grep` checks source code against structural rules without a Python runtime.
 
-Configure `sgconfig.yml` and commit relevant ast-grep rules for the project's languages and security risks. Set blocking rules to `severity: error` and test the rules against matching and nonmatching examples with `ast-grep test`. ast-grep runs configured rules; do not assume it supplies Semgrep's rules or equivalent security coverage by default.
+Configure `sgconfig.yml` and commit relevant ast-grep rules for the languages confirmed with the user. Select and adapt candidates from [ast-grep rules](ast-grep-rules.md) to the project's actual APIs and risks. Set blocking rules to `severity: error` and test each rule against matching and nonmatching examples with `ast-grep test`; include the rule tests in `test`. ast-grep runs configured rules; do not assume it supplies Semgrep's rules or equivalent security coverage by default.
 
 Define a read-only `lint` task that runs `jactionlint --shellcheck=shellcheck`, `pinact run --check`, `ghalint run`, and `ast-grep scan`, plus format checks and project-specific linters. Run ShellCheck on standalone shell scripts as well. If the repository has composite actions, also check them with `ghalint run-action`. Define a `fix` task for commands that modify files, including `pinact run`, `disable-checkout-persist-credentials`, and applicable formatters. Review ast-grep rewrites before enabling them in `fix`. Keep intentional exceptions narrow and explain their reason, especially for CSM's generated callers.
 
