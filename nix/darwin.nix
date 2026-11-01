@@ -46,7 +46,7 @@
     gnutar
     gawk
     gnugrep
-    wget
+    (callPackage ./wget.nix { })
     openssl
     gnupg
     git
