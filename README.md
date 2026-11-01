@@ -175,9 +175,9 @@ whenever a new Herdr version is installed (force it with
 (`config/herdr/config.toml`).
 
 [Herdr app](https://github.com/herdrdev/herdr-app) is the official desktop
-app. `mise run brew` installs it as the `herdr-app` cask. The app uses
-herdr-core, which it can install when first opened; the TUI and its plugins
-are managed separately by mise.
+app. `mise run brew` installs it as the `herdr-app` cask, and mise installs
+its separate `herdr-core` runtime. The app and the TUI do not share sessions.
+Update the core through mise, not through the app.
 
 Layout and navigation (Emacs-style pane motion: `b`/`p`/`n`/`f`):
 
