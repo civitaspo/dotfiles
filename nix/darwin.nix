@@ -52,8 +52,8 @@
     git
   ];
 
-  # Touch ID is managed by the switch task instead of nix-darwin.
-  security.pam.services.sudo_local.enable = false;
+  # Touch ID for sudo.
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # Raise file descriptor limits (2^19).
   launchd.daemons = {
