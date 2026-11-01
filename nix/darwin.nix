@@ -55,6 +55,15 @@
   # Touch ID for sudo.
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  # Match nix-darwin's mitigation for compromised eMudhra intermediates.
+  # https://github.com/NixOS/nixpkgs/issues/576485
+  security.pki.caCertificateBlacklist = [
+    "Comodo AAA Services root"
+    "emSign ECC Root CA - G3"
+    "emSign Root CA - C1"
+    "emSign ECC Root CA - C3"
+  ];
+
   # Raise file descriptor limits (2^19).
   launchd.daemons = {
     sysctl = {
