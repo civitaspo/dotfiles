@@ -14,7 +14,7 @@ The authoritative configuration is [`civitaspo/csm-ci-server`](https://github.co
 Before configuring project tooling, ask the user which programming languages the repository will use unless they have already specified them. Include multiple languages where applicable. If the languages are undecided, defer language-specific rules until they are chosen.
 
 1. Create the public repository and its initial default branch. Repo-settings does not create repositories. If the repository is empty, use a minimal signed bootstrap commit; use PRs for subsequent changes.
-2. Add only the foundation files the project needs, including an English README, license, `AGENTS.md`, project tooling, tests, and CI. Provide a PR workflow with the `status-check` required by the server. Pin GitHub Actions and reusable workflows to reviewed full commit SHAs.
+2. Add only the foundation files the project needs, including an English README, license, `AGENTS.md`, project tooling, tests, and CI. Follow [GitHub Actions architecture](github-actions.md): create the project's `docs/github-actions.md` and an `AGENTS.md` pointer to it, then implement and verify the required PR workflow. Leave server-distributed csm-ci caller workflows under server management.
 3. Configure [mise task management, linting, and the fix task](tooling.md). Run the same lint and test tasks locally and in PR CI.
 4. Configure Renovate using [renovate.json5](renovate.json5) as the baseline. Adapt language-specific settings to the project. Renovate requests merges with `/merge`; it does not use GitHub platform automerge.
 5. Enroll the repository and enable its client workflows using [enrollment.md](enrollment.md). Review and verify the caller workflows before activating the server-managed rulesets.
