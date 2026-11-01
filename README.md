@@ -174,9 +174,10 @@ whenever a new Herdr version is installed (force it with
 `mise install -f aqua:herdrdev/herdr`). The prefix is `ctrl+t`
 (`config/herdr/config.toml`).
 
-[Herdr GPUI](https://github.com/penso/herdr-gpui) attaches to that daemon as a
-native window. `mise run brew` installs the signed cask from `penso/tap`
-(`Herdr.app`). The cask requires macOS Sequoia or newer.
+[Herdr app](https://github.com/herdrdev/herdr-app) is the official desktop
+app. `mise run brew` installs it as the `herdr-app` cask. The app uses
+herdr-core, which it can install when first opened; the TUI and its plugins
+are managed separately by mise.
 
 Layout and navigation (Emacs-style pane motion: `b`/`p`/`n`/`f`):
 
