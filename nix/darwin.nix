@@ -50,7 +50,6 @@
     openssl
     gnupg
     git
-    htop
   ];
 
   # Touch ID is managed by the switch task instead of nix-darwin.
