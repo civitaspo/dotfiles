@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#MISE description="Register configured HTTP MCP servers with CLI-managed clients."
+#MISE hide=true
 set -euo pipefail
 
 mcp_config="$HOME/.config/dotfiles/mcp.json"
@@ -8,7 +8,7 @@ if [[ ! -f "$mcp_config" ]]; then
 fi
 
 if ! command -v jq >/dev/null 2>&1; then
-  printf 'mcp:sync requires jq. Install repository tools, then run mise run mcp:sync again.\n' >&2
+  printf 'mcp requires jq. Install repository tools, then run mise run mcp again.\n' >&2
   exit 1
 fi
 
@@ -82,7 +82,7 @@ while IFS=$'\t' read -r name url; do
       codex mcp add "$name" --url "$url"
     fi
   else
-    printf 'Codex CLI is unavailable. Run mise run mcp:sync after installing it.\n' >&2
+    printf 'Codex CLI is unavailable. Run mise run mcp after installing it.\n' >&2
   fi
 
   if ((claude_available)); then
@@ -91,6 +91,6 @@ while IFS=$'\t' read -r name url; do
       claude mcp add --transport http --scope user "$name" "$url"
     fi
   else
-    printf 'Claude Code CLI is unavailable. Run mise run mcp:sync after installing it.\n' >&2
+    printf 'Claude Code CLI is unavailable. Run mise run mcp after installing it.\n' >&2
   fi
 done < <(jq -r '.mcpServers | to_entries[] | [.key, .value.url] | @tsv' "$mcp_config")

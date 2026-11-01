@@ -12,6 +12,7 @@ cat >"$test_dir/bin/mise" <<'MISE'
 set -euo pipefail
 printf '%s\n' "$*" >> "$TEST_ROOT/calls"
 case "$*" in
+  'exec -- jq '* ) shift 2; exec "$@" ;;
   'ls --current --json')
     [[ "${FAIL_LIST:-0}" == 0 ]] || exit 1
     jq -n --arg root "$TEST_ROOT" '{"aqua:cli/cli": [{version: "1.0", install_path: ($root + "/empty")}], healthy: [{version: "1.0", install_path: ($root + "/healthy")}], new: [{version: "1.0", install_path: ($root + "/new")} ]}'

@@ -55,7 +55,7 @@ other private context. Such configuration belongs in the private repository
 `config/` into `~/.config/` (for example `~/.config/deck/` and
 `~/.config/herdr-linear-agent/`). Public OSS setup skills live under `skills/`
 in this repository. Personal skills live in the private repository under
-`skills/`. `mise run tools` installs both repositories and the official skill
+`skills/`. `mise run skills` installs both repositories and the official skill
 repositories with the `skills` CLI into `~/.agents/skills/` and each agent's
 skill directory.
 The on-demand Snowflake catalog comes from the mise-managed CoCo CLI
