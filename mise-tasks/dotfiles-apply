@@ -5,11 +5,11 @@ set -euo pipefail
 public_root="$HOME/src/github.com/civitaspo/dotfiles"
 private_root="$HOME/src/github.com/civitaspo/dotfiles-private"
 if [[ ! -d "$public_root/home" || ! "$public_root/home" -ef "$MISE_PROJECT_ROOT/home" || ! -d "$public_root/config" || ! "$public_root/config" -ef "$MISE_PROJECT_ROOT/config" ]]; then
-  printf 'Run switch from the checkout configured in the public dotfile groups.\n' >&2
+  printf 'Run mise run dotfiles from the checkout configured in the public dotfile groups.\n' >&2
   exit 1
 fi
 if [[ ! -f "$private_root/mise.toml" || ! -d "$private_root/home" || ! -d "$private_root/config" ]]; then
-  printf 'Clone and update the private dotfiles checkout before running switch.\n' >&2
+  printf 'Clone and update the private dotfiles checkout before running mise run dotfiles.\n' >&2
   exit 1
 fi
 for path in "$MISE_PROJECT_ROOT"/config/*; do
