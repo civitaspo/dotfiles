@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+activation="${1:?activation script required}"
+sudo_config="${2:?sudo PAM configuration required}"
+local_config="${3:?sudo_local PAM configuration required}"
+
+if ! awk '$1 == "auth" && $2 == "include" && $3 == "sudo_local" && $0 !~ /security[.]pam[.]services[.]sudo_local/ { found = 1 } END { exit !found }' "$sudo_config"; then
+  echo "sudo PAM configuration does not include sudo_local: $sudo_config" >&2
+  exit 1
+fi
+
+check_local_config() {
+  if [[ -e "$local_config" || -L "$local_config" ]]; then
+    if [[ ! -f "$local_config" ]] || ! awk '$1 == "auth" && $2 == "sufficient" && $3 == "pam_tid.so" { found = 1 } END { exit !found }' "$local_config"; then
+      echo "refusing to replace existing sudo_local configuration: $local_config" >&2
+      exit 1
+    fi
+  fi
+}
+
+check_local_config
+nix-env -p /nix/var/nix/profiles/system --set ./result
+activation_status=0
+"$activation" || activation_status=$?
+check_local_config
+if [[ ! -e "$local_config" ]]; then
+  # Publish a complete file without overwriting a concurrently created one.
+  temporary="$(mktemp "${local_config}.XXXXXX")"
+  trap 'rm -f "$temporary"' EXIT
+  printf 'auth       sufficient     pam_tid.so\n' >"$temporary"
+  chmod 644 "$temporary"
+  ln "$temporary" "$local_config"
+fi
+exit "$activation_status"

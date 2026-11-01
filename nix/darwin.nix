@@ -53,8 +53,8 @@
     htop
   ];
 
-  # Touch ID for sudo.
-  security.pam.services.sudo_local.touchIdAuth = true;
+  # Touch ID is managed by the switch task instead of nix-darwin.
+  security.pam.services.sudo_local.enable = false;
 
   # Raise file descriptor limits (2^19).
   launchd.daemons = {

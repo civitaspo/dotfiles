@@ -75,6 +75,8 @@ jobs:
         run: bash tests/test_timezone.sh
       - name: Check keyboard and Spotlight setup
         run: bash tests/test_system_settings.sh
+      - name: Check system activation and Touch ID handoff
+        run: bash tests/test_activate_system.sh
 
   status-check:
     runs-on: ubuntu-latest

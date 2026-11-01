@@ -206,6 +206,7 @@ run = [
   { task = "check:github-key" },
   { task = "check:timezone" },
   { task = "check:system-settings" },
+  { task = "check:activate-system" },
   { task = "check:typos" },
 ]
 
@@ -223,8 +224,8 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/timezone mise-tasks/setup/system-settings mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_timezone.sh tests/test_system_settings.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
-  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/timezone mise-tasks/setup/system-settings mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_timezone.sh tests/test_system_settings.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
+  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/timezone mise-tasks/setup/system-settings mise-tasks/setup/activate-system mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_timezone.sh tests/test_system_settings.sh tests/test_activate_system.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/timezone mise-tasks/setup/system-settings mise-tasks/setup/activate-system mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_timezone.sh tests/test_system_settings.sh tests/test_activate_system.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
 ]
 
 [tasks."check:typos"]
@@ -258,3 +259,7 @@ run = "bash tests/test_timezone.sh"
 [tasks."check:system-settings"]
 description = "Test keyboard and Spotlight setup."
 run = "bash tests/test_system_settings.sh"
+
+[tasks."check:activate-system"]
+description = "Test system activation and Touch ID handoff."
+run = "bash tests/test_activate_system.sh"
