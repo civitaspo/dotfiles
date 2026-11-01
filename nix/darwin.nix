@@ -55,4 +55,32 @@
   # Touch ID is managed by the switch task instead of nix-darwin.
   security.pam.services.sudo_local.enable = false;
 
+  # Raise file descriptor limits (2^19).
+  launchd.daemons = {
+    sysctl = {
+      serviceConfig = {
+        Label = "sysctl";
+        ProgramArguments = [
+          "sysctl"
+          "-w"
+          "kern.maxfiles=524288"
+          "kern.maxfilesperproc=524288"
+        ];
+        RunAtLoad = true;
+      };
+    };
+    "launchctl.maxfiles" = {
+      serviceConfig = {
+        Label = "launchctl.maxfiles";
+        ProgramArguments = [
+          "launchctl"
+          "limit"
+          "maxfiles"
+          "524288"
+          "524288"
+        ];
+        RunAtLoad = true;
+      };
+    };
+  };
 }
