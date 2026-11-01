@@ -32,6 +32,7 @@ git clone https://github.com/civitaspo/dotfiles.git \
   ~/src/github.com/civitaspo/dotfiles
 cd ~/src/github.com/civitaspo/dotfiles
 ./bootstrap.sh
+export PATH="$HOME/.local/bin:$PATH"
 ~/.local/bin/mise run bootstrap
 /opt/homebrew/bin/brew install --cask 1password
 sudo softwareupdate --install-rosetta --agree-to-license
@@ -52,19 +53,20 @@ Then pause and do the following by hand:
     ~/src/github.com/civitaspo/dotfiles-private
   ```
 
-  Keep this checkout up to date before running `mise run switch`.
+  Keep this checkout up to date before running `mise run dotfiles`.
 
 Install the CLI tools and register this Mac's GitHub key before applying the
 SSH configuration:
 
 ```sh
-~/.local/bin/mise run tools:install
+~/.local/bin/mise run tools
+eval "$(MISE_GLOBAL_CONFIG_FILE="$PWD/config/mise/config.toml" MISE_GLOBAL_CONFIG_ROOT="$PWD/config/mise" mise env -s zsh)"
 gh auth login --hostname github.com --git-protocol ssh --skip-ssh-key
 gh auth refresh --hostname github.com --scopes admin:public_key,admin:ssh_signing_key
 ~/.local/bin/mise run setup:github-key
 ```
 
-Open a new terminal and apply the configuration:
+Apply the configuration in the same terminal:
 
 ```sh
 cd ~/src/github.com/civitaspo/dotfiles
@@ -73,12 +75,12 @@ cd ~/src/github.com/civitaspo/dotfiles
 
 `bootstrap.sh` only installs a pinned, verified mise. `mise run bootstrap`
 installs pinned, signed Determinate Nix and Homebrew packages. `mise run
-reconcile` is the only apply step: nix-darwin, Homebrew, App Store apps,
-then locked mise tools.
+reconcile` installs the locked tools, links dotfiles, activates nix-darwin,
+then applies apps and agent configuration.
 
 Private MCP servers are installed from the private configuration during
-`mise run switch`. If a client CLI was unavailable during setup, install it
-and run `mise run mcp:sync` to register the servers later.
+`mise run mcp` after dotfile placement. If a client CLI was unavailable during
+setup, install it and run `mise run mcp` to register the servers later.
 
 App Store apps are `mas:<id>` entries in `mise.toml`'s
 `[bootstrap.packages]`. `mise run mas` installs missing ones with
@@ -134,7 +136,11 @@ workflows. Dotfiles has no automated release pipeline.
 ```sh
 mise run               # list available tasks
 mise run reconcile     # apply everything: nix-darwin + dotfiles + Homebrew + App Store + mise
-mise run switch        # apply nix-darwin, dotfiles, and time zone
+mise run dotfiles      # link public and private configuration files
+mise run nix           # activate nix-darwin system settings
+mise run tools         # install locked CLI tools
+mise run skills        # sync declared agent skills; remove undeclared skills
+mise run mcp           # register configured MCP servers
 mise run mas           # install missing App Store apps
 mise run update        # update Nix inputs, mise tools, Homebrew packages and App Store apps
 mise run import:brew   # capture the live Homebrew state back into the Brewfile
@@ -142,14 +148,17 @@ mise run livecheck:casks # show newer upstream versions for local tap casks
 mise run check         # validate Nix, private configuration, and repository checks
 ```
 
-To change a configuration file, edit it under `config/` or `home/` and run
-`mise run switch`. mise links public and private files from their local
-checkouts. Cursor shares the private MCP configuration file with other clients.
-Always use `mise run switch` or `mise run reconcile` to activate Nix: direct
-`darwin-rebuild switch` skips the dotfile handoff.
+Existing managed files are symlinks to `config/` or `home/` in the public
+or private checkout. Edit either the link or its source; no apply step is
+needed. For a new file, add it to Git and run `mise run dotfiles` to link it.
+Cursor shares the private MCP configuration file with other clients.
 
-After the first successful reconcile, the shell configuration puts mise on
-`PATH`, so `mise run …` works without the `~/.local/bin/mise` prefix.
+Run `mise run nix` to activate system settings or `mise run reconcile` to
+apply the complete configuration. Activation disables Spotlight indexing and
+clears its existing index.
+
+After the first successful reconcile, open a new terminal to load the linked
+shell configuration, which puts mise on `PATH`.
 
 `mise run tools` (also part of `reconcile`) reinstalls configured tools whose
 installation directories contain no files, even when mise reports them as
@@ -213,8 +222,9 @@ Kitty graphics is enabled for panes that use it inside Herdr.
 
 ## Codex + Plannotator
 
-`mise run tools` installs [Plannotator](https://plannotator.ai/) and configures
-its Codex `Stop` hook in `$CODEX_HOME` or `~/.codex`. The setup enables Codex's
+`mise run tools` installs [Plannotator](https://plannotator.ai/);
+`mise run setup:plannotator` configures its Codex `Stop` hook in `$CODEX_HOME`
+or `~/.codex`. The setup enables Codex's
 hooks feature (`[features] hooks = true`) and merges an absolute mise shim
 path into the existing `hooks.json`, so existing Codex hooks remain in place.
 Restart Codex Desktop after the first setup.
@@ -233,7 +243,7 @@ document annotation are available from a Codex prompt:
 !plannotator last
 ```
 
-`mise run tools` installs the declared agent skills and removes every other
+`mise run skills` installs the declared agent skills and removes every other
 global skill. `mise run skills:plan` prints that diff and changes nothing.
 The sources are the list in `mise-tasks/skills/sync`, installed for Claude
 Code, Cursor, Codex, and Pi. Personal skills come from
@@ -273,14 +283,14 @@ title uses the same device label. If you change the Mac's hostname, the task
 stops when the installed files belong to the previous label. Archive both
 reference files before explicitly generating and registering the replacement.
 
-For an existing installation, register the key before `mise run switch`.
+For an existing installation, register the key before `mise run dotfiles`.
 The task requires `gh` to be signed into `civitaspo` with `admin:public_key`
 and `admin:ssh_signing_key` scopes. If needed, run:
 
 ```sh
 gh auth refresh --hostname github.com --scopes admin:public_key,admin:ssh_signing_key
 mise run setup:github-key
-mise run switch
+mise run dotfiles
 ssh -T git@github.com
 ```
 
@@ -297,7 +307,7 @@ partial key files, or a mismatch, it stops without replacing them. Inspect
 `sc_auth list-ctk-identities` and the reported fingerprints before repairing
 the local state. Preserve the old 1Password keys and GitHub registrations
 until the replacement is verified. To roll back, restore the previous Git
-and SSH configuration and run `mise run switch`; do not delete either key.
+and SSH configuration and run `mise run dotfiles`; do not delete either key.
 
 This setup follows [mizdra's Secure Enclave guide](https://www.mizdra.net/entry/2026/08/07/101542).
 

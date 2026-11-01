@@ -55,11 +55,19 @@ run = [
 [tasks.reconcile]
 description = "Apply the whole configuration to this machine."
 run = [
-  { task = "switch" },
+  { task = "tools" },
+  { task = "dotfiles" },
+  { task = "nix" },
   { task = "brew" },
   { task = "mas" },
-  { task = "tools" },
+  { task = "setup:plannotator" },
+  { task = "skills" },
+  { task = "mcp" },
 ]
+
+[tasks.dotfiles]
+description = "Link public and private dotfiles."
+run = "./mise-tasks/dotfiles-apply"
 
 [tasks.brew]
 description = "Apply the Brewfile and remove unlisted packages."
@@ -78,12 +86,17 @@ run = [
 ]
 
 [tasks.tools]
-description = "Install locked tool versions with mise."
-run = [
-  { task = "tools:install" },
-  { task = "setup:plannotator" },
-  { task = "skills:sync" },
-]
+description = "Install locked tool versions and repair empty installations."
+env = { MISE_GLOBAL_CONFIG_FILE = "{{config_root}}/config/mise/config.toml", MISE_GLOBAL_CONFIG_ROOT = "{{config_root}}/config/mise" }
+run = "./mise-tasks/tools/install"
+
+[tasks.skills]
+description = "Sync declared global skills and remove undeclared skills."
+run = "./mise-tasks/skills/sync"
+
+[tasks.mcp]
+description = "Register configured MCP servers with CLI clients."
+run = "./mise-tasks/mcp/sync"
 
 [tasks.update]
 description = "Update Nix inputs, mise tools, Homebrew packages, and App Store apps."
@@ -99,11 +112,8 @@ description = "Sign in to Cursor Agent."
 run = "cursor-agent login"
 
 [tasks."update:nix"]
-description = "Update flake inputs and re-activate nix-darwin."
-run = [
-  "nix flake update",
-  { task = "switch" },
-]
+description = "Update Nix flake inputs without activating them."
+run = "nix flake update"
 
 [tasks."update:mise"]
 description = "Upgrade mise-managed tools and drop unused versions."
@@ -179,8 +189,8 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
-  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
+  "shellcheck bootstrap.sh mise-tasks/nix mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/nix mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
 ]
 
 [tasks."check:typos"]

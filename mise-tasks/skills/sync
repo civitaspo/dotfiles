@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#MISE description="Install declared global skills and remove every other global skill."
+#MISE hide=true
 set -euo pipefail
 
 mode="${SKILLS_RECONCILE:-sync}"

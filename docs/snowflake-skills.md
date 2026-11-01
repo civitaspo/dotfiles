@@ -38,4 +38,4 @@ The router uses mise directly.
 
 Keep upstream skill assets and dependency manifests out of Git. Their presence
 in a local mise installation does not create Dependabot entries in either
-repository. Official skills are installed by `mise run tools`, not committed.
+repository. Official skills are installed by `mise run skills`, not committed.

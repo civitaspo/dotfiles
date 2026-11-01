@@ -117,6 +117,6 @@ missing_bin="$tmp_dir/missing-bin"
 mkdir -p "$missing_bin"
 ln -s "$real_jq" "$missing_bin/jq"
 env HOME="$missing_home" PATH="$missing_bin:/usr/bin:/bin" "$repo_root/mise-tasks/mcp/sync" >"$tmp_dir/missing.log" 2>&1
-grep -q 'mise run mcp:sync' "$tmp_dir/missing.log"
+grep -q 'mise run mcp' "$tmp_dir/missing.log"
 
 printf 'MCP sync behavior checks passed.\n'

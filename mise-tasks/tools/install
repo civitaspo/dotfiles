@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-#MISE description="Install configured tools and repair empty installations."
+#MISE hide=true
 set -euo pipefail
 
 configured_tools() {
-  mise ls --current --json | jq -r 'to_entries[] | .key as $tool | .value[] | [($tool + "@" + .version), .install_path] | @tsv'
+  # The jq filter uses jq variables, not shell variables.
+  # shellcheck disable=SC2016
+  mise ls --current --json | mise exec -- jq -r 'to_entries[] | .key as $tool | .value[] | [($tool + "@" + .version), .install_path] | @tsv'
 }
 
 has_payload() {
