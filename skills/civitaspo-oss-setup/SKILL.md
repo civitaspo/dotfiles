@@ -5,7 +5,7 @@ description: Set up a new public civitaspo OSS repository with csm-ci-server, Re
 
 # Set up a civitaspo OSS repository
 
-Create a public repository under `civitaspo`, adapted to the project's actual language and needs. Write all repository text in English, including code, comments, documentation, commits, and PRs. Use Conventional Commit PR titles and signed commits.
+Create a public repository under `civitaspo`, adapted to the project's actual language and needs. Write all repository text and public repository communication in English, including code, documentation, commits, issues, PRs, reviews, and comments. Use Conventional Commit PR titles and signed commits.
 
 The authoritative configuration is [`civitaspo/csm-ci-server`](https://github.com/civitaspo/csm-ci-server), especially its [`csm-ci.yaml`](https://github.com/civitaspo/csm-ci-server/blob/main/csm-ci.yaml). Before choosing workflow pins or applying settings, inspect the deployed server workflows and the documentation at the corresponding published `csm-ci-actions` revision. Do not assume features documented on an unreleased branch are deployed.
 
@@ -15,6 +15,9 @@ Before configuring project tooling, ask the user which programming languages the
 
 1. Create the public repository and its initial default branch. Repo-settings does not create repositories. If the repository is empty, use a minimal signed bootstrap commit; use PRs for subsequent changes.
 2. Add only the foundation files the project needs, including an English README, license, `AGENTS.md`, project tooling, tests, and CI. Follow [GitHub Actions architecture](github-actions.md): create the project's `docs/github-actions.md` and an `AGENTS.md` pointer to it, then implement and verify the required PR workflow. Leave server-distributed csm-ci caller workflows under server management.
+
+   In the new `AGENTS.md`, require English for all repository text and public repository communication, including issues, PRs, reviews, and comments. Require a `Co-Authored-By: Name <email>` Git commit trailer for each AI agent that contributed to the commit. Use the actual agent identity, for example `Co-Authored-By: Codex <noreply@openai.com>` or `Co-Authored-By: Claude <noreply@anthropic.com>`. Verify the trailers in each commit before pushing. Include each contributing agent’s trailer at the end of the PR body so the csm-ci squash merge preserves it in the final commit; verify the merged commit.
+
 3. Configure [mise task management, linting, and the fix task](tooling.md). Run the same lint and test tasks locally and in PR CI.
 4. Configure Renovate using [renovate.json5](renovate.json5) as the baseline. Adapt language-specific settings to the project. Renovate requests merges with `/merge`; it does not use GitHub platform automerge.
 5. Enroll the repository and enable its client workflows using [enrollment.md](enrollment.md). Review and verify the caller workflows before activating the server-managed rulesets.
