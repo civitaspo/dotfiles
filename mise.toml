@@ -19,48 +19,6 @@ target = "~/.config"
 mode = "symlink-each"
 manifest = "git"
 
-[bootstrap.macos.defaults.NSGlobalDomain]
-AppleICUForce24HourTime = true
-AppleInterfaceStyle = "Dark"
-AppleInterfaceStyleSwitchesAutomatically = false
-AppleMeasurementUnits = "Centimeters"
-ApplePressAndHoldEnabled = false
-AppleShowAllExtensions = true
-AppleShowScrollBars = "WhenScrolling"
-AppleTemperatureUnit = "Celsius"
-InitialKeyRepeat = 15
-KeyRepeat = 1
-NSAutomaticCapitalizationEnabled = false
-NSAutomaticDashSubstitutionEnabled = false
-NSAutomaticPeriodSubstitutionEnabled = false
-NSAutomaticQuoteSubstitutionEnabled = false
-NSAutomaticSpellingCorrectionEnabled = false
-NSAutomaticWindowAnimationsEnabled = false
-NSDisableAutomaticTermination = true
-NSWindowResizeTime = 0.001
-"com.apple.mouse.tapBehavior" = 1
-"com.apple.sound.beep.volume" = 0.0
-"com.apple.sound.beep.feedback" = 0
-"com.apple.trackpad.enableSecondaryClick" = true
-
-[bootstrap.macos.defaults."com.apple.LaunchServices"]
-LSQuarantine = false
-
-[bootstrap.macos.defaults."com.apple.dock"]
-autohide = false
-show-recents = false
-launchanim = true
-mouse-over-hilite-stack = true
-orientation = "bottom"
-tilesize = 48
-
-[bootstrap.macos.defaults."com.apple.finder"]
-_FXShowPosixPathInTitle = false
-
-[bootstrap.macos.trackpad]
-tap_to_click = true
-three_finger_drag = true
-
 # Mac App Store apps, installed by `mise run mas` with the `mas` CLI.
 # Run named bootstrap parts only: bare `mise bootstrap` also runs
 # [tasks.bootstrap], which installs Nix and Homebrew.
@@ -204,8 +162,6 @@ run = [
   { task = "check:skills-sync" },
   { task = "check:1password" },
   { task = "check:github-key" },
-  { task = "check:timezone" },
-  { task = "check:system-settings" },
   { task = "check:typos" },
 ]
 
@@ -223,8 +179,8 @@ run = [
 [tasks."check:shell"]
 description = "Lint and format-check shell scripts."
 run = [
-  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/timezone mise-tasks/setup/system-settings mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_timezone.sh tests/test_system_settings.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
-  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/timezone mise-tasks/setup/system-settings mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_timezone.sh tests/test_system_settings.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
+  "shellcheck bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
+  "shfmt -d -i 2 -ci bootstrap.sh mise-tasks/switch mise-tasks/dotfiles-apply mise-tasks/check/private tests/test_private_dotfiles_handoff.sh mise-tasks/mcp/sync mise-tasks/setup/plannotator mise-tasks/setup/xcode mise-tasks/setup/github-key mise-tasks/bootstrap/nix mise-tasks/bootstrap/homebrew mise-tasks/brew/tap mise-tasks/tools/install mise-tasks/skills/plan mise-tasks/skills/sync tests/test_tools_install.sh tests/test_skills_sync.sh tests/test_mcp_sync.sh tests/test_github_key.sh tests/test_mas_packages.sh tests/test_mise_lock.sh home/bin/* home/.docker/cli-plugins/*",
 ]
 
 [tasks."check:typos"]
@@ -250,11 +206,3 @@ run = "bash tests/test_github_key.sh"
 [tasks."check:mcp-sync"]
 description = "Test MCP server registration and conflict handling."
 run = "bash tests/test_mcp_sync.sh"
-
-[tasks."check:timezone"]
-description = "Test macOS time zone setup."
-run = "bash tests/test_timezone.sh"
-
-[tasks."check:system-settings"]
-description = "Test keyboard and Spotlight setup."
-run = "bash tests/test_system_settings.sh"
