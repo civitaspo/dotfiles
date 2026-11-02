@@ -102,9 +102,6 @@ aqua = "latest"
 "aqua:dalance/procs" = "latest"
 "aqua:bootandy/dust" = "latest"
 
-# --- Cloud SDKs -------------------------------------------------------------
-gcloud = "latest"
-
 # --- AI agent CLIs ----------------------------------------------------------
 claude-code = "latest"
 # Resolves to aqua:openai/codex (package tar.gz since rust-v0.133.0). Requires a
