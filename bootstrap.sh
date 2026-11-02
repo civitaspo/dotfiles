@@ -2,8 +2,9 @@
 # Install the pinned mise binary. All other setup lives in mise tasks.
 set -euo pipefail
 
-MISE_VERSION="2026.10.7"
-MISE_SHA256="f5171e341518a57e8c4e9280e28443e35d66212c51164c83be76794e0a78b014"
+# Refresh mise to keep its baked-in aqua registry current.
+MISE_VERSION="2026.10.25"
+MISE_SHA256="8a3ef00765b009278197aba627ac00d6e9c63f6aeb04d4f4b2cfe0e59ddc2fd6"
 MISE_TEAM_ID="4993Y37DX6"
 MISE_URL="https://github.com/jdx/mise/releases/download/v${MISE_VERSION}/mise-v${MISE_VERSION}-macos-arm64"
 MISE_BIN="${HOME}/.local/bin/mise"
