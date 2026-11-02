@@ -130,14 +130,14 @@ checksum = "sha256:05c5ef53fb262de2fa1b46cf457890ee4152ec1dd8b2fdd94d028fa9b885f
 url = "https://s3.amazonaws.com/session-manager-downloads/plugin/1.2.896.0/mac_arm64/sessionmanager-bundle.zip"
 
 [[tools."aqua:bootandy/dust"]]
-version = "1.2.7"
+version = "1.2.6"
 backend = "aqua:bootandy/dust"
 
 [tools."aqua:bootandy/dust"."platforms.macos-arm64"]
-checksum = "sha256:38e1b3b4e5e6a5cdb044b5fdb32ea45f18dc78276711796214806f20f7705a99"
+checksum = "sha256:5c37ee0d353165c73aedd6b21b9133182221efe08f9a5e76c082d9d6d5a0935d"
 checksum_source = "mise-versions"
-url = "https://github.com/bootandy/dust/releases/download/v1.2.7/dust-v1.2.7-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/699455834"
+url = "https://github.com/bootandy/dust/releases/download/v1.2.6/dust-v1.2.6-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/568852617"
 
 [[tools."aqua:charmbracelet/freeze"]]
 version = "0.2.2"
@@ -470,13 +470,13 @@ url = "https://github.com/openai/codex/releases/download/rust-v0.166.0/codex-pac
 url_api = "https://api.github.com/repos/openai/codex/releases/assets/689703068"
 
 [[tools."github:backnotprop/plannotator"]]
-version = "0.28.44"
+version = "0.28.43"
 backend = "github:backnotprop/plannotator"
 
 [tools."github:backnotprop/plannotator"."platforms.macos-arm64"]
-checksum = "sha256:57467265bfaa2c967c35b62b6ba323e649cd679713b67ad61e8bef7c4aaac24b"
-url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.44/plannotator-darwin-arm64"
-url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/699687990"
+checksum = "sha256:23a60fdd3d986114d3c4df99dcb3734961bae9ef7917df9d1b4977acf01c597a"
+url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.43/plannotator-darwin-arm64"
+url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/698699862"
 provenance = "github-attestations"
 
 [[tools."github:civitaspo/hook-relay-client-rs"]]
