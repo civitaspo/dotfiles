@@ -469,14 +469,6 @@ checksum_source = "mise-versions"
 url = "https://github.com/openai/codex/releases/download/rust-v0.166.0/codex-package-aarch64-apple-darwin.tar.gz"
 url_api = "https://api.github.com/repos/openai/codex/releases/assets/689703068"
 
-[[tools.gcloud]]
-version = "591.0.0"
-backend = "vfox:mise-plugins/vfox-gcloud"
-
-[tools.gcloud."platforms.macos-arm64"]
-checksum = "sha256:5552277a00e32810929aa3b727116727453c75c49fe413604d370ddb52885c26"
-url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-591.0.0-darwin-arm.tar.gz"
-
 [[tools."github:backnotprop/plannotator"]]
 version = "0.28.44"
 backend = "github:backnotprop/plannotator"
@@ -635,15 +627,6 @@ backend = "core:python"
 [tools.python."platforms.macos-arm64"]
 checksum = "sha256:1b1b03fca8aa351698403f3d100ee83db7a5d99748fc7707681ac31a6a846ad9"
 url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.15.2+20261026-aarch64-apple-darwin-install_only_stripped.tar.gz"
-provenance = "github-attestations"
-
-[[tools.python]]
-version = "3.14.10"
-backend = "core:python"
-
-[tools.python."platforms.macos-arm64"]
-checksum = "sha256:95eb8c87d16af37c54e9765e31d8c56c0d8ffa9968ea0f704f73a9b83f84e9f9"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.14.10+20261026-aarch64-apple-darwin-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [[tools.rust]]
