@@ -11,12 +11,12 @@ url_api = "https://api.github.com/repos/aquaproj/aqua/releases/assets/665751122"
 provenance = "github-attestations"
 
 [[tools."aqua:1password/cli"]]
-version = "2.41.0"
+version = "2.41.1"
 backend = "aqua:1password/cli"
 
 [tools."aqua:1password/cli"."platforms.macos-arm64"]
-checksum = "sha256:83da93b6d90726ac5111ce4f6993a9504ee420b7a299b9d145041886cd13c6ca"
-url = "https://cache.agilebits.com/dist/1P/op2/pkg/v2.41.0/op_darwin_arm64_v2.41.0.zip"
+checksum = "sha256:2289771b68b521ee3dc1d63a013a6a1c5691e0c53e4c4fe79af8042b6ad3c7f5"
+url = "https://cache.agilebits.com/dist/1P/op2/pkg/v2.41.1/op_darwin_arm64_v2.41.1.zip"
 
 [[tools."aqua:BurntSushi/ripgrep"]]
 version = "15.2.0"
@@ -28,13 +28,13 @@ url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15
 url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478118851"
 
 [[tools."aqua:ClementTsang/bottom"]]
-version = "0.14.9"
+version = "0.15.0"
 backend = "aqua:ClementTsang/bottom"
 
 [tools."aqua:ClementTsang/bottom"."platforms.macos-arm64"]
-checksum = "sha256:28358e19a3d62b3778fc0d1778b0028a682059145c9ac38ac5076bf124d77714"
-url = "https://github.com/ClementTsang/bottom/releases/download/0.14.9/bottom_aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/ClementTsang/bottom/releases/assets/531978112"
+checksum = "sha256:6d83c9eba811dd139392fa5b04baa75225c6aa120dad36a070e636660db023fd"
+url = "https://github.com/ClementTsang/bottom/releases/download/0.15.0/bottom_aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/ClementTsang/bottom/releases/assets/696808719"
 provenance = "github-attestations"
 
 [[tools."aqua:DataDog/pup"]]
@@ -130,13 +130,14 @@ checksum = "sha256:05c5ef53fb262de2fa1b46cf457890ee4152ec1dd8b2fdd94d028fa9b885f
 url = "https://s3.amazonaws.com/session-manager-downloads/plugin/1.2.896.0/mac_arm64/sessionmanager-bundle.zip"
 
 [[tools."aqua:bootandy/dust"]]
-version = "1.2.6"
+version = "1.2.7"
 backend = "aqua:bootandy/dust"
 
 [tools."aqua:bootandy/dust"."platforms.macos-arm64"]
-checksum = "sha256:5c37ee0d353165c73aedd6b21b9133182221efe08f9a5e76c082d9d6d5a0935d"
-url = "https://github.com/bootandy/dust/releases/download/v1.2.6/dust-v1.2.6-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/568852617"
+checksum = "sha256:38e1b3b4e5e6a5cdb044b5fdb32ea45f18dc78276711796214806f20f7705a99"
+checksum_source = "mise-versions"
+url = "https://github.com/bootandy/dust/releases/download/v1.2.7/dust-v1.2.7-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/699455834"
 
 [[tools."aqua:charmbracelet/freeze"]]
 version = "0.2.2"
@@ -259,13 +260,14 @@ url = "https://github.com/git-lfs/git-lfs/releases/download/v3.8.1/git-lfs-darwi
 url_api = "https://api.github.com/repos/git-lfs/git-lfs/releases/assets/666388058"
 
 [[tools."aqua:grafana/k6"]]
-version = "1.7.1"
+version = "1.8.2"
 backend = "aqua:grafana/k6"
 
 [tools."aqua:grafana/k6"."platforms.macos-arm64"]
-checksum = "sha256:9cace748ebeddb92432f606c6c53d964772176fdf1a0ebb4db5ead3df39ba761"
-url = "https://github.com/grafana/k6/releases/download/v1.7.1/k6-v1.7.1-macos-arm64.zip"
-url_api = "https://api.github.com/repos/grafana/k6/releases/assets/384650593"
+checksum = "sha256:2ce3ed837e9a7c7b1b7a594ff72861bbf9d94d5930ca6611bd6f1ef5a08f7d0a"
+checksum_source = "mise-versions"
+url = "https://github.com/grafana/k6/releases/download/v1.8.2/k6-v1.8.2-macos-arm64.zip"
+url_api = "https://api.github.com/repos/grafana/k6/releases/assets/633737653"
 
 [[tools."aqua:hashicorp/terraform"]]
 version = "1.17.1"
@@ -476,13 +478,13 @@ checksum = "sha256:5552277a00e32810929aa3b727116727453c75c49fe413604d370ddb52885
 url = "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-591.0.0-darwin-arm.tar.gz"
 
 [[tools."github:backnotprop/plannotator"]]
-version = "0.28.42"
+version = "0.28.44"
 backend = "github:backnotprop/plannotator"
 
 [tools."github:backnotprop/plannotator"."platforms.macos-arm64"]
-checksum = "sha256:78739ce77af66949f0d1a105d7f83af543ef68d925cb5ef11579a8628e625781"
-url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.42/plannotator-darwin-arm64"
-url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/694961007"
+checksum = "sha256:57467265bfaa2c967c35b62b6ba323e649cd679713b67ad61e8bef7c4aaac24b"
+url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.44/plannotator-darwin-arm64"
+url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/699687990"
 provenance = "github-attestations"
 
 [[tools."github:civitaspo/hook-relay-client-rs"]]
@@ -534,12 +536,12 @@ url = "https://github.com/tomasz-tomczyk/crit/releases/download/v0.23.2/crit-dar
 url_api = "https://api.github.com/repos/tomasz-tomczyk/crit/releases/assets/695421985"
 
 [[tools.go]]
-version = "1.26.10"
+version = "1.27.3"
 backend = "core:go"
 
 [tools.go."platforms.macos-arm64"]
-checksum = "sha256:0b5183492292ada170f9b561a834863808dd02edba599e4ad0e89899330020b3"
-url = "https://dl.google.com/go/go1.26.10.darwin-arm64.tar.gz"
+checksum = "sha256:dd3908cf20959d798c1e06ebe5b72213f0505ce01373b40ce3110975a6cd99c2"
+url = "https://dl.google.com/go/go1.27.3.darwin-arm64.tar.gz"
 
 [[tools."http:antigravity-cli"]]
 version = "1.0.3"
@@ -627,12 +629,12 @@ version = "1.7.4"
 backend = "npm:skills"
 
 [[tools.python]]
-version = "3.13.18"
+version = "3.15.2"
 backend = "core:python"
 
 [tools.python."platforms.macos-arm64"]
-checksum = "sha256:8392b6ea51d94391befb2c31ebe75463f045d0b69dfcf5e1bb3234e1f5fa3405"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.13.18+20261026-aarch64-apple-darwin-install_only_stripped.tar.gz"
+checksum = "sha256:1b1b03fca8aa351698403f3d100ee83db7a5d99748fc7707681ac31a6a846ad9"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.15.2+20261026-aarch64-apple-darwin-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [[tools.rust]]
