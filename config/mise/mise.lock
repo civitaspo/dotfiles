@@ -480,6 +480,15 @@ checksum = "sha256:f5dadb8ea4a680492f284772bfb9e54a1eaea57d9d4e672662278af7aa4fb
 url = "https://github.com/tomasz-tomczyk/crit/releases/download/v0.23.0/crit-darwin-arm64"
 url_api = "https://api.github.com/repos/tomasz-tomczyk/crit/releases/assets/648371549"
 
+[[tools."http:herdr-core"]]
+version = "0.1.16"
+backend = "http:herdr-core"
+specifiers = ["0.1.16"]
+
+[tools."http:herdr-core"."platforms.macos-arm64"]
+checksum = "sha256:698d8f0c44f4e4b15fec174d52a39d57a014cfd71added44b53a0753b469d0fd"
+url = "https://releases.herdr.dev/core/0.1.16/herdr-core-macos-aarch64.tar.gz"
+
 [[tools."http:antigravity-cli"]]
 version = "1.0.3"
 backend = "http:antigravity-cli"
