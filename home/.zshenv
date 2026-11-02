@@ -17,6 +17,9 @@ path=(
   $HOME/.local/share/mise/shims(N-/)
   $path
 )
+if [[ -n "$REX_BIN_DIR" ]]; then
+  path=("$REX_BIN_DIR" $path)
+fi
 
 # 1Password secret reference. Resolve at use time with `op read` / `op run`.
 export OPENAI_API_KEY="op://Private/openai-api-key-civitaspo-neovim/password"
