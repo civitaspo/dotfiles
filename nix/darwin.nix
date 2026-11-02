@@ -103,6 +103,7 @@
     gnutar
     gawk
     gnugrep
+    google-cloud-sdk
     (callPackage ./wget.nix { })
     openssl
     gnupg
