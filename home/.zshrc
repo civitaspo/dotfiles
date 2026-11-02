@@ -92,6 +92,10 @@ if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
 fi
 
+if [[ -n "$REX_BIN_DIR" ]]; then
+  export PATH="$REX_BIN_DIR:$PATH"
+fi
+
 _command_ready() {
   local bin_path
   bin_path="$(command -v "$1" 2> /dev/null)" || return 1
