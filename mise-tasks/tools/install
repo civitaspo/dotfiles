@@ -16,6 +16,10 @@ has_payload() {
   [[ -n "$files" ]]
 }
 
+# gcloud's macOS postinstall requires a Python minor version recorded inside
+# the SDK. Install the compatible runtime first so it is available to vfox's
+# postinstall hook during the full tool install.
+mise install python@3.14
 mise install
 tools="$(configured_tools)"
 while IFS=$'\t' read -r tool install_path; do

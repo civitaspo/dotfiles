@@ -20,7 +20,10 @@ trusted_config_paths = ["~/.config/herdr/plugins"]
 
 [tools]
 # --- Language runtimes ------------------------------------------------------
-python = "3.15.2"
+# gcloud's macOS installer requires the exact Python minor version embedded in
+# its SDK. Keep the project Python first and the gcloud-compatible runtime
+# available alongside it.
+python = ["3.15.2", "3.14"]
 node = "22.23.4"
 go = "1.27.3"
 "aqua:hashicorp/terraform" = "1.17.1"
