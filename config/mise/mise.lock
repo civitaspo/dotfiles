@@ -452,6 +452,15 @@ checksum = "sha256:684cd782e6f1ba2fcf6e7dffe069b82efe9397b681b95ae0b17a907c70392
 url = "https://github.com/civitaspo/hook-relay-client-rs/releases/download/v0.1.0/hook-relay-client-aarch64-apple-darwin"
 url_api = "https://api.github.com/repos/civitaspo/hook-relay-client-rs/releases/assets/592651691"
 
+[[tools."github:git-ecosystem/git-credential-manager"]]
+version = "3.0.2"
+backend = "github:git-ecosystem/git-credential-manager"
+
+[tools."github:git-ecosystem/git-credential-manager"."platforms.macos-arm64"]
+checksum = "sha256:2031e8f81683ff0bd835a762e6cfd0831e9d28cdd5a55b10135c73e9498750cc"
+url = "https://github.com/git-ecosystem/git-credential-manager/releases/download/v3.0.2/gcm-osx-arm64-3.0.2.tar.gz"
+url_api = "https://api.github.com/repos/git-ecosystem/git-credential-manager/releases/assets/677977553"
+
 [[tools."github:k1LoW/mo"]]
 version = "1.6.9"
 backend = "github:k1LoW/mo"
