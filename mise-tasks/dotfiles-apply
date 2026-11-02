@@ -12,20 +12,28 @@ if [[ ! -f "$private_root/mise.toml" || ! -d "$private_root/home" || ! -d "$priv
   printf 'Clone and update the private dotfiles checkout before running mise run dotfiles.\n' >&2
   exit 1
 fi
-for path in "$MISE_PROJECT_ROOT"/config/*; do
-  name=${path##*/}
-  if [[ "$name" != mise && -e "$private_root/config/$name" ]]; then
-    printf 'Public and private config directories overlap.\n' >&2
-    exit 1
-  fi
-done
+private_paths=()
+while IFS= read -r -d '' private_path; do
+  private_paths+=("$private_path")
+done < <(git -C "$private_root" ls-files -z home config)
 
-while IFS= read -r -d '' path; do
-  if git -C "$private_root" --literal-pathspecs ls-files --error-unmatch -- "$path" >/dev/null 2>&1; then
-    printf 'Public and private home files overlap.\n' >&2
-    exit 1
-  fi
-done < <(git -C "$MISE_PROJECT_ROOT" ls-files -z home)
+while IFS= read -r -d '' public_path; do
+  case "$public_path" in
+    home/*) public_target=${public_path#home/} ;;
+    config/*) public_target=.config/${public_path#config/} ;;
+  esac
+  for private_path in "${private_paths[@]}"; do
+    case "$private_path" in
+      config/mise/*) continue ;;
+      home/*) private_target=${private_path#home/} ;;
+      config/*) private_target=.config/${private_path#config/} ;;
+    esac
+    if [[ "$public_target" == "$private_target" || "$public_target" == "$private_target/"* || "$private_target" == "$public_target/"* ]]; then
+      printf 'Public and private dotfile targets overlap: %s and %s\n' "$public_path" "$private_path" >&2
+      exit 1
+    fi
+  done
+done < <(git -C "$MISE_PROJECT_ROOT" ls-files -z home config)
 
 /bin/bash "$MISE_PROJECT_ROOT/mise-tasks/check/private"
 mise dotfiles apply --yes "$HOME" "$HOME/.config"

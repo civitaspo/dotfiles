@@ -61,6 +61,7 @@ fi
 printf 'pass\n' >"$private_root/scripts/check-skill-links.py"
 bash mise-tasks/dotfiles-apply
 bash mise-tasks/dotfiles-apply
+git config --global --get user.name >/dev/null
 [[ "$HOME/.ssh/config.d/fixture" -ef "$private_root/home/.ssh/config.d/fixture" ]]
 [[ "$HOME/.cursor/mcp.json" -ef "$private_root/config/dotfiles/mcp.json" ]]
 [[ $(cat "$HOME/.config/nvim/unmanaged") == keep && ! -e "$HOME/.unrelated" ]]
@@ -71,9 +72,29 @@ if bash mise-tasks/dotfiles-apply; then
   exit 1
 fi
 [[ $(cat "$HOME/.ssh/config.d/fixture") == "local changes" ]]
-mkdir -p "$private_root/config/nvim"
+rm "$HOME/.ssh/config.d/fixture"
+mkdir -p "$private_root/config/git/conf.d"
+printf '[test]\n\tvalue = private\n' >"$private_root/config/git/conf.d/private"
+git -C "$private_root" add config/git/conf.d/private
+bash mise-tasks/dotfiles-apply
+[[ "$HOME/.config/git/config" -ef "$repo_root/config/git/config" ]]
+[[ "$HOME/.config/git/conf.d/private" -ef "$private_root/config/git/conf.d/private" ]]
+[[ $(git config --get test.value) == private ]]
+printf 'collision\n' >"$private_root/config/git/config"
+git -C "$private_root" add config/git/config
 if bash mise-tasks/dotfiles-apply; then
-  echo 'overlapping config must fail' >&2
+  echo 'overlapping config file must fail' >&2
   exit 1
 fi
+[[ "$HOME/.config/git/config" -ef "$repo_root/config/git/config" ]]
+git -C "$private_root" rm -q --cached config/git/config
+rm "$private_root/config/git/config"
+mkdir -p "$private_root/config/git/ignore"
+printf 'collision\n' >"$private_root/config/git/ignore/child"
+git -C "$private_root" add config/git/ignore/child
+if bash mise-tasks/dotfiles-apply; then
+  echo 'file and directory collision must fail' >&2
+  exit 1
+fi
+[[ "$HOME/.config/git/ignore" -ef "$repo_root/config/git/ignore" ]]
 echo 'ok - private handoff preserves conflicts and rejects overlapping ownership'

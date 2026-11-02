@@ -3,6 +3,9 @@
 	email = civitaspo@gmail.com
 	signingkey = ~/.ssh/id_github_secure_enclave
 
+[include]
+	path = ~/.config/git/conf.d/private
+
 [core]
 	pager = delta
 	autocrlf = input
