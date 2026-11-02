@@ -17,6 +17,7 @@ case "$*" in
     [[ "${FAIL_LIST:-0}" == 0 ]] || exit 1
     jq -n --arg root "$TEST_ROOT" '{"aqua:cli/cli": [{version: "1.0", install_path: ($root + "/empty")}], healthy: [{version: "1.0", install_path: ($root + "/healthy")}], new: [{version: "1.0", install_path: ($root + "/new")} ]}'
     ;;
+  'install python@3.14') ;;
   'install')
     mkdir -p "$TEST_ROOT/new"
     touch "$TEST_ROOT/new/tool"
