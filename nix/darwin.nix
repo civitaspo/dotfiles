@@ -115,13 +115,14 @@
   # Touch ID for sudo.
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  # Match nix-darwin's mitigation for compromised eMudhra intermediates.
-  # https://github.com/NixOS/nixpkgs/issues/576485
+  # Comodo remains in the NSS trust store and needs an explicit denylist.
+  # Already addressed by NSS 3.131.1: these eMudhra roots are no longer in
+  # certdata. Keep them commented out because buildcatrust rejects unknown names.
   security.pki.caCertificateBlacklist = [
     "Comodo AAA Services root"
-    "emSign ECC Root CA - G3"
-    "emSign Root CA - C1"
-    "emSign ECC Root CA - C3"
+    # "emSign ECC Root CA - G3"
+    # "emSign Root CA - C1"
+    # "emSign ECC Root CA - C3"
   ];
 
   # Raise file descriptor limits (2^19).
