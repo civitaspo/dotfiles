@@ -360,6 +360,16 @@ checksum = "sha256:059f5413c1f6f248ea88c35d2c3514c82f6669d478ac157598b506ca3ea89
 url = "https://github.com/mas-cli/mas/releases/download/v6.0.1/mas-6.0.1-arm64.pkg"
 url_api = "https://api.github.com/repos/mas-cli/mas/releases/assets/370854867"
 
+[[tools."aqua:max-sixty/worktrunk"]]
+version = "0.81.0"
+backend = "aqua:max-sixty/worktrunk"
+
+[tools."aqua:max-sixty/worktrunk"."platforms.macos-arm64"]
+checksum = "sha256:b9c3f2f8071554cf88500466d65d35e18ad5edad5762479a1f14bcddd5ab7882"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.81.0/worktrunk-aarch64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/660537046"
+provenance = "cosign"
+
 [[tools."aqua:mvdan/sh"]]
 version = "3.14.1"
 backend = "aqua:mvdan/sh"

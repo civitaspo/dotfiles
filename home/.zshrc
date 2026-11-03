@@ -111,6 +111,9 @@ if _command_ready zoxide; then
   eval "$(zoxide init zsh)"
   alias cd='z'
 fi
+if _command_ready wt; then
+  eval "$(wt config shell init zsh)"
+fi
 if _command_ready direnv; then
   eval "$(direnv hook zsh)"
 fi
