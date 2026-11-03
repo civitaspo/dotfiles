@@ -55,6 +55,8 @@ cask "cursor-cli"
 # --- Casks: fonts -----------------------------------------------------------
 cask "font-hackgen-nerd"
 cask "font-monaspice-nerd-font"
+cask "font-moralerspace"
+cask "font-udev-gothic-nf"
 
 # --- Mac App Store ----------------------------------------------------------
 # App Store apps live in mise.toml's [bootstrap.packages]. Do not add `mas`
