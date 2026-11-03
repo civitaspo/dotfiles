@@ -53,6 +53,7 @@ cask "tabtab"
 cask "cursor-cli"
 
 # --- Casks: fonts -----------------------------------------------------------
+cask "font-hackgen-nerd"
 cask "font-monaspice-nerd-font"
 
 # --- Mac App Store ----------------------------------------------------------
