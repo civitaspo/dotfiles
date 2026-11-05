@@ -91,24 +91,14 @@
           import AppKit
           import UniformTypeIdentifiers
 
-          let done = DispatchSemaphore(value: 0)
-          NSWorkspace.shared.setDefaultApplication(
-            at: URL(fileURLWithPath: "/Applications/Google Chrome.app"),
-            toOpen: UTType("net.daringfireball.markdown")!
-          ) { error in
-            if let error = error {
-              fputs("Failed to set Markdown default app: \(error)\n", stderr)
-              exit(1)
-            }
-            done.signal()
+          let apply = { () async throws in
+            try await NSWorkspace.shared.setDefaultApplication(
+              at: URL(fileURLWithPath: "/Applications/Google Chrome.app"),
+              toOpen: UTType("net.daringfireball.markdown")!
+            )
           }
-          if done.wait(timeout: .now() + 30) == .timedOut {
-            fputs("Timed out setting Markdown default app\n", stderr)
-            exit(1)
-          }
+          try await apply()
         ''}
-      else
-        echo "Skipping Markdown default app: Chrome or Swift is not installed."
       fi
     '';
   };
