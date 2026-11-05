@@ -85,6 +85,8 @@
       /usr/bin/mdutil -E / >/dev/null 2>&1 || true
       echo "ok"
 
+      # Replace this with a nix-darwin option when available:
+      # https://github.com/nix-darwin/nix-darwin/issues/1506
       if [ -d /Applications/Google\ Chrome.app ] && /usr/bin/xcrun --find swift >/dev/null 2>&1; then
         user_id=$(/usr/bin/id -u ${config.system.primaryUser})
         /bin/launchctl asuser "$user_id" /usr/bin/sudo -u ${config.system.primaryUser} /usr/bin/swift ${pkgs.writeText "markdown-default-app.swift" ''
