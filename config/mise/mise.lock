@@ -531,6 +531,16 @@ url = "https://github.com/k1LoW/mo/releases/download/v1.7.0/mo_v1.7.0_darwin_arm
 url_api = "https://api.github.com/repos/k1LoW/mo/releases/assets/662490656"
 provenance = "github-attestations"
 
+[[tools."github:rednafi/rexdiff"]]
+version = "0.5.0"
+backend = "github:rednafi/rexdiff"
+
+[tools."github:rednafi/rexdiff"."platforms.macos-arm64"]
+checksum = "sha256:db7955173a156fb9d56ea3021b58b3ea17fe7972b50e1aa7a42104669bfdf9fe"
+checksum_source = "mise-versions"
+url = "https://github.com/rednafi/rexdiff/releases/download/v0.5.0/rexdiff-v0.5.0-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/rednafi/rexdiff/releases/assets/706653163"
+
 [[tools."github:sorairolake/qrtool"]]
 version = "0.13.2"
 backend = "github:sorairolake/qrtool"
