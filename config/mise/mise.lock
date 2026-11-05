@@ -626,7 +626,7 @@ version = "12.16.1"
 backend = "npm:pnpm"
 
 [[tools."npm:skills"]]
-version = "1.7.4"
+version = "1.7.6"
 backend = "npm:skills"
 
 [[tools.python]]
