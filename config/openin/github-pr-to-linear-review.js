@@ -3,6 +3,6 @@
   const pullRequest = url.pathname.match(/^\/([^/]+)\/([^/]+)\/pull\/(\d+)(?:\/.*)?$/);
 
   if (url.hostname === 'github.com' && pullRequest) {
-    url.href = `https://linear.review/${pullRequest[1]}/${pullRequest[2]}/pull/${pullRequest[3]}`;
+    url.href = `linear://review/${pullRequest[1]}/${pullRequest[2]}/pull/${pullRequest[3]}`;
   }
 })();
