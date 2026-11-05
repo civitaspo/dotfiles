@@ -113,6 +113,8 @@ claude-code = "latest"
 codex = "latest"
 # Inline review UI for agent plans/diffs (https://crit.md/).
 "github:tomasz-tomczyk/crit" = "latest"
+# Diff viewer for coding agents in Rex.
+"github:rednafi/rexdiff" = "latest"
 # Browser-based plan and code review UI (https://plannotator.ai/).
 "github:backnotprop/plannotator" = "latest"
 [tools."npm:@mermaid-js/mermaid-cli"]
