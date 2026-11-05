@@ -3,7 +3,7 @@
 # Scope: macOS system-level settings and base CLI packages.
 # Most binaries come from mise; applications from Homebrew (Brewfile);
 # dotfiles from mise.
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -84,6 +84,24 @@
       /usr/bin/mdutil -i off -d / >/dev/null 2>&1 || true
       /usr/bin/mdutil -E / >/dev/null 2>&1 || true
       echo "ok"
+
+      # Replace this with a nix-darwin option when available:
+      # https://github.com/nix-darwin/nix-darwin/issues/1506
+      if [ -d /Applications/Google\ Chrome.app ] && /usr/bin/xcrun --find swift >/dev/null 2>&1; then
+        user_id=$(/usr/bin/id -u ${config.system.primaryUser})
+        /bin/launchctl asuser "$user_id" /usr/bin/sudo -u ${config.system.primaryUser} /usr/bin/swift ${pkgs.writeText "markdown-default-app.swift" ''
+          import AppKit
+          import UniformTypeIdentifiers
+
+          let apply = { () async throws in
+            try await NSWorkspace.shared.setDefaultApplication(
+              at: URL(fileURLWithPath: "/Applications/Google Chrome.app"),
+              toOpen: UTType("net.daringfireball.markdown")!
+            )
+          }
+          try await apply()
+        ''}
+      fi
     '';
   };
 
