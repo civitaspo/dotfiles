@@ -2,6 +2,12 @@
 #MISE hide=true
 set -euo pipefail
 
+config_dir="${MISE_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/mise}"
+if [[ ! -f "$config_dir/config.toml" && -z "${MISE_GLOBAL_CONFIG_FILE:-}" ]]; then
+  export MISE_GLOBAL_CONFIG_FILE="${MISE_PROJECT_ROOT:?}/config/mise/config.toml"
+  export MISE_GLOBAL_CONFIG_ROOT="$MISE_PROJECT_ROOT/config/mise"
+fi
+
 configured_tools() {
   # The jq filter uses jq variables, not shell variables.
   # shellcheck disable=SC2016
