@@ -263,14 +263,14 @@ url = "https://github.com/git-lfs/git-lfs/releases/download/v3.8.1/git-lfs-darwi
 url_api = "https://api.github.com/repos/git-lfs/git-lfs/releases/assets/666388058"
 
 [[tools."aqua:grafana/k6"]]
-version = "1.8.2"
+version = "2.3.0"
 backend = "aqua:grafana/k6"
 
 [tools."aqua:grafana/k6"."platforms.macos-arm64"]
-checksum = "sha256:2ce3ed837e9a7c7b1b7a594ff72861bbf9d94d5930ca6611bd6f1ef5a08f7d0a"
+checksum = "sha256:b2417a3038edc5fe81dc178a889237724b595c5c9cfed875822008e46e862c7d"
 checksum_source = "mise-versions"
-url = "https://github.com/grafana/k6/releases/download/v1.8.2/k6-v1.8.2-macos-arm64.zip"
-url_api = "https://api.github.com/repos/grafana/k6/releases/assets/633737653"
+url = "https://github.com/grafana/k6/releases/download/v2.3.0/k6-v2.3.0-macos-arm64.zip"
+url_api = "https://api.github.com/repos/grafana/k6/releases/assets/579287879"
 
 [[tools."aqua:hashicorp/terraform"]]
 version = "1.17.1"
@@ -355,13 +355,14 @@ url = "https://github.com/marp-team/marp-cli/releases/download/v4.5.1/marp-cli-v
 url_api = "https://api.github.com/repos/marp-team/marp-cli/releases/assets/546511603"
 
 [[tools."aqua:mas-cli/mas"]]
-version = "6.0.1"
+version = "7.0.0"
 backend = "aqua:mas-cli/mas"
 
 [tools."aqua:mas-cli/mas"."platforms.macos-arm64"]
-checksum = "sha256:059f5413c1f6f248ea88c35d2c3514c82f6669d478ac157598b506ca3ea89776"
-url = "https://github.com/mas-cli/mas/releases/download/v6.0.1/mas-6.0.1-arm64.pkg"
-url_api = "https://api.github.com/repos/mas-cli/mas/releases/assets/370854867"
+checksum = "sha256:bc218a854c85d9e1c95496a96b26287bb66056b95688b90f91d04fa62ed21b75"
+checksum_source = "mise-versions"
+url = "https://github.com/mas-cli/mas/releases/download/v7.0.0/mas-7.0.0-arm64.pkg"
+url_api = "https://api.github.com/repos/mas-cli/mas/releases/assets/411752346"
 
 [[tools."aqua:max-sixty/worktrunk"]]
 version = "0.81.0"
@@ -614,12 +615,12 @@ checksum = "sha256:bf036b35b071bfb2f54f2c0af8ee8d88afa95ee6eb3dce02c0f94cfc2524d
 url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13%2B9/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.13_9.tar.gz"
 
 [[tools.node]]
-version = "22.23.4"
+version = "26.13.0"
 backend = "core:node"
 
 [tools.node."platforms.macos-arm64"]
-checksum = "sha256:c9e1dbc748b33ed2d14f42445191ecaf14c56259c7a9a26d0042c49ec2b66428"
-url = "https://nodejs.org/dist/v22.23.4/node-v22.23.4-darwin-arm64.tar.gz"
+checksum = "sha256:d38bd5e5a2ddce6bbb5ce45e46e208337da4d51fffe611e567fd32073d6439f6"
+url = "https://nodejs.org/dist/v26.13.0/node-v26.13.0-darwin-arm64.tar.gz"
 
 [[tools."npm:pnpm"]]
 version = "12.16.1"
