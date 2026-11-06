@@ -55,8 +55,8 @@ run = [
 [tasks.reconcile]
 description = "Apply the whole configuration to this machine."
 run = [
-  { task = "tools" },
   { task = "dotfiles" },
+  { task = "tools" },
   { task = "nix" },
   { task = "brew" },
   { task = "mas" },
@@ -87,7 +87,6 @@ run = [
 
 [tasks.tools]
 description = "Install locked tool versions and repair empty installations."
-env = { MISE_GLOBAL_CONFIG_FILE = "{{config_root}}/config/mise/config.toml", MISE_GLOBAL_CONFIG_ROOT = "{{config_root}}/config/mise" }
 run = "./mise-tasks/tools/install"
 
 [tasks.skills]
