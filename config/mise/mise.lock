@@ -290,13 +290,14 @@ url = "https://github.com/herdrdev/herdr/releases/download/v0.9.5/herdr-macos-aa
 url_api = "https://api.github.com/repos/herdrdev/herdr/releases/assets/640898230"
 
 [[tools."aqua:jesseduffield/lazygit"]]
-version = "0.66.2"
+version = "0.66.3"
 backend = "aqua:jesseduffield/lazygit"
 
 [tools."aqua:jesseduffield/lazygit"."platforms.macos-arm64"]
-checksum = "sha256:fadda59ae7665ba556fcbaa704c7eade6e40d016d3f3b25d6327dd1f3f906a0c"
-url = "https://github.com/jesseduffield/lazygit/releases/download/v0.66.2/lazygit_0.66.2_darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/jesseduffield/lazygit/releases/assets/646837816"
+checksum = "sha256:6873e6b7a538b521c4d7ff3f76ec49e6dcafa41e6053a6aae33c12f62663e163"
+checksum_source = "mise-versions"
+url = "https://github.com/jesseduffield/lazygit/releases/download/v0.66.3/lazygit_0.66.3_darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/jesseduffield/lazygit/releases/assets/722268996"
 
 [[tools."aqua:jqlang/jq"]]
 version = "1.8.2"
@@ -486,13 +487,13 @@ url = "https://github.com/openai/codex/releases/download/rust-v0.167.0/codex-pac
 url_api = "https://api.github.com/repos/openai/codex/releases/assets/715500912"
 
 [[tools."github:backnotprop/plannotator"]]
-version = "0.28.51"
+version = "0.28.53"
 backend = "github:backnotprop/plannotator"
 
 [tools."github:backnotprop/plannotator"."platforms.macos-arm64"]
-checksum = "sha256:0489448067d490d270dc782d754c3e80890aac424d10059cedaba404524d6aa0"
-url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.51/plannotator-darwin-arm64"
-url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/717157364"
+checksum = "sha256:70d2e795d5c38a9c23cec36ce642c2686a4ae46f492f0f63e99361794de20f91"
+url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.53/plannotator-darwin-arm64"
+url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/723698404"
 provenance = "github-attestations"
 
 [[tools."github:civitaspo/hook-relay-client-rs"]]
