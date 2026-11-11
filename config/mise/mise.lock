@@ -628,7 +628,7 @@ version = "12.18.0"
 backend = "npm:pnpm"
 
 [[tools."npm:skills"]]
-version = "1.7.4"
+version = "1.8.1"
 backend = "npm:skills"
 
 [[tools.python]]
