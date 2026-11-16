@@ -98,5 +98,5 @@ zsh -i -c '
   [[ ${_comps[afew]} == _afew ]]
 '
 cd "$HOME"
-"$mise" exec aqua:mas-cli/mas -- mas version | grep -qx '6.0.1'
+"$mise" exec aqua:mas-cli/mas -- mas version | grep -qx '7.0.0'
 echo "ok - mise provides mas and zsh plugins"
