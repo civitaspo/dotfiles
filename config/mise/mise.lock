@@ -263,14 +263,14 @@ url = "https://github.com/git-lfs/git-lfs/releases/download/v3.8.1/git-lfs-darwi
 url_api = "https://api.github.com/repos/git-lfs/git-lfs/releases/assets/666388058"
 
 [[tools."aqua:grafana/k6"]]
-version = "1.8.2"
+version = "1.8.3"
 backend = "aqua:grafana/k6"
 
 [tools."aqua:grafana/k6"."platforms.macos-arm64"]
-checksum = "sha256:2ce3ed837e9a7c7b1b7a594ff72861bbf9d94d5930ca6611bd6f1ef5a08f7d0a"
+checksum = "sha256:ca33d6435a410f7c90e77bd345b2e71bb46fdbf1c1dfefcc3ab9c27ee62ad3da"
 checksum_source = "mise-versions"
-url = "https://github.com/grafana/k6/releases/download/v1.8.2/k6-v1.8.2-macos-arm64.zip"
-url_api = "https://api.github.com/repos/grafana/k6/releases/assets/633737653"
+url = "https://github.com/grafana/k6/releases/download/v1.8.3/k6-v1.8.3-macos-arm64.zip"
+url_api = "https://api.github.com/repos/grafana/k6/releases/assets/743784759"
 
 [[tools."aqua:hashicorp/terraform"]]
 version = "1.17.2"
