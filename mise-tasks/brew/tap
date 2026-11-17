@@ -10,7 +10,7 @@
 # re-fetch already-installed local casks on every `mise run brew`.
 #
 # Installed local casks are pinned so `brew bundle` / `brew upgrade` skip
-# them. They self-update in-app; Casks/*.rb pins are for fresh installs.
+# them. Most self-update in-app; Casks/*.rb pins are for fresh installs.
 set -euo pipefail
 
 tap="civitaspo/dotfiles"

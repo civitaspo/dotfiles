@@ -4,7 +4,8 @@
 # upgrades, and uninstalls packages not listed here) and capture drift with
 # `mise run import:brew` (VS Code extensions are intentionally excluded via
 # --no-vscode). Local tap casks are pinned after install so brew leaves them
-# to in-app updates; check stale Casks/ pins with `mise run livecheck:casks`.
+# to in-app updates when available; check stale Casks/ pins with
+# `mise run livecheck:casks`. Mozkey updates require a manual upgrade.
 # Homebrew is intentionally NOT on $PATH --
 # `mise run brew` is the only entry point. Casks only; no formulae.
 # CLI binaries come from mise, and base packages plus pinned runtimes
@@ -36,6 +37,7 @@ cask "karabiner-elements"
 cask "keyboard-maestro"
 cask "linear"
 cask "mimestream"
+cask "civitaspo/dotfiles/mozkey"
 cask "nani"
 cask "civitaspo/dotfiles/nospace"
 cask "openin"
