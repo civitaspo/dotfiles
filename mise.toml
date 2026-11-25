@@ -37,7 +37,6 @@ manifest = "git"
 "mas:539883307" = "latest" # LINE
 "mas:361304891" = "latest" # Numbers
 "mas:361309726" = "latest" # Pages
-"mas:1501592214" = "latest" # Twingate
 "mas:497799835" = "latest" # Xcode
 
 [tasks.default]
