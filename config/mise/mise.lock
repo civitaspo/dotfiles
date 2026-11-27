@@ -38,13 +38,13 @@ url_api = "https://api.github.com/repos/ClementTsang/bottom/releases/assets/6968
 provenance = "github-attestations"
 
 [[tools."aqua:DataDog/pup"]]
-version = "2.4.7"
+version = "2.7.1"
 backend = "aqua:DataDog/pup"
 
 [tools."aqua:DataDog/pup"."platforms.macos-arm64"]
-checksum = "sha256:754044d0ec0461d0d8ac6b764a64b95a85f2ad0ab5e53a2b40d0eef725bb04c3"
-url = "https://github.com/DataDog/pup/releases/download/v2.4.7/pup_2.4.7_Darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/DataDog/pup/releases/assets/742038462"
+checksum = "sha256:5d19b8286b8a00e59ce1dd28a4d8773319ab3d35cab3972d49c0db50294adc28"
+url = "https://github.com/DataDog/pup/releases/download/v2.7.1/pup_2.7.1_Darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/DataDog/pup/releases/assets/788976956"
 provenance = "cosign"
 
 [[tools."aqua:F1bonacc1/process-compose"]]
@@ -75,42 +75,42 @@ url = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.10.0/zoxide-0.
 url_api = "https://api.github.com/repos/ajeetdsouza/zoxide/releases/assets/466316174"
 
 [[tools."aqua:astral-sh/ruff"]]
-version = "0.17.5"
+version = "0.17.6"
 backend = "aqua:astral-sh/ruff"
 
 [tools."aqua:astral-sh/ruff"."platforms.macos-arm64"]
-checksum = "sha256:4ffadabec5c5fee1ddb2eecac0787ffe6fa18c665b73da9258b84211f40c5829"
-url = "https://github.com/astral-sh/ruff/releases/download/0.17.5/ruff-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/ruff/releases/assets/740496814"
+checksum = "sha256:72a886253072cd1bb6a5978a33a5a7add848ee315a8b0f1589f164a11c26328d"
+url = "https://github.com/astral-sh/ruff/releases/download/0.17.6/ruff-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/ruff/releases/assets/768306954"
 provenance = "github-attestations"
 
 [[tools."aqua:astral-sh/uv"]]
-version = "0.13.8"
+version = "0.13.10"
 backend = "aqua:astral-sh/uv"
 
 [tools."aqua:astral-sh/uv"."platforms.macos-arm64"]
-checksum = "sha256:6b71028a6b904f2ae3340ef52e595512de807d06c0a20eaef2f692581b246558"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.8/uv-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/740313603"
+checksum = "sha256:e419bf07533bdbf48795fc793601c834dd79db57a8c49ce8e25cfe3a8639958d"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.10/uv-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/788884643"
 provenance = "github-attestations"
 
 [[tools."aqua:atuinsh/atuin"]]
-version = "18.24.8"
+version = "18.25.1"
 backend = "aqua:atuinsh/atuin"
 
 [tools."aqua:atuinsh/atuin"."platforms.macos-arm64"]
-checksum = "sha256:1c33bb672cf09eecf595578ad3136e415a3e54eb34de92247f637d1fa9eae688"
-url = "https://github.com/atuinsh/atuin/releases/download/v18.24.8/atuin-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/741927123"
+checksum = "sha256:c2d94ae74da55c644de08ce3eedb0abd5f4a32340f3e9b8e2dade29764ac524c"
+url = "https://github.com/atuinsh/atuin/releases/download/v18.25.1/atuin-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/atuinsh/atuin/releases/assets/773455322"
 provenance = "github-attestations"
 
 [[tools."aqua:aws/aws-cli"]]
-version = "2.40.3"
+version = "2.42.4"
 backend = "aqua:aws/aws-cli"
 
 [tools."aqua:aws/aws-cli"."platforms.macos-arm64"]
-checksum = "sha256:be032742ff205f7f2d7c189010bbb1f3891d0a67be0b1df0fe9d3e7f5fc5ad30"
-url = "https://awscli.amazonaws.com/AWSCLIV2-2.40.3.pkg"
+checksum = "sha256:6f5a5d523f128bfa736841523fabe936a9a4c9da7fce7273c535043a53016ea5"
+url = "https://awscli.amazonaws.com/AWSCLIV2-2.42.4.pkg"
 
 [[tools."aqua:aws/session-manager-plugin"]]
 version = "1.2.896.0"
@@ -121,14 +121,14 @@ checksum = "sha256:05c5ef53fb262de2fa1b46cf457890ee4152ec1dd8b2fdd94d028fa9b885f
 url = "https://s3.amazonaws.com/session-manager-downloads/plugin/1.2.896.0/mac_arm64/sessionmanager-bundle.zip"
 
 [[tools."aqua:bootandy/dust"]]
-version = "1.2.7"
+version = "1.2.8"
 backend = "aqua:bootandy/dust"
 
 [tools."aqua:bootandy/dust"."platforms.macos-arm64"]
-checksum = "sha256:38e1b3b4e5e6a5cdb044b5fdb32ea45f18dc78276711796214806f20f7705a99"
+checksum = "sha256:829b1223d968ec84b7e0f2374971f77a9b7443d99a7dfbbaa68bc374a0fe8a93"
 checksum_source = "mise-versions"
-url = "https://github.com/bootandy/dust/releases/download/v1.2.7/dust-v1.2.7-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/699455834"
+url = "https://github.com/bootandy/dust/releases/download/v1.2.8/dust-v1.2.8-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/bootandy/dust/releases/assets/791128132"
 
 [[tools."aqua:charmbracelet/freeze"]]
 version = "0.2.2"
@@ -150,13 +150,13 @@ url_api = "https://api.github.com/repos/charmbracelet/gum/releases/assets/585508
 provenance = "cosign"
 
 [[tools."aqua:cli/cli"]]
-version = "2.104.0"
+version = "2.106.0"
 backend = "aqua:cli/cli"
 
 [tools."aqua:cli/cli"."platforms.macos-arm64"]
-checksum = "sha256:23b12706219b9892e44236f988444a24adcf29284e16b35e03ba5b863fb6eb8e"
-url = "https://github.com/cli/cli/releases/download/v2.104.0/gh_2.104.0_macOS_arm64.zip"
-url_api = "https://api.github.com/repos/cli/cli/releases/assets/740719079"
+checksum = "sha256:22b2b723dfbc69b6022b1b08604ff51c0db5aa8b6774b4ced1a47b8413a995d6"
+url = "https://github.com/cli/cli/releases/download/v2.106.0/gh_2.106.0_macOS_arm64.zip"
+url_api = "https://api.github.com/repos/cli/cli/releases/assets/793444946"
 provenance = "github-attestations"
 
 [[tools."aqua:crate-ci/typos"]]
@@ -179,13 +179,14 @@ url = "https://github.com/dalance/procs/releases/download/v0.14.12/procs-v0.14.1
 url_api = "https://api.github.com/repos/dalance/procs/releases/assets/457525354"
 
 [[tools."aqua:dandavison/delta"]]
-version = "0.20.1"
+version = "0.22.0"
 backend = "aqua:dandavison/delta"
 
 [tools."aqua:dandavison/delta"."platforms.macos-arm64"]
-checksum = "sha256:bc1839cea69288d4673a24faffbb825d408ca907e0f7d33b1678c9e6cdd5e58e"
-url = "https://github.com/dandavison/delta/releases/download/0.20.1/delta-0.20.1-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/dandavison/delta/releases/assets/610498923"
+checksum = "sha256:1baa389d6de21e41f6de8a328ed2e19a4fdef6112641420bf591ead50299cab5"
+checksum_source = "mise-versions"
+url = "https://github.com/dandavison/delta/releases/download/0.22.0/delta-0.22.0-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/dandavison/delta/releases/assets/781465750"
 
 [[tools."aqua:denoland/deno"]]
 version = "2.9.8"
@@ -206,51 +207,51 @@ url = "https://github.com/direnv/direnv/releases/download/v2.38.2/direnv.darwin-
 url_api = "https://api.github.com/repos/direnv/direnv/releases/assets/627455431"
 
 [[tools."aqua:docker/buildx"]]
-version = "0.39.0"
+version = "0.39.1"
 backend = "aqua:docker/buildx"
 
 [tools."aqua:docker/buildx"."platforms.macos-arm64"]
-checksum = "sha256:0190e4b9c85510974290f9a597e86c4d8200be782aeaa3df7d756ab4423d6b2d"
+checksum = "sha256:7a7f10602f0826d36b046e8db012b4cbfaa4ba56f9d2a5d374fe5bb7ae864fc4"
 checksum_source = "mise-versions"
-url = "https://github.com/docker/buildx/releases/download/v0.39.0/buildx-v0.39.0.darwin-arm64"
-url_api = "https://api.github.com/repos/docker/buildx/releases/assets/737261062"
+url = "https://github.com/docker/buildx/releases/download/v0.39.1/buildx-v0.39.1.darwin-arm64"
+url_api = "https://api.github.com/repos/docker/buildx/releases/assets/769871902"
 
 [[tools."aqua:docker/cli"]]
-version = "29.9.3"
+version = "29.10.1"
 backend = "aqua:docker/cli"
 
 [tools."aqua:docker/cli"."platforms.macos-arm64"]
-checksum = "sha256:79145e169bca0b9571d02de8e1cd311a36e0e8fdb4599b6661a87b1bb3afbe13"
-url = "https://download.docker.com/mac/static/stable/aarch64/docker-29.9.3.tgz"
+checksum = "sha256:c4fc3a3afe720b76a23d499a8f43d5b9774a09f7b85f1af75d9005b32a7b2cf4"
+url = "https://download.docker.com/mac/static/stable/aarch64/docker-29.10.1.tgz"
 
 [[tools."aqua:docker/compose"]]
-version = "5.7.1"
+version = "5.8.0"
 backend = "aqua:docker/compose"
 
 [tools."aqua:docker/compose"."platforms.macos-arm64"]
-checksum = "sha256:5a9aa8b5fb5b1e3cd83f39c80e570ae30aafd74cd9b47264fbe4ff7e6e6251ca"
-url = "https://github.com/docker/compose/releases/download/v5.7.1/docker-compose-darwin-aarch64"
-url_api = "https://api.github.com/repos/docker/compose/releases/assets/734662223"
+checksum = "sha256:008b8fcf6c6d60340f5796626a0f0d51c042085793a9b1653343011727140b71"
+url = "https://github.com/docker/compose/releases/download/v5.8.0/docker-compose-darwin-aarch64"
+url_api = "https://api.github.com/repos/docker/compose/releases/assets/759067212"
 provenance = "cosign"
 
 [[tools."aqua:duckdb/duckdb"]]
-version = "2.0.0"
+version = "2.0.1"
 backend = "aqua:duckdb/duckdb"
 
 [tools."aqua:duckdb/duckdb"."platforms.macos-arm64"]
-checksum = "sha256:188a36fe8883ef52e69165a0cbb6031ef679c8e6c448a1ce22951964149b7f96"
+checksum = "sha256:7809dc1ea9215db53f76bdd539e38186c2310b6a3b5800581bf65876048556aa"
 checksum_source = "mise-versions"
-url = "https://github.com/duckdb/duckdb/releases/download/v2.0.0/duckdb-cli-osx-arm64.tar.gz"
-url_api = "https://api.github.com/repos/duckdb/duckdb/releases/assets/662551052"
+url = "https://github.com/duckdb/duckdb/releases/download/v2.0.1/duckdb-cli-osx-arm64.tar.gz"
+url_api = "https://api.github.com/repos/duckdb/duckdb/releases/assets/771954432"
 
 [[tools."aqua:evilmartians/lefthook"]]
-version = "2.2.2"
+version = "2.2.4"
 backend = "aqua:evilmartians/lefthook"
 
 [tools."aqua:evilmartians/lefthook"."platforms.macos-arm64"]
-checksum = "sha256:aef03ff2faaf87594068ec3ab794dcc1acd8d64f2aa3109785244c8359fbf15b"
-url = "https://github.com/evilmartians/lefthook/releases/download/v2.2.2/lefthook_2.2.2_MacOS_arm64.gz"
-url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/636518817"
+checksum = "sha256:d021736a6f73d308f65284f64b162675c8c579ee88baa8fd278c51c73edf7c40"
+url = "https://github.com/evilmartians/lefthook/releases/download/v2.2.4/lefthook_2.2.4_MacOS_arm64.gz"
+url_api = "https://api.github.com/repos/evilmartians/lefthook/releases/assets/795192785"
 provenance = "github-attestations"
 
 [[tools."aqua:git-lfs/git-lfs"]]
@@ -320,13 +321,14 @@ url = "https://github.com/junegunn/fzf/releases/download/v0.75.0/fzf-0.75.0-darw
 url_api = "https://api.github.com/repos/junegunn/fzf/releases/assets/720590797"
 
 [[tools."aqua:k1LoW/deck"]]
-version = "1.24.4"
+version = "1.24.5"
 backend = "aqua:k1LoW/deck"
 
 [tools."aqua:k1LoW/deck"."platforms.macos-arm64"]
-checksum = "sha256:d25e6ecfc20112f591797bd2a9840d6320ac1bfd65334be83a3f51f644f6c04d"
-url = "https://github.com/k1LoW/deck/releases/download/v1.24.4/deck_v1.24.4_darwin_arm64.zip"
-url_api = "https://api.github.com/repos/k1LoW/deck/releases/assets/636985107"
+checksum = "sha256:b5f381a5c89558f9c5d5ac19091fad305c4540b94139338db11a27919194aacc"
+url = "https://github.com/k1LoW/deck/releases/download/v1.24.5/deck_v1.24.5_darwin_arm64.zip"
+url_api = "https://api.github.com/repos/k1LoW/deck/releases/assets/761611226"
+provenance = "github-attestations"
 
 [[tools."aqua:koalaman/shellcheck"]]
 version = "0.11.0"
@@ -367,13 +369,13 @@ url = "https://github.com/mas-cli/mas/releases/download/v7.0.0/mas-7.0.0-arm64.p
 url_api = "https://api.github.com/repos/mas-cli/mas/releases/assets/411752346"
 
 [[tools."aqua:max-sixty/worktrunk"]]
-version = "0.81.0"
+version = "0.83.0"
 backend = "aqua:max-sixty/worktrunk"
 
 [tools."aqua:max-sixty/worktrunk"."platforms.macos-arm64"]
-checksum = "sha256:b9c3f2f8071554cf88500466d65d35e18ad5edad5762479a1f14bcddd5ab7882"
-url = "https://github.com/max-sixty/worktrunk/releases/download/v0.81.0/worktrunk-aarch64-apple-darwin.tar.xz"
-url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/660537046"
+checksum = "sha256:5e489089672b553b6277595875ef3479df011755153021c84def90eddaeef7b8"
+url = "https://github.com/max-sixty/worktrunk/releases/download/v0.83.0/worktrunk-aarch64-apple-darwin.tar.xz"
+url_api = "https://api.github.com/repos/max-sixty/worktrunk/releases/assets/776207071"
 provenance = "cosign"
 
 [[tools."aqua:mvdan/sh"]]
@@ -452,12 +454,12 @@ url = "https://github.com/x-motemen/ghq/releases/download/v1.12.0/ghq_darwin_arm
 url_api = "https://api.github.com/repos/x-motemen/ghq/releases/assets/706006438"
 
 [[tools.bun]]
-version = "1.4.4"
+version = "1.4.5"
 backend = "core:bun"
 
 [tools.bun."platforms.macos-arm64"]
-checksum = "sha256:c240d7f0ccb90c263a849fcdb09b7ee62630d921348ed6aafda86b9d577bc510"
-url = "https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-darwin-aarch64.zip"
+checksum = "sha256:b5d6bc2e13caf14e57c89661e89efd073ff16165b41bfe43882616410609cd10"
+url = "https://github.com/oven-sh/bun/releases/download/bun-v1.4.5/bun-darwin-aarch64.zip"
 
 [[tools."cargo:deadnix"]]
 version = "1.3.1"
@@ -468,14 +470,14 @@ version = "0.23.5"
 backend = "cargo:eza"
 
 [[tools.claude-code]]
-version = "2.1.325"
+version = "2.1.332"
 backend = "aqua:anthropics/claude-code"
 
 [tools.claude-code."platforms.macos-arm64"]
-checksum = "sha256:b0dc23f2d8c3ef55b2b22f03ef204e98b06b22b6c51a15b66d263b13442c4e03"
+checksum = "sha256:96d9c674ec1da19b96d1f143129f1a032f65b5991421aeac8d2f1bd4c3881c69"
 checksum_source = "mise-versions"
-url = "https://github.com/anthropics/claude-code/releases/download/v2.1.325/claude-darwin-arm64.tar.gz"
-url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/745018486"
+url = "https://github.com/anthropics/claude-code/releases/download/v2.1.332/claude-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/anthropics/claude-code/releases/assets/789036291"
 
 [[tools.codex]]
 version = "0.169.0"
@@ -488,13 +490,13 @@ url = "https://github.com/openai/codex/releases/download/rust-v0.169.0/codex-pac
 url_api = "https://api.github.com/repos/openai/codex/releases/assets/742912926"
 
 [[tools."github:backnotprop/plannotator"]]
-version = "0.28.64"
+version = "0.29.5"
 backend = "github:backnotprop/plannotator"
 
 [tools."github:backnotprop/plannotator"."platforms.macos-arm64"]
-checksum = "sha256:ab3b3ab0ec04a3926fccd230a3ed0f4c7db846c7348aae8b8683b7cce36e2f0f"
-url = "https://github.com/backnotprop/plannotator/releases/download/v0.28.64/plannotator-darwin-arm64.tar.xz"
-url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/744519312"
+checksum = "sha256:88c34ab1368aa78cd5b16a0dd1814a85989f6728b006eabef57c98a7a6a36a77"
+url = "https://github.com/backnotprop/plannotator/releases/download/v0.29.5/plannotator-darwin-arm64.tar.xz"
+url_api = "https://api.github.com/repos/backnotprop/plannotator/releases/assets/796853433"
 provenance = "github-attestations"
 
 [[tools."github:civitaspo/hook-relay-client-rs"]]
@@ -517,13 +519,13 @@ url = "https://github.com/git-ecosystem/git-credential-manager/releases/download
 url_api = "https://api.github.com/repos/git-ecosystem/git-credential-manager/releases/assets/677977553"
 
 [[tools."github:k1LoW/mo"]]
-version = "1.8.0"
+version = "1.8.2"
 backend = "github:k1LoW/mo"
 
 [tools."github:k1LoW/mo"."platforms.macos-arm64"]
-checksum = "sha256:e533b07109a6dc7cf2be5ce16e1bbc3b5fb6891efeacd951b2b17bda4aa80028"
-url = "https://github.com/k1LoW/mo/releases/download/v1.8.0/mo_v1.8.0_darwin_arm64.zip"
-url_api = "https://api.github.com/repos/k1LoW/mo/releases/assets/730258445"
+checksum = "sha256:4c2968a9ab02f3687ea81961085c106f232a2c63ba5088ec819b3955a1424c5e"
+url = "https://github.com/k1LoW/mo/releases/download/v1.8.2/mo_v1.8.2_darwin_arm64.zip"
+url_api = "https://api.github.com/repos/k1LoW/mo/releases/assets/759443937"
 provenance = "github-attestations"
 
 [[tools."github:rednafi/rexdiff"]]
@@ -537,14 +539,14 @@ url = "https://github.com/rednafi/rexdiff/releases/download/v0.5.2/rexdiff-v0.5.
 url_api = "https://api.github.com/repos/rednafi/rexdiff/releases/assets/739773714"
 
 [[tools."github:tomasz-tomczyk/crit"]]
-version = "0.23.3"
+version = "0.24.0"
 backend = "github:tomasz-tomczyk/crit"
 
 [tools."github:tomasz-tomczyk/crit"."platforms.macos-arm64"]
-checksum = "sha256:c4c53e185cb2d09912a0707c8f15f12a63a18a79e5b1a98c9a466dde143a7295"
+checksum = "sha256:5670f79f2f06c4e15b7c64dd11423357208917d4b25f18ba4c904a5c725b138a"
 checksum_source = "mise-versions"
-url = "https://github.com/tomasz-tomczyk/crit/releases/download/v0.23.3/crit-darwin-arm64"
-url_api = "https://api.github.com/repos/tomasz-tomczyk/crit/releases/assets/744839766"
+url = "https://github.com/tomasz-tomczyk/crit/releases/download/v0.24.0/crit-darwin-arm64"
+url_api = "https://api.github.com/repos/tomasz-tomczyk/crit/releases/assets/771803945"
 
 [[tools.go]]
 version = "1.27.4"
@@ -609,7 +611,7 @@ checksum = "sha256:5981c19ebaab027e356fe1ee5284f7a021b89d4405cc53dc84b476c3aee9c
 url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/tags/0.8.0.tar.gz"
 
 [[tools.java]]
-version = "temurin-21.0.13+9.0.LTS"
+version = "temurin-21.0.13+100000002.0.LTS"
 backend = "core:java"
 
 [tools.java."platforms.macos-arm64"]
@@ -625,7 +627,7 @@ checksum = "sha256:aec2514ea1ceb2ba52455e9ec65986f6749a06dd759e5db2a72e6889668c9
 url = "https://nodejs.org/dist/v26.13.1/node-v26.13.1-darwin-arm64.tar.gz"
 
 [[tools."npm:pnpm"]]
-version = "12.21.0"
+version = "12.23.0"
 backend = "npm:pnpm"
 
 [[tools."npm:skills"]]
